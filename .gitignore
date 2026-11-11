@@ -1,0 +1,51 @@
+# Local system and editor state
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Credentials and machine-local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+.local/
+.runtime/
+
+# Raw data, experiment outputs and model artifacts
+data/raw/
+trajectories/raw/
+artifacts/
+outputs/
+logs/
+checkpoints/
+wandb/
+mlruns/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+
+# Recordings and large media
+*.m4a
+*.wav
+*.mp3
+*.mp4
+
+# Python environments and caches, for future development
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node dependencies, for future development
+node_modules/
