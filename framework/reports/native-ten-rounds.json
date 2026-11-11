@@ -1,0 +1,248 @@
+{
+  "kind": "real_native_Claude_Code_Docker_and_scripted_provider",
+  "real_provider_calls": 0,
+  "rounds": [
+    {
+      "task_id": "task-1",
+      "status": {
+        "task_id": "task-1",
+        "execution": "complete",
+        "curation": "applied"
+      },
+      "native_exit": {
+        "exit_code": 0
+      },
+      "tool_calls": 2,
+      "tool_returns": 2,
+      "body_proven": 1,
+      "objective": {
+        "details": {
+          "status": "passed"
+        },
+        "score": 1
+      }
+    },
+    {
+      "task_id": "task-2",
+      "status": {
+        "task_id": "task-2",
+        "execution": "complete",
+        "curation": "no_op"
+      },
+      "native_exit": {
+        "exit_code": 0
+      },
+      "tool_calls": 2,
+      "tool_returns": 2,
+      "body_proven": 1,
+      "objective": {
+        "details": {
+          "status": "passed"
+        },
+        "score": 1
+      }
+    },
+    {
+      "task_id": "task-3",
+      "status": {
+        "task_id": "task-3",
+        "execution": "complete",
+        "curation": "no_op"
+      },
+      "native_exit": {
+        "exit_code": 0
+      },
+      "tool_calls": 2,
+      "tool_returns": 2,
+      "body_proven": 1,
+      "objective": {
+        "details": {
+          "status": "passed"
+        },
+        "score": 1
+      }
+    },
+    {
+      "task_id": "task-4",
+      "status": {
+        "task_id": "task-4",
+        "execution": "complete",
+        "curation": "no_op"
+      },
+      "native_exit": {
+        "exit_code": 0
+      },
+      "tool_calls": 2,
+      "tool_returns": 2,
+      "body_proven": 1,
+      "objective": {
+        "details": {
+          "status": "passed"
+        },
+        "score": 1
+      }
+    },
+    {
+      "task_id": "task-5",
+      "status": {
+        "task_id": "task-5",
+        "execution": "complete",
+        "curation": "no_op"
+      },
+      "native_exit": {
+        "exit_code": 0
+      },
+      "tool_calls": 2,
+      "tool_returns": 2,
+      "body_proven": 1,
+      "objective": {
+        "details": {
+          "status": "passed"
+        },
+        "score": 1
+      }
+    },
+    {
+      "task_id": "task-6",
+      "status": {
+        "task_id": "task-6",
+        "execution": "complete",
+        "curation": "no_op"
+      },
+      "native_exit": {
+        "exit_code": 0
+      },
+      "tool_calls": 2,
+      "tool_returns": 2,
+      "body_proven": 1,
+      "objective": {
+        "details": {
+          "status": "passed"
+        },
+        "score": 1
+      }
+    },
+    {
+      "task_id": "task-7",
+      "status": {
+        "task_id": "task-7",
+        "execution": "complete",
+        "curation": "no_op"
+      },
+      "native_exit": {
+        "exit_code": 0
+      },
+      "tool_calls": 2,
+      "tool_returns": 2,
+      "body_proven": 1,
+      "objective": {
+        "details": {
+          "status": "passed"
+        },
+        "score": 1
+      }
+    },
+    {
+      "task_id": "task-8",
+      "status": {
+        "task_id": "task-8",
+        "execution": "complete",
+        "curation": "no_op"
+      },
+      "native_exit": {
+        "exit_code": 0
+      },
+      "tool_calls": 2,
+      "tool_returns": 2,
+      "body_proven": 1,
+      "objective": {
+        "details": {
+          "status": "passed"
+        },
+        "score": 1
+      }
+    },
+    {
+      "task_id": "task-9",
+      "status": {
+        "task_id": "task-9",
+        "execution": "complete",
+        "curation": "no_op"
+      },
+      "native_exit": {
+        "exit_code": 0
+      },
+      "tool_calls": 2,
+      "tool_returns": 2,
+      "body_proven": 1,
+      "objective": {
+        "details": {
+          "status": "passed"
+        },
+        "score": 1
+      }
+    },
+    {
+      "task_id": "task-10",
+      "status": {
+        "task_id": "task-10",
+        "execution": "complete",
+        "curation": "no_op"
+      },
+      "native_exit": {
+        "exit_code": 0
+      },
+      "tool_calls": 2,
+      "tool_returns": 2,
+      "body_proven": 1,
+      "objective": {
+        "details": {
+          "status": "passed"
+        },
+        "score": 1
+      }
+    }
+  ],
+  "passed": true,
+  "cost": {
+    "executor": {
+      "request_attempts": 30,
+      "known_unsent": 0,
+      "complete_responses": 30,
+      "invalid_complete_responses": 0,
+      "input_tokens": 3000,
+      "output_tokens": 600,
+      "known_input_lower_bound": 3000,
+      "known_output_lower_bound": 600,
+      "missing_usage": 0,
+      "money": null
+    },
+    "curator": {
+      "request_attempts": 40,
+      "known_unsent": 0,
+      "complete_responses": 40,
+      "invalid_complete_responses": 0,
+      "input_tokens": 4000,
+      "output_tokens": 800,
+      "known_input_lower_bound": 4000,
+      "known_output_lower_bound": 800,
+      "missing_usage": 0,
+      "money": null
+    },
+    "judge": {
+      "request_attempts": 20,
+      "known_unsent": 0,
+      "complete_responses": 20,
+      "invalid_complete_responses": 0,
+      "input_tokens": 2000,
+      "output_tokens": 400,
+      "known_input_lower_bound": 2000,
+      "known_output_lower_bound": 400,
+      "missing_usage": 0,
+      "money": null
+    }
+  },
+  "image": "sha256:456ed07b51d5ec9adc9a0a4b91c2085f8f897dd02abb797c7140464aea13f0db",
+  "security_profile": "platform",
+  "cli_sha256": "2b84cc2e04633619eab02b9f77ed00a56b64682b4fa7b3267149ee9eb1fecfc7"
+}
