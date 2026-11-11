@@ -1,0 +1,7 @@
+[
+  {
+    "id": "sum-1",
+    "instruction": "读取 input.json，把 values 的合计写入 output/result.json，结构为 {\"sum\": 数值}。",
+    "public_dir": "public/sum-1"
+  }
+]

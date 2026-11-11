@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "check": "fresh_venv_pip_install_runtime_bytes_match",
+      "passed": true
+    },
+    {
+      "check": "installed_console_script_checks_copied_configuration_outside_repo",
+      "passed": true
+    },
+    {
+      "check": "copied_folder_complete_pipeline_without_repository_imports",
+      "passed": true,
+      "log": "test_round_01_add_then_future_consumer (test_framework.FrameworkRounds.test_round_01_add_then_future_consumer) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.571s\n\nOK\n"
+    },
+    {
+      "check": "installed_dependency_consistency",
+      "passed": true,
+      "log": "No broken requirements found."
+    },
+    {
+      "check": "documentation_local_links",
+      "count": 12,
+      "passed": true
+    },
+    {
+      "check": "five_extracted_modules_source_provenance",
+      "passed": true
+    }
+  ],
+  "package_version": "0.1.0",
+  "source_python_sha256": {
+    "skillrl/curation.py": "c2e5021d10353a1f7326ff8a9ee6f37591b2893b2dceccc282f4e93831f69901",
+    "skillrl/models.py": "3f762bceb0aae31b34b6c47498d75d25e88de2dc38334e0486a557682f1e21b1",
+    "skillrl/budget.py": "39354011e8e076b988cf7b420e2ab792f0a737b8e4732be281eccbce90e65476",
+    "skillrl/__init__.py": "e8cbff40d35eb6e93624b4cc447d80286534896d410bea71c823d8312e93b3ad",
+    "skillrl/native.py": "63cb08df8319c43f633151aa322c6ca2c523c8d28eaf4c1d117cd6a627de8354",
+    "skillrl/review.py": "223a8633f8a08d75ae215f7913319fd9805e31d0b6379cd7f99bf7091d91062c",
+    "skillrl/agents.py": "cb859ab0befad7f349a74355536b2895ec2cb9b0b8b809c4f7bfb25da3be568e",
+    "skillrl/cli.py": "eb92928c5132d6ddc7bee1baaec5a7a276f3ccc33bb5e8375d65f6b772395486",
+    "skillrl/pipeline.py": "2f32910040fab2d7140ad97d69936f9bba0b064f151a7448a9ae19557dcc7f3c",
+    "skillrl/storage.py": "6c3421ea7dbfef05ab3750e0772b3ec55c66222692a52500e9425f7715f3612b",
+    "skillrl/environments.py": "0e33b6320edbcbc1ac08491bed04f539cffeaa4ef8c02f2a335c2acf4fda1af8",
+    "skillrl/workbuddy.py": "862f18c8c176c9517492cf68c6aa1773502a9c65b82a7f70969c4d9341df4a5f",
+    "skillrl/benchmarks.py": "06385f1829fe6d3e2688881dc0c60a350915675ce8c6abfdcabf238a00820b89",
+    "skillrl/__main__.py": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3",
+    "skillrl/reporting.py": "f19c643c3d4e90c0db1a42e63936c697eec9202c6749c3f3ef65e52d8dfeb6d3",
+    "skillrl/vendor/library_base.py": "a5aff4ea2d856dfc913c6e0dcc17d7f4ba95f1ffd7a8c97b89b2cd3fb97fe254",
+    "skillrl/vendor/submit.py": "5de328030114515b00da6456e85ce447b28c44ee7aa4e562adb0a3acc1ee7e39",
+    "skillrl/vendor/library.py": "3e91331c572c15592059af2ad096c97f5bf25cf5eaecb598c4051ec7a335386a",
+    "skillrl/vendor/a2o.py": "5f40081d4a6b6087af77697e8534067a1f31afbfb30ca32572740f99382e1fd6",
+    "skillrl/vendor/__init__.py": "40acaa8c6d5dd3b517f801e77021785af16e9dad71a0a4f91888d5e69d6286a8",
+    "skillrl/vendor/common.py": "75f08a0859cf6fb020f131c5815c020c9167227722fd105fd6f7cc96528e12dd"
+  }
+}
