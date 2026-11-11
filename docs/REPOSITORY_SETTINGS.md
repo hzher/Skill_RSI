@@ -2,60 +2,46 @@
 
 核对日期：2026-11-11。仓库：[hzher/Skill_RSI](https://github.com/hzher/Skill_RSI)。
 
-**本文件区分已观察状态与目标配置。** `.github/repository-settings.json` 是设置清单，GitHub 不会自动执行它；`CODEOWNERS` 也不会自动授予权限或强制审核。
+## 已完成的设置
 
-## 实际状态
-
-| 项目 | 核对结果 |
+| 项目 | 实际状态 |
 |---|---|
-| 远端可见性 | `public`，尚未改成私有 |
-| 远端默认分支 | `main`，尚未切换成 `master` |
-| 本地工作分支 | 已将 `main` 重命名为 `master`，清除旧 `origin/main` 跟踪关系；未创建成员分支 |
-| 远端分支 | 仅观察到 `main`；本次不创建成员分支 |
-| 主分支保护 | `main` 未保护；仓库 rulesets 返回空列表 |
-| Issues／Projects／Wiki | 三项功能当前均开启；未创建项目看板 |
-| 成员账号与邀请 | 尚未核实，不发送邀请 |
-| 当前初始化范围 | README、协作说明、模板和设置清单；实现代码由维护者随后上传 |
-| GitHub 写入 | 推送和设置需要仓库认证；是否生效以 GitHub 实际状态为准 |
-| 文档提交 | 本批纳入说明与协作配置；实现代码由维护者随后整理上传 |
-| 本地 Git 默认行为 | `pull.ff=only`、`fetch.prune=true`、`push.default=simple`，仅对此仓库设置 |
+| 文档发布 | README、协作规范、模板及配置已发布；实现代码尚未导入 |
+| 默认分支 | `master`，本地跟踪 `origin/master` |
+| 分支 | 保留原 `main`；成员分支由本人随后创建，本次未代建 |
+| `master` 保护 | 必须通过 PR、解决讨论、保持线性历史；禁止强推和删除，管理员同样受约束 |
+| 初始化审核 | 批准人数为 0；其他有写权限的审核成员接受邀请后，再启用至少 1 位他人批准 |
+| CODEOWNERS | 当前 `@hzher` 统一负责；不强制唯一 CODEOWNER 批准 |
+| 合并方式 | 仅启用 Squash merge；merge commit 和 rebase merge 已关闭 |
+| 分支清理 | 自动删除来源分支关闭，保留长期成员分支 |
+| 功能入口 | Issues、Projects 开启，Wiki 关闭；未创建项目看板 |
+| 自动合并与 CI | 自动合并关闭；未设置不存在的必需 CI 检查 |
+| 负责人访问 | 已向 `@sheepyedu` 发出协作者邀请，待对方接受；接受后具备读写与 PR 合并权限 |
+| 可见性 | 当前仍为 `public`，本次未改变可见性 |
+| 本地 Git 行为 | `pull.ff=only`、`fetch.prune=true`、`push.default=simple`，仅对此仓库生效 |
 
-## 目标配置
+GitHub 插件已安装并用于本次发布；插件认证与本机 Git 命令行认证不同，后续直接使用 `git push` 仍需配置本机 GitHub 凭据。远端发布通过 GitHub 插件完成，初始发布提交 `ab74a1a` 的文件树已与本地核对一致；本轮设置状态修订通过 PR 同步。
 
-| 设置 | 目标与原因 |
-|---|---|
-| 可见性 | 延续私有共享仓库的安排，目标为 `private` |
-| 默认分支 | `master`，作为稳定集成主线 |
-| 合并方式 | 启用 Squash merge，关闭 merge commit 和 rebase merge |
-| 分支清理 | 关闭自动删除来源分支，保留长期成员分支 |
-| `master` 审核 | 通过 PR，至少一位他人批准；新增修改后旧批准失效，合并前解决讨论 |
-| `master` 历史 | 线性历史，禁止强推和删除；保护规则应用于管理员 |
-| CODEOWNERS | 由 `@hzher` 统一负责；暂不强制 code-owner 批准，避免唯一负责人无法审核自己的 PR |
-| 状态检查 | 当前没有 CI，不设置不存在的必需检查 |
-| 功能入口 | 保留 Issues、Projects；关闭 Wiki，说明统一放仓库文档 |
-| 自动合并 | 暂不启用，按团队规范由维护者执行合并 |
+## 当前保护的含义
 
-注意：Squash merge 是 GitHub PR 的合并方式；成员在自己的分支执行 `git merge origin/master` 用于同步，两者不冲突。
+任何人，包括所有者，都需通过 PR 修改 `master`。初始化阶段尚无其他已接受邀请的协作者，暂不要求他人批准；自查不会被记录为他人审核。负责人接受邀请并核验写权限后，再把批准数提高为 1。
 
-## 应用顺序
+协作者可以按保护规则提交、审核和合并 PR，不能直接绕过保护。个人账号仓库不能给第二人单独授予 Admin；负责人若要管理仓库设置或访问控制，需要组织仓库方案，须另行确定组织和迁移安排。
 
-1. 维护者核对文件并使用自己的 Git 身份提交，整理和上传初版主代码。
-2. 在 GitHub 发布或重命名主分支为 `master`，设为默认分支，并确认本地跟踪关系；不提前删除旧分支。
-3. 将可见性调整为 `private`，应用合并方式、功能开关与分支保留设置。
-4. 成员准备接入时，由本人提供真实 GitHub 账号，再授予协作权限；成员按照 README 自建工作分支。
-5. 至少一位其他审核者就绪后，再启用必需审核及管理员保护，避免初始化阶段无人可审。私有仓库能否启用保护取决于账户套餐，需核对服务端结果；不能为了启用保护改成公开。
-6. 用一个小型文档 PR 验证审核、合并、长期分支保留和同步流程，更新本文件的实际状态。
+## 待完成事项
 
-当前未确认成员账号，也未建立对应远端分支。成员自建分支不等于获得写权限，仍需仓库协作者访问。
+1. 负责人接受邀请后，核对写权限，启用一位他人审核及旧批准失效。
+2. 按实际分工补充 CODEOWNERS；其他成员的账号和权限由本人确认。
+3. 维护者整理实现代码，通过 PR 导入；成员随后自行创建工作分支。
+4. 实现代码具备实际运行检查后，再启用对应 CI。
+5. 早期计划提过私有共享，目前仓库仍公开。若后续改为私有，先核对套餐是否支持所需保护；本次不改变可见性或购买套餐。
 
-远端 `master` 就绪后，维护者可执行 `git fetch origin`，再执行 `git branch --set-upstream-to=origin/master master` 恢复主分支跟踪；首次推送主分支时使用 `git push -u origin master` 也会建立跟踪。
+## 设置清单与权限边界
 
-## 权限边界
+[repository-settings.json](../.github/repository-settings.json) 记录后续团队就绪时的目标设置，不是自动执行文件；其中私有可见性和一位审核者要求尚未应用。GitHub 不会自动读取并执行它。
 
-这是个人账号名下的仓库，当前方案区分仓库所有者与协作者，不承诺组织仓库的细分角色。个人分支归属、由维护者合并属于团队协作规范；分支名和 `CODEOWNERS` 不构成成员间的访问隔离。参见 [GitHub 个人仓库权限说明](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/permission-levels-for-a-personal-account-repository)。
+`CODEOWNERS` 只定义审核归属，不授予访问权限；个人分支名也不隔离成员间的写权限。参考 [个人仓库权限说明](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/permission-levels-for-a-personal-account-repository)及[分支保护说明](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)。
 
-主分支保护的套餐要求和可用设置见 [GitHub 分支保护说明](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)。如果当前套餐不支持，记录“保护未强制生效”，先执行 PR 约定，再由维护者决定后续方案；不将文档约定写成平台已实施。
+## 项目跟踪
 
-## 项目跟踪建议
-
-每项工作用 Issue 记录，按 `Todo → In progress → Review → Done` 更新。初期直接使用 Issues 即可，需要跨任务看板时由维护者建立 Project。资源请求、运行预算和实验结果进入 Issue，PR 关联相应任务。当前尚未创建线上看板，也未自动分配任务。
+每项工作用 Issue 记录，按 `Todo → In progress → Review → Done` 更新。初期使用 Issues 即可，需要看板时再建立 Project。资源请求、运行预算和实验结果进入 Issue，PR 关联对应任务。
