@@ -4,6 +4,8 @@
 
 `framework/` 已包含可复用执行、轨迹封存、技能事务和评审实现。`xuyifan` 分支的 PAST-Bench × Codex 接线、运行方式与范围见 [接入说明](framework/docs/PASTBENCH_CODEX.md)；上游题库位于被忽略的 `upstream/PAST-Bench/`，原始结果位于 `.runtime/`。
 
+2026-11-12 首批 SM01 八题完成：原评分 5 通过、3 未通过、0 缺失；导出 5 条通过轨迹与 5 个候选技能版本。已观察 memory 继承，尚无 Skill 全文读取或技能效果证据。[验收汇总](framework/reports/pastbench-codex-sm01-20261112.json)
+
 ## 项目目标
 
 ```mermaid

@@ -1,5 +1,24 @@
 # PAST-Bench × Codex 数据生产
 
+## 2026-11-12 实际验收
+
+SM01 八题全部执行完成，原 grader 5 题通过、3 题未通过、0 个缺失评分。实际回执见 [汇总](../reports/pastbench-codex-sm01-20261112.json)。冻结运行源码、八题 memory/skill 历史分支、原评分与导出摘要审计通过；31 项框架及适配合同测试通过。
+
+| Episode | 原 task_score | 原通过判定 |
+|---|---:|---|
+| cold_style_baseline | 0.6000 | 未通过 |
+| learn_a_tsv_preference | 1.0000 | 通过 |
+| learn_b_preference_reinforcement | 1.0000 | 通过 |
+| eval_near_apply_saved_style | 1.0000 | 通过 |
+| eval_far_transfer_saved_style | 1.0000 | 通过 |
+| control_shortcut_visible_style_rule | 0.8667 | 未通过 |
+| control_style_preference_control | 1.0000 | 通过 |
+| control_no_persistence_style | 0.6000 | 未通过 |
+
+近、远迁移会话均继承真实 memory 并采用所学格式；本轮没有任何 Skill 工具全文读取，故 5 个导出 skill 版本均保持候选，不能宣称技能产生了任务增益。40 次原生 Responses 请求、32 次 Curator 请求、26 个工具事件与 2 次 memory 写入有原回执。5 次终止响应缺少 reported model 字段，原样保留缺失；其余明确报告 `gpt-6.1-sol`。无 judge 请求、无参数更新、无独立下游评测。
+
+本机运行位于 `.runtime/pastbench/sm01-v3/`，导出位于 `.runtime/pastbench/sm01-v3-export/`：8 条完整原生轨迹、其中 5 条原评分通过轨迹、5 个候选技能版本。数据只覆盖一个开发任务族；原始轨迹不随 Git 分发。服务已退出。首两次配置/依赖诊断保留在独立旧目录，不混入这批结果。
+
 在 `xuyifan` 分支复用现有 Pipeline、Curator、DeltaLibrary 和 Reviewer，新增原生 Codex CLI 执行器及 PAST-Bench notes 环境。模型参数不更新。本接线是 Codex 的 benchmark 适配，不是 Hermes/Hermes+ 复现。
 
 ## 输入与角色

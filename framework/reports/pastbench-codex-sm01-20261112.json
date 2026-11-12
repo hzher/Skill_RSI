@@ -1,0 +1,196 @@
+{
+  "schema": "skillrl-pastbench-acceptance-v1",
+  "observed_at": "2026-11-12T04:09:26.245140+00:00",
+  "implementation_commit": "28cd7668f79d5d63863f800b441cc03dcf598c56",
+  "runtime_source_identity": "frozen source snapshot made before implementation commit; exact per-module hashes below",
+  "runtime_source_sha256": {
+    "__init__.py": "e8cbff40d35eb6e93624b4cc447d80286534896d410bea71c823d8312e93b3ad",
+    "__main__.py": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3",
+    "agents.py": "135b4473c661052e3dcf13ba9ef98a716aa7e0f6a0b283daa2588f2e256cb030",
+    "benchmarks.py": "06385f1829fe6d3e2688881dc0c60a350915675ce8c6abfdcabf238a00820b89",
+    "budget.py": "39354011e8e076b988cf7b420e2ab792f0a737b8e4732be281eccbce90e65476",
+    "cli.py": "97165b212ffa2f4476768664e70e49f486da461e3bb917c024c3e32bae7fd07c",
+    "codex.py": "44d6d6b3d73e2113ae66f6fa7378f4fb5f8461755028fc8731697a23d86ee3b2",
+    "codex_mcp.py": "6dd56b233da132b1c0fcf2639ea8896ec202cfcbb50f52c4c3ba99d3fbd7a49e",
+    "curation.py": "be809f26479c3ea371595e9162e98de9c33ed25fa5d21c7bd49f17ba575b5ca5",
+    "environments.py": "0e33b6320edbcbc1ac08491bed04f539cffeaa4ef8c02f2a335c2acf4fda1af8",
+    "export_pastbench.py": "140fa1c1e74c394d2b9be7f916e7890d6c7fc9a1568e0dd24dc25fe78046dbc2",
+    "models.py": "3f762bceb0aae31b34b6c47498d75d25e88de2dc38334e0486a557682f1e21b1",
+    "native.py": "63cb08df8319c43f633151aa322c6ca2c523c8d28eaf4c1d117cd6a627de8354",
+    "pastbench.py": "e34785c54a13018215bb72022b50eae534470a742faa4a54f2916f0d0c5afd86",
+    "pipeline.py": "2f32910040fab2d7140ad97d69936f9bba0b064f151a7448a9ae19557dcc7f3c",
+    "reporting.py": "0f6fcbaea198aadabd92a47b02c2571928992718de664ed5c4de5a03f0ddaa7f",
+    "review.py": "223a8633f8a08d75ae215f7913319fd9805e31d0b6379cd7f99bf7091d91062c",
+    "storage.py": "6c3421ea7dbfef05ab3750e0772b3ec55c66222692a52500e9425f7715f3612b",
+    "vendor/__init__.py": "40acaa8c6d5dd3b517f801e77021785af16e9dad71a0a4f91888d5e69d6286a8",
+    "vendor/a2o.py": "5f40081d4a6b6087af77697e8534067a1f31afbfb30ca32572740f99382e1fd6",
+    "vendor/common.py": "75f08a0859cf6fb020f131c5815c020c9167227722fd105fd6f7cc96528e12dd",
+    "vendor/library.py": "3e91331c572c15592059af2ad096c97f5bf25cf5eaecb598c4051ec7a335386a",
+    "vendor/library_base.py": "a5aff4ea2d856dfc913c6e0dcc17d7f4ba95f1ffd7a8c97b89b2cd3fb97fe254",
+    "vendor/submit.py": "5de328030114515b00da6456e85ce447b28c44ee7aa4e562adb0a3acc1ee7e39",
+    "workbuddy.py": "862f18c8c176c9517492cf68c6aa1773502a9c65b82a7f70969c4d9341df4a5f"
+  },
+  "upstream_repository": "https://github.com/Gen-Verse/PAST-Bench",
+  "upstream_commit": "f8223517ae7491e776b69793d9f11e9d074ab42e",
+  "family": "memory_ability/SM01_preference_adoption",
+  "executor": {
+    "harness": "codex-cli 0.164.0",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "timeout_seconds": 600,
+    "reported_model_missing_in_responses": 5
+  },
+  "curator": {
+    "backend": "framework HTTPModel Chat Completions tool loop",
+    "model": "gpt-6.1-sol"
+  },
+  "judge_model_requests": 0,
+  "episodes_attempted": 8,
+  "episodes_completed": 8,
+  "original_grader_passed": 5,
+  "original_grader_failed": 3,
+  "missing_objective_scores": 0,
+  "episodes": [
+    {
+      "episode": "cold_style_baseline",
+      "task_id": "SM01_COLD_001",
+      "task_score": 0.6,
+      "passed": false,
+      "memory_before_entries": 0,
+      "memory_after_entries": 0,
+      "skills_at_start": 0,
+      "active_skills_after": 1,
+      "curation_status": "applied"
+    },
+    {
+      "episode": "learn_a_tsv_preference",
+      "task_id": "SM01_LEARN_A_001",
+      "task_score": 1.0,
+      "passed": true,
+      "memory_before_entries": 0,
+      "memory_after_entries": 1,
+      "skills_at_start": 1,
+      "active_skills_after": 1,
+      "curation_status": "applied"
+    },
+    {
+      "episode": "learn_b_preference_reinforcement",
+      "task_id": "SM01_LEARN_B_001",
+      "task_score": 1.0,
+      "passed": true,
+      "memory_before_entries": 1,
+      "memory_after_entries": 1,
+      "skills_at_start": 1,
+      "active_skills_after": 1,
+      "curation_status": "no_op"
+    },
+    {
+      "episode": "eval_near_apply_saved_style",
+      "task_id": "SM01_EVAL_NEAR_001",
+      "task_score": 1.0,
+      "passed": true,
+      "memory_before_entries": 1,
+      "memory_after_entries": 1,
+      "skills_at_start": 1,
+      "active_skills_after": 1,
+      "curation_status": "no_op"
+    },
+    {
+      "episode": "eval_far_transfer_saved_style",
+      "task_id": "SM01_EVAL_FAR_001",
+      "task_score": 1.0,
+      "passed": true,
+      "memory_before_entries": 1,
+      "memory_after_entries": 1,
+      "skills_at_start": 1,
+      "active_skills_after": 1,
+      "curation_status": "no_op"
+    },
+    {
+      "episode": "control_shortcut_visible_style_rule",
+      "task_id": "SM01_CONTROL_002",
+      "task_score": 0.8667,
+      "passed": false,
+      "memory_before_entries": 0,
+      "memory_after_entries": 0,
+      "skills_at_start": 0,
+      "active_skills_after": 1,
+      "curation_status": "applied"
+    },
+    {
+      "episode": "control_style_preference_control",
+      "task_id": "SM01_CONTROL_001",
+      "task_score": 1.0,
+      "passed": true,
+      "memory_before_entries": 0,
+      "memory_after_entries": 1,
+      "skills_at_start": 0,
+      "active_skills_after": 1,
+      "curation_status": "applied"
+    },
+    {
+      "episode": "control_no_persistence_style",
+      "task_id": "SM01_CONTROL_003",
+      "task_score": 0.6,
+      "passed": false,
+      "memory_before_entries": 0,
+      "memory_after_entries": 0,
+      "skills_at_start": 0,
+      "active_skills_after": 1,
+      "curation_status": "applied"
+    }
+  ],
+  "wire_requests": 40,
+  "tool_events": 26,
+  "memory_writes": 2,
+  "skill_reads": 0,
+  "cost": {
+    "executor": {
+      "input_tokens": 463310,
+      "output_tokens": 3274,
+      "missing_usage": 0,
+      "requests": 40
+    },
+    "curator": {
+      "input_tokens": 98035,
+      "output_tokens": 4459,
+      "missing_usage": 0,
+      "requests": 32
+    },
+    "judge": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "missing_usage": 0,
+      "requests": 0
+    }
+  },
+  "export": {
+    "family": "memory_ability/SM01_preference_adoption",
+    "episodes": 8,
+    "successful_trajectories": 5,
+    "skill_versions": 5,
+    "skill_versions_with_successful_consumer": 0,
+    "scope": "single-family development data; not independent downstream evaluation",
+    "policy_gradient_eligible": false,
+    "weights_updated": false,
+    "exporter_sha256": "f39a7334cd7be625b42b1dcf282da0f88f331cd64ada801cbb4364721f840240",
+    "files": {
+      "successful-trajectories.jsonl": "03a068fb294995bd678f045d386c207257a61333542a1fb9d810b06f57a16e8a",
+      "all-trajectories.jsonl": "15d775041bcc927d5b62eb00fc296fd90bde2591af491aa165359d4928b74bdc",
+      "skills.jsonl": "a388a210004e007f409dc219fc08c6e58bf84fcfb38e1e23beb3d1b88b9e67d1"
+    }
+  },
+  "tests_passed": 31,
+  "source_and_branch_audit_passed": true,
+  "audit_sha256": "6a00d5568e93a5614bb2292c17ddf68defdf61e4dfb771c870b235eb5608c9d6",
+  "run_ref": ".runtime/pastbench/sm01-v3",
+  "export_ref": ".runtime/pastbench/sm01-v3-export",
+  "limitations": [
+    "Only one notes-service task family, not the full 204 episodes.",
+    "Five successful trajectories and five candidate skill versions; no Skill tool reads or proven skill consumers.",
+    "Preference reuse is observed with real persisted memory; skill benefit is not established.",
+    "No independent downstream evaluation, weight update or policy-gradient token logprobs.",
+    "Original deterministic grader invoked with Codex memory-event metadata; not a Hermes runtime reproduction.",
+    "The initial configuration/dependency probes are excluded; their original receipts are retained separately."
+  ]
+}
