@@ -1,0 +1,148 @@
+{
+  "schema": "pastbench-merged-release-validation-v1",
+  "observed_at": "2026-11-12T13:33:59.943407+00:00",
+  "validated": true,
+  "families": 26,
+  "episodes": 204,
+  "scores": {
+    "failed": 154,
+    "passed": 50
+  },
+  "preserved_original_families": 13,
+  "fully_passed_families": 0,
+  "pipeline_complete_episodes": 186,
+  "successful_trajectories": 48,
+  "successful_native_turns": 238,
+  "skill_versions": 124,
+  "generated_skill_versions": 107,
+  "provided_seed_only_versions": 17,
+  "reported_model_counts": {
+    "executor:gpt-6.1-sol": 1162,
+    "curator:gpt-6.1-sol": 1110,
+    "judge:gpt-6.1-sol": 310,
+    "executor:None": 91
+  },
+  "credential_scan_matches": 0,
+  "manifest_sha256": "212d279f33a54238bce8a280b29dede8b053272ee24f97ddeea8e1ac7dad843a",
+  "acceptance_audit_sha256": "b4d6c86b6759463f7da59a0b28e022b8e0900d372895a3b25cfbb92326954649",
+  "validator_sha256": "67292115e6f0611338fab414e61598807443531d9635227083fc5fc13e6cb06c",
+  "no_weight_update_or_causal_skill_effect_claim": true,
+  "branch": "xuyifan",
+  "git_base": "59c8fef41f346b7955061e2e4f7073097f3f0b83",
+  "upstream_commit": "f8223517ae7491e776b69793d9f11e9d074ab42e",
+  "task_coverage_complete": true,
+  "all_original_scores_available": true,
+  "preserved_families": 13,
+  "recovered_families": 13,
+  "categories": {
+    "memory_ability": {
+      "attempted": 41,
+      "execution_complete": 41,
+      "pipeline_complete": 41,
+      "passed": 16,
+      "failed": 25,
+      "unknown": 0
+    },
+    "proactive_information_gathering": {
+      "attempted": 48,
+      "execution_complete": 48,
+      "pipeline_complete": 41,
+      "passed": 10,
+      "failed": 38,
+      "unknown": 0
+    },
+    "procedural_ability": {
+      "attempted": 64,
+      "execution_complete": 64,
+      "pipeline_complete": 55,
+      "passed": 4,
+      "failed": 60,
+      "unknown": 0
+    },
+    "update_ability": {
+      "attempted": 51,
+      "execution_complete": 51,
+      "pipeline_complete": 49,
+      "passed": 20,
+      "failed": 31,
+      "unknown": 0
+    }
+  },
+  "skill_reads": 68,
+  "memory_writes": 18,
+  "session_searches": 185,
+  "skill_versions_with_passing_consumer": 3,
+  "timing": {
+    "campaign_started_at": "2026-11-12T10:06:21.243543+00:00",
+    "collection_and_recovery_finished_at": "2026-11-12T13:22:41.569048+00:00",
+    "wall_seconds": 11780.325505,
+    "primary_wall_seconds": 7472.621539274987
+  },
+  "evidence": {
+    "campaign": ".runtime/pastbench/full204-20261112-resilient-v2-recovered",
+    "export": ".runtime/pastbench/full204-20261112-resilient-v2-recovered-export",
+    "quality_receipt": ".runtime/pastbench/full204-20261112-resilient-v2-recovered/network-quality-accepted-v2.json",
+    "validation_receipt": ".runtime/pastbench/full204-20261112-resilient-v2-recovered/release-validation.json",
+    "campaign_plan_sha256": "5a32e6e6d8da7da02039e34b80a670d6765b178498fba2822aab7279ec3be0eb",
+    "quality_sha256": "d883581eb530426d088c7440ae20f446f12f1132d46b88b2797a00be3c316061",
+    "release_validation_sha256": "3a766829f2eada1be907901970c3c2da070bab36f21b6b9d06cf97caeab94784"
+  },
+  "limits": [
+    "Original scoring retained; full task coverage does not mean every task passed.",
+    "18 task executions and grades are complete but Curator/Reviewer pipeline is incomplete; strict successful trajectories exclude incomplete pipelines.",
+    "91 executor completions omit reported model identity; request model remains gpt-6.1-sol and missing response identity is not filled in.",
+    "Skill consumer co-occurrence is not a causal effect estimate; no weight update or policy-gradient logprobs.",
+    "Native Codex task adapter with framework Curator; not a native Hermes reproduction.",
+    "Selected-history usage excludes abandoned family attempts and uncertain retry charges; no monetary total claimed."
+  ],
+  "selected_history_cost": {
+    "executor": {
+      "request_attempts": 1253,
+      "complete_responses": 1253,
+      "known_input_lower_bound": 24085553,
+      "known_output_lower_bound": 133762,
+      "missing_usage": 0,
+      "known_unsent": 0,
+      "invalid_complete_responses": 0,
+      "physical_request_attempts": 1256,
+      "transport_recovered_errors": 3,
+      "prior_transport_attempts_with_unknown_cost": 3
+    },
+    "curator": {
+      "request_attempts": 1111,
+      "complete_responses": 1110,
+      "known_input_lower_bound": 24320138,
+      "known_output_lower_bound": 154515,
+      "missing_usage": 1,
+      "known_unsent": 0,
+      "invalid_complete_responses": 0,
+      "physical_request_attempts": 1119,
+      "transport_recovered_errors": 1,
+      "prior_transport_attempts_with_unknown_cost": 8
+    },
+    "judge": {
+      "request_attempts": 123,
+      "complete_responses": 122,
+      "known_input_lower_bound": 5595427,
+      "known_output_lower_bound": 33121,
+      "missing_usage": 1,
+      "known_unsent": 0,
+      "invalid_complete_responses": 0,
+      "physical_request_attempts": 129,
+      "transport_recovered_errors": 0,
+      "prior_transport_attempts_with_unknown_cost": 6
+    },
+    "objective_judge": {
+      "request_attempts": 188,
+      "complete_responses": 188,
+      "known_input_lower_bound": 1532326,
+      "known_output_lower_bound": 24687,
+      "missing_usage": 0,
+      "known_unsent": 0,
+      "invalid_complete_responses": 0,
+      "physical_request_attempts": 188,
+      "transport_recovered_errors": 0,
+      "prior_transport_attempts_with_unknown_cost": 0
+    }
+  }
+}

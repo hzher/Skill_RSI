@@ -252,6 +252,7 @@ def run_full_family(source, family, config, output, *, continue_on_error=True):
     immutable(output / 'family-plan.json', canonical(plan))
     models = {role: HTTPModel(**spec) for role, spec in config['models'].items()}
     rows, previous = [], None
+    continue_on_error = config.get('continue_on_error', continue_on_error)
     if config.get('episode_limit'):
         specifications = specifications[:config['episode_limit']]
     for specification in specifications:
@@ -295,6 +296,10 @@ def run_full_family(source, family, config, output, *, continue_on_error=True):
             if not anchor.exists():
                 inherit(root, anchor)
         if not row['complete'] and not continue_on_error:
+            break
+        if config.get('stop_on_infrastructure_error') and (
+                not row['execution_complete'] or objective is None or objective.get('score') is None or
+                any(load(p).get('transient') for p in root.rglob('transport-exhausted.json'))):
             break
     summary = {'family': family, 'episodes': rows, 'attempts_finished': len(rows) == len(specifications),
         'complete': len(rows) == len(specifications) and all(r['complete'] for r in rows),

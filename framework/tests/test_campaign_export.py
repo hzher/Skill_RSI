@@ -26,7 +26,8 @@ class ReleaseCriteria(unittest.TestCase):
                 response = {'type': 'response.completed', 'response': {'model': 'gpt-6.1-sol', 'output': []}}
                 (task / 'actor/wire/0000/response.raw').write_text('data: ' + json.dumps(response) + '\n')
                 rows.append({'episode': name, 'task_id': name, 'report': str(run / 'report.json'),
-                    'complete': complete, 'objective': {'score': score, 'details': {'task_score': score}}})
+                    'complete': complete, 'objective': {'score': score, 'details': {
+                        'task_score': score, 'private_canary': 'DO_NOT_FEED_GRADER_METADATA_TO_MODEL'}}})
             atomic(campaign / 'families' / family / 'family-summary.json', {'episodes': rows})
             result = export_campaign(campaign, root / 'export')
             self.assertEqual(result['successful_training_trajectories'], 1)
@@ -34,6 +35,10 @@ class ReleaseCriteria(unittest.TestCase):
             self.assertEqual(len((root / 'export/all-trajectories.jsonl').read_text().splitlines()), 3)
             accepted = json.loads((root / 'export/successful-trajectories.jsonl').read_text())
             self.assertEqual(accepted['task_id'], 'valid')
+            native = (root / 'export/successful-native-turns.jsonl').read_text()
+            self.assertNotIn('DO_NOT_FEED_GRADER_METADATA_TO_MODEL', native)
+            self.assertEqual(json.loads(native)['task_id'], 'valid')
+            self.assertEqual(result['successful_native_turns'], 1)
             self.assertTrue((root / 'export/RESULTS.md').exists())
             self.assertTrue((root / 'export/traces' / family / 'unknown.md').exists())
 

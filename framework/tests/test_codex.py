@@ -63,6 +63,24 @@ class CodexContracts(unittest.TestCase):
             self.assertEqual(actual['input_tokens'], 12)
             self.assertEqual(actual['output_tokens'], 3)
 
+    def test_code_mode_custom_tool_output_preserves_exact_nested_skill_body(self):
+        with tempfile.TemporaryDirectory() as folder:
+            actor = Path(folder)
+            version = {'name': 'sample', 'skill_id': 's:1', 'raw_sha256': 'hash', 'content': 'First line\nFull second line'}
+            execution = {'events': [{'type': 'tool', 'name': 'Skill', 'error': False, 'result': version},
+                                    {'type': 'tool', 'name': 'notes_share', 'error': False}]}
+            mcp = {'content': [{'type': 'text', 'text': json.dumps(version)}]}
+            request = actor / 'wire/0001'
+            atomic(request / 'request.json', {'input': [{'type': 'custom_tool_call_output', 'call_id': 'actual-native-call',
+                'output': [{'type': 'input_text', 'text': 'Script completed\nOutput:\n'},
+                           {'type': 'input_text', 'text': json.dumps(mcp)}]}]})
+            atomic(request / 'result.json', {'status': 200})
+            (request / 'response.raw').write_text('event: response.completed\ndata: {}\n')
+            proof = codex_exposures(execution, [version], actor, ['notes_share'])[0]
+            self.assertTrue(proof['body_proven'])
+            self.assertEqual(proof['proof'][0]['wire_call_id'], 'actual-native-call')
+            self.assertEqual(proof['proof'][0]['subsequent_actions'], [1])
+
 
 if __name__ == '__main__':
     unittest.main()

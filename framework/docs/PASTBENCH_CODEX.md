@@ -33,6 +33,8 @@
 
 入口为导出目录的 `RESULTS.md`，表格为 `families.csv`，逐题为 `traces/<family>/<task_id>.md`，技能为 `skills/<name>--<sha>.md`。明确区分原提供的 seed 技能与 Curator 生成的版本；没有完整 wire、pipeline 完整性或原通过判定的样本不混入 successful-trajectories。
 
+`successful-trajectories.jsonl` 是带完整审计元数据的轨迹包，包含原评分细节，不应把整个对象作为模型输入。`successful-native-turns.jsonl` 则单独保存这些通过轨迹的实际模型请求/响应，不含 grader 细节或事后状态，便于后续构造监督样本；它仍是原生 Responses 结构，未冒称已经完成 tokenizer 适配或提供 policy-gradient logprob。
+
 ## 2026-11-12 实际验收
 
 SM01 八题全部执行完成，原 grader 5 题通过、3 题未通过、0 个缺失评分。实际回执见 [汇总](../reports/pastbench-codex-sm01-20261112.json)。冻结运行源码、八题 memory/skill 历史分支、原评分与导出摘要审计通过；31 项框架及适配合同测试通过。
@@ -123,3 +125,25 @@ episodes/<episode>/
 导出文件为 `all-trajectories.jsonl`、`successful-trajectories.jsonl`、`skills.jsonl` 和带文件摘要的 `manifest.json`。保留原 Responses 请求和终止响应；网关未报告 model 字段时保持缺失，不用请求值补写；明确报告其他模型时拒绝发布该导出。
 
 `upstream/`、`.runtime/` 和原始轨迹不提交。仓库只保存代码、配置、操作说明和经过检查的汇总结果；运行时源码、上游 commit、原输入摘要由回执记录。
+
+## 直连与断线恢复配置
+
+`examples/pastbench-codex-resilient.json` 为独立的新批次配置：所有角色仍使用 `gpt-6.1-sol`，明确关闭环境代理，临时网络错误或 HTTP 408/429/500/502/503/504 最多尝试 8 次，单个请求恢复时间预算 480 秒。完整 SSE 收齐且出现 `response.completed` 后才交给原生 Codex，半截响应不会触发工具操作。完整模型回答、业务错误、低分、认证错误不通过请求重试改写。
+
+每次物理请求的摘要、原始响应和失败原因保存在 `transport-attempts/`，恢复次数在 `transport-summary.json`；额外调用费用可能未知，不能只凭最终 usage 推算总花费。失败记录不进入成功模型交互视图，但完整保留供审计。
+
+此配置遇到执行缺失、评分缺失或已耗尽的临时传输故障即停止当前任务族，避免传播因基础设施故障而残缺的历史。若存在已耗尽的临时网络故障，未完成任务族最多从原始种子重新运行 3 次。所有独立尝试保存在 `family-attempts/<category>/<family>/<attempt>/`；`families/` 只保存所选尝试的索引，episode report 仍指向其真实原始路径。一旦组内原任务全部执行并取得评分，即保留该组，不因低分或技能生成/评审失败而整组重跑。非传输性 Curator 拒绝或未提交保留为模型行为，没有技能提交就继承实际未改动的技能库，不伪造 no-op。新配置及更大的超时预算使其成为与首批不同的实验条件。
+
+工作区私有启动器 `codex/run_resilient_pastbench.py` 读取仓库外密钥，先检查直连，再以固定并发启动全套任务，每 30 秒记录 `/models` 心跳，结束后执行谱系审计和导出。`/models` 成功仅表示该时刻可访问，不能保证所有生成请求成功。最终 `network-quality.json` 的 `quality_accepted` 只有在 204 题均完成执行且有评分、谱系审计通过、导出成功且所选原生调用无最终传输失败时才为 true；它是网络与任务覆盖验收，不代表所有题通过或所有技能有效。`full_pipeline_accepted` 单独报告 Curator/Reviewer 是否也全部完成；成功样本仍按严格流水线条件筛选。
+
+## 2026-11-12 全量补跑与合并结果
+
+本轮保留 13 个已完整执行和评分的任务族，补齐另外 13 族。26 族、204 题均有完整 Codex 执行和原评测回执：50 题通过、154 题未通过、0 题缺失；组内全部题通过的任务族为 0。采集与补跑从北京时间 18:06:21 到 21:22:41，约 3 小时 16 分 20 秒，之后完成审计与导出校验。
+
+最终目录（相对于仓库根目录）为 `.runtime/pastbench/full204-20261112-resilient-v2-recovered-export/`：`RESULTS.md` 提供 26 族总表及逐题、逐技能链接；`all-trajectories.jsonl` 包含全部 204 题；`successful-trajectories.jsonl` 包含 48 条严格成功轨迹；`successful-native-turns.jsonl` 包含对应的 238 条原生模型交互；`skills.jsonl` 和 `skills/` 保留 124 个确切内容版本，其中生成候选 107 个、初始种子 17 个。68 次实际 Skill 读取中，3 个技能版本存在完整全文曝光与通过任务的共现证据；这不构成因果增益证明。
+
+完整框架流水线完成 186/204 题。另 18 题的执行与原评分完整，但 Curator/Reviewer 未全部完成；按用户要求不整组重跑，且不完整流水线不进入严格成功样本。请求模型均为 `gpt-6.1-sol`；1253 次执行器完成回执中，1162 次报告该模型、91 次未返回模型标识，缺失字段原样保留。Executor 使用原生 Codex CLI；Curator 与 Judge 使用 OpenAI 兼容 HTTP 工具调用。原生交互视图没有私有评分字段，也没有后训练所需的逐 token logprob。
+
+审计目录为 `.runtime/pastbench/full204-20261112-resilient-v2-recovered/`，以 `release-validation.json` 和 `network-quality-accepted-v2.json` 为最终验收入口。首次合并审计因锚点路径指向合并索引而失败；已改为沿实际 worker 回执定位原目录，通过全部 204 题的源码、顺序、历史与技能/记忆继承、原评分绑定及生命周期检查。旧失败回执和全部模型尝试保留，没有重写原始轨迹或奖励。导出文件校验值、原生请求/响应一致性、13 族保留策略与凭证扫描也已通过。
+
+汇总见 [机器可读验收报告](../reports/pastbench-codex-full-recovered-20261112.json)。原始题库、运行数据与私有启动器不提交；仓库仅保存实现、配置、测试和不含凭证的统计。当前实现的全部 43 项测试通过；每个实际运行使用的源码以其冻结快照和模块 SHA 为准。

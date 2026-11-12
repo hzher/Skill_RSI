@@ -15,7 +15,7 @@ from .storage import atomic, begin, seal, load
 
 class ResponsesRecorder:
     """Keep upstream credentials out of the harness and persist unmodified wire bodies."""
-    def __init__(self, base_url, key, path, timeout):
+    def __init__(self, base_url, key, path, timeout, transport=None):
         self.path = Path(path)
         self.path.mkdir(parents=True, exist_ok=True)
         self.lock = threading.Lock()
@@ -47,16 +47,27 @@ class ResponsesRecorder:
                     headers={'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json',
                              'Accept': self.headers.get('Accept', 'text/event-stream')})
                 try:
-                    with urllib.request.urlopen(request, timeout=timeout) as response:
-                        self.send_response(response.status)
-                        self.send_header('Content-Type', response.headers.get('Content-Type', 'text/event-stream'))
+                    if transport:
+                        from .transport import buffered_request
+                        body, content_type = buffered_request(request, target, timeout=timeout,
+                            options=transport, secret=key, responses=True)
+                        (target / 'response.raw').write_bytes(body)
+                        self.send_response(200)
+                        self.send_header('Content-Type', content_type)
                         self.end_headers()
-                        with (target / 'response.raw').open('wb') as stream:
-                            while chunk := response.read1(65536):
-                                stream.write(chunk)
-                                stream.flush()
-                                self.wfile.write(chunk)
-                                self.wfile.flush()
+                        self.wfile.write(body)
+                        self.wfile.flush()
+                    else:
+                        with urllib.request.urlopen(request, timeout=timeout) as response:
+                            self.send_response(response.status)
+                            self.send_header('Content-Type', response.headers.get('Content-Type', 'text/event-stream'))
+                            self.end_headers()
+                            with (target / 'response.raw').open('wb') as stream:
+                                while chunk := response.read1(65536):
+                                    stream.write(chunk)
+                                    stream.flush()
+                                    self.wfile.write(chunk)
+                                    self.wfile.flush()
                     completed = []
                     for line in (target / 'response.raw').read_text(errors='replace').splitlines():
                         if line.startswith('data: '):
@@ -145,9 +156,11 @@ class CodexExecutor:
         mcp = {'command': sys.executable, 'args': ['-m', 'skillrl.codex_mcp', str(path / 'mcp.json')],
                'env': {'PYTHONPATH': env['PYTHONPATH']}, 'startup_timeout_sec': 30, 'tool_timeout_sec': 90,
                'default_tools_approval_mode': 'approve'}
-        with ResponsesRecorder(self.model.base_url, key, path / 'wire', self.timeout) as url:
+        with ResponsesRecorder(self.model.base_url, key, path / 'wire', self.timeout,
+                               transport=getattr(self.model, 'transport', None)) as url:
             provider = {'name': 'Recorded benchmark provider', 'base_url': url, 'wire_api': 'responses',
-                        'request_max_retries': 0, 'stream_max_retries': 0}
+                        'request_max_retries': 0, 'stream_max_retries': 0,
+                        'stream_idle_timeout_ms': self.timeout * 1000}
             # TOML inline tables do not accept JSON's colon syntax.
             def table(value):
                 if isinstance(value, dict):

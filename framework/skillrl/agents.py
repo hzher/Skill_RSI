@@ -145,8 +145,9 @@ def codex_exposures(execution, snapshot, actor_path, action_tools):
                         if isinstance(value, list):
                             return any(contains_body(v) for v in value)
                         return False
-                    if item.get('type') == 'function_call_output' and contains_body(output):
+                    if item.get('type') in ('function_call_output', 'custom_tool_call_output', 'mcp_tool_call_output') and contains_body(output):
                         proof.append({'event_index': index, 'next_request': name,
+                                      'wire_item_type': item['type'], 'wire_call_id': item.get('call_id'),
                                       'subsequent_actions': [i for i, e in enumerate(execution['events'])
                                           if i > index and e['type'] == 'tool' and not e['error'] and e['name'] in action_tools]})
         rows.append({'name': version['name'], 'skill_id': version['skill_id'], 'raw_sha256': version['raw_sha256'],

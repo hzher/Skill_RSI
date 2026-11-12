@@ -1,0 +1,12 @@
+{
+  "models": {
+    "executor": {"base_url": "https://cn.affordablerouter.com/v1", "model": "gpt-6.1-sol", "api_key_env": "OPENAI_API_KEY", "timeout": 600, "max_tokens": 8192, "transport": {"max_attempts": 8, "max_elapsed": 480, "attempt_timeout": 120}},
+    "curator": {"base_url": "https://cn.affordablerouter.com/v1", "model": "gpt-6.1-sol", "api_key_env": "OPENAI_API_KEY", "timeout": 600, "max_tokens": 8192, "transport": {"max_attempts": 8, "max_elapsed": 480, "attempt_timeout": 120}},
+    "judge": {"base_url": "https://cn.affordablerouter.com/v1", "model": "gpt-6.1-sol", "api_key_env": "OPENAI_API_KEY", "timeout": 600, "max_tokens": 8192, "transport": {"max_attempts": 8, "max_elapsed": 480, "attempt_timeout": 120}}
+  },
+  "codex": {"timeout": 1200, "reasoning_effort": "medium"},
+  "curator": {"max_turns": 24, "wall_seconds": 1200},
+  "continue_on_error": true,
+  "stop_on_infrastructure_error": true,
+  "family_transport_attempts": 3
+}

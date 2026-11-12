@@ -18,44 +18,55 @@ Submit actual structured fields with exact parent names and actual Read evidence
 An evidence_id is the stem of an events file: after Read("events/e00001.json"), cite "e00001".
 Do not cite task.json, index.json, artifact paths, or full file paths as evidence IDs. They are context, not event IDs.
 Dependencies must survive the transaction. submit_transaction returns the actual validated commit or a concrete rejection.
+Skill names must match ^[a-z][a-z0-9-]{2,63}$: lowercase ASCII words separated by hyphens, no spaces or underscores.
+Each description/applicability/exclusions/step/validation string must respect its declared length limit.
+After a rejected submission, use the concrete error to correct your own arguments and resubmit within the remaining budget.
+To choose no-op, call submit_transaction with {"reason":"your evidence-based reason", "operations":[]}.
+A final text message without a committed transaction does not finish curation.
 After a commit, finish briefly. No-op is equally valid. Objective evaluations and private answers are unavailable.'''
 
 
-def validate(value, spec):
+def validate(value, spec, path='$'):
     """Subset of JSON Schema used by the extracted transaction contract."""
     if 'anyOf' in spec:
-        for option in spec['anyOf']:
+        options = spec['anyOf']
+        if isinstance(value, dict) and 'operation' in value:
+            matching = [option for option in options if value['operation'] in
+                        option.get('properties', {}).get('operation', {}).get('enum', [])]
+            options = matching or options
+        errors = []
+        for option in options:
             try:
-                validate(value, option)
+                validate(value, option, path)
                 return
-            except ValueError:
-                pass
-        raise ValueError('Value does not match any operation shape')
+            except ValueError as error:
+                errors.append(str(error))
+        raise ValueError('Invalid operation shape: ' + '; '.join(errors[:2]))
     kind = spec.get('type')
     types = {'object': dict, 'array': list, 'string': str, 'integer': int, 'number': (int, float)}
     if kind in types and (not isinstance(value, types[kind]) or kind in ('number', 'integer') and isinstance(value, bool)):
-        raise ValueError('Incorrect field type ' + str(kind))
+        raise ValueError(path + ': expected type ' + str(kind))
     if 'enum' in spec and value not in spec['enum']:
-        raise ValueError('Value outside declared enum')
+        raise ValueError(path + ': value outside declared enum')
     if kind == 'object':
         if not set(spec.get('required', [])) <= set(value):
-            raise ValueError('Missing required fields')
+            raise ValueError(path + ': missing required fields')
         properties = spec.get('properties', {})
         if spec.get('additionalProperties') is False and not set(value) <= set(properties):
-            raise ValueError('Unknown fields')
+            raise ValueError(path + ': unknown fields')
         for key, item in value.items():
             if key in properties:
-                validate(item, properties[key])
+                validate(item, properties[key], path + '.' + key)
     if kind in ('array', 'string'):
         lower = spec.get('minItems' if kind == 'array' else 'minLength', 0)
         upper = spec.get('maxItems' if kind == 'array' else 'maxLength', float('inf'))
         if not lower <= len(value) <= upper:
-            raise ValueError('Field outside size budget')
+            raise ValueError(path + ': length must be between ' + str(lower) + ' and ' + str(upper))
     if kind == 'array':
-        for item in value:
-            validate(item, spec.get('items', {}))
+        for index, item in enumerate(value):
+            validate(item, spec.get('items', {}), path + '[' + str(index) + ']')
     if kind == 'string' and 'pattern' in spec and not re.search(spec['pattern'], value):
-        raise ValueError('Invalid field pattern')
+        raise ValueError(path + ': must match ' + spec['pattern'])
 
 
 def observation(task, execution, snapshot, workspace):
@@ -145,10 +156,10 @@ class Curator:
                         if key.startswith('parents/'):
                             read_parents.add(Path(key).stem)
                     elif name == 'submit_transaction':
+                        atomic(path / f'candidate-{turn:04d}-{len(seen_calls)}.json', args)
                         validate(args, schema(enforce_shapes=True))
                         proposal = render_proposal(args)
                         # Original candidate precedes validation. Every rejection remains on disk.
-                        atomic(path / f'candidate-{turn:04d}-{len(seen_calls)}.json', args)
                         commit = library.commit('curate-' + task.id, proposal, parent_sha, read_parents, read_events)
                         atomic(path / 'commit.json', commit)
                         result = {'committed': True, 'commit': commit}

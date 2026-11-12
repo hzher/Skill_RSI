@@ -21,7 +21,7 @@ def export_campaign(campaign, destination):
     final = load(summary_path)
     plan = load(campaign / 'campaign-plan.json')
     destination.mkdir(parents=True)
-    summaries, all_rows, successful, skill_versions, holds = [], [], [], {}, []
+    summaries, all_rows, successful, skill_versions, holds, native_turns = [], [], [], {}, [], []
     costs = defaultdict(lambda: Counter())
     for family in plan['families']:
         family_root = campaign / 'families' / family
@@ -57,24 +57,46 @@ def export_campaign(campaign, destination):
                     'request_sha256': file_sha(request_path),
                     'response_sha256': file_sha(response_path) if response_path.exists() else None,
                     'source': str(request_path.parent)})
-            exposures = read_if(task / 'exposure.json', [])
+            original_exposures = read_if(task / 'exposure.json', [])
+            exposures = original_exposures
+            posthoc = campaign / 'posthoc-code-mode-exposure-v1/tasks' / family / episode['task_id']
+            posthoc_intent = read_if(posthoc / 'intent.json')
+            posthoc_review = None
+            if posthoc_intent and (posthoc / 'exposure.json').exists():
+                expected_sha = file_sha(task / 'execution.json') if execution is not None else None
+                if posthoc_intent['source_execution_sha256'] != expected_sha:
+                    raise ValueError('Posthoc proof is not bound to this original execution')
+                exposures = load(posthoc / 'exposure.json')
+                posthoc_review = read_if(posthoc / 'review.json')
             eligible = bool(execution and execution['complete'] and episode['complete'] and score == 1
                             and wire and all(w['response'] is not None and w['failure'] is None for w in wire))
             hold = read_if(task / 'hold.json', read_if(root / 'driver-error.json'))
             row = {'schema': 'skillrl-pastbench-campaign-native-v1', 'family': family, **episode,
                    'source_commit': plan['upstream_commit'], 'execution': execution, 'native_wire': wire,
-                   'exposure': exposures, 'hold': hold, 'successful_trajectory': eligible,
+                   'exposure': exposures, 'original_runtime_exposure': original_exposures,
+                   'exposure_analysis_ref': str(posthoc) if posthoc_intent else None,
+                   'posthoc_skill_review': posthoc_review,
+                   'hold': hold, 'successful_trajectory': eligible,
                    'curation': read_if(task / 'curator/result.json'), 'curator_ref': str(task / 'curator'),
                    'training_logprobs_available': False, 'policy_gradient_eligible': False}
             all_rows.append(row)
             if eligible:
                 successful.append(row)
+                for index, turn in enumerate(wire):
+                    # A separate model-only view avoids accidentally feeding private
+                    # grading metadata or post-execution state into an SFT prompt.
+                    native_turns.append({'schema': 'skillrl-successful-native-turn-v1', 'family': family,
+                        'task_id': episode['task_id'], 'turn_index': index, 'task_passed': True,
+                        'request': turn['request'], 'response': turn['response'],
+                        'request_sha256': turn['request_sha256'], 'response_sha256': turn['response_sha256'],
+                        'source': turn['source'], 'policy_gradient_eligible': False})
             if not episode['complete'] or score is None:
                 holds.append({'family': family, 'episode': episode['episode'], 'task_id': episode['task_id'],
                               'hold': hold, 'objective': outcome, 'source': str(root)})
             for role, cost in report.get('cost', {}).items():
                 for key in ('request_attempts', 'complete_responses', 'known_input_lower_bound',
-                            'known_output_lower_bound', 'missing_usage', 'known_unsent', 'invalid_complete_responses'):
+                            'known_output_lower_bound', 'missing_usage', 'known_unsent', 'invalid_complete_responses',
+                            'physical_request_attempts', 'transport_recovered_errors', 'prior_transport_attempts_with_unknown_cost'):
                     costs[role][key] += cost.get(key, 0)
             events = execution['events'] if execution else []
             family_stats['skill_reads'] += sum(e.get('name') == 'Skill' and not e.get('error') for e in events)
@@ -128,7 +150,8 @@ def export_campaign(campaign, destination):
         entry['view_file'] = str(p.relative_to(destination))
         entry['status'] = 'observed_successful_consumer' if entry['successful_consumers'] else 'candidate' if entry['generated_candidate'] else 'provided_seed'
     for name, rows in [('all-trajectories.jsonl', all_rows), ('successful-trajectories.jsonl', successful),
-                       ('skills.jsonl', list(skill_versions.values())), ('unresolved.jsonl', holds)]:
+                       ('skills.jsonl', list(skill_versions.values())), ('unresolved.jsonl', holds),
+                       ('successful-native-turns.jsonl', native_turns)]:
         immutable(destination / name, ''.join(json.dumps(row, ensure_ascii=False) + '\n' for row in rows).encode())
     stream = io.StringIO()
     writer = csv.DictWriter(stream, fieldnames=list(summaries[0]))
@@ -139,6 +162,7 @@ def export_campaign(campaign, destination):
         'passed', 'failed', 'unknown', 'skill_reads', 'memory_writes', 'session_searches')}
     result = {'schema': 'skillrl-pastbench-full-export-v1', 'source_commit': plan['upstream_commit'],
         'families': summaries, 'totals': totals, 'successful_training_trajectories': len(successful),
+        'successful_native_turns': len(native_turns),
         'skill_versions': len(skill_versions), 'generated_skill_versions': sum(s['generated_candidate'] for s in skill_versions.values()),
         'provided_seed_only_versions': sum(not s['generated_candidate'] for s in skill_versions.values()),
         'skill_versions_with_successful_consumer': sum(bool(s['successful_consumers']) for s in skill_versions.values()),

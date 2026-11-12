@@ -7,7 +7,15 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import time
 from .storage import atomic, file_sha, load
+
+
+def tasks_complete(summary):
+    """A finished task group stays finished regardless of reward/skill review."""
+    return bool(summary and summary.get('attempts_finished') and summary.get('episodes') and
+        all(row.get('execution_complete') and row.get('objective') and
+            row['objective'].get('score') is not None for row in summary['episodes']))
 
 
 def main():
@@ -41,12 +49,15 @@ def main():
         if not set(args.families) <= set(families):
             raise ValueError('Unknown family selection')
         families = args.families
+    configuration = load(args.config)
+    family_attempts = int(configuration.get('family_transport_attempts', 1))
+    if not 1 <= family_attempts <= 10:
+        raise ValueError('family_transport_attempts outside 1..10')
     atomic(output / 'campaign-plan.json', {'families': families, 'workers': args.workers,
-        'config': load(args.config), 'upstream_commit': subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip(),
+        'config': configuration, 'upstream_commit': subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip(),
         'runtime_source_sha256': {str(p.relative_to(snapshot)): file_sha(p) for p in snapshot.rglob('*.py')}})
 
-    def run(family):
-        root = output / 'families' / family
+    def run_attempt(family, root):
         root.mkdir(parents=True)
         env = os.environ.copy()
         env['PYTHONPATH'] = str(snapshot)
@@ -61,6 +72,36 @@ def main():
             'episodes': len(summary['episodes']) if summary else 0, 'passed': summary['passed'] if summary else 0,
             'known_scores': summary['known_scores'] if summary else 0, 'complete': summary['complete'] if summary else False}
         atomic(root / 'worker-result.json', result)
+        return result
+
+    def run(family):
+        if family_attempts == 1:
+            return run_attempt(family, output / 'families' / family)
+        attempts = []
+        for index in range(family_attempts):
+            root = output / 'family-attempts' / family / f'{index:04d}'
+            result = run_attempt(family, root)
+            exhausted = [str(p) for p in root.rglob('transport-exhausted.json')
+                         if load(p).get('transient')]
+            attempts.append({**result, 'attempt': index, 'transient_exhaustions': exhausted})
+            summary = load(root / 'family-summary.json') if (root / 'family-summary.json').exists() else None
+            if tasks_complete(summary) or not exhausted:
+                break
+            if index + 1 < family_attempts:
+                print(json.dumps({'event': 'family_transport_retry', 'family': family,
+                    'failed_attempt': index, 'retained': str(root)}), flush=True)
+                time.sleep(15)
+        # This is an index, never a relocated/overwritten attempt. Reports retain
+        # their actual absolute paths, including complete branch lineage.
+        selected = output / 'families' / family
+        selected.mkdir(parents=True, exist_ok=False)
+        for name in ('family-summary.json', 'family-progress.json', 'upstream-manifest.yaml'):
+            if (root / name).exists():
+                shutil.copyfile(root / name, selected / name)
+        result = {**result, 'attempts': attempts, 'selected_attempt': len(attempts) - 1,
+                  'selection_rule': 'first fully executed/scored task group; no reward or skill-review selection',
+                  'summary': str(selected / 'family-summary.json')}
+        atomic(selected / 'worker-result.json', result)
         return result
 
     results = []

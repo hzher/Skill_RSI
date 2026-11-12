@@ -10,8 +10,12 @@ def costs(root):
     result = {}
     for role, expressions in patterns.items():
         paths = {path.parent for expression in expressions for path in root.glob(expression)}
-        incoming = outgoing = missing = complete = invalid = known_unsent = 0
+        incoming = outgoing = missing = complete = invalid = known_unsent = recovered = extra = 0
         for path in paths:
+            physical = list((path / 'transport-attempts').glob('*/request.json'))
+            extra += max(0, len(physical) - 1)
+            if (path / 'transport-summary.json').exists():
+                recovered += load(path / 'transport-summary.json').get('recovered_errors', 0)
             usage = None
             if (path / 'result.json').exists():
                 complete += 1
@@ -36,5 +40,8 @@ def costs(root):
                         'complete_responses': complete, 'invalid_complete_responses': invalid,
                         'input_tokens': incoming if not missing else None,
                         'output_tokens': outgoing if not missing else None, 'known_input_lower_bound': incoming,
-                        'known_output_lower_bound': outgoing, 'missing_usage': missing, 'money': None}
+                        'known_output_lower_bound': outgoing, 'missing_usage': missing, 'money': None,
+                        'physical_request_attempts': len(paths) + extra,
+                        'transport_recovered_errors': recovered,
+                        'prior_transport_attempts_with_unknown_cost': extra}
     return result
