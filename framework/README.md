@@ -49,6 +49,8 @@ skillrl examples/local.json
 
 ## 两种执行入口
 
+`xuyifan` 分支新增 Codex CLI 与 PAST-Bench notes-family 接线，见 [PAST-Bench × Codex](docs/PASTBENCH_CODEX.md)。保留原生请求/响应、MCP 调用、独立评分、memory 与技能分支谱系；覆盖范围和实际验收见该说明及运行回执。
+
 |入口|实际工具运行方式|Skill发现与加载|
 |---|---|---|
 |`claude-code`|Docker里运行原生Claude Code，Read/Write/Edit/Glob/Grep/Bash由SDK执行|公开目录与只读Skill文件，模型按需Read全文|

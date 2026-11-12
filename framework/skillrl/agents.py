@@ -81,6 +81,8 @@ class ToolExecutor:
 
 def exposures(execution, snapshot, actor_path, action_tools=('Write', 'Edit', 'Bash')):
     """Full successful Skill return must occur in an actual later complete model input."""
+    if execution.get('backend') == 'codex':
+        return codex_exposures(execution, snapshot, actor_path, action_tools)
     if execution.get('backend') == 'claude-code':
         return native_exposures(execution, snapshot, actor_path, action_tools)
     result = []
@@ -106,6 +108,50 @@ def exposures(execution, snapshot, actor_path, action_tools=('Write', 'Edit', 'B
         result.append({'name': entry['name'], 'skill_id': entry['skill_id'], 'raw_sha256': entry['raw_sha256'],
                        'body_proven': bool(proof), 'proof': proof})
     return result
+
+
+def codex_exposures(execution, snapshot, actor_path, action_tools):
+    """Require the exact Skill body in an actual completed Responses input."""
+    requests = []
+    for path in sorted((Path(actor_path) / 'wire').glob('*/request.json')):
+        if not (path.parent / 'result.json').exists():
+            continue
+        raw = (path.parent / 'response.raw').read_text(errors='replace')
+        if 'response.completed' not in raw:
+            continue
+        requests.append((str(path.relative_to(actor_path)), load(path)))
+    rows = []
+    for version in snapshot:
+        proof = []
+        for index, event in enumerate(execution['events']):
+            if event.get('name') != 'Skill' or event.get('error'):
+                continue
+            if event['result'].get('raw_sha256') != version['raw_sha256'] or event['result'].get('content') != version['content']:
+                continue
+            for name, request in requests:
+                for item in request.get('input', []):
+                    output = item.get('output', '')
+                    def contains_body(value):
+                        if isinstance(value, str):
+                            if version['content'] in value:
+                                return True
+                            try:
+                                decoded = json.loads(value)
+                            except ValueError:
+                                return False
+                            return decoded != value and contains_body(decoded)
+                        if isinstance(value, dict):
+                            return any(contains_body(v) for v in value.values())
+                        if isinstance(value, list):
+                            return any(contains_body(v) for v in value)
+                        return False
+                    if item.get('type') == 'function_call_output' and contains_body(output):
+                        proof.append({'event_index': index, 'next_request': name,
+                                      'subsequent_actions': [i for i, e in enumerate(execution['events'])
+                                          if i > index and e['type'] == 'tool' and not e['error'] and e['name'] in action_tools]})
+        rows.append({'name': version['name'], 'skill_id': version['skill_id'], 'raw_sha256': version['raw_sha256'],
+                     'body_proven': bool(proof), 'proof': proof})
+    return rows
 
 
 def native_exposures(execution, snapshot, actor_path, action_tools=('Write', 'Edit', 'Bash')):

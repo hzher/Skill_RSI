@@ -17,6 +17,8 @@ Thumbs.db
 secrets/
 .local/
 .runtime/
+upstream/
+framework/runs/
 
 # Raw data, experiment outputs and model artifacts
 data/raw/

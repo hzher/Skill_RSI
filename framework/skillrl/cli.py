@@ -5,6 +5,7 @@ import importlib
 import json
 from .agents import ToolExecutor
 from .native import ClaudeCodeExecutor
+from .codex import CodexExecutor
 from .benchmarks import ManifestBenchmark, WorkBuddyBenchmark, JSONExactEvaluator, CommandEvaluator
 from .curation import Curator
 from .models import HTTPModel
@@ -51,9 +52,10 @@ def build(config, base):
     execution = config.get('executor', {})
     backend = execution.get('backend', 'openai-tools')
     options = {key: value for key, value in execution.items() if key != 'backend'}
-    if backend not in ('claude-code', 'openai-tools'):
+    if backend not in ('claude-code', 'openai-tools', 'codex'):
         raise ValueError('Unknown executor backend')
-    executor = (ClaudeCodeExecutor if backend == 'claude-code' else ToolExecutor)(models['executor'], **options)
+    executor_class = {'claude-code': ClaudeCodeExecutor, 'openai-tools': ToolExecutor, 'codex': CodexExecutor}[backend]
+    executor = executor_class(models['executor'], **options)
     return Pipeline(root, benchmark, executor, Curator(models['curator'], **config.get('curator', {})),
                     Reviewer(models['judge'], **config.get('reviewer', {})), sequence=config.get('sequence', 'skillrl'))
 
