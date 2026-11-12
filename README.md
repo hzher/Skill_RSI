@@ -6,6 +6,8 @@
 
 2026-11-12 首批 SM01 八题完成：原评分 5 通过、3 未通过、0 缺失；导出 5 条通过轨迹与 5 个候选技能版本。已观察 memory 继承，尚无 Skill 全文读取或技能效果证据。[验收汇总](framework/reports/pastbench-codex-sm01-20261112.json)
 
+全量 26 族、204 题的 Codex 接线已补齐并通过预检，正式运行中。采用原上游 manifest、grade_episode 和 hard-pass 合同，结果不能与旧八题简单阈值统计拼接。运行、历史分支、评分角色与数据查看入口见[全量说明](framework/docs/PASTBENCH_CODEX.md#全量-204-题接线与启动)。
+
 ## 项目目标
 
 ```mermaid

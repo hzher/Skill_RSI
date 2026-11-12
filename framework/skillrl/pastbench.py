@@ -14,6 +14,7 @@ import subprocess
 import sys
 import time
 import urllib.request
+import urllib.error
 from urllib.parse import urlsplit, urlunsplit
 
 from .benchmarks import Task
@@ -48,6 +49,7 @@ class PastEnvironment:
                        if not any(x in k.upper() for x in ('API_KEY', 'TOKEN', 'SECRET', 'PASSWORD'))}
                 env.update({k: str((self.source / v).resolve()) if (self.source / v).exists() else v
                             for k, v in service.env.items()})
+                env['PORT'] = str(port)
                 log = (self.workspace.parent / ('service-' + service.name + '.log')).open('w')
                 proc = subprocess.Popen([sys.executable, '-m', 'uvicorn', module + ':app',
                     '--host', '127.0.0.1', '--port', str(port)], cwd=self.source, env=env,
@@ -59,9 +61,15 @@ class PastEnvironment:
                         raise RuntimeError('Original mock service exited: ' + service.name)
                     try:
                         request = urllib.request.Request(health, data=b'{}' if service.health_check_method == 'POST' else None,
-                            method=service.health_check_method, headers={'Content-Type': 'application/json'})
+                            method=service.health_check_method, headers={'Content-Type': 'application/json', 'X-Health-Check': '1'})
                         with urllib.request.urlopen(request, timeout=1):
                             break
+                    except urllib.error.HTTPError as exc:
+                        # Upstream ServiceManager considers any non-5xx response healthy;
+                        # KB search requires a query and legitimately returns 422 to {}.
+                        if exc.code < 500:
+                            break
+                        time.sleep(.1)
                     except OSError:
                         time.sleep(.1)
                 else:
@@ -89,7 +97,8 @@ class PastEnvironment:
 
     def metadata(self):
         for service, proc, log, port in self.processes:
-            with urllib.request.urlopen('http://127.0.0.1:' + str(port) + '/' + service.name + '/audit', timeout=5) as response:
+            audit_name = 'x' if service.name == 'x_mock' else service.name
+            with urllib.request.urlopen('http://127.0.0.1:' + str(port) + '/' + audit_name + '/audit', timeout=5) as response:
                 self.audits[service.name] = json.load(response)
         return {'backend': 'past-bench-original-services', 'audit': self.audits,
                 'isolation': 'native read-only harness; benchmark tools over loopback MCP; not a container security boundary'}
@@ -110,7 +119,7 @@ class PastEnvironment:
 
 
 class PastBenchmark:
-    def __init__(self, source, episode, public_dir):
+    def __init__(self, source, episode, public_dir, *, full=False):
         self.source, self.episode = Path(source).resolve(), Path(episode).resolve()
         sys.path.insert(0, str(self.source / 'src'))
         from past_bench.models.task import TaskDefinition
@@ -118,9 +127,9 @@ class PastBenchmark:
         from past_bench.graders.self_evolve_helpers import SelfEvolveTaskGrader
         self.definition = TaskDefinition.from_yaml(self.episode / 'task.yaml')
         # Other substrates require workspace/seed/session adapters. Reject rather than silently drop inputs.
-        if {s.name for s in self.definition.services} != {'notes'}:
+        if not full and {s.name for s in self.definition.services} != {'notes'}:
             raise ValueError('Initial adapter supports original notes-service families only')
-        if self.definition.prompt.attachments or self.definition.sandbox_files or self.definition.hermes_home_seed:
+        if self.definition.prompt.attachments or self.definition.sandbox_files or (self.definition.hermes_home_seed and not full):
             raise ValueError('This episode needs an additional public workspace or persistence adapter')
         self.task = Task(self.definition.task_id, self.definition.prompt.text, Path(public_dir))
 

@@ -1,5 +1,38 @@
 # PAST-Bench × Codex 数据生产
 
+## 全量 204 题接线与启动
+
+全量适配器为 `pastbench_full.py`，批次编排为 `pastbench_campaign.py`。使用上游 `generate_manifest` 生成实际题序、history mode、锚点、机制开关与 seed 路径；不按 history_plan 的分组遍历顺序执行。支持 notes、config、helpdesk/KB、Plonk、X 原服务，统一为每个任务分配独立回环端口并重置业务状态。
+
+新增 MCP `session_search` 仅检索本历史分支中提供的原 seed 和真实先前会话，不检索其他任务族。原始 seed 导入保留来源摘要，已有更新不因同一 seed 的重复声明而被盲目覆盖。无持久化及单机制开关沿用上游 `resolve_episode_tool_config`：关闭的 memory/skills/session 不暴露给 Executor。
+
+全量评分改用原上游 `grade_episode`、LLMJudge、artifact diff、retrieval signals、mechanism scores 和 hard-pass 条件。原 judge 请求通过框架 HTTPModel 记录，原评分逻辑不修改。此处 notes_memory 的 hard_pass 与旧八题试跑的简单 task_score 阈值判定不同，不能把两批数字拼接。原 LLM judge 的 parser/retry 仍由固定上游实现控制，原始回复与每次请求保留。
+
+为评估分离的执行/技能管理管线，全量 adapter 在 score-blind Curator 结束后独立评分：技能创建/更新计数只来自实际 Curator `applied_ops`，明确标记 actor，不冒称原生 Codex 做了 `skill_manage`。Executor 的 Skill/memory/session 读取仍只统计实际 MCP 事件。Curator 不接收评分。此适配不等于 Hermes/Hermes+ 复现。
+
+```bash
+../codex/run_and_log.sh --artifact .runtime/pastbench/full204/campaign-summary.json -- \
+  env PYTHONPATH=framework .venv/bin/python -m skillrl.pastbench_campaign \
+  --source upstream/PAST-Bench --config framework/examples/pastbench-codex.json \
+  --output .runtime/pastbench/full204 --workers 4
+```
+
+每个任务族是独立进程，冻结同一源码快照；族内按上游题序执行。失败/缺评分原样保留，完整性不足的任务不写成已验收完成。全量运行继续尝试后续 episode，不静默重放不完整调用。`family-progress.json` 和原 `hold.json` 记录实际状态；受失败学习位置影响的后续历史需要结合谱系审计解释。
+
+2026-11-12 全量预检：204 个任务/seed/评分入口通过，6 类原服务实际启动、重置、审计通过，无模型调用。34 项框架与适配合同测试通过。首个全量批次位于 `.runtime/pastbench/full204-20261112-v1/`；开始运行不等于已完成验收。
+
+本机批次先以 4 个 worker 启动，再以同一冻结源码增添 4 个 worker。额外编排记录为 `extension-4-workers/plan.json`，新旧调度都用原子创建 family 目录占用任务，不重复执行。原调度遇到已占用目录会留下调度错误观察；最终需从每族实际 `worker-result.json` 另生成 `campaign-reconciled.json`，不覆盖原 `campaign-summary.json`，导出明确引用所用汇总及 SHA。占用冲突不能混算成任务/模型失败。
+
+批次结束后生成可读总表、逐题 Markdown 轨迹、独立技能 Markdown、成功轨迹 JSONL 和 unresolved 清单：
+
+```bash
+../codex/run_and_log.sh --artifact .runtime/pastbench/full204-export/manifest.json -- \
+  env PYTHONPATH=framework .venv/bin/python -m skillrl.export_campaign \
+  --campaign .runtime/pastbench/full204 --output .runtime/pastbench/full204-export
+```
+
+入口为导出目录的 `RESULTS.md`，表格为 `families.csv`，逐题为 `traces/<family>/<task_id>.md`，技能为 `skills/<name>--<sha>.md`。明确区分原提供的 seed 技能与 Curator 生成的版本；没有完整 wire、pipeline 完整性或原通过判定的样本不混入 successful-trajectories。
+
 ## 2026-11-12 实际验收
 
 SM01 八题全部执行完成，原 grader 5 题通过、3 题未通过、0 个缺失评分。实际回执见 [汇总](../reports/pastbench-codex-sm01-20261112.json)。冻结运行源码、八题 memory/skill 历史分支、原评分与导出摘要审计通过；31 项框架及适配合同测试通过。

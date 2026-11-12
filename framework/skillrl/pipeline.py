@@ -1,5 +1,5 @@
 """Execution -> sealed public experience -> curation; evaluation progresses independently."""
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, Future
 from pathlib import Path
 import json
 from .agents import exposures
@@ -112,14 +112,20 @@ class Pipeline:
                     # Build the immutable observation before any verifier starts.
                     from .curation import observation
                     atomic(path / 'curation-observation.json', observation(task, execution, snapshot, path / 'public-artifacts'))
-                    jobs.append((task, execution, snapshot, exposure,
-                                 grading.submit(self.evaluate, task, execution, path / 'public-artifacts')))
+                    after_curation = getattr(self.benchmark, 'evaluate_after_curation', False)
+                    objective_future = Future() if after_curation else grading.submit(
+                        self.evaluate, task, execution, path / 'public-artifacts')
+                    jobs.append((task, execution, snapshot, exposure, objective_future))
                     stage = path / 'curator'
                     processed = library.state()['processed'].get('curate-' + task.id)
                     if processed and not (stage / 'result.json').exists():
                         # A crash after commit never reissues a model or a transaction.
                         atomic(stage / 'result.json', {'status': 'committed_final_unresolved', 'commit': processed})
-                    self.curator.run(task, execution, snapshot, path / 'public-artifacts', library, stage)
+                    try:
+                        self.curator.run(task, execution, snapshot, path / 'public-artifacts', library, stage)
+                    finally:
+                        if after_curation:
+                            objective_future.set_result(self.evaluate(task, execution, path / 'public-artifacts'))
                     statuses.append({'task_id': task.id, 'execution': 'complete', 'curation': load(stage / 'result.json')['status']})
                 except Exception as error:
                     atomic(path / 'hold.json', {'kind': type(error).__name__, 'message': str(error)[:1500]})

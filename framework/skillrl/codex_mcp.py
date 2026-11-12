@@ -5,6 +5,8 @@ import sys
 import time
 import urllib.request
 import urllib.error
+from datetime import datetime, timezone
+import re
 
 
 def serve(config):
@@ -36,12 +38,32 @@ def serve(config):
                             'action': {'type': 'string', 'enum': ['read', 'add', 'replace', 'remove']},
                             'text': {'type': 'string'}, 'target': {'type': 'string'}},
                             'required': ['action'], 'additionalProperties': False}})
+                if config.get('sessions'):
+                    catalog.append({'name': 'session_search', 'description': 'Search authorized prior sessions. Returns original matching session messages, not inferred facts. Use query terms or an exact session_id.',
+                        'inputSchema': {'type': 'object', 'properties': {'query': {'type': 'string'},
+                            'session_id': {'type': 'string'}, 'limit': {'type': 'integer', 'minimum': 1, 'maximum': 8}},
+                            'required': ['query'], 'additionalProperties': False}})
                 result = {'tools': catalog}
             elif method == 'tools/call':
                 name, args = request['params']['name'], request['params'].get('arguments', {})
                 started = time.monotonic()
                 status = 200
-                if name == 'memory' and config.get('memory'):
+                if name == 'session_search' and config.get('sessions'):
+                    history_path = Path(config['sessions'])
+                    history = json.loads(history_path.read_text()) if history_path.exists() else []
+                    tokens = set(re.findall(r'[\w-]+', args.get('query', '').lower()))
+                    ranked = []
+                    for session in history:
+                        if args.get('session_id') and session.get('session_id', session.get('id')) != args['session_id']:
+                            continue
+                        body = json.dumps(session, ensure_ascii=False).lower()
+                        score = sum(token in body for token in tokens)
+                        if score or args.get('session_id') or not tokens:
+                            ranked.append((score, session))
+                    ranked.sort(key=lambda pair: pair[0], reverse=True)
+                    value = {'sessions': [s for _, s in ranked[:max(1, min(8, args.get('limit', 5)))]],
+                             'matched': len(ranked), 'history_sessions': len(history)}
+                elif name == 'memory' and config.get('memory'):
                     memory_path = Path(config['memory'])
                     entries = json.loads(memory_path.read_text()) if memory_path.exists() else []
                     action = args['action']
@@ -79,6 +101,7 @@ def serve(config):
                     except urllib.error.HTTPError as exc:
                         status, value = exc.code, exc.read().decode(errors='replace')
                 event = {'type': 'tool', 'name': name, 'arguments': args, 'result': value,
+                         'timestamp': datetime.now(timezone.utc).isoformat(),
                          'call_id': str(request['id']), 'error': status >= 400,
                          'response_status': status, 'endpoint_url': tools.get(name, {}).get('url', ''),
                          'latency_ms': (time.monotonic() - started) * 1000}
@@ -93,6 +116,7 @@ def serve(config):
             if method == 'tools/call':
                 params = request.get('params', {})
                 failed = {'type': 'tool', 'name': params.get('name'),
+                    'timestamp': datetime.now(timezone.utc).isoformat(),
                     'arguments': params.get('arguments', {}), 'result': {'error': str(exc)},
                     'call_id': str(request['id']), 'error': True, 'response_status': 500,
                     'endpoint_url': '', 'latency_ms': 0}
