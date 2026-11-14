@@ -1,0 +1,32 @@
+{
+  "schema_version": "model-endpoints-v1",
+  "profiles": {
+    "openai": {
+      "protocol": "openai_responses",
+      "base_url_env": "WORKENV_OPENAI_BASE_URL",
+      "model_env": "WORKENV_OPENAI_MODEL",
+      "api_key_env": "OPENAI_API_KEY",
+      "max_tokens": 8192,
+      "timeout_seconds": 60,
+      "reasoning_effort": "medium"
+    },
+    "openai_compatible": {
+      "protocol": "openai_chat",
+      "base_url_env": "WORKENV_CHAT_BASE_URL",
+      "model_env": "WORKENV_CHAT_MODEL",
+      "api_key_env": "WORKENV_CHAT_API_KEY",
+      "chat_token_field": "max_completion_tokens",
+      "max_tokens": 1024,
+      "timeout_seconds": 60
+    },
+    "claude": {
+      "protocol": "anthropic_messages",
+      "base_url_env": "WORKENV_CLAUDE_BASE_URL",
+      "model_env": "WORKENV_CLAUDE_MODEL",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "anthropic_version": "2023-06-01",
+      "max_tokens": 8192,
+      "timeout_seconds": 60
+    }
+  }
+}

@@ -1,0 +1,4 @@
+FROM toolathlon-pack:api-env-audit4-20261026
+COPY patch_toolathlon_runtime5.py /tmp/
+RUN /opt/venv/bin/python /tmp/patch_toolathlon_runtime5.py \
+    && npm --prefix /opt/local_servers/Calendar-Autoauth-MCP-Server run build

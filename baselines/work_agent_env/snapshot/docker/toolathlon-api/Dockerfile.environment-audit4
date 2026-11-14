@@ -1,0 +1,7 @@
+FROM toolathlon-pack:api-env-audit3-20261025
+COPY notion_contract.ts patch_toolathlon_runtime4.py /tmp/
+RUN /opt/venv/bin/python /tmp/patch_toolathlon_runtime4.py \
+    && npm --prefix /opt/local_servers/notion-mcp-server run build \
+    && npm --prefix /opt/local_servers/google-forms-mcp run build \
+    && /opt/local_servers/emails-mcp/.venv/bin/python -c \
+       'from emails_mcp.tools.email_tools import register_email_tools; from emails_mcp.backends.pg_backend import PgSMTPBackend'

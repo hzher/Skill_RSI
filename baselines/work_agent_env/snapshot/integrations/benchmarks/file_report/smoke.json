@@ -1,0 +1,1 @@
+{"greeting": {"calls": [{"name": "write_file", "arguments": {"path": "result.txt", "content": "hello\n"}}], "passed": true}}

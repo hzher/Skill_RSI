@@ -1,0 +1,17 @@
+{
+  "toolathlon_gym": {
+    "url": "https://github.com/eigent-ai/toolathlon_gym.git",
+    "commit": "ed735ba0af71d82688a55f952a6ea11479ae7206",
+    "checkout": ".upstream/toolathlon-gym",
+    "python_requirement": "==3.12.11"
+  },
+  "nemo_gym": {
+    "url": "https://github.com/NVIDIA-NeMo/Gym.git",
+    "commit": "98de01c6168062fb746d45f8cd56b38b5580555b",
+    "checkout": ".upstream/nemo-gym",
+    "python_requirement": ">=3.13.14",
+    "runtime_status": "not_installed"
+  },
+  "woocommerce_native_extra_dependencies": {"pg": "8.16.3", "@types/pg": "8.15.5"},
+  "purpose": "native business verification only; no NeMo Gym integration or real model rollout claimed"
+}

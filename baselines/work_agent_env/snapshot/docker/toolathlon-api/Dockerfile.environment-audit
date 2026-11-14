@@ -1,0 +1,9 @@
+FROM toolathlon-pack:api-runtime-fixes2-20261025
+
+RUN uv pip install --python /opt/venv/bin/python 'reportlab>=4.4.3,<5' 'psycopg[binary]>=3.2,<4' 'playwright==1.52.0' \
+    && /opt/venv/bin/python -m playwright install chromium \
+    && /opt/venv/bin/python -c 'import bs4, reportlab, psycopg, playwright.sync_api'
+
+COPY notion_contract.ts patch_toolathlon_runtime3.py /tmp/
+RUN /opt/venv/bin/python /tmp/patch_toolathlon_runtime3.py \
+    && npm --prefix /opt/local_servers/notion-mcp-server run build

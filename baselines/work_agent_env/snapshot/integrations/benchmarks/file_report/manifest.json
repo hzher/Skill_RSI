@@ -1,0 +1,27 @@
+{
+  "schema_version": "workagent-task-package-v1",
+  "benchmark": "file_report",
+  "revision": "1",
+  "environment": {
+    "backend": "docker",
+    "config": {
+      "image": "bench-runtime:python",
+      "network_access": false,
+      "mounts": [{"source": "tools", "target": "/assets/tools"}],
+      "tools": [{
+        "name": "write_file",
+        "description": "Write a UTF-8 text file inside the task workspace.",
+        "parameters": {"type": "object", "properties": {"path": {"type": "string"}, "content": {"type": "string"}}, "required": ["path", "content"], "additionalProperties": false},
+        "argv": ["python3", "/assets/tools/write_file.py"]
+      }]
+    }
+  },
+  "evaluation": {
+    "backend": "command_json",
+    "config": {
+      "argv": ["python3", "/assets/evaluation/main.py"],
+      "mounts": [{"source": "tasks/greeting/evaluation", "target": "/assets/evaluation"}]
+    }
+  },
+  "tasks": ["greeting"]
+}

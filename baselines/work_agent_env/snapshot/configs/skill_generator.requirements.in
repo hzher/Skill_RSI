@@ -1,0 +1,2 @@
+# Additional dependency for the pinned SkillOS Markdown/tool primitives.
+PyYAML==6.0.3

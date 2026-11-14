@@ -1,0 +1,41 @@
+{
+  "schema_version": "workagent-mainline-sources-v1",
+  "sources": {
+    "nemo_gym": {
+      "url": "https://github.com/NVIDIA-NeMo/Gym.git",
+      "commit": "98de01c6168062fb746d45f8cd56b38b5580555b",
+      "checkout": ".upstream/nemo-gym",
+      "role": "main_environment_runtime"
+    },
+    "toolathlon_gym": {
+      "url": "https://github.com/eigent-ai/toolathlon_gym.git",
+      "commit": "ed735ba0af71d82688a55f952a6ea11479ae7206",
+      "checkout": ".upstream/toolathlon-gym",
+      "role": "training_seed_candidates"
+    },
+    "verl_recipe": {
+      "url": "https://github.com/verl-project/verl-recipe.git",
+      "commit": "81d782765e6ddcd3d0371d64acee3a1d5645ef73",
+      "checkout": ".upstream/verl-recipe",
+      "role": "skill_generator_training_integration"
+    },
+    "toolathlon_verified": {
+      "url": "https://github.com/hkust-nlp/Toolathlon.git",
+      "commit": "9be8d8fe07a497b18ee61e3f2ae694e9797f39eb",
+      "checkout": ".upstream/toolathlon-verified",
+      "role": "independent_evaluation_metadata_only"
+    },
+    "verl": {
+      "url": "https://github.com/verl-project/verl.git",
+      "commit": "695ac0ebcb5d4e1ca7bcb88fd952b0214daf199f",
+      "role": "post_train_skill_generator",
+      "install_status": "source_pin_only",
+      "recipe_submodule_declared": "ba246418f4de12b845a09bba975f1a5242adc898",
+      "declared_submodule_contains_nemo_recipe": false,
+      "compatibility": "not_runtime_verified",
+      "metadata_sha256": "9339f868600e8a2afc794e0440926eae21894cc0770a5296f1542c13ff55a266",
+      "checkout": ".upstream/verl",
+      "source_commit_verified": true
+    }
+  }
+}

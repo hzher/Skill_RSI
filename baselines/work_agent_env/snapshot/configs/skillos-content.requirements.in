@@ -1,0 +1,10 @@
+# Separate from the pinned verl/vLLM environment. Qwen3.8 uses qwen3_5.
+transformers==5.22.1
+# Install with --no-deps after appending the pinned generator runtime via .pth.
+# torch 2.8 / CUDA 12, accelerate, FastAPI and uvicorn are inherited unchanged.
+huggingface-hub==2.4.0
+tokenizers==0.23.3
+safetensors==0.8.0
+regex==2026.9.29
+typer==0.27.3
+xgrammar==0.1.25

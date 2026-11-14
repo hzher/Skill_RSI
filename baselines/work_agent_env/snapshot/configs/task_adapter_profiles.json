@@ -1,0 +1,387 @@
+{
+  "schema_version": "toolathlon-task-adapter-profiles-v1",
+  "profiles": {
+    "wc-sales-tax-summary-v1": {
+      "profile_id": "wc-sales-tax-summary-v1",
+      "source": "toolathlon_gym",
+      "source_commit": "ed735ba0af71d82688a55f952a6ea11479ae7206",
+      "task_id": "wc-sales-tax-summary",
+      "task_config_git_blob": "6b8909c3809512640dd117bf61d1b732ba7b0fe0",
+      "task_config_sha256": "6d2bc0fdcfe93bc8b6fd57a55c56f74e52bfd4ecb3612385f15a8c7729f9a60f",
+      "mcp_methods": {
+        "google_sheet": [
+          "create_spreadsheet",
+          "get_sheet_data",
+          "list_sheets",
+          "rename_sheet",
+          "update_cells"
+        ],
+        "woocommerce": [
+          "woo_orders_list"
+        ]
+      },
+      "artifact_tools": [
+        "write_report",
+        "write_workbook"
+      ],
+      "resource_backends": [
+        "shared",
+        "isolated"
+      ],
+      "implementation_sha256": {
+        "adapters/toolathlon_native.py": "e86689736c66b62cf963ced33dc343dac6ce3fc3a38b793b2a69ca5f2bf73311",
+        "adapters/woocommerce_native.mjs": "28218ddf3e660b2ecc71182dd756080459f412e76ed2149377b15db7db51269f",
+        "integrations/toolathlon_bridge.py": "5e3d1f53c8eb73e2665d2401179271a8dcc79ab4b7a211fe53df9ed8d446fb71"
+      },
+      "declared_services_not_exposed_as_mcp": [
+        "excel",
+        "filesystem"
+      ],
+      "declared_local_tools_not_exposed": [
+        "claim_done",
+        "handle_overlong_tool_outputs",
+        "history",
+        "manage_context",
+        "python_execute"
+      ],
+      "runtime_activation": "requires_runtime_task_router_validation",
+      "training_admission": false
+    },
+    "howtocook-meal-plan-gcal-v1": {
+      "profile_id": "howtocook-meal-plan-gcal-v1",
+      "source": "toolathlon_gym",
+      "source_commit": "ed735ba0af71d82688a55f952a6ea11479ae7206",
+      "task_id": "howtocook-meal-plan-gcal",
+      "task_config_git_blob": "95b01989882b3f3c85216187a694b9df3a711211",
+      "task_config_sha256": "01bd54abaa0cd536bdae04e0d6c44dd176cedf6f874f8972748245076d2e779a",
+      "mcp_methods": {
+        "google_calendar": [
+          "create_event",
+          "delete_event",
+          "get_event",
+          "list_events",
+          "update_event"
+        ],
+        "howtocook": [
+          "mcp_howtocook_getAllRecipes",
+          "mcp_howtocook_getRecipeById"
+        ]
+      },
+      "artifact_tools": [
+        "write_workbook",
+        "read_workbook"
+      ],
+      "sql_schemas": [
+        "gcal"
+      ],
+      "resource_backends": [
+        "isolated"
+      ],
+      "implementation_sha256": {
+        "integrations/meal_plan_services.py": "a5df27b06b6d6e7432b8fffb3669221c3bc12ac7b61d57fb978715316f1e5e83",
+        "integrations/meal_plan_resource.py": "578962cb8523eb935dcad69ef19bfb04f3ebb5616fe14fee476527586069d28d",
+        "integrations/episode_worker.py": "f402396e816fd4af8dfcdb0a14e654884721464c26b49d21e0175d595ff95796",
+        "integrations/calendar_component.py": "cd25c0ae3da4fddfd77d1df786563a5522a0790d1499ed447789ab2db992a38c",
+        "integrations/howtocook_component.py": "0c425607d8dde3e2fe97b9dddc3560732b787e27e3b6dd6c93d2e7d82312cc74",
+        "adapters/meal_plan_artifacts.py": "739f773138dd38e0bdbc14535fea66cdfb1c54f97ba5783e4c7f58a9e875ca71",
+        "adapters/meal_plan_evaluation.py": "3ff31f8abc0b06a602687338722d41ee658afd0018e3788b9ef590c8bd396cee",
+        "adapters/meal_plan_validation.py": "9f172d7ccfa4005ec27240b0a8399b01ba52dcec84c33a76f8f199e006c260a7"
+      },
+      "declared_services_not_exposed_as_mcp": [
+        "excel",
+        "filesystem"
+      ],
+      "declared_local_tools_not_exposed": [
+        "claim_done",
+        "handle_overlong_tool_outputs",
+        "history",
+        "manage_context",
+        "python_execute"
+      ],
+      "runtime_activation": "requires_runtime_task_router_validation",
+      "training_admission": false
+    },
+    "wc-order-analysis-gcal-v1": {
+      "profile_id": "wc-order-analysis-gcal-v1",
+      "source": "toolathlon_gym",
+      "source_commit": "ed735ba0af71d82688a55f952a6ea11479ae7206",
+      "task_id": "wc-order-analysis-gcal",
+      "task_config_git_blob": "50791926c58c3753541cea74c5b19080c34d8fbc",
+      "task_config_sha256": "f9b4839c5ab62941155fc8876d4a1d8a77100bf4e1cc4f76e18eb5548b094481",
+      "mcp_methods": {
+        "google_calendar": [
+          "create_event",
+          "delete_event",
+          "get_event",
+          "list_events",
+          "update_event"
+        ],
+        "woocommerce": [
+          "woo_orders_list",
+          "woo_products_list"
+        ]
+      },
+      "artifact_tools": [
+        "write_workbook",
+        "read_workbook"
+      ],
+      "sql_schemas": [
+        "wc",
+        "gcal"
+      ],
+      "resource_backends": [
+        "isolated"
+      ],
+      "implementation_sha256": {
+        "integrations/order_analysis_resource.py": "5df3e933c322ea3275c72263060bc1015bea4df116081c72aa7d3a1a5f1d48da",
+        "integrations/order_analysis_components.py": "2ed527d58016779a1454d428b56459d69c297efeb5e199f318f1ebe21932680a",
+        "adapters/order_analysis_evaluation.py": "cfb956f3a6fe0e140f819af21059c5352ea590f0c6dface61c249b894c28f1ad",
+        "adapters/order_analysis_validation.py": "8cf63b6e7279aad7108fee1547adc7f4c689710b9a3ace69a689787111133ac2",
+        "adapters/meal_plan_artifacts.py": "739f773138dd38e0bdbc14535fea66cdfb1c54f97ba5783e4c7f58a9e875ca71",
+        "adapters/woocommerce_native.mjs": "28218ddf3e660b2ecc71182dd756080459f412e76ed2149377b15db7db51269f",
+        "integrations/calendar_component.py": "cd25c0ae3da4fddfd77d1df786563a5522a0790d1499ed447789ab2db992a38c",
+        "integrations/episode_worker.py": "f402396e816fd4af8dfcdb0a14e654884721464c26b49d21e0175d595ff95796"
+      },
+      "declared_services_not_exposed_as_mcp": [
+        "excel",
+        "filesystem"
+      ],
+      "declared_local_tools_not_exposed": [
+        "claim_done",
+        "handle_overlong_tool_outputs",
+        "history",
+        "manage_context",
+        "python_execute"
+      ],
+      "runtime_activation": "requires_runtime_task_router_validation",
+      "training_admission": false
+    },
+    "wc-order-fulfillment-tracker-v1": {
+      "profile_id": "wc-order-fulfillment-tracker-v1",
+      "source": "toolathlon_gym",
+      "source_commit": "ed735ba0af71d82688a55f952a6ea11479ae7206",
+      "task_id": "wc-order-fulfillment-tracker",
+      "task_config_git_blob": "6b8909c3809512640dd117bf61d1b732ba7b0fe0",
+      "task_config_sha256": "6d2bc0fdcfe93bc8b6fd57a55c56f74e52bfd4ecb3612385f15a8c7729f9a60f",
+      "mcp_methods": {
+        "google_sheet": [
+          "create_spreadsheet",
+          "get_sheet_data",
+          "list_sheets",
+          "rename_sheet",
+          "update_cells"
+        ],
+        "woocommerce": [
+          "woo_orders_list"
+        ]
+      },
+      "artifact_tools": [
+        "write_workbook",
+        "read_workbook"
+      ],
+      "sql_schemas": [
+        "wc",
+        "gsheet"
+      ],
+      "resource_backends": [
+        "isolated"
+      ],
+      "implementation_sha256": {
+        "integrations/office_report_resource.py": "94a3c2e1e73b11bbcaa35b369ebc93d29116cddbc8d524d448c0952899031934",
+        "integrations/fulfillment_resource.py": "b79495d3f3b43c884a6ec999941340a80fcb5b16c52de7fac36291268f1c8ff1",
+        "integrations/fulfillment_components.py": "0dba923ef6046c3565ae833c59545961f377da6950a506025d2f558a289cf59f",
+        "integrations/customer_report_components.py": "01567c3e0c449b1d226f01c382785b640e0a9b8a00cca220d88df6685cda1a0b",
+        "adapters/fulfillment_evaluation.py": "660eb5e00e2878a6a3e0898baf780ac28f7f36b2e289602e9a15669dbc9b80a6",
+        "adapters/fulfillment_validation.py": "d584a5284bd5f34bba1b407210980a2e096bd72eec934870093f11978a30eb48",
+        "adapters/customer_report_evaluation.py": "9d62d84f6474fad7fb72705f26d79277845a68f67d8b7df59e234192a343ffda",
+        "adapters/customer_spending_validation.py": "dadd472381f40b960061193652fa8e393b31c20f0e17da425eb2016b5e03cfd1",
+        "adapters/office_workbook.py": "993c5fbfb7986a43faedc918668d7fd2cbe7df0a797ad08f2a25917ebf430eee",
+        "adapters/meal_plan_artifacts.py": "739f773138dd38e0bdbc14535fea66cdfb1c54f97ba5783e4c7f58a9e875ca71",
+        "adapters/woocommerce_native.mjs": "28218ddf3e660b2ecc71182dd756080459f412e76ed2149377b15db7db51269f",
+        "adapters/google_sheets_native.py": "47439f54f3f2d4885c5a340d991bf902773d11aa55395d53b867af88b15dfab1",
+        "integrations/order_analysis_resource.py": "5df3e933c322ea3275c72263060bc1015bea4df116081c72aa7d3a1a5f1d48da",
+        "integrations/episode_worker.py": "f402396e816fd4af8dfcdb0a14e654884721464c26b49d21e0175d595ff95796",
+        "training/office_task_review.py": "e3ba53506010c27826e2e411b0af3008976fbb2512d80f3cc73d019f422bdb7e"
+      },
+      "declared_services_not_exposed_as_mcp": [
+        "excel",
+        "filesystem"
+      ],
+      "declared_local_tools_not_exposed": [
+        "claim_done",
+        "handle_overlong_tool_outputs",
+        "history",
+        "manage_context",
+        "python_execute"
+      ],
+      "measurement_mode": "project_derived_sql_oracle",
+      "reward_version": "workenv-fulfillment-project-sql-diagnostic-v1",
+      "official_benchmark_score_available": false,
+      "runtime_activation": "requires_runtime_task_router_validation",
+      "training_admission": false
+    },
+    "wc-shipping-zone-gsheet-v1": {
+      "profile_id": "wc-shipping-zone-gsheet-v1",
+      "source": "toolathlon_gym",
+      "source_commit": "ed735ba0af71d82688a55f952a6ea11479ae7206",
+      "task_id": "wc-shipping-zone-gsheet",
+      "task_config_git_blob": "2987e7eb9f7ac563b3e03d9e8a630654dfb4171d",
+      "task_config_sha256": "25f4b8b5635ea7fd3244515c926dcd08220cf07a23578e715df9f9280cb7fded",
+      "mcp_methods": {
+        "google_sheet": [
+          "create_spreadsheet",
+          "get_sheet_data",
+          "list_sheets",
+          "rename_sheet",
+          "update_cells"
+        ],
+        "woocommerce": [
+          "woo_orders_list",
+          "woo_shipping_zone_methods_list",
+          "woo_shipping_zones_list",
+          "workenv_shipping_zone_locations_get"
+        ]
+      },
+      "artifact_tools": [
+        "write_workbook",
+        "read_workbook"
+      ],
+      "sql_schemas": [
+        "wc",
+        "gsheet"
+      ],
+      "resource_backends": [
+        "isolated"
+      ],
+      "implementation_sha256": {
+        "integrations/shipping_resource.py": "2759b30df62bc1ae90062cf75715ba2ef33b1a9798370d7a789f01b4b406e338",
+        "integrations/shipping_components.py": "2595c6b7145c8cc886bd2ac7acfec2e7dcfb28a53860de9429581523a7fbdaa5",
+        "adapters/shipping_evaluation.py": "e0472e7e6f9138348b9a790af979e5d82cb200ebd43ed84008e0510018627ec8",
+        "adapters/shipping_validation.py": "f9e2678b2635f18e61975869b029ffe919eb8f1e2ce343d6b8a7bfc347dc04a5",
+        "training/shipping_task_review.py": "86099a3b945844c04066b25c78eae162d13b860ebff915607705b6db3c5568a6",
+        "integrations/office_report_resource.py": "94a3c2e1e73b11bbcaa35b369ebc93d29116cddbc8d524d448c0952899031934",
+        "integrations/fulfillment_resource.py": "b79495d3f3b43c884a6ec999941340a80fcb5b16c52de7fac36291268f1c8ff1",
+        "integrations/fulfillment_components.py": "0dba923ef6046c3565ae833c59545961f377da6950a506025d2f558a289cf59f",
+        "integrations/customer_report_components.py": "01567c3e0c449b1d226f01c382785b640e0a9b8a00cca220d88df6685cda1a0b",
+        "adapters/fulfillment_evaluation.py": "660eb5e00e2878a6a3e0898baf780ac28f7f36b2e289602e9a15669dbc9b80a6",
+        "adapters/fulfillment_validation.py": "d584a5284bd5f34bba1b407210980a2e096bd72eec934870093f11978a30eb48",
+        "adapters/customer_report_evaluation.py": "9d62d84f6474fad7fb72705f26d79277845a68f67d8b7df59e234192a343ffda",
+        "adapters/customer_spending_validation.py": "dadd472381f40b960061193652fa8e393b31c20f0e17da425eb2016b5e03cfd1",
+        "adapters/office_workbook.py": "993c5fbfb7986a43faedc918668d7fd2cbe7df0a797ad08f2a25917ebf430eee",
+        "adapters/meal_plan_artifacts.py": "739f773138dd38e0bdbc14535fea66cdfb1c54f97ba5783e4c7f58a9e875ca71",
+        "adapters/woocommerce_native.mjs": "28218ddf3e660b2ecc71182dd756080459f412e76ed2149377b15db7db51269f",
+        "adapters/google_sheets_native.py": "47439f54f3f2d4885c5a340d991bf902773d11aa55395d53b867af88b15dfab1",
+        "integrations/order_analysis_resource.py": "5df3e933c322ea3275c72263060bc1015bea4df116081c72aa7d3a1a5f1d48da",
+        "integrations/episode_worker.py": "f402396e816fd4af8dfcdb0a14e654884721464c26b49d21e0175d595ff95796",
+        "training/office_task_review.py": "e3ba53506010c27826e2e411b0af3008976fbb2512d80f3cc73d019f422bdb7e"
+      },
+      "declared_services_not_exposed_as_mcp": [
+        "excel",
+        "filesystem"
+      ],
+      "declared_local_tools_not_exposed": [
+        "claim_done",
+        "handle_overlong_tool_outputs",
+        "history",
+        "manage_context",
+        "python_execute"
+      ],
+      "project_read_extensions": [
+        "workenv_shipping_zone_locations_get"
+      ],
+      "shipping_locations_enabled": true,
+      "measurement_mode": "project_derived_sql_oracle",
+      "reward_version": "workenv-shipping-project-sql-diagnostic-v1",
+      "official_benchmark_score_available": false,
+      "runtime_activation": "requires_runtime_task_router_validation",
+      "training_admission": false
+    },
+    "wc-customer-order-gsheet-email-v1": {
+      "profile_id": "wc-customer-order-gsheet-email-v1",
+      "source": "toolathlon_gym",
+      "source_commit": "ed735ba0af71d82688a55f952a6ea11479ae7206",
+      "task_id": "wc-customer-order-gsheet-email",
+      "task_config_git_blob": "4985e3a243e4361c0fa044d0f5ee9c91439564e5",
+      "task_config_sha256": "47720d3b2b70eacb1237c5b8dc62088dd8a6d6f6dbf25828e1c381e3c9cc7f02",
+      "mcp_methods": {
+        "email": [
+          "get_emails",
+          "read_email",
+          "send_email"
+        ],
+        "google_sheet": [
+          "create_sheet",
+          "create_spreadsheet",
+          "get_sheet_data",
+          "list_sheets",
+          "rename_sheet",
+          "update_cells"
+        ],
+        "woocommerce": [
+          "woo_customers_list"
+        ]
+      },
+      "artifact_tools": [],
+      "sql_schemas": [
+        "wc",
+        "gsheet",
+        "email"
+      ],
+      "resource_backends": [
+        "isolated"
+      ],
+      "implementation_sha256": {
+        "integrations/vip_email_resource.py": "cb783a56b1263ce6ddf2a6c34fc5be28c52cce62f7846d17193f0e1f6d4b6442",
+        "integrations/vip_seed.py": "67482bc481b34c9103bb1f34a51328fbb038966a99f7d3a7a0ee80d4d5574a6d",
+        "integrations/vip_email_components.py": "c212b01cf80b1667c8626a70168d6ba0e52e8facfc7b3cdc6e5cfad8b9408d65",
+        "integrations/email_components.py": "05c34b1394c82990c7a31bfb4c73236c483877e2d0d93a77a57cfb5b34d8c31d",
+        "integrations/email_build.py": "9cc93cf349437179852f8fb43ea18d9f926deb171ff013c9c831a2d819bb446b",
+        "adapters/email_pg_native.py": "28c43db7829055ed93c8a5410860e79aa87840b70096ecc01864a63df9cb9df7",
+        "adapters/vip_email_evaluation.py": "99d124096ccf60d4964ac0dc0d7176600bbb2420eb56398d6196dc43a10cb468",
+        "adapters/vip_email_validation.py": "6b8c74bcd67ea5f8511dfed5f6d7a487b717ea82cfcb0b102859a44176e2d44f",
+        "training/email_task_review.py": "1a79a0aa1b75c70403cfebe2508df97d7c797c8f60eec1ffa6d622608f24bd71",
+        "configs/email.requirements.in": "00b7db62c9f76ca2f908d5d38ba3cfeaa06f42b71456c7ac4def2ca82d24ccd9",
+        "configs/email.requirements.lock.txt": "950f447c09449f74df9c219423f727f787e31f47097d5b66891e143f0678b146",
+        "integrations/episode_worker.py": "f402396e816fd4af8dfcdb0a14e654884721464c26b49d21e0175d595ff95796",
+        "integrations/customer_report_components.py": "01567c3e0c449b1d226f01c382785b640e0a9b8a00cca220d88df6685cda1a0b",
+        "integrations/order_analysis_resource.py": "5df3e933c322ea3275c72263060bc1015bea4df116081c72aa7d3a1a5f1d48da",
+        "adapters/google_sheets_native.py": "47439f54f3f2d4885c5a340d991bf902773d11aa55395d53b867af88b15dfab1",
+        "adapters/woocommerce_native.mjs": "28218ddf3e660b2ecc71182dd756080459f412e76ed2149377b15db7db51269f",
+        "adapters/customer_spending_validation.py": "dadd472381f40b960061193652fa8e393b31c20f0e17da425eb2016b5e03cfd1",
+        "adapters/customer_report_evaluation.py": "9d62d84f6474fad7fb72705f26d79277845a68f67d8b7df59e234192a343ffda",
+        "integrations/toolathlon_bridge.py": "5e3d1f53c8eb73e2665d2401179271a8dcc79ab4b7a211fe53df9ed8d446fb71",
+        "integrations/email_task_identity.py": "f2318acae7ef6ad9ba3a74239ebe6ceb0d146b64681a093887dcb4193fa3cdb5",
+        "integrations/inventory_data.py": "245a1b533faf2c3cdb840cc51c96bf78f22bd1e80cacdea8f64e23fad0c882d1",
+        "training/inventory_task_review.py": "ff2e5ccbbe8184eba94e778223df5c008fd528a8ee9a52afdec7b4279bfe0222",
+        "training/source_api.py": "9ebf221725eaa453f6129df64667c6a48dbb2013ef7fe0c742671992eb4cac1f",
+        "adapters/inventory_alert_validation.py": "751f4acecb34e20930cd807f97301f98ac8894a34bd06b339f95417b9eae240d",
+        "adapters/inventory_alert_artifacts.py": "eda287fe35e85f1e4955e87be2242d5db43136f3298e784afd1a573c81e64817",
+        "integrations/episode_cluster.py": "58afd2a15b5eff5393b33c6cb08c014e201cd3a59cdc7e16879b9ceaca777225",
+        "workenv/core.py": "680c6fafc9939d8edb833bbe6c67f81032254f0ed2d737180fd7cb57c8d48ae7",
+        "workenv/process_identity.py": "e8111af79b6614b8685b9ed941ca1b72926418ebc5835dc3115ada3ef6d77f3f",
+        "integrations/mainline_audit.py": "a377d33c376713d13c83d18304bad0620da2680c21a60fbae55cebf990b2a203",
+        "workenv/leases.py": "56667219f4a07714a9f98a4e0e1bdc6b10948e07454740bb54aed84defd5e4fb"
+      },
+      "declared_services_not_exposed_as_mcp": [
+        "filesystem"
+      ],
+      "original_service_aliases": {
+        "email": "emails"
+      },
+      "declared_local_tools_not_exposed": [
+        "claim_done",
+        "handle_overlong_tool_outputs",
+        "history",
+        "manage_context",
+        "python_execute"
+      ],
+      "measurement_mode": "original_database_evaluator_with_project_supplement",
+      "reward_version": "workenv-vip-original-db-diagnostic-v1",
+      "official_benchmark_score_available": false,
+      "runtime_activation": "requires_runtime_task_router_validation",
+      "training_admission": false
+    }
+  },
+  "runtime_scheduler_integrated": true,
+  "automatic_training_admissions": 0
+}

@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "verified_at": "2026-11-14T06:13:53.340536+00:00",
+  "source_sha": "aa07d24e308e3adfa843ca70e3faf1ccfa8185eb",
+  "python": "3.11.15",
+  "exported_files_verified": 505,
+  "source_bytes_verified": 3542433,
+  "python_files_compiled": 445,
+  "pure_contract_checks": 3,
+  "source_last_change_authors": {
+    "MuguanMidgardian": 325,
+    "xuyifan7-star": 180
+  },
+  "credential_pattern_findings": [],
+  "synthetic_key_literals": 0,
+  "errors": [],
+  "model_calls": 0,
+  "docker_started": false,
+  "gpu_started": false,
+  "scope": "Git snapshot integrity, syntax and pure contract checks only; no full benchmark/training claim"
+}

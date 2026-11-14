@@ -1,0 +1,20 @@
+# Authored handoff guard; the pinned source files are listed in the parent manifest.
+.runtime/
+.venv/
+venv/
+.upstream/
+vendor/
+node_modules/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+*.safetensors
+*.pt
+*.ckpt
+outputs/
+checkpoints/

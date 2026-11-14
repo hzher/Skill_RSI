@@ -1,0 +1,3 @@
+# Preserve the pinned source Git blob bytes on Windows and Linux.
+# Text diffs remain enabled; only automatic line-ending conversion is disabled.
+* -text

@@ -1,0 +1,3 @@
+# Standalone schema/timezone helpers; NeMo's Python environment is separate.
+jsonschema==4.25.1
+tzdata==2026.5

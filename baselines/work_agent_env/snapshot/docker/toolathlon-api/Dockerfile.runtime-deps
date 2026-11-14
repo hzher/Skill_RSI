@@ -1,0 +1,14 @@
+FROM toolathlon-pack:api-fixes-20261025
+
+# The arXiv entrypoint imports its PDF converter even for database-backed tools.
+RUN uv pip install --python /opt/local_servers/arxiv-mcp-server/.venv/bin/python \
+      'pymupdf4llm==0.0.17' 'PyMuPDF==1.26.0' \
+    && /opt/local_servers/arxiv-mcp-server/.venv/bin/python -c \
+      'import pymupdf4llm, fitz, arxiv_mcp_server; print("arXiv MCP entrypoint import OK")'
+
+RUN uv pip install --python /opt/venv/bin/python 'beautifulsoup4==4.13.4' \
+    && /opt/venv/bin/python -c 'import bs4'
+COPY patch_toolathlon_runtime2.py /tmp/patch_toolathlon_runtime2.py
+RUN /opt/venv/bin/python /tmp/patch_toolathlon_runtime2.py \
+    && npm --prefix /opt/local_servers/mcp-canvas-lms run build \
+    && npm --prefix /opt/local_servers/woocommerce-mcp run build

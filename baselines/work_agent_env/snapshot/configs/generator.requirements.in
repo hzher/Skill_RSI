@@ -1,0 +1,16 @@
+# Separate Python 3.11 environment for the pinned native verl Generator.
+# vLLM requires pydantic>=2.11.7; do not install this into api-executor-venv.
+-e .upstream/verl
+vllm==0.11.0
+transformers==4.57.1
+tensordict==0.10.0
+numpy==1.26.4
+# PyArrow 26 imports require NumPy 2 despite permissive wheel metadata.
+pyarrow==21.0.0
+ray[default]==2.48.0
+pydantic==2.11.9
+openai==2.44.0
+anthropic==0.109.2
+mcp==1.9.0
+jsonschema==4.25.1
+PyYAML==6.0.3

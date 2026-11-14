@@ -1,0 +1,13 @@
+"""Environment lifecycle and model-visible tool session contracts."""
+from typing import Protocol
+
+
+class ToolSessionError(RuntimeError):
+    pass
+
+
+class ToolSession(Protocol):
+    async def initialize(self) -> dict: ...
+    def discover(self) -> list[dict]: ...
+    async def call(self, name: str, arguments: dict): ...
+    async def close(self) -> dict: ...

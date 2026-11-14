@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "checked_at": "2026-11-14T06:10:43.786478+00:00",
+  "source_sha": "aa07d24e308e3adfa843ca70e3faf1ccfa8185eb",
+  "python": "3.13.14",
+  "steps": [
+    {
+      "step": "integrity",
+      "exit_code": 0
+    },
+    {
+      "step": "list",
+      "exit_code": 0,
+      "benchmarks": [
+        "file_report"
+      ]
+    },
+    {
+      "step": "static-package",
+      "exit_code": 0,
+      "static_valid": true,
+      "tasks": 1,
+      "model_calls": 0
+    },
+    {
+      "step": "plan",
+      "exit_code": 0,
+      "status": "planned_not_executed",
+      "tasks": 1
+    },
+    {
+      "step": "generic-tests",
+      "exit_code": 0,
+      "tests_run": 16,
+      "skipped": 3
+    }
+  ],
+  "test_dependencies": {
+    "jsonschema": "4.25.1",
+    "attrs": "26.1.0",
+    "jsonschema-specifications": "2025.9.1",
+    "referencing": "0.37.0",
+    "rpds-py": "2026.9.1",
+    "typing-extensions": null
+  },
+  "logs": ".runtime/handoff-checks/acd505051c0049f9b51a12f47ee195e9",
+  "credentials_removed_from_child_environment": true,
+  "model_calls": 0,
+  "docker_started": false,
+  "execution_workspace": "isolated temporary snapshot; exported files rehashed after copying",
+  "gpu_started": false,
+  "shared_framework_modified": false,
+  "limitations": [
+    "Container cases intentionally skipped; no native Docker runtime acceptance in this handoff.",
+    "Only public file_report diagnostic is bundled; private task/data/vendor tests need external resources.",
+    "No Skill benefit, full benchmark or training/weight-update result is claimed."
+  ]
+}

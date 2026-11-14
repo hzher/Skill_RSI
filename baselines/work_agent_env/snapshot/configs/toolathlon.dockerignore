@@ -1,0 +1,12 @@
+.git
+.venv
+**/.venv
+**/node_modules
+**/__pycache__
+**/*.pyc
+benchmark_logs
+dumps
+.env
+.env.*
+**/.env
+**/.env.*
