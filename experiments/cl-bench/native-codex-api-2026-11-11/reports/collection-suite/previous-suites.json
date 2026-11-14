@@ -1,0 +1,42 @@
+[
+  {
+    "pid": 48980,
+    "started_at": "2026-11-12T18:19:14.440706+08:00",
+    "status": "stopped_at_requested_boundary",
+    "authorization": "User requested as much complete trajectory coverage as possible",
+    "concurrent_scene_runs": 1,
+    "order": [
+      "sales_prediction",
+      "cohort_studies",
+      "database_exploration",
+      "exploitable_poker",
+      "blind_spectrum_monitoring",
+      "codebase"
+    ],
+    "runs": [
+      {
+        "task": "sales_prediction",
+        "config": "collection-sales_prediction.json",
+        "started_at": "2026-11-12T18:19:14.440706+08:00",
+        "status": "process_exited",
+        "pid": 44292,
+        "exit_code": 0,
+        "finished_at": "2026-11-12T18:42:19.108481+08:00",
+        "audit_exit_code": 0
+      },
+      {
+        "task": "cohort_studies",
+        "config": "collection-cohort_studies.json",
+        "started_at": "2026-11-12T18:42:22.253179+08:00",
+        "status": "process_exited",
+        "pid": 49888,
+        "exit_code": 1,
+        "finished_at": "2026-11-12T19:06:08.036507+08:00",
+        "audit_exit_code": 0
+      }
+    ],
+    "active_task": null,
+    "note": "One bounded attempt per config; process completion is audited separately from question scores. No unbounded retries.",
+    "finished_at": "2026-11-12T19:06:10.890123+08:00"
+  }
+]

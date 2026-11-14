@@ -1,0 +1,227 @@
+{
+  "started_at": "2026-11-12T17:43:15.638915+08:00",
+  "source": "/workspace/2026.11.11/rsi-workspace/sources/continual-learning-bench-pr26-lf",
+  "source_sha": "a6f5ede32b4c6c13ccc4c793b3e9b9d7aebe5617",
+  "model_calls": 0,
+  "tasks": {
+    "exploitable_poker": {
+      "expected_instances": 120,
+      "status": "ready",
+      "resolved_num_instances": 120,
+      "data_files": []
+    },
+    "blind_spectrum_monitoring": {
+      "expected_instances": 90,
+      "status": "ready",
+      "resolved_num_instances": 90,
+      "data_files": [
+        {
+          "path": "data/blind_spectrum_monitoring/mixed_grid_lifecycle.jsonl",
+          "bytes": 295364,
+          "sha256": "89be0c2d1528c59ddae47b67747bbe551ca138a3f27fb6f2bcfdd496c5086ae7"
+        },
+        {
+          "path": "data/blind_spectrum_monitoring/mixed_grid_lifecycle_metadata.json",
+          "bytes": 6546,
+          "sha256": "f46e0ce093bed2271e6c718f1e9db3fbe677c7156a9295c32f347a050577be18"
+        }
+      ]
+    },
+    "cohort_studies": {
+      "expected_instances": 20,
+      "status": "ready",
+      "resolved_num_instances": 20,
+      "data_files": [
+        {
+          "path": "data/cohort_studies/default/cohort_definitions.json",
+          "bytes": 9859,
+          "sha256": "6fb6f1fe70ce01876e3232d522b1b5ff3f5e87a3204f0883b49992579285a21f"
+        },
+        {
+          "path": "data/cohort_studies/default/ground_truth.json",
+          "bytes": 5997,
+          "sha256": "29871b21e79aa204cf9bf470fcfe81bc6727bbf06c94fdab598e7648876256a6"
+        },
+        {
+          "path": "data/cohort_studies/default/instance_references.json",
+          "bytes": 2350,
+          "sha256": "b300baf4f8e6bcba247589b855763de05b1620b1a7450535003c84306d431c15"
+        },
+        {
+          "path": "data/cohort_studies/default/metadata.json",
+          "bytes": 6585,
+          "sha256": "b601401fc4acfb45aa6b35aa891aeaa344b7d688cb7c84d9cba5fdca72be25b3"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/cadence_industrial.db",
+          "bytes": 36864,
+          "sha256": "7343192bde114773c6878e323e9839431dca53b6aeac61e2d96a1173fef74fb0"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/cadence_industrial_s2.db",
+          "bytes": 36864,
+          "sha256": "2b8b0566678651dc1c61615121c822deed129ed2f32235b8836d79f32061ae84"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/cadence_urban.db",
+          "bytes": 45056,
+          "sha256": "fc07d7c643e90b4747785bdefc89f6a3ed0d2d143bd453cfd9dd0407ee97fadd"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/cadence_urban_s2.db",
+          "bytes": 45056,
+          "sha256": "164a3ec39673788efca1bc50df5d13b01773d4fb2d9c452c9ab75381a05d1916"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/forge_industrial.db",
+          "bytes": 49152,
+          "sha256": "e6280b873d5d0b6c08566b6d477d469a1928731523fc3840b1af22f39b45c207"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/forge_industrial_s2.db",
+          "bytes": 49152,
+          "sha256": "1657ae08ed6b901f26b60a05f4c846f210bb7c09c7e3c2216da1c32c5a3ea7cc"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/forge_urban.db",
+          "bytes": 40960,
+          "sha256": "c5cd0c9533bf0330fd5dbbb471671dae214d3d5ec537d10f5736ae86492cc455"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/forge_urban_s2.db",
+          "bytes": 40960,
+          "sha256": "605a90ff7ddc9074c645608c0addf757ea22e5bdbf673aaf2fe77e16e7d3d4ff"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/herald_rural.db",
+          "bytes": 40960,
+          "sha256": "67b6a222db0991c645da0a5502eab6a7bc8007d3a2b0349b7fa5d151b436110a"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/herald_rural_s2.db",
+          "bytes": 40960,
+          "sha256": "ae4fd4c6b8deaf451eb6c964f5c041f576cbbbe76f8ef64cff669e4933f36040"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/herald_suburban.db",
+          "bytes": 36864,
+          "sha256": "64d716599bf9e1511163bd583b76f754f934eefcfa89006117b8893b9bc3c8e2"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/herald_suburban_s2.db",
+          "bytes": 40960,
+          "sha256": "15f40c9062d5216761bbff3ff13f48efe04c97172babda351293bd673a70281d"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/meridian_rural.db",
+          "bytes": 45056,
+          "sha256": "40ef197994a6ce2487824b8557f4e4f940bcfe9fab8931e56f6d14d4441f8881"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/meridian_rural_s2.db",
+          "bytes": 45056,
+          "sha256": "2e93eb4e9bb00fd674d14375d0016ef1b876a06a3ff33fc429fb58baffe15d00"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/meridian_suburban.db",
+          "bytes": 45056,
+          "sha256": "de7d2b29129250a5ca4b96e54cfe938c48369b76973f2cf36c2dd1bc98dff07f"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/meridian_suburban_s2.db",
+          "bytes": 49152,
+          "sha256": "2f08a5094979f967c3cb5baef08c2c73a7de70dc71073bf4bb538cdbbd91b165"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/mosaic_suburban.db",
+          "bytes": 40960,
+          "sha256": "ded0d0741e27aa57db7d6729277d39823fca230029d5c47d2880d5f8f3f3469d"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/mosaic_suburban_s2.db",
+          "bytes": 45056,
+          "sha256": "2bf46aa197228b7c7904e604feab3b02587fd24c17a1909a97c856d151e941df"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/mosaic_urban.db",
+          "bytes": 36864,
+          "sha256": "421c780ed8788c97930791f3226d389cdfd11b27f07003ad306dcfdfdffc30d8"
+        },
+        {
+          "path": "data/cohort_studies/default/dbs/mosaic_urban_s2.db",
+          "bytes": 36864,
+          "sha256": "90af03592c22757f7126bdaf752de1eb5afd9463421e24a40533f8b27d6c060a"
+        }
+      ]
+    },
+    "sales_prediction": {
+      "expected_instances": 12,
+      "status": "ready",
+      "docker_image": "pgasawa2/continual-learning-bench:sales-prediction",
+      "repo_digests": [
+        "pgasawa2/continual-learning-bench@sha256:3055d0adbc5cf33d72594cab0e95ac0e6863639fd6dc8e21b8d2bacbb4fd15a0"
+      ],
+      "resolved_num_instances": 12,
+      "data_files": [
+        {
+          "path": "data/sales_prediction/furniture.json",
+          "bytes": 64519,
+          "sha256": "e70e5d1eef56ccf41dd28257efbaee722392c502c711775202eaa02830b40b83"
+        },
+        {
+          "path": "data/sales_prediction/furniture_types.json",
+          "bytes": 1942,
+          "sha256": "50a783f21f9446dc8a9a01f4db851b0359065a2590087db7c6005efb30e80caf"
+        },
+        {
+          "path": "data/sales_prediction/locations.json",
+          "bytes": 255,
+          "sha256": "06fd5fc7df8bc5014197bdbaa662b47c008fdf78c24ffa7434eb715cec82a1c9"
+        },
+        {
+          "path": "data/sales_prediction/sales_lifecycle_metadata.json",
+          "bytes": 72168,
+          "sha256": "16b4f8897d2b7e274bc96311998cf04539987a6fe62aa0642333b4bbffade7e9"
+        },
+        {
+          "path": "data/sales_prediction/sales_lifecycle_panel.jsonl",
+          "bytes": 3431918,
+          "sha256": "2c6037576f35b3b87d383c00a1f1099569e925d5bbadcc5d8bb65633df584079"
+        }
+      ]
+    },
+    "database_exploration": {
+      "expected_instances": 40,
+      "status": "ready",
+      "resolved_num_instances": 40,
+      "data_files": [
+        {
+          "path": "data/database_exploration/.gitignore",
+          "bytes": 18,
+          "sha256": "8211651e482d6cf0d58434613d9f72de68ee4fa6b4ec03ee9bfaf18f13bb563e"
+        },
+        {
+          "path": "data/database_exploration/products.db",
+          "bytes": 397910016,
+          "sha256": "edf8ee80ff125de0bfd6c37a1d185efa9e3037ce28eb1bd1d32ae0829bd264a6"
+        },
+        {
+          "path": "data/database_exploration/products_drifted.db",
+          "bytes": 432148480,
+          "sha256": "a53d523f70604be0e4328f3722417895250ac35e1127cc504b609576aee70fad"
+        },
+        {
+          "path": "data/database_exploration/questions.json",
+          "bytes": 30820,
+          "sha256": "f98e515c14b74f4d30c29401fb79cca9ceeb15fe9ee2432b10265a4a649d1771"
+        },
+        {
+          "path": "data/database_exploration/questions_post_drift.json",
+          "bytes": 21144,
+          "sha256": "c05aa6a33def3878e6b655a1cba6454e55e1a9c16ded8c1fe53b7811986a45de"
+        }
+      ]
+    }
+  },
+  "finished_at": "2026-11-12T17:46:06.147133+08:00"
+}

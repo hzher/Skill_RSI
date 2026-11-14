@@ -1,0 +1,14 @@
+{
+  "accepted": true,
+  "native_wiring_passed": true,
+  "native_verifier_passed": true,
+  "archived_patch_regrade_passed": true,
+  "run_id": "smoke_20261112T172427+0800_214092cb",
+  "benchmark_sha": "a6f5ede32b4c6c13ccc4c793b3e9b9d7aebe5617",
+  "actor_isolation": true,
+  "reviewed_at": "2026-11-12T17:31:15+08:00",
+  "native_verifier_evidence": "audit/verifier.json",
+  "tool_return_evidence": "audit/tool-calls.jsonl",
+  "artifact_evidence": "audit/submitted-worktree.patch",
+  "notes": "Verified isolated candidate smoke for user-authorized trajectory collection; unmerged source is recorded explicitly."
+}

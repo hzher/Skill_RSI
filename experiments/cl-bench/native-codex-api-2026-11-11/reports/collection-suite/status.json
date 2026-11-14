@@ -1,0 +1,72 @@
+{
+  "pid": 39172,
+  "started_at": "2026-11-13T00:40:31.238591+08:00",
+  "status": "all_configured_collection_complete_verified",
+  "authorization": "User requested as much complete trajectory coverage as possible",
+  "concurrent_scene_runs": 1,
+  "order": [
+    "database_exploration",
+    "exploitable_poker",
+    "blind_spectrum_monitoring",
+    "codebase",
+    "cohort_studies"
+  ],
+  "runs": [
+    {
+      "task": "database_exploration",
+      "config": "collection-database_exploration.json",
+      "started_at": "2026-11-13T00:40:31.238591+08:00",
+      "status": "process_exited",
+      "pid": 45572,
+      "exit_code": 0,
+      "finished_at": "2026-11-13T00:55:16.585836+08:00",
+      "audit_exit_code": 0
+    },
+    {
+      "task": "exploitable_poker",
+      "config": "collection-exploitable_poker.json",
+      "started_at": "2026-11-13T00:55:23.132605+08:00",
+      "status": "process_exited",
+      "pid": 35740,
+      "exit_code": 0,
+      "finished_at": "2026-11-13T01:41:52.317977+08:00",
+      "audit_exit_code": 0
+    },
+    {
+      "task": "blind_spectrum_monitoring",
+      "config": "collection-blind_spectrum_monitoring.json",
+      "started_at": "2026-11-13T01:42:05.685367+08:00",
+      "status": "process_exited",
+      "pid": 24040,
+      "exit_code": 0,
+      "finished_at": "2026-11-13T02:11:30.017438+08:00",
+      "audit_exit_code": 0
+    },
+    {
+      "task": "codebase",
+      "config": "collection-codebase.json",
+      "started_at": "2026-11-13T02:11:52.547019+08:00",
+      "status": "process_exited",
+      "pid": 33052,
+      "exit_code": 0,
+      "finished_at": "2026-11-13T03:47:42.835982+08:00",
+      "audit_exit_code": 0
+    },
+    {
+      "task": "cohort_studies",
+      "config": "collection-cohort_studies.json",
+      "started_at": "2026-11-13T03:49:12.659988+08:00",
+      "status": "process_exited",
+      "pid": 30016,
+      "exit_code": 0,
+      "finished_at": "2026-11-13T03:49:33.570908+08:00",
+      "audit_exit_code": 0
+    }
+  ],
+  "active_task": null,
+  "note": "One bounded attempt per config; process completion is audited separately from question scores. No unbounded retries.",
+  "finished_at": "2026-11-13T03:50:04.153849+08:00",
+  "driver_completion_status": "all_configured_attempts_finished_pending_coverage_review",
+  "verified_at": "2026-11-13T03:52:37.746291+08:00",
+  "verification_report": "../collection-completion.json"
+}

@@ -1,0 +1,107 @@
+{
+  "benchmark": "CL-Bench",
+  "source_sha": "a6f5ede32b4c6c13ccc4c793b3e9b9d7aebe5617",
+  "source_publication_status": "unmerged PR26 including PR25; not the official master baseline",
+  "harness": "native Codex CLI",
+  "codex_cli_version": "0.167.0",
+  "requested_model": "gpt-6.1-sol",
+  "api_base_url": "https://cn.affordablerouter.com/v1",
+  "use_oauth": false,
+  "model_identity_independently_verified": false,
+  "collected_in_shared_rsi_platform": false,
+  "unique_instances": 301,
+  "primary_records": 320,
+  "auxiliary_records": 2,
+  "indexed_records": 322,
+  "primary_native_success_true": 225,
+  "primary_native_success_rate": 0.703125,
+  "groups": [
+    {
+      "task": "codebase_adaptation",
+      "phase": "baseline",
+      "records": 19,
+      "native_success_true": 12,
+      "native_success_false": 7,
+      "native_success_null": 0,
+      "native_success_rate": 0.631578947368421,
+      "mean_native_reward": 0.518421052631579,
+      "environment_auto_resolutions": 0
+    },
+    {
+      "task": "codebase_adaptation",
+      "phase": "run",
+      "records": 19,
+      "native_success_true": 12,
+      "native_success_false": 7,
+      "native_success_null": 0,
+      "native_success_rate": 0.631578947368421,
+      "mean_native_reward": 0.5842105263157894,
+      "environment_auto_resolutions": 0
+    },
+    {
+      "task": "database_exploration",
+      "phase": "run",
+      "records": 40,
+      "native_success_true": 35,
+      "native_success_false": 5,
+      "native_success_null": 0,
+      "native_success_rate": 0.875,
+      "mean_native_reward": 0.7883199999999998,
+      "environment_auto_resolutions": 0
+    },
+    {
+      "task": "sales_prediction",
+      "phase": "run",
+      "records": 12,
+      "native_success_true": 12,
+      "native_success_false": 0,
+      "native_success_null": 0,
+      "native_success_rate": 1.0,
+      "mean_native_reward": 0.9088500000000002,
+      "environment_auto_resolutions": 0
+    },
+    {
+      "task": "cohort_studies",
+      "phase": "run",
+      "records": 20,
+      "native_success_true": 13,
+      "native_success_false": 7,
+      "native_success_null": 0,
+      "native_success_rate": 0.65,
+      "mean_native_reward": 0.020140300000000007,
+      "environment_auto_resolutions": 0
+    },
+    {
+      "task": "blind_spectrum_monitoring",
+      "phase": "run",
+      "records": 90,
+      "native_success_true": 58,
+      "native_success_false": 32,
+      "native_success_null": 0,
+      "native_success_rate": 0.6444444444444445,
+      "mean_native_reward": 0.5719788888888888,
+      "environment_auto_resolutions": 0
+    },
+    {
+      "task": "exploitable_poker",
+      "phase": "run",
+      "records": 120,
+      "native_success_true": 83,
+      "native_success_false": 37,
+      "native_success_null": 0,
+      "native_success_rate": 0.6916666666666667,
+      "mean_native_reward": 6.079166666666667,
+      "environment_auto_resolutions": 16
+    }
+  ],
+  "evidence_kinds_all_indexed": {
+    "model_interaction": 306,
+    "environment_auto_resolution": 16
+  },
+  "new_interactions_all_indexed": 991,
+  "replayed_interactions_all_indexed": 2,
+  "accuracy_note": "Native success proportion; reward semantics differ by task. Primary aggregate includes both Codebase phases and is not an official benchmark aggregate.",
+  "interaction_note": "Action/feedback turns, not HTTP request counts. Replay prefixes are not new model work.",
+  "cost_note": "Native cost fields are estimates, not actual gateway billing.",
+  "model_calls_during_export": 0
+}

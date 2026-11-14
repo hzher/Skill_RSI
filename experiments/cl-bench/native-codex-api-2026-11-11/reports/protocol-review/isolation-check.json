@@ -1,0 +1,68 @@
+{
+  "checked_at": "2026-11-12T17:10:54.951094+08:00",
+  "candidate_sha": "a6f5ede32b4c6c13ccc4c793b3e9b9d7aebe5617",
+  "candidate_status": "unmerged_upstream_pr26_including_pr25",
+  "base_sha": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+  "model_calls": 0,
+  "new_benchmark_rollouts": 0,
+  "actors": [
+    {
+      "instance_id": "jazzband__tablib-534",
+      "image": "pgasawa2/continual-learning-bench:tablib",
+      "base_commit": "bbc273951cefc616f1a865dd1c21003859a9da14",
+      "base_tree": "d62a3ce95859215b9efc22c65b71b7920f8462b7",
+      "actor_tree": "d62a3ce95859215b9efc22c65b71b7920f8462b7",
+      "base_tree_preserved_exactly": true,
+      "git_commit_count": 1,
+      "inherited_commit_inaccessible": true,
+      "remote_list_empty": true,
+      "working_tree_clean_including_ignored": true,
+      "package_import_passed": true,
+      "actor_head": "86f2be599e4e82070084088ee48fa95163047f84",
+      "official_test_patch_absent": true
+    },
+    {
+      "instance_id": "jd__tenacity-597",
+      "image": "pgasawa2/continual-learning-bench:tenacity",
+      "base_commit": "213446e8f5f73ca0d20e22ec8ee38b1f75a45434",
+      "base_tree": "03e922cf0b13f8f4dc70a16d52d7c7e19910c234",
+      "actor_tree": "03e922cf0b13f8f4dc70a16d52d7c7e19910c234",
+      "base_tree_preserved_exactly": true,
+      "git_commit_count": 1,
+      "inherited_commit_inaccessible": true,
+      "remote_list_empty": true,
+      "working_tree_clean_including_ignored": true,
+      "package_import_passed": true,
+      "actor_head": "a79d2df74c4462e088e85347e047a78cb0413ecf",
+      "official_test_patch_absent": true
+    }
+  ],
+  "evaluator_probes": [
+    {
+      "instance_id": "jazzband__tablib-534",
+      "official_test_patch_applied_in_evaluator": true,
+      "evaluator_retains_base_commit": true
+    },
+    {
+      "instance_id": "jd__tenacity-597",
+      "official_test_patch_applied_in_evaluator": true,
+      "evaluator_retains_base_commit": true
+    }
+  ],
+  "dataset_bytes_identical": true,
+  "scorer_wrapper_bytes_identical": true,
+  "evaluation_function_ast_identical": true,
+  "schedules_bytes_identical": true,
+  "prior_archived_patch_regrade_on_candidate": {
+    "patch_sha256": "175ccd8ce2c5914c03226df8edbee031678cfc193b7cb20cd13b652d106f30df",
+    "result": {
+      "success": true,
+      "status": "completed",
+      "tests_passed": [],
+      "tests_failed": [],
+      "error": ""
+    },
+    "is_new_model_result": false
+  },
+  "passed": true
+}

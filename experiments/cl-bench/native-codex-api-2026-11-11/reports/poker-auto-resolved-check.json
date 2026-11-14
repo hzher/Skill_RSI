@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "model_calls": 0,
+  "graded_hands": 120,
+  "hands_with_model_interaction": 104,
+  "auto_resolved_hands": 16,
+  "evidence": [
+    {
+      "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand7",
+      "hand_num": 27,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand9",
+      "hand_num": 29,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand12",
+      "hand_num": 32,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand15",
+      "hand_num": 35,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand16",
+      "hand_num": 36,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:fit_or_fold:hand:stage3_seed45_hand2",
+      "hand_num": 62,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:fit_or_fold:hand:stage3_seed45_hand3",
+      "hand_num": 63,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:fit_or_fold:hand:stage3_seed45_hand13",
+      "hand_num": 73,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:fit_or_fold:hand:stage3_seed45_hand18",
+      "hand_num": 78,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:fit_or_fold:hand:stage3_seed45_hand22",
+      "hand_num": 82,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:fit_or_fold:hand:stage3_seed45_hand31",
+      "hand_num": 91,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:fit_or_fold:hand:stage3_seed45_hand35",
+      "hand_num": 95,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand1",
+      "hand_num": 96,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand6",
+      "hand_num": 101,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand12",
+      "hand_num": 107,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    },
+    {
+      "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand24",
+      "hand_num": 119,
+      "only_opponent_actions": true,
+      "terminal_action": "FOLD"
+    }
+  ],
+  "source_trace": "native/results/exploitable_poker/traces/collection_20261113T005523_0800_e910a9cf/run_0000.json"
+}

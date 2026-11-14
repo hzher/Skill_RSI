@@ -1,0 +1,119 @@
+{
+  "tasks/compact.rs": {
+    "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.167.0/codex-rs/core/src/tasks/compact.rs",
+    "matches": [
+      {
+        "line": 11,
+        "text": "use crate::state::TaskKind;\nuse codex_features::Feature;\nuse codex_model_provider::RemoteCompactionSupport;\nuse codex_protocol::error::CodexErrorDetails;\nuse codex_protocol::protocol::CodexErrorInfo;\nuse codex_protocol::user_input::UserInput;"
+      },
+      {
+        "line": 63,
+        "text": "        }\n\n        let result = match ctx.provider.capabilities().remote_compaction {\n            RemoteCompactionSupport::V2 => {\n                emit_compact_metric(\n                    &session.services.session_telemetry,"
+      },
+      {
+        "line": 70,
+        "text": "                    /*manual*/ true,\n                );\n                crate::compact_remote_v2::run_remote_compact_task(\n                    session.clone(),\n                    step_context,\n                    world_state,"
+      }
+    ]
+  },
+  "session/turn/auto_compact.rs": {
+    "error_type": "HTTPError"
+  },
+  "compact_remote.rs": {
+    "error_type": "HTTPError"
+  },
+  "capabilities.rs": {
+    "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.167.0/codex-rs/model-provider/src/capabilities.rs",
+    "matches": [
+      {
+        "line": 5,
+        "text": "//! Provider capability defaults and resolution of custom provider overrides.\n\nuse codex_api::is_azure_responses_provider;\nuse codex_model_provider_info::ModelProviderInfo;\nuse codex_model_provider_info::RemoteCompactionSupport;\n\n/// Optional provider-backed features that Codex may expose at runtime.\n///\n/// These capabilities are a provider-owned upper bound. Model and turn settings\n/// can further restrict the functionality exposed to the model."
+      },
+      {
+        "line": 18,
+        "text": "    pub reasoning_summaries: bool,\n    pub image_generation: bool,\n    pub web_search: bool,\n    pub external_web_access: bool,\n    pub remote_compaction: RemoteCompactionSupport,\n}\n\nimpl Default for ProviderCapabilities {\n    fn default() -> Self {\n        Self {"
+      },
+      {
+        "line": 28,
+        "text": "            reasoning_summaries: true,\n            image_generation: true,\n            web_search: true,\n            external_web_access: true,\n            remote_compaction: RemoteCompactionSupport::Unsupported,\n        }\n    }\n}\n\nimpl ProviderCapabilities {"
+      },
+      {
+        "line": 36,
+        "text": "\nimpl ProviderCapabilities {\n    pub(crate) fn from_config(info: &ModelProviderInfo) -> Self {\n        let defaults = Self {\n            remote_compaction: if info.is_openai()\n                || is_azure_responses_provider(&info.name, info.base_url.as_deref())\n            {\n                RemoteCompactionSupport::V2\n            } else {\n                RemoteCompactionSupport::Unsupported"
+      },
+      {
+        "line": 39,
+        "text": "        let defaults = Self {\n            remote_compaction: if info.is_openai()\n                || is_azure_responses_provider(&info.name, info.base_url.as_deref())\n            {\n                RemoteCompactionSupport::V2\n            } else {\n                RemoteCompactionSupport::Unsupported\n            },\n            ..Self::default()\n        };"
+      },
+      {
+        "line": 41,
+        "text": "                || is_azure_responses_provider(&info.name, info.base_url.as_deref())\n            {\n                RemoteCompactionSupport::V2\n            } else {\n                RemoteCompactionSupport::Unsupported\n            },\n            ..Self::default()\n        };\n        let overrides = info.capabilities.unwrap_or_default();\n        Self {"
+      },
+      {
+        "line": 50,
+        "text": "        Self {\n            external_web_access: overrides\n                .external_web_access\n                .unwrap_or(defaults.external_web_access),\n            remote_compaction: overrides\n                .remote_compaction\n                .unwrap_or(defaults.remote_compaction),\n            ..defaults\n        }\n    }"
+      },
+      {
+        "line": 51,
+        "text": "            external_web_access: overrides\n                .external_web_access\n                .unwrap_or(defaults.external_web_access),\n            remote_compaction: overrides\n                .remote_compaction\n                .unwrap_or(defaults.remote_compaction),\n            ..defaults\n        }\n    }\n}"
+      },
+      {
+        "line": 52,
+        "text": "                .external_web_access\n                .unwrap_or(defaults.external_web_access),\n            remote_compaction: overrides\n                .remote_compaction\n                .unwrap_or(defaults.remote_compaction),\n            ..defaults\n        }\n    }\n}\n"
+      }
+    ]
+  },
+  "provider.rs": {
+    "url": "https://raw.githubusercontent.com/openai/codex/rust-v0.167.0/codex-rs/model-provider/src/provider.rs",
+    "matches": [
+      {
+        "line": 30,
+        "text": "use codex_runtime_agent_instance::RuntimeAuthManager;\n\nuse crate::ProviderCapabilities;\n#[cfg(test)]\nuse crate::RemoteCompactionSupport;\nuse crate::ResolvedResponsesProvider;\nuse crate::amazon_bedrock::AmazonBedrockModelProvider;\nuse crate::auth::ProviderAuthScope;\nuse crate::auth::ResolvedProviderAuth;\nuse crate::auth::auth_manager_for_provider;"
+      },
+      {
+        "line": 139,
+        "text": "            })\n    }\n\n    /// Returns the provider-owned capability upper bounds.\n    fn capabilities(&self) -> ProviderCapabilities {\n        ProviderCapabilities::default()\n    }\n\n    /// Returns the preferred model used for automatic approval review.\n    ///"
+      },
+      {
+        "line": 593,
+        "text": "    fn info(&self) -> &ModelProviderInfo {\n        &self.info\n    }\n\n    fn capabilities(&self) -> ProviderCapabilities {\n        ProviderCapabilities::from_config(&self.info)\n    }\n\n    fn approval_review_preferred_model(&self) -> &'static str {\n        if self"
+      },
+      {
+        "line": 898,
+        "text": "        assert!(auth.auth.to_auth_headers().unwrap().is_empty());\n    }\n\n    #[test]\n    fn openai_provider_enables_remote_compaction() {\n        let provider = create_model_provider(\n            ModelProviderInfo::create_openai_provider(/*base_url*/ None),\n            /*auth_manager*/ None,\n        );\n"
+      },
+      {
+        "line": 905,
+        "text": "            /*auth_manager*/ None,\n        );\n\n        assert_eq!(\n            provider.capabilities(),\n            ProviderCapabilities {\n                remote_compaction: RemoteCompactionSupport::V2,\n                ..ProviderCapabilities::default()\n            }\n        );"
+      },
+      {
+        "line": 907,
+        "text": "\n        assert_eq!(\n            provider.capabilities(),\n            ProviderCapabilities {\n                remote_compaction: RemoteCompactionSupport::V2,\n                ..ProviderCapabilities::default()\n            }\n        );\n    }\n"
+      },
+      {
+        "line": 914,
+        "text": "        );\n    }\n\n    #[test]\n    fn configured_provider_remote_compaction_matches_provider_support() {\n        let cases = [\n            (\n                ModelProviderInfo::create_openai_provider(/*base_url*/ None),\n                RemoteCompactionSupport::V2,\n            ),"
+      },
+      {
+        "line": 918,
+        "text": "    fn configured_provider_remote_compaction_matches_provider_support() {\n        let cases = [\n            (\n                ModelProviderInfo::create_openai_provider(/*base_url*/ None),\n                RemoteCompactionSupport::V2,\n            ),\n            (\n                ModelProviderInfo {\n                    name: \"Azure\".to_string(),\n                    base_url: Some(\"https://example.com/openai\".to_string()),"
+      },
+      {
+        "line": 926,
+        "text": "                    name: \"Azure\".to_string(),\n                    base_url: Some(\"https://example.com/openai\".to_string()),\n                    ..ModelProviderInfo::default()\n                },\n                RemoteCompactionSupport::V2,\n            ),\n            (\n                ModelProviderInfo {\n                    name: \"Custom\".to_string(),\n                    base_url: Some(\"https://example.openai.azure.com/openai/v1\".to_string()),"
+      },
+      {
+        "line": 934,
+        "text": "                    name: \"Custom\".to_string(),\n                    base_url: Some(\"https://example.openai.azure.com/openai/v1\".to_string()),\n                    ..ModelProviderInfo::default()\n                },\n                RemoteCompactionSupport::V2,\n            ),\n            (\n                provider_for(\"https://example.test/v1\".to_string()),\n                RemoteCompactionSupport::Unsupported,\n            ),"
+      },
+      {
+        "line": 938,
+        "text": "                RemoteCompactionSupport::V2,\n            ),\n            (\n                provider_for(\"https://example.test/v1\".to_string()),\n                RemoteCompactionSupport::Unsupported,\n            ),\n        ];\n\n        for (provider_info, expected) in cases {\n            let provider = create_model_provider(provider_info, /*auth_manager*/ None);"
+      },
+      {
+        "line": 944,
+        "text": "        ];\n\n        for (provider_info, expected) in cases {\n            let provider = create_model_provider(provider_info, /*auth_manager*/ None);\n            assert_eq!(provider.capabilities().remote_compaction, expected);\n        }\n    }\n\n    #[test]\n    fn configured_provider_uses_default_approval_review_preferred_model() {"
+      }
+    ]
+  }
+}

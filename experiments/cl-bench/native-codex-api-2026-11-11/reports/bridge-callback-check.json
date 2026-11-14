@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "model_calls": 0,
+  "bridge_sha256": "070e647f7d3ea77c4299fbebb58c1475fcc0641fe25963fc061a2fee411a466b",
+  "checks": [
+    "observe forwards observation and next_query",
+    "respond preserves native result",
+    "native exception is recorded and re-raised",
+    "timeout partial stdout and stderr survive"
+  ]
+}

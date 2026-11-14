@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "unit_tests_run": 7,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "actual_extraction_samples": 3,
+  "longest_extracted_relative_path_characters": 318,
+  "coverage": [
+    "path normalization preserves native fields",
+    "unchanged bytes and BOM",
+    "mixed UTF16LE/UTF8 WSL logs",
+    "nested gzip normalization and secret rejection",
+    "archive traversal rejection",
+    "unknown binary rejection",
+    "different existing file not overwritten"
+  ],
+  "model_calls": 0
+}

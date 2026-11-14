@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-12T13:46:27.1661568+08:00",
+  "formal_baseline_confirmed": false,
+  "sources": {
+    "benchmark": {
+      "path": "sources/continual-learning-bench",
+      "url": "https://github.com/pgasawa/continual-learning-bench.git",
+      "files_sha256": {
+        "data/codebase_adaptation/final-dataset.jsonl": "63d2267d0dc9214c642c4646376cc9367847824b1b31b7b539397656924f1f23",
+        "src/cli.py": "72c08943afc37daf41470bb4c91572e9cf6ff6418aa36397044c72664960741d",
+        "src/tasks/codebase_adaptation/schedules/default.json": "abd65d2143bdf050e6e6f3c12b17640c79fa582af2d362543991d4ca393767f6",
+        "uv.lock": "162af956864d365aa988b108f2a72bdf457c5da77668137699c738c39ba89556",
+        "src/systems/codex/system.py": "184d715076ee6d4c81a39ce0385b95fffc301994eb3a32cf2a710bd5f346aecf",
+        "pyproject.toml": "029749bcb6e89625bcb47b094554aaebafac4ea410e57d617d998f68e2bf3f94",
+        "src/tasks/codebase_adaptation/task.py": "282c9e69c98b7461cf75d2421cb21ef37ee71b9e5e07143c1a047ebaa1f425f9"
+      },
+      "sha": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26"
+    },
+    "team_framework": {
+      "path": "sources/Skill_RSI",
+      "url": "https://github.com/hzher/Skill_RSI.git",
+      "files_sha256": {
+        "framework/README.md": "1f0558a4bc852818a360992ea1db1035f76b5c7be2900faefb7f90c41dfe2152",
+        "framework/pyproject.toml": "45b229601f622a97712a41c3917c50dc8565840beebe4173af36b5b42f24a795"
+      },
+      "sha": "d068b79deb0e71f2f55e88487efff051dadd0f0a"
+    },
+    "benchmark_isolation_candidate": {
+      "path": "sources/continual-learning-bench-pr26",
+      "url": "https://github.com/pgasawa/continual-learning-bench.git",
+      "sha": "a6f5ede32b4c6c13ccc4c793b3e9b9d7aebe5617",
+      "publication_status": "unmerged PR26 including PR25",
+      "files_sha256": {
+        "src/tasks/codebase_adaptation/generic_runtime.py": "7ca996677284c6f3721e1b22b34b044b7d777066cf675364a68042d4e5f10c4f",
+        "src/tasks/codebase_adaptation/sanitized_runtime.py": "24868a8fbf4fa2b052c2c90bd2ea477f13c89637f6405399a4564db66593c66c",
+        "src/tasks/codebase_adaptation/task.py": "4f834204be8b67950c4a58dfc9756302b07442a569ae6a8f9171ffe73e8050f8",
+        "src/tasks/codebase_adaptation/evaluator.py": "3483c5ffa6dbcf015f195129b0261492fe6c401fbed23a9bf8bef833d432e817",
+        "data/codebase_adaptation/final-dataset.jsonl": "63d2267d0dc9214c642c4646376cc9367847824b1b31b7b539397656924f1f23",
+        "src/tasks/codebase_adaptation/schedules/default.json": "abd65d2143bdf050e6e6f3c12b17640c79fa582af2d362543991d4ca393767f6",
+        "src/systems/codex/system.py": "184d715076ee6d4c81a39ce0385b95fffc301994eb3a32cf2a710bd5f346aecf",
+        "uv.lock": "162af956864d365aa988b108f2a72bdf457c5da77668137699c738c39ba89556"
+      }
+    },
+    "benchmark_isolation_candidate_lf": {
+      "path": "sources/continual-learning-bench-pr26-lf",
+      "url": "https://github.com/pgasawa/continual-learning-bench.git",
+      "sha": "a6f5ede32b4c6c13ccc4c793b3e9b9d7aebe5617",
+      "publication_status": "unmerged PR26 including PR25; canonical LF checkout",
+      "files_sha256": {
+        "src/cli.py": "d69e2f6a3862c5cbb9c0ba385e05d7719466482c73859eb0a3dbdb85d83101d8",
+        "src/systems/codex/system.py": "ea16c0cf83b378c7f68f9657848198450e9f8cc27ce7830e070e6d5ccb0a3ee4",
+        "uv.lock": "a2390fd9e093696d690f23c07bc796c74d3093b93717d821d685001db1e2e439",
+        "data/blind_spectrum_monitoring/mixed_grid_lifecycle.jsonl": "89be0c2d1528c59ddae47b67747bbe551ca138a3f27fb6f2bcfdd496c5086ae7",
+        "data/sales_prediction/sales_lifecycle_panel.jsonl": "2c6037576f35b3b87d383c00a1f1099569e925d5bbadcc5d8bb65633df584079",
+        "src/tasks/database_exploration/task.py": "d23259196c4bf2204b0b46a515d17f0d435036581349b12dd6386cb2ae5c429e",
+        "src/tasks/database_exploration/schedules/default.json": "bb0d0678f469f554c4379dea2b66ff88b89f9fd102edae4f452b523f46977d9d",
+        "src/tasks/sales_prediction/task.py": "5f2a4bc7b314606d1655ab03be901c247808dae66f45428f91f907c3c75f61f6",
+        "src/tasks/sales_prediction/schedules/default.json": "efda2c4d1916e368b46e6a91c89d1b7fa83ad50b2e47427a40889a8870096c5b",
+        "src/tasks/cohort_studies/task.py": "56ee4f3553028aab439d7998cec1c1ed42f7cbe8607ba6b6c8eac060c45849f1",
+        "src/tasks/cohort_studies/schedules/default.json": "9afb2b7c569b8fea700073fb8484b57b2ce86d1b94c401e0ee8e7db3e45996f7",
+        "src/tasks/blind_spectrum_monitoring/task.py": "b4e521fb0338bfd57b28aa56a91cf7191b421e21139fba016f6f2a70d16d5cd4",
+        "src/tasks/blind_spectrum_monitoring/schedules/default.json": "f015c67c2c0f2d9d121acdde9b55322d4b37d7d8764f4c9d0098a2bbbdc854c0",
+        "src/tasks/exploitable_poker/task.py": "1e5922510fe0bfc52b70d94138b352f7a1bd618341c3a5c14c5709d269d4b5f0",
+        "src/tasks/exploitable_poker/schedules/default.json": "6c79d5a177d46e695d50bcf577e1071ba7f4f94fc8d694530170b3f7345e591f"
+      }
+    }
+  }
+}

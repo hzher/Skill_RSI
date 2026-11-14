@@ -1,0 +1,21 @@
+{
+  "run_id": "smoke_20261112T172427+0800_214092cb",
+  "episode_id": "jazzband__tablib-534",
+  "native_passed": true,
+  "native_reward": 0.825,
+  "native_steps": 8,
+  "native_model_calls": 8,
+  "native_tokens": 127822,
+  "framework_estimated_cost_usd": 0.0671543,
+  "archived_patch_regrade_passed": true,
+  "native_cli_version": "0.167.0",
+  "native_provider": "rsi_router",
+  "session_ids": [
+    "01a1cf13-7b5e-79f0-a6a3-1c142daef978"
+  ],
+  "archive": "runs/smoke/smoke_20261112T172427+0800_214092cb",
+  "formal_batch_started": false,
+  "formal_statistics_eligible": false,
+  "protocol_alignment": "verified_isolated_candidate",
+  "completed_at": "2026-11-12T17:31:15+08:00"
+}

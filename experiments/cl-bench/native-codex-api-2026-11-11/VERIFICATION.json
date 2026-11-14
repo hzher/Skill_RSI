@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "exported_evidence_entries_verified": 4979,
+  "exported_evidence_bytes_verified": 847158267,
+  "raw_archives_verified": 11,
+  "archive_sizes_bytes": {
+    "raw/collection_20261112T173337+0800_b06d3bd1.zip": 1273819,
+    "raw/collection_20261112T181914+0800_e88f2057.zip": 5007343,
+    "raw/collection_20261112T184222+0800_8624dcbc.zip": 5196006,
+    "raw/collection_20261113T004031+0800_3b8356a2.zip": 3863416,
+    "raw/collection_20261113T005523+0800_e910a9cf.zip": 20621467,
+    "raw/collection_20261113T010809+0800_21578a53.zip": 33219748,
+    "raw/collection_20261113T014205+0800_420b0733.zip": 11367362,
+    "raw/collection_20261113T021152+0800_af16b595.zip": 12490845,
+    "raw/smoke_20261112T160554+0800_772c97b8.zip": 225429,
+    "raw/smoke_20261112T172427+0800_214092cb.zip": 223263,
+    "raw/historical-execution-evidence.zip": 291534
+  },
+  "published_files_scanned": 428,
+  "published_bytes": 116122621,
+  "source_integrity": {
+    "sealed_file_hashes_checked": 4431,
+    "frozen_resources_checked": 36,
+    "pinned_source_hashes_checked": 32,
+    "historical_archive_members_checked": 155
+  },
+  "indexed_episodes_verified": 322,
+  "primary_records": 320,
+  "auxiliary_records": 2,
+  "unique_instances": 301,
+  "new_action_feedback_turns": 991,
+  "replayed_prefix_turns": 2,
+  "evidence_kinds": {
+    "model_interaction": 306,
+    "environment_auto_resolution": 16
+  },
+  "errors": [],
+  "credential_shaped_findings": 0,
+  "model_calls": 0,
+  "benchmark_rerun": false,
+  "original_source_modified": false
+}

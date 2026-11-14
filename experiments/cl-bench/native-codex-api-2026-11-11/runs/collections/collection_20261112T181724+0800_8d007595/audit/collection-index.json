@@ -1,0 +1,18 @@
+{
+  "run_id": "collection_20261112T181724+0800_8d007595",
+  "task": "cohort_studies",
+  "updated_at": "2026-11-12T11:06:08.581542+00:00",
+  "execution_status": "infrastructure_error",
+  "expected_instances_per_sequence": 20,
+  "expected_trajectories": 20,
+  "graded_trajectories": 0,
+  "unique_graded": 0,
+  "episodes": [],
+  "captured_full_submissions": [],
+  "native_session_ids": [],
+  "native_usage_by_phase": {},
+  "cost_note": "Framework estimates are not actual gateway charges; usage of interrupted calls may only exist in native event sidecars",
+  "ungraded_submission_instance_ids": [],
+  "note": "A native outcome is evidence of completed grading; process exit code is not a task score. Partial submissions remain ungraded.",
+  "model_calls_by_auditor": 0
+}

@@ -1,0 +1,62 @@
+{
+  "per_task": {
+    "codebase_adaptation": {
+      "records": 40,
+      "model_interactions": 240,
+      "replayed_interactions": 0,
+      "native_success_true": 26,
+      "phases": {
+        "baseline": 21,
+        "run": 19
+      }
+    },
+    "sales_prediction": {
+      "records": 12,
+      "model_interactions": 52,
+      "replayed_interactions": 0,
+      "native_success_true": 12,
+      "phases": {
+        "run": 12
+      }
+    },
+    "cohort_studies": {
+      "records": 20,
+      "model_interactions": 230,
+      "replayed_interactions": 2,
+      "native_success_true": 13,
+      "phases": {
+        "run": 20
+      }
+    },
+    "database_exploration": {
+      "records": 40,
+      "model_interactions": 98,
+      "replayed_interactions": 0,
+      "native_success_true": 35,
+      "phases": {
+        "run": 40
+      }
+    },
+    "exploitable_poker": {
+      "records": 120,
+      "model_interactions": 281,
+      "replayed_interactions": 0,
+      "native_success_true": 83,
+      "phases": {
+        "run": 120
+      }
+    },
+    "blind_spectrum_monitoring": {
+      "records": 90,
+      "model_interactions": 90,
+      "replayed_interactions": 0,
+      "native_success_true": 58,
+      "phases": {
+        "run": 90
+      }
+    }
+  },
+  "new_model_interactions_in_indexed_episodes": 991,
+  "replayed_interactions_inside_new_partial_episodes": 2,
+  "note": "Interaction counts are benchmark action/feedback turns, not HTTP-request counts. Wholly replayed episodes are excluded. Ungraded partial attempts remain in raw evidence inventory."
+}

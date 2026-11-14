@@ -1,0 +1,10 @@
+{
+  "model_calls": 0,
+  "docker_limits": "67108864 67108864 128",
+  "timeout_returncode": 124,
+  "timeout_elapsed_seconds": 1.6745724879999955,
+  "sleep_process_absent": true,
+  "memory_probe_returncode": 137,
+  "memory_events": "low 0\nhigh 0\nmax 4073\noom 1\noom_kill 1\noom_group_kill 0\n",
+  "passed": true
+}

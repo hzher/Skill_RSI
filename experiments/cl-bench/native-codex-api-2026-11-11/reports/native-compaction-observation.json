@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-11-13T01:17:54.597291+08:00",
+  "model_calls_by_observer": 0,
+  "remote_compact_endpoint_validated": false,
+  "native_events_observed": [
+    {
+      "session_id": "01a1cf5a-df7d-7270-a4a1-4b222adaf349",
+      "task": "cohort_studies",
+      "compacted_events_in_live_thread": 6,
+      "compacted_events_in_original_archived_thread": 4,
+      "continued_valid_responses_observed": true
+    },
+    {
+      "session_id": "01a1d0b0-5209-7031-b47e-b591bdd50964",
+      "task": "exploitable_poker",
+      "compacted_events_in_live_thread": 1,
+      "continued_valid_responses_observed": true
+    }
+  ],
+  "interpretation": "Native session compaction followed by continued actions was observed. This does not establish support for the separate remote /responses/compact endpoint. Live-thread counts are a point-in-time observation."
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "purpose": "collection",
+  "selection_status": "confirmed",
+  "selection_note": "User explicitly requested maximum complete trajectory coverage; engineering defaults are recorded and are not a claim of a team-fixed experiment protocol.",
+  "selection_confirmation_scope": "user_authorized_coverage_collection",
+  "benchmark_sha": "a6f5ede32b4c6c13ccc4c793b3e9b9d7aebe5617",
+  "task": "blind_spectrum_monitoring",
+  "instance_ids": null,
+  "schedule": "default",
+  "seed": 42,
+  "runs": 1,
+  "max_workers": 1,
+  "run_mode": "replicate",
+  "include_baseline": false,
+  "max_steps_per_issue": null,
+  "turn_timeout_seconds": 300,
+  "wall_timeout_seconds": 21600,
+  "system": {
+    "model": "gpt-6.1-sol",
+    "version": "0.167.0",
+    "reasoning_effort": "low",
+    "single_conversation": true,
+    "disable_native_memories": true,
+    "other_memory_files": [],
+    "skill": null,
+    "preamble_file": null,
+    "use_oauth": false,
+    "docker_image": "node:22-slim",
+    "model_auto_compact_token_limit": 100000
+  },
+  "formal_parameters_confirmed": false,
+  "notes": [
+    "Pinned unmerged upstream PR25/26 candidate; preserve source SHA and actor boundary evidence.",
+    "Use the entire original default schedule; one pass first, completed and failed outcomes both preserved.",
+    "Per-container resource limits and in-container command termination prevent host memory exhaustion.",
+    "Token usage and framework dollar estimates are recorded separately from actual gateway billing.",
+    "External action dispatch is clarified in each public prompt after a prior long conversation incorrectly claimed benchmark tools were unavailable; original schemas/scorers are unchanged."
+  ],
+  "benchmark_source": "benchmark_isolation_candidate_lf",
+  "actor_isolation": "official_task_environment",
+  "task_params": {},
+  "authorization_note": "User requested maximum complete trajectory coverage. One stateful pass over the entire official default schedule of this family, no paired baseline or repetitions initially.",
+  "collection_authorized": true,
+  "resource_limits": {
+    "actor_memory_mib": 1024,
+    "evaluator_memory_mib": 1024,
+    "model_memory_mib": 768,
+    "pids_limit": 128,
+    "cpus_per_container": 2
+  },
+  "action_transport": "external_json"
+}

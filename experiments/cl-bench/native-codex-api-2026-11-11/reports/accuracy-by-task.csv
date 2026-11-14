@@ -1,0 +1,8 @@
+task,phase,records,native_success_true,native_success_false,native_success_null,native_success_rate,mean_native_reward,environment_auto_resolutions
+codebase_adaptation,baseline,19,12,7,0,0.631578947368421,0.518421052631579,0
+codebase_adaptation,run,19,12,7,0,0.631578947368421,0.5842105263157894,0
+database_exploration,run,40,35,5,0,0.875,0.7883199999999998,0
+sales_prediction,run,12,12,0,0,1.0,0.9088500000000002,0
+cohort_studies,run,20,13,7,0,0.65,0.020140300000000007,0
+blind_spectrum_monitoring,run,90,58,32,0,0.6444444444444445,0.5719788888888888,0
+exploitable_poker,run,120,83,37,0,0.6916666666666667,6.079166666666667,16

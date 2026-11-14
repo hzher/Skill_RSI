@@ -1,0 +1,1249 @@
+{
+  "groups": [
+    {
+      "role": "auxiliary_interrupted",
+      "task": "codebase_adaptation",
+      "phase": "baseline",
+      "records": 2,
+      "success_true": 2,
+      "success_false": 0,
+      "success_unavailable": 0,
+      "native_success_rate": 1.0,
+      "reward": {
+        "count": 2,
+        "sum": 1.65,
+        "mean": 0.825,
+        "median": 0.825,
+        "min": 0.825,
+        "max": 0.825
+      },
+      "raw_metrics": {
+        "issue_regret": {
+          "count": 2,
+          "sum": 14.0,
+          "mean": 7.0,
+          "median": 7.0,
+          "min": 7.0,
+          "max": 7.0
+        }
+      },
+      "latency_seconds": {
+        "count": 2,
+        "sum": 316.33841700000005,
+        "mean": 158.16920850000002,
+        "median": 158.16920850000002,
+        "min": 156.144922,
+        "max": 160.193495
+      },
+      "framework_estimated_cost_usd": {
+        "count": 2,
+        "sum": 0.2788526,
+        "mean": 0.1394263,
+        "median": 0.1394263,
+        "min": 0.1112233,
+        "max": 0.1676293
+      },
+      "new_action_feedback_turns": 16,
+      "replayed_prefix_turns": 0,
+      "evidence_kind_counts": {
+        "model_interaction": 2
+      },
+      "eval_status_counts": {
+        "completed": 2
+      },
+      "native_timed_out_true": 0,
+      "native_metadata_keys_present": {
+        "steps": 2,
+        "eval_status": 2,
+        "timed_out": 2
+      },
+      "failure_instances": []
+    },
+    {
+      "role": "primary",
+      "task": "blind_spectrum_monitoring",
+      "phase": "run",
+      "records": 90,
+      "success_true": 58,
+      "success_false": 32,
+      "success_unavailable": 0,
+      "native_success_rate": 0.6444444444444445,
+      "reward": {
+        "count": 90,
+        "sum": 51.4781,
+        "mean": 0.5719788888888889,
+        "median": 0.6154,
+        "min": 0.2203,
+        "max": 0.7803
+      },
+      "raw_metrics": {
+        "None": {
+          "count": 0
+        }
+      },
+      "latency_seconds": {
+        "count": 90,
+        "sum": 1557.9847760000002,
+        "mean": 17.310941955555556,
+        "median": 15.150411,
+        "min": 9.116785,
+        "max": 77.165244
+      },
+      "framework_estimated_cost_usd": {
+        "count": 90,
+        "sum": 1.6749264000000004,
+        "mean": 0.018610293333333333,
+        "median": 0.013140800000000001,
+        "min": 0.0053256,
+        "max": 0.1974484
+      },
+      "new_action_feedback_turns": 90,
+      "replayed_prefix_turns": 0,
+      "evidence_kind_counts": {
+        "model_interaction": 90
+      },
+      "eval_status_counts": {
+        "None": 90
+      },
+      "native_timed_out_true": 0,
+      "native_metadata_keys_present": {
+        "unsafe_bandwidth_claimed": 90,
+        "missed_available_bandwidth": 90
+      },
+      "failure_instances": [
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:1",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.2203,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0000_2a7dd5e550.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:2",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.297,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0001_dac140af3f.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:3",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3383,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0002_bba6aff305.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:4",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3552,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0003_28a3ea40b3.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:5",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3601,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0004_f6681305aa.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:6",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3686,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0005_4b52f64cb8.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:7",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3618,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0006_03e0039df8.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:8",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3529,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0007_65c5f01512.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:9",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3501,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0008_29a7e073fe.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:10",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3395,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0009_230591af8e.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:11",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.366,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0010_e610d9f688.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:12",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3758,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0011_fe15483457.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:13",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3747,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0012_16f2773fb6.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:14",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4928,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0013_8eb4e1dd88.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:15",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4606,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0014_a550168279.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:16",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4549,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0015_3e3f2ab2b5.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:17",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4638,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0016_eabbc99324.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:18",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4681,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0017_ba3b736b41.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:19",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4744,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0018_88e7604df6.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:20",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4862,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0019_db32c0d7b9.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_ch_wide:corpus:mixed_grid_lifecycle:scan:30",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4767,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0029_24b7dd6bd8.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_plus_four_mixed:corpus:mixed_grid_lifecycle:scan:31",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4938,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0030_a37f0fbbef.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_plus_four_mixed:corpus:mixed_grid_lifecycle:scan:32",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4939,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0031_f9c343781d.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_plus_four_mixed:corpus:mixed_grid_lifecycle:scan:54",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3237,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0053_47797ef561.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_plus_four_mixed:corpus:mixed_grid_lifecycle:scan:55",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3117,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0054_ac00d89374.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_plus_four_mixed:corpus:mixed_grid_lifecycle:scan:56",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.366,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0055_ce31a663d8.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_plus_four_mixed:corpus:mixed_grid_lifecycle:scan:57",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.361,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0056_1b7bf2abdb.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_plus_four_mixed:corpus:mixed_grid_lifecycle:scan:58",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3575,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0057_5d412d76f2.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_plus_four_mixed:corpus:mixed_grid_lifecycle:scan:59",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3518,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0058_ef361e054b.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:five_plus_four_mixed:corpus:mixed_grid_lifecycle:scan:60",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.3645,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0059_a935769d11.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:full_grid_active:corpus:mixed_grid_lifecycle:scan:61",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4161,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0060_e440b8aeeb.json"
+        },
+        {
+          "instance_id": "blind_spectrum_monitoring:full_grid_active:corpus:mixed_grid_lifecycle:scan:62",
+          "run_id": "collection_20261113T014205+0800_420b0733",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.4884,
+          "episode_path": "runs/collections/collection_20261113T014205+0800_420b0733/audit/episodes/run_0061_41c1f5d4a2.json"
+        }
+      ]
+    },
+    {
+      "role": "primary",
+      "task": "codebase_adaptation",
+      "phase": "baseline",
+      "records": 19,
+      "success_true": 12,
+      "success_false": 7,
+      "success_unavailable": 0,
+      "native_success_rate": 0.631578947368421,
+      "reward": {
+        "count": 19,
+        "sum": 9.850000000000001,
+        "mean": 0.518421052631579,
+        "median": 0.8,
+        "min": 0.0,
+        "max": 0.875
+      },
+      "raw_metrics": {
+        "issue_regret": {
+          "count": 19,
+          "sum": 366.0,
+          "mean": 19.263157894736842,
+          "median": 8.0,
+          "min": 5.0,
+          "max": 40.0
+        }
+      },
+      "latency_seconds": {
+        "count": 19,
+        "sum": 1721.125897,
+        "mean": 90.58557352631578,
+        "median": 85.041401,
+        "min": 54.509779,
+        "max": 174.989979
+      },
+      "framework_estimated_cost_usd": {
+        "count": 19,
+        "sum": 1.8637747999999998,
+        "mean": 0.09809341052631579,
+        "median": 0.1030232,
+        "min": 0.0520504,
+        "max": 0.2012416
+      },
+      "new_action_feedback_turns": 152,
+      "replayed_prefix_turns": 0,
+      "evidence_kind_counts": {
+        "model_interaction": 19
+      },
+      "eval_status_counts": {
+        "completed": 12,
+        "tests_failed": 7
+      },
+      "native_timed_out_true": 0,
+      "native_metadata_keys_present": {
+        "steps": 19,
+        "eval_status": 19,
+        "timed_out": 19
+      },
+      "failure_instances": [
+        {
+          "instance_id": "jazzband__tablib-579",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/baseline_0003_2a2c711aec.json"
+        },
+        {
+          "instance_id": "jazzband__tablib-594",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/baseline_0005_5821bfc050.json"
+        },
+        {
+          "instance_id": "jazzband__tablib-596",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/baseline_0007_ee1ddc85ca.json"
+        },
+        {
+          "instance_id": "jd__tenacity-603",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/baseline_0010_427dc10531.json"
+        },
+        {
+          "instance_id": "jd__tenacity-610",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/baseline_0014_3798acfbf2.json"
+        },
+        {
+          "instance_id": "jd__tenacity-615",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/baseline_0017_b4e0d76e52.json"
+        },
+        {
+          "instance_id": "jd__tenacity-628",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/baseline_0018_a95ca39d4f.json"
+        }
+      ]
+    },
+    {
+      "role": "primary",
+      "task": "codebase_adaptation",
+      "phase": "run",
+      "records": 19,
+      "success_true": 12,
+      "success_false": 7,
+      "success_unavailable": 0,
+      "native_success_rate": 0.631578947368421,
+      "reward": {
+        "count": 19,
+        "sum": 11.1,
+        "mean": 0.5842105263157895,
+        "median": 0.9,
+        "min": 0.0,
+        "max": 0.95
+      },
+      "raw_metrics": {
+        "issue_regret": {
+          "count": 19,
+          "sum": 316.0,
+          "mean": 16.63157894736842,
+          "median": 4.0,
+          "min": 2.0,
+          "max": 40.0
+        }
+      },
+      "latency_seconds": {
+        "count": 19,
+        "sum": 898.0605380000001,
+        "mean": 47.26634410526316,
+        "median": 44.056644,
+        "min": 31.806076,
+        "max": 90.91397
+      },
+      "framework_estimated_cost_usd": {
+        "count": 19,
+        "sum": 1.1646414,
+        "mean": 0.06129691578947368,
+        "median": 0.042192,
+        "min": 0.0281584,
+        "max": 0.1788636
+      },
+      "new_action_feedback_turns": 72,
+      "replayed_prefix_turns": 0,
+      "evidence_kind_counts": {
+        "model_interaction": 19
+      },
+      "eval_status_counts": {
+        "completed": 12,
+        "tests_failed": 7
+      },
+      "native_timed_out_true": 0,
+      "native_metadata_keys_present": {
+        "steps": 19,
+        "eval_status": 19,
+        "timed_out": 19
+      },
+      "failure_instances": [
+        {
+          "instance_id": "jazzband__tablib-579",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/run_0003_2a2c711aec.json"
+        },
+        {
+          "instance_id": "jazzband__tablib-594",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/run_0005_5821bfc050.json"
+        },
+        {
+          "instance_id": "jazzband__tablib-596",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/run_0007_ee1ddc85ca.json"
+        },
+        {
+          "instance_id": "jd__tenacity-603",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/run_0010_427dc10531.json"
+        },
+        {
+          "instance_id": "jd__tenacity-604",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/run_0011_7603a0fa33.json"
+        },
+        {
+          "instance_id": "jd__tenacity-610",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/run_0014_3798acfbf2.json"
+        },
+        {
+          "instance_id": "jd__tenacity-615",
+          "run_id": "collection_20261113T021152+0800_af16b595",
+          "eval_status": "tests_failed",
+          "timed_out": false,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T021152+0800_af16b595/audit/episodes/run_0017_b4e0d76e52.json"
+        }
+      ]
+    },
+    {
+      "role": "primary",
+      "task": "cohort_studies",
+      "phase": "run",
+      "records": 20,
+      "success_true": 13,
+      "success_false": 7,
+      "success_unavailable": 0,
+      "native_success_rate": 0.65,
+      "reward": {
+        "count": 20,
+        "sum": 0.4028060000000001,
+        "mean": 0.0201403,
+        "median": 0.0240635,
+        "min": -0.164392,
+        "max": 0.19428
+      },
+      "raw_metrics": {
+        "kl_information_gain_bits": {
+          "count": 20,
+          "sum": 0.4028060000000001,
+          "mean": 0.0201403,
+          "median": 0.0240635,
+          "min": -0.164392,
+          "max": 0.19428
+        }
+      },
+      "latency_seconds": {
+        "count": 20,
+        "sum": 4058.138368,
+        "mean": 202.9069184,
+        "median": 186.999126,
+        "min": 122.066756,
+        "max": 408.450162
+      },
+      "framework_estimated_cost_usd": {
+        "count": 20,
+        "sum": 8.345884199999999,
+        "mean": 0.41729421,
+        "median": 0.3309004,
+        "min": 0.1768056,
+        "max": 1.1252763
+      },
+      "new_action_feedback_turns": 230,
+      "replayed_prefix_turns": 2,
+      "evidence_kind_counts": {
+        "model_interaction": 20
+      },
+      "eval_status_counts": {
+        "None": 20
+      },
+      "native_timed_out_true": 0,
+      "native_metadata_keys_present": {
+        "study_name": 20,
+        "mean_kl_divergence": 20,
+        "mean_reference_kl": 20,
+        "kl_unit": 20,
+        "n_cohorts_estimated": 20,
+        "steps": 20,
+        "timed_out": 20
+      },
+      "failure_instances": [
+        {
+          "instance_id": "cohort_studies:herald_suburban",
+          "run_id": "collection_20261112T184222+0800_8624dcbc",
+          "eval_status": null,
+          "timed_out": false,
+          "native_reward": -0.001338,
+          "episode_path": "runs/collections/collection_20261112T184222+0800_8624dcbc/audit/episodes/run_0000_dc2cca93c8.json"
+        },
+        {
+          "instance_id": "cohort_studies:herald_suburban_s2",
+          "run_id": "collection_20261112T184222+0800_8624dcbc",
+          "eval_status": null,
+          "timed_out": false,
+          "native_reward": -0.009029,
+          "episode_path": "runs/collections/collection_20261112T184222+0800_8624dcbc/audit/episodes/run_0002_d85baaa630.json"
+        },
+        {
+          "instance_id": "cohort_studies:herald_rural_s2",
+          "run_id": "collection_20261112T184222+0800_8624dcbc",
+          "eval_status": null,
+          "timed_out": false,
+          "native_reward": -0.006463,
+          "episode_path": "runs/collections/collection_20261112T184222+0800_8624dcbc/audit/episodes/run_0003_f30e53050a.json"
+        },
+        {
+          "instance_id": "cohort_studies:forge_urban",
+          "run_id": "collection_20261113T010809+0800_21578a53",
+          "eval_status": null,
+          "timed_out": false,
+          "native_reward": -0.004303,
+          "episode_path": "runs/collections/collection_20261113T010809+0800_21578a53/audit/episodes/run_0013_0c04c0db2e.json"
+        },
+        {
+          "instance_id": "cohort_studies:forge_industrial_s2",
+          "run_id": "collection_20261113T010809+0800_21578a53",
+          "eval_status": null,
+          "timed_out": false,
+          "native_reward": -0.069501,
+          "episode_path": "runs/collections/collection_20261113T010809+0800_21578a53/audit/episodes/run_0014_3d14c8e099.json"
+        },
+        {
+          "instance_id": "cohort_studies:forge_urban_s2",
+          "run_id": "collection_20261113T010809+0800_21578a53",
+          "eval_status": null,
+          "timed_out": false,
+          "native_reward": -0.164392,
+          "episode_path": "runs/collections/collection_20261113T010809+0800_21578a53/audit/episodes/run_0015_afea4bf795.json"
+        },
+        {
+          "instance_id": "cohort_studies:cadence_industrial_s2",
+          "run_id": "collection_20261113T010809+0800_21578a53",
+          "eval_status": null,
+          "timed_out": false,
+          "native_reward": -0.02069,
+          "episode_path": "runs/collections/collection_20261113T010809+0800_21578a53/audit/episodes/run_0019_8292ea29b9.json"
+        }
+      ]
+    },
+    {
+      "role": "primary",
+      "task": "database_exploration",
+      "phase": "run",
+      "records": 40,
+      "success_true": 35,
+      "success_false": 5,
+      "success_unavailable": 0,
+      "native_success_rate": 0.875,
+      "reward": {
+        "count": 40,
+        "sum": 31.53279999999999,
+        "mean": 0.78832,
+        "median": 0.9333,
+        "min": 0.0,
+        "max": 0.9333
+      },
+      "raw_metrics": {
+        "exploration_regret": {
+          "count": 40,
+          "sum": 127.0,
+          "mean": 3.175,
+          "median": 1.0,
+          "min": 1.0,
+          "max": 15.0
+        }
+      },
+      "latency_seconds": {
+        "count": 40,
+        "sum": 671.408565,
+        "mean": 16.785214125,
+        "median": 15.4795865,
+        "min": 10.497295,
+        "max": 31.55754
+      },
+      "framework_estimated_cost_usd": {
+        "count": 40,
+        "sum": 0.8594098999999998,
+        "mean": 0.0214852475,
+        "median": 0.016681,
+        "min": 0.0070116,
+        "max": 0.092768
+      },
+      "new_action_feedback_turns": 98,
+      "replayed_prefix_turns": 0,
+      "evidence_kind_counts": {
+        "model_interaction": 40
+      },
+      "eval_status_counts": {
+        "None": 40
+      },
+      "native_timed_out_true": 0,
+      "native_metadata_keys_present": {
+        "num_queries": 40,
+        "num_actions": 40,
+        "regret": 40,
+        "difficulty": 40
+      },
+      "failure_instances": [
+        {
+          "instance_id": "5",
+          "run_id": "collection_20261113T004031+0800_3b8356a2",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T004031+0800_3b8356a2/audit/episodes/run_0001_ef2d127de3.json"
+        },
+        {
+          "instance_id": "119",
+          "run_id": "collection_20261113T004031+0800_3b8356a2",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T004031+0800_3b8356a2/audit/episodes/run_0021_3038bfb575.json"
+        },
+        {
+          "instance_id": "103",
+          "run_id": "collection_20261113T004031+0800_3b8356a2",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T004031+0800_3b8356a2/audit/episodes/run_0022_454f63ac30.json"
+        },
+        {
+          "instance_id": "112",
+          "run_id": "collection_20261113T004031+0800_3b8356a2",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T004031+0800_3b8356a2/audit/episodes/run_0023_b1556dea32.json"
+        },
+        {
+          "instance_id": "105",
+          "run_id": "collection_20261113T004031+0800_3b8356a2",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T004031+0800_3b8356a2/audit/episodes/run_0026_1253e9373e.json"
+        }
+      ]
+    },
+    {
+      "role": "primary",
+      "task": "exploitable_poker",
+      "phase": "run",
+      "records": 120,
+      "success_true": 83,
+      "success_false": 37,
+      "success_unavailable": 0,
+      "native_success_rate": 0.6916666666666667,
+      "reward": {
+        "count": 120,
+        "sum": 729.5,
+        "mean": 6.079166666666667,
+        "median": 1.0,
+        "min": -100.0,
+        "max": 100.0
+      },
+      "raw_metrics": {
+        "None": {
+          "count": 0
+        }
+      },
+      "latency_seconds": {
+        "count": 104,
+        "sum": 2446.2813220000007,
+        "mean": 23.521935788461537,
+        "median": 21.043694000000002,
+        "min": 6.372768,
+        "max": 190.382332
+      },
+      "framework_estimated_cost_usd": {
+        "count": 104,
+        "sum": 3.195818800000001,
+        "mean": 0.030729026923076923,
+        "median": 0.0219088,
+        "min": 0.005702,
+        "max": 0.2033248
+      },
+      "new_action_feedback_turns": 281,
+      "replayed_prefix_turns": 0,
+      "evidence_kind_counts": {
+        "model_interaction": 104,
+        "environment_auto_resolution": 16
+      },
+      "eval_status_counts": {
+        "None": 120
+      },
+      "native_timed_out_true": 0,
+      "native_metadata_keys_present": {
+        "variant_id": 120,
+        "total_profit": 120
+      },
+      "failure_instances": [
+        {
+          "instance_id": "poker:calling_station:hand:stage0_seed42_hand1",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -2.5,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0000_ddafe9db0d.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage0_seed42_hand3",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0002_d1d83a5ab9.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage0_seed42_hand5",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0004_af647957a9.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage0_seed42_hand8",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -4.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0007_aa21b130e7.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage0_seed42_hand10",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -100.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0009_08ddf16ae9.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage0_seed42_hand12",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -100.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0011_20c4ba7f62.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage0_seed42_hand15",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -4.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0014_0eb853cb5e.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage0_seed42_hand16",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0015_a3b32cc71c.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage0_seed42_hand18",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0017_27bc0376dc.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand2",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -5.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0021_5dd5ea178d.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand6",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -3.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0025_d059d39b10.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand8",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -3.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0027_4bb810a443.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand10",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0029_2acb9d8cf9.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand14",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -7.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0033_21d9187619.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand17",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -5.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0036_0d1016c721.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand18",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": 0.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0037_a19673bd0c.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand21",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0040_06f24eb3e2.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand22",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -2.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0041_541cdb65da.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand23",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -3.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0042_6a86fdde0f.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand25",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0044_c659d537d6.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand26",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -5.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0045_4324f57692.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand29",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -0.5,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0048_7ca65b0eb5.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage1_seed43_hand30",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0049_268c31bf39.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage2_seed44_hand3",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -4.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0052_a12e4a2867.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage2_seed44_hand4",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -5.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0053_03c0638111.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage2_seed44_hand8",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -100.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0057_dbdfea3735.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage2_seed44_hand9",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0058_e623c9dfed.json"
+        },
+        {
+          "instance_id": "poker:calling_station:hand:stage2_seed44_hand10",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0059_9c4cf3d2d3.json"
+        },
+        {
+          "instance_id": "poker:fit_or_fold:hand:stage3_seed45_hand15",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -5.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0074_eddfdd2914.json"
+        },
+        {
+          "instance_id": "poker:fit_or_fold:hand:stage3_seed45_hand34",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0093_10d2d42251.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand3",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -2.5,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0097_556ab2e341.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand11",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0105_187bef98e3.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand13",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -13.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0107_fa384143f1.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand14",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -1.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0108_59fce042b9.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand19",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -3.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0113_32b29cadaf.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand20",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -5.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0114_79f2168d49.json"
+        },
+        {
+          "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand25",
+          "run_id": "collection_20261113T005523+0800_e910a9cf",
+          "eval_status": null,
+          "timed_out": null,
+          "native_reward": -2.0,
+          "episode_path": "runs/collections/collection_20261113T005523+0800_e910a9cf/audit/episodes/run_0119_01d822c4e4.json"
+        }
+      ]
+    },
+    {
+      "role": "primary",
+      "task": "sales_prediction",
+      "phase": "run",
+      "records": 12,
+      "success_true": 12,
+      "success_false": 0,
+      "success_unavailable": 0,
+      "native_success_rate": 1.0,
+      "reward": {
+        "count": 12,
+        "sum": 10.906200000000002,
+        "mean": 0.9088499999999999,
+        "median": 0.9660500000000001,
+        "min": 0.577,
+        "max": 0.971
+      },
+      "raw_metrics": {
+        "score": {
+          "count": 12,
+          "sum": 10.906200000000002,
+          "mean": 0.9088499999999999,
+          "median": 0.9660500000000001,
+          "min": 0.577,
+          "max": 0.971
+        }
+      },
+      "latency_seconds": {
+        "count": 12,
+        "sum": 1188.579557,
+        "mean": 99.04829641666667,
+        "median": 97.75044349999999,
+        "min": 45.994263,
+        "max": 194.63738
+      },
+      "framework_estimated_cost_usd": {
+        "count": 12,
+        "sum": 1.2078223,
+        "mean": 0.10065185833333333,
+        "median": 0.09149265000000001,
+        "min": 0.0680598,
+        "max": 0.2141909
+      },
+      "new_action_feedback_turns": 52,
+      "replayed_prefix_turns": 0,
+      "evidence_kind_counts": {
+        "model_interaction": 12
+      },
+      "eval_status_counts": {
+        "None": 12
+      },
+      "native_timed_out_true": 0,
+      "native_metadata_keys_present": {
+        "steps": 12,
+        "target_year": 12,
+        "variant_id": 12,
+        "format_valid": 12,
+        "timed_out": 12,
+        "regret": 12
+      },
+      "failure_instances": []
+    }
+  ],
+  "indexed_records": 322,
+  "notes": [
+    "Native success is authoritative; no new scoring or model calls.",
+    "Task rewards/raw metrics have different scales and must not be pooled as accuracy.",
+    "Action/feedback turns are not HTTP request counts; cost is an estimate, not billing.",
+    "Null original metadata stays null; no inferred failure causes.",
+    "Auxiliary interrupted Codebase records are excluded from the primary summary."
+  ]
+}

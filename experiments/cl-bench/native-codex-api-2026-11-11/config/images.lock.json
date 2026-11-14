@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-11-12",
+  "verification": "Registry manifest requests returned HTTP 200; image layers not yet pulled",
+  "images": [
+    {
+      "tag": "node:22-slim",
+      "digest": "sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee"
+    },
+    {
+      "tag": "pgasawa2/continual-learning-bench:tablib",
+      "digest": "sha256:7f5c2cb22b707280d0b7aef566ad98e01670e9b67ac19ad6252bfbb5248c4e61"
+    },
+    {
+      "tag": "pgasawa2/continual-learning-bench:tenacity",
+      "digest": "sha256:e25f2a58bd4e9c68bd899f43df51281a3848dbeed661dc9c0f718e25fa8c0ce9"
+    },
+    {
+      "tag": "pgasawa2/continual-learning-bench:sales-prediction",
+      "digest": "sha256:3055d0adbc5cf33d72594cab0e95ac0e6863639fd6dc8e21b8d2bacbb4fd15a0"
+    }
+  ]
+}

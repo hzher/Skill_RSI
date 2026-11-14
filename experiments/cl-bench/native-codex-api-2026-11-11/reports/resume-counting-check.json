@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "original_graded_outcomes": 6,
+  "new_graded_trajectories_from_replay": 0,
+  "model_calls": 0,
+  "auditor_sha256": "a8d45db97588a4b5078f1ec25a1df9bdcc2970106b7e197e00b81095d543c685"
+}

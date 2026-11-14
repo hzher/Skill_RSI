@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-11-12",
+  "base_sha": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+  "candidate_sha": "a6f5ede32b4c6c13ccc4c793b3e9b9d7aebe5617",
+  "classification": "unmerged_upstream_candidate_not_formal_baseline",
+  "pull_requests": [
+    {
+      "number": 25,
+      "url": "https://github.com/pgasawa/continual-learning-bench/pull/25",
+      "state": "open",
+      "merged": false,
+      "base_sha": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+      "head_sha": "5e384e9f88c1f588f4e08b623fb5bec7e3699593",
+      "title": "Keep Code regression tests evaluator-only",
+      "body": "## Summary\n\nThe Codebase Adaptation task describes its regression tests as hidden, but the\nactor and evaluator previously shared an initializer that applied the official\n`test_patch` in both environments.\n\nThis aligns the implementation with Appendix A.2 of the paper, which specifies\nthat actors receive the repository at `base_commit` and are evaluated against\nhidden regression tests.\n\nThis change separates base-tree initialization from evaluator initialization:\n\n- Actor workspaces receive only the task's `base_commit`.\n- Evaluator and curation workspaces continue to apply the official `test_patch`.\n- Existing repository tests remain available to the actor.\n\nTask datasets, schedules, scoring, and evaluation behavior are unchanged.\n\n## Testing\n\n- 24 focused Codebase Adaptation tests passed\n- Ruff lint and formatting checks passed\n"
+    },
+    {
+      "number": 26,
+      "url": "https://github.com/pgasawa/continual-learning-bench/pull/26",
+      "state": "open",
+      "merged": false,
+      "base_sha": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+      "head_sha": "a6f5ede32b4c6c13ccc4c793b3e9b9d7aebe5617",
+      "title": "Prevent Code actors from accessing future Git history",
+      "body": "Depends on #25. This PR is stacked on that change, so GitHub may display both\ndiffs until #25 is merged and this branch is rebased onto `main`.\n\n## Summary\n\n- Replace the actor workspace's inherited Git history with a deterministic,\n  single-commit snapshot of the instance's `base_commit`.\n- Remove ignored and untracked workspace artifacts before creating the snapshot.\n- Recreate a clean Git baseline so actor edits can still be submitted as patches.\n- Document the legacy opt-out and the currently supported Git layout.\n\n## Motivation\n\nThe Code task images retain `.git` so the runtime can check out each instance's\nbase commit. Checking out that commit updates the working tree, but leaves later\ncommits and objects accessible through commands such as `git log` and `git show`.\nThe actor should receive the intended base tree without access to that inherited\nhistory. Evaluator initialization is unchanged.\n\n## Observed in a published trajectory\n\nThis channel was used in a checked-in benchmark trajectory. In\n`final_results/runs/icl-claude-opus-4.7/tasks/codebase_adaptation.json.gz`,\n`run_traces[4]`, instance `jd__tenacity-604`:\n\n1. Step 93 searches all Git history and finds the commit for issue 604.\n2. Step 94 inspects that commit.\n3. Step 95 runs `git show ... | git apply` to apply its source changes directly.\n4. Step 96 submits, and the evaluator reports `Submission PASSED`.\n\nThis can be verified from a repository checkout with:\n\n```bash\ngzip -cd final_results/runs/icl-claude-opus-4.7/tasks/codebase_adaptation.json.gz \\\n  | jq '.run_traces[4].trace.interactions[92:96]\n        | map({step_number,\n               instance_id: .query.instance_id,\n               action: .response.action,\n               observation: .observation.content})'\n```\n\n## Validation\n\n- 26 focused Code-domain tests pass.\n- Ruff lint and formatting checks pass.\n- Smoke-tested against the published `tablib` and `tenacity` images: each base\n  tree was preserved exactly, old commits became inaccessible, package imports\n  continued to work, and actor edits remained visible through `git diff`.\n"
+    }
+  ],
+  "files": [
+    {
+      "path": "src/tasks/codebase_adaptation/README.md",
+      "status": "modified"
+    },
+    {
+      "path": "src/tasks/codebase_adaptation/generic_runtime.py",
+      "status": "modified"
+    },
+    {
+      "path": "src/tasks/codebase_adaptation/sanitized_runtime.py",
+      "status": "added"
+    },
+    {
+      "path": "src/tasks/codebase_adaptation/task.py",
+      "status": "modified"
+    },
+    {
+      "path": "tests/test_codebase_adaptation_generic_runtime.py",
+      "status": "modified"
+    },
+    {
+      "path": "tests/test_codebase_adaptation_sanitized_runtime.py",
+      "status": "added"
+    }
+  ]
+}

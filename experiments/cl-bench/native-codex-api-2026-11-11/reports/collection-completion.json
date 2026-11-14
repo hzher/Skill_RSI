@@ -1,0 +1,107 @@
+{
+  "updated_at": "2026-11-13T03:52:12.390020+08:00",
+  "benchmark": "CL-Bench",
+  "default_schedules_covered": true,
+  "codebase_pair_complete": true,
+  "all_collection_complete": true,
+  "full_hash_verification_performed": true,
+  "sealed_file_hashes_checked": 4431,
+  "frozen_resource_hashes_checked": 36,
+  "unique_graded_instances": 301,
+  "indexed_records": 322,
+  "evidence_kind_counts": {
+    "model_interaction": 306,
+    "environment_auto_resolution": 16
+  },
+  "coverage": {
+    "codebase_adaptation": {
+      "expected": 19,
+      "unique_graded": 19,
+      "canonical_indexes_complete": true
+    },
+    "database_exploration": {
+      "expected": 40,
+      "unique_graded": 40,
+      "canonical_indexes_complete": true
+    },
+    "sales_prediction": {
+      "expected": 12,
+      "unique_graded": 12,
+      "canonical_indexes_complete": true
+    },
+    "cohort_studies": {
+      "expected": 20,
+      "unique_graded": 20,
+      "canonical_indexes_complete": true
+    },
+    "blind_spectrum_monitoring": {
+      "expected": 90,
+      "unique_graded": 90,
+      "canonical_indexes_complete": true
+    },
+    "exploitable_poker": {
+      "expected": 120,
+      "unique_graded": 120,
+      "canonical_indexes_complete": true
+    }
+  },
+  "codebase_pair_run": "collection_20261113T021152+0800_af16b595",
+  "codebase_phase_counts": {
+    "baseline": 19,
+    "run": 19
+  },
+  "active_runs": [],
+  "issues": [],
+  "runs": [
+    {
+      "run_id": "collection_20261112T173337+0800_b06d3bd1",
+      "task": "codebase_adaptation",
+      "indexed_records": 2,
+      "execution_status": "infrastructure_interrupted"
+    },
+    {
+      "run_id": "collection_20261112T181914+0800_e88f2057",
+      "task": "sales_prediction",
+      "indexed_records": 12,
+      "execution_status": "process_completed_pending_audit"
+    },
+    {
+      "run_id": "collection_20261112T184222+0800_8624dcbc",
+      "task": "cohort_studies",
+      "indexed_records": 6,
+      "execution_status": "infra_or_task_error_pending_audit"
+    },
+    {
+      "run_id": "collection_20261113T004031+0800_3b8356a2",
+      "task": "database_exploration",
+      "indexed_records": 40,
+      "execution_status": "process_completed_pending_audit"
+    },
+    {
+      "run_id": "collection_20261113T005523+0800_e910a9cf",
+      "task": "exploitable_poker",
+      "indexed_records": 120,
+      "execution_status": "process_completed_pending_audit"
+    },
+    {
+      "run_id": "collection_20261113T010809+0800_21578a53",
+      "task": "cohort_studies",
+      "indexed_records": 14,
+      "execution_status": "process_completed_pending_audit"
+    },
+    {
+      "run_id": "collection_20261113T014205+0800_420b0733",
+      "task": "blind_spectrum_monitoring",
+      "indexed_records": 90,
+      "execution_status": "process_completed_pending_audit"
+    },
+    {
+      "run_id": "collection_20261113T021152+0800_af16b595",
+      "task": "codebase_adaptation",
+      "indexed_records": 38,
+      "execution_status": "process_completed_pending_audit"
+    }
+  ],
+  "model_calls_by_verifier": 0,
+  "score_note": "Completed grading includes native model failures; completion does not mean all answers passed."
+}

@@ -1,0 +1,669 @@
+{
+  "run_id": "collection_20261113T021152+0800_af16b595",
+  "fresh_instances_checked": 19,
+  "stateful_instances_checked": 19,
+  "fresh_uses_distinct_sessions": true,
+  "fresh_has_no_inherited_conversation": true,
+  "stateful_uses_one_session_across_issues": true,
+  "fresh_and_stateful_sessions_disjoint": true,
+  "native_memory_files_empty": true,
+  "actual_cli_versions_from_version_output": [
+    "0.167.0"
+  ],
+  "models_from_native_command_arguments": [
+    "gpt-6.1-sol"
+  ],
+  "actual_upstream_model_independently_verified": false,
+  "full_pair_verification_complete": true,
+  "model_calls_by_check": 0,
+  "fresh_evidence": [
+    {
+      "instance_id": "jazzband__tablib-534",
+      "instance_index": 0,
+      "session_id": "01a1d0f6-919f-7172-b6c5-0857b81b4b12",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-534",
+        "instance_index": 0,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d0f6-919f-7172-b6c5-0857b81b4b12"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-540",
+      "instance_index": 1,
+      "session_id": "01a1d0f8-d845-71d1-8c25-e5972f7dd5c1",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-540",
+        "instance_index": 1,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d0f8-d845-71d1-8c25-e5972f7dd5c1"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-547",
+      "instance_index": 2,
+      "session_id": "01a1d0fb-3cb7-7292-97c9-c339789132f3",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-547",
+        "instance_index": 2,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d0fb-3cb7-7292-97c9-c339789132f3"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-579",
+      "instance_index": 3,
+      "session_id": "01a1d0fd-855e-7423-969e-965193f448a8",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-579",
+        "instance_index": 3,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d0fd-855e-7423-969e-965193f448a8"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-584",
+      "instance_index": 4,
+      "session_id": "01a1d0ff-ad87-7eb0-9ab3-a50482cc7595",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-584",
+        "instance_index": 4,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d0ff-ad87-7eb0-9ab3-a50482cc7595"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-594",
+      "instance_index": 5,
+      "session_id": "01a1d102-0f88-76f3-9805-3986e4342b8d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-594",
+        "instance_index": 5,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d102-0f88-76f3-9805-3986e4342b8d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-595",
+      "instance_index": 6,
+      "session_id": "01a1d104-da02-7212-b0ac-3cd0d9db39e8",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-595",
+        "instance_index": 6,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d104-da02-7212-b0ac-3cd0d9db39e8"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-596",
+      "instance_index": 7,
+      "session_id": "01a1d107-d180-7211-9d86-a0955c135db3",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-596",
+        "instance_index": 7,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d107-d180-7211-9d86-a0955c135db3"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-613",
+      "instance_index": 8,
+      "session_id": "01a1d10a-4edc-7431-8abd-1a710a142390",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-613",
+        "instance_index": 8,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d10a-4edc-7431-8abd-1a710a142390"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-597",
+      "instance_index": 9,
+      "session_id": "01a1d10d-21d3-7212-958f-45fb13b9d57f",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-597",
+        "instance_index": 9,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d10d-21d3-7212-958f-45fb13b9d57f"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-603",
+      "instance_index": 10,
+      "session_id": "01a1d110-01b4-7d92-ba81-d48bbc04f198",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-603",
+        "instance_index": 10,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d110-01b4-7d92-ba81-d48bbc04f198"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-604",
+      "instance_index": 11,
+      "session_id": "01a1d111-e92d-76b3-ba74-7ea32d4bf620",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-604",
+        "instance_index": 11,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d111-e92d-76b3-ba74-7ea32d4bf620"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-606",
+      "instance_index": 12,
+      "session_id": "01a1d115-6c7b-77a1-964d-c9ef7f37970f",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-606",
+        "instance_index": 12,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d115-6c7b-77a1-964d-c9ef7f37970f"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-609",
+      "instance_index": 13,
+      "session_id": "01a1d11d-81d4-7670-b5f1-c9d26475b5e4",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-609",
+        "instance_index": 13,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d11d-81d4-7670-b5f1-c9d26475b5e4"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-610",
+      "instance_index": 14,
+      "session_id": "01a1d120-07cd-76f2-9136-ff2ddf952b80",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-610",
+        "instance_index": 14,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d120-07cd-76f2-9136-ff2ddf952b80"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-611",
+      "instance_index": 15,
+      "session_id": "01a1d123-024d-7800-9b27-e466de31b6ec",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-611",
+        "instance_index": 15,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d123-024d-7800-9b27-e466de31b6ec"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-614",
+      "instance_index": 16,
+      "session_id": "01a1d127-164d-7183-bf80-36d2a7d3a7e9",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-614",
+        "instance_index": 16,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d127-164d-7183-bf80-36d2a7d3a7e9"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-615",
+      "instance_index": 17,
+      "session_id": "01a1d129-bbf8-79d1-a755-0527cb6c426b",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-615",
+        "instance_index": 17,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d129-bbf8-79d1-a755-0527cb6c426b"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-628",
+      "instance_index": 18,
+      "session_id": "01a1d12d-9f61-7850-a391-c3d3155c8032",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-628",
+        "instance_index": 18,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d12d-9f61-7850-a391-c3d3155c8032"
+      },
+      "native_memory_file_count": 0
+    }
+  ],
+  "stateful_evidence": [
+    {
+      "instance_id": "jazzband__tablib-534",
+      "instance_index": 0,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-534",
+        "instance_index": 0,
+        "invocation_mode": "fresh_persistent",
+        "resumed_this_turn": false,
+        "conversation_id_before": null,
+        "conversation_id_for_turn": null,
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-540",
+      "instance_index": 1,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-540",
+        "instance_index": 1,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-547",
+      "instance_index": 2,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-547",
+        "instance_index": 2,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-579",
+      "instance_index": 3,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-579",
+        "instance_index": 3,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-584",
+      "instance_index": 4,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-584",
+        "instance_index": 4,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-594",
+      "instance_index": 5,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-594",
+        "instance_index": 5,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-595",
+      "instance_index": 6,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-595",
+        "instance_index": 6,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-596",
+      "instance_index": 7,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-596",
+        "instance_index": 7,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jazzband__tablib-613",
+      "instance_index": 8,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jazzband__tablib-613",
+        "instance_index": 8,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-597",
+      "instance_index": 9,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-597",
+        "instance_index": 9,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-603",
+      "instance_index": 10,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-603",
+        "instance_index": 10,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-604",
+      "instance_index": 11,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-604",
+        "instance_index": 11,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-606",
+      "instance_index": 12,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-606",
+        "instance_index": 12,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-609",
+      "instance_index": 13,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-609",
+        "instance_index": 13,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-610",
+      "instance_index": 14,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-610",
+        "instance_index": 14,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-611",
+      "instance_index": 15,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-611",
+        "instance_index": 15,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-614",
+      "instance_index": 16,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-614",
+        "instance_index": 16,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-615",
+      "instance_index": 17,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-615",
+        "instance_index": 17,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    },
+    {
+      "instance_id": "jd__tenacity-628",
+      "instance_index": 18,
+      "session_id": "01a1d12f-f583-71d3-8129-e1de19be197d",
+      "continuity": {
+        "mode": "single_conversation",
+        "single_conversation": true,
+        "instance_id": "jd__tenacity-628",
+        "instance_index": 18,
+        "invocation_mode": "resume",
+        "resumed_this_turn": true,
+        "conversation_id_before": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_for_turn": "01a1d12f-f583-71d3-8129-e1de19be197d",
+        "conversation_id_after": "01a1d12f-f583-71d3-8129-e1de19be197d"
+      },
+      "native_memory_file_count": 0
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "run_id": "collection_20261113T005523+0800_e910a9cf",
+  "task": "exploitable_poker",
+  "phase": "run",
+  "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand12",
+  "instance_index": 106,
+  "grading_status": "native_outcome_present",
+  "native_outcome": {
+    "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand12",
+    "instance_index": 106,
+    "reward": 0.5,
+    "success": true,
+    "raw_metric_name": null,
+    "raw_metric_value": null,
+    "raw_metric_higher_is_better": null,
+    "metadata": {
+      "variant_id": "loose_aggressive",
+      "total_profit": 6770
+    }
+  },
+  "completed_interactions": 0,
+  "interactions": [],
+  "evidence_kind": "environment_auto_resolution",
+  "environment_evidence": {
+    "reason": "opponent_folded_before_model_turn",
+    "native_hand_history": {
+      "hand_num": 107,
+      "actions": [
+        {
+          "player": "opponent",
+          "action": "FOLD",
+          "amount": null
+        }
+      ],
+      "profit": 5,
+      "total_profit": 6770,
+      "instance_id": "poker:loose_aggressive:hand:stage4_seed46_hand12",
+      "variant_id": "loose_aggressive"
+    },
+    "supporting_observation_steps": [
+      240
+    ]
+  },
+  "native_query_instance_ids": [],
+  "interaction_join_key": "native canonical instance_index",
+  "visible_initial_prompt_sha256": null,
+  "source_trace": "native/results/exploitable_poker/traces/collection_20261113T005523_0800_e910a9cf/run_0000.json",
+  "source_trace_is_live": false,
+  "source_sha": "a6f5ede32b4c6c13ccc4c793b3e9b9d7aebe5617",
+  "resource_limits": {
+    "actor_memory_mib": 1024,
+    "evaluator_memory_mib": 1024,
+    "model_memory_mib": 768,
+    "pids_limit": 128,
+    "cpus_per_container": 2
+  },
+  "resume_from_run": null,
+  "replayed_prefix_interactions": 0,
+  "cost_note": "Native cost_usd is a framework estimate, not actual gateway billing"
+}

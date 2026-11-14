@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "source_run": "collection_20261112T184222+0800_8624dcbc",
+  "replayed_interactions": 82,
+  "identical_environment_observations": 82,
+  "identical_original_outcomes": 6,
+  "native_thread_restored": true,
+  "auth_files_copied": false,
+  "changed_query_rejected": true,
+  "model_calls": 0,
+  "helper_sha256": "c1cc569d83361086c9d023b47b200f039c8e62cda664af1424e2d12f6827afc2"
+}
