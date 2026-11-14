@@ -1,6 +1,6 @@
-# sunchengze：旧基建源码交接
+# 旧基建源码交接
 
-本个人分支将逸凡已同步的 `work_agent_env@aa07d24` 整理为独立目录，供黄郑好及团队评估复用。
+本个人分支将固定版本 `work_agent_env@aa07d24` 整理为独立目录，供团队评估复用。
 
 入口：[源码、配置与复跑说明](../baselines/work_agent_env/README.md)；[模块复用边界](../baselines/work_agent_env/MODULE_MAP.md)；[逐文件来源](../baselines/work_agent_env/SOURCE_PROVENANCE.json)。
 

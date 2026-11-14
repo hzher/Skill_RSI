@@ -12,7 +12,7 @@ from pathlib import Path, PurePosixPath
 import subprocess
 
 PIN = 'aa07d24e308e3adfa843ca70e3faf1ccfa8185eb'
-URL = 'https://github.com/MuguanMidgardian/work_agent_env'
+SOURCE_PROJECT = 'work_agent_env'
 TARGET = Path(__file__).resolve().parents[1] / 'baselines/work_agent_env'
 CODE_ROOTS = {'adapters', 'workenv', 'integrations', 'resources_servers',
               'responses_api_agents', 'training', 'evaluation', 'scripts', 'tests'}
@@ -58,13 +58,13 @@ def export(source):
     source = Path(source).resolve()
     head = git(source, 'rev-parse', 'HEAD').decode().strip()
     if head != PIN:
-        raise ValueError('Source HEAD must be the agreed final Yifan commit ' + PIN)
+        raise ValueError('Source HEAD must be the pinned handoff commit ' + PIN)
     if git(source, 'status', '--porcelain=v1', '--untracked-files=normal').strip():
         raise ValueError('Source has local changes; use the reviewed clean source')
     existing = TARGET / 'SOURCE_PROVENANCE.json'
     if existing.exists():
         previous = json.loads(existing.read_text(encoding='utf-8'))
-        if previous['source_sha'] != PIN or previous['source_repository'] != URL:
+        if previous['source_sha'] != PIN:
             raise ValueError('Refuse to replace an export from another source')
         for row in previous['files']:
             path = TARGET / 'snapshot' / row['source_file']
@@ -84,18 +84,18 @@ def export(source):
             entries.append({'source_file': name, 'git_blob': oid, 'git_mode': mode, 'reason': reason})
         else:
             excluded[reason] += 1
-    # Last touching commit, not a claim that the last author wrote the whole file.
-    log = git(source, 'log', '--no-renames', '--format=%x1e%H%x1f%an%x1f%aI', '--name-only', PIN)
+    # Keep revision evidence without exporting personal attribution metadata.
+    log = git(source, 'log', '--no-renames', '--format=%x1e%H%x1f%cI', '--name-only', PIN)
     wanted = {row['source_file'] for row in entries}
-    authors = {}
+    revisions = {}
     for block in log.decode('utf-8').split('\x1e'):
         lines = block.strip().splitlines()
         if not lines or '\x1f' not in lines[0]:
             continue
-        commit, author, date = lines[0].split('\x1f', 2)
+        commit, date = lines[0].split('\x1f', 1)
         for name in lines[1:]:
-            if name in wanted and name not in authors:
-                authors[name] = {'last_change_commit': commit, 'author': author, 'author_date': date}
+            if name in wanted and name not in revisions:
+                revisions[name] = {'last_change_commit': commit, 'commit_date': date}
     snapshot = TARGET / 'snapshot'
     snapshot.mkdir(parents=True, exist_ok=True)
     process = subprocess.Popen(['git', '-C', str(source), 'cat-file', '--batch'],
@@ -118,12 +118,11 @@ def export(source):
                 destination.write_bytes(data)
             row.update(sha256=hashlib.sha256(data).hexdigest(), bytes=len(data),
                        destination=destination.relative_to(TARGET.parent.parent).as_posix(),
-                       **authors.get(row['source_file'], {'author': 'not resolved from readable history'}))
+                       **revisions.get(row['source_file'], {'last_change_commit': None}))
     finally:
         process.stdin.close()
         process.wait(timeout=15)
-    provenance = {'source_repository': URL, 'source_branch': 'main', 'source_sha': PIN,
-        'source_commit_author': git(source, 'show', '-s', '--format=%an', PIN).decode().strip(),
+    provenance = {'source_repository': SOURCE_PROJECT, 'source_branch': 'main', 'source_sha': PIN,
         'target_repository': 'https://github.com/hzher/Skill_RSI', 'target_branch': 'sunchengze',
         'shared_base': 'd068b79deb0e71f2f55e88487efff051dadd0f0a',
         'exported_at': datetime.now(timezone.utc).isoformat(),

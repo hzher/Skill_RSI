@@ -1,6 +1,6 @@
 # 来源与许可
 
-来源：`https://github.com/MuguanMidgardian/work_agent_env`，分支 `main`，提交 `aa07d24e308e3adfa843ca70e3faf1ccfa8185eb`，提交作者 `xuyifan7-star`。此前第一方改动也包含 `MuguanMidgardian`；逐文件最后改动来源见 SOURCE_PROVENANCE.json，不能将其统计解读为全部代码的作者贡献比例。
+来源项目：`work_agent_env`，分支 `main`，提交 `aa07d24e308e3adfa843ca70e3faf1ccfa8185eb`。逐文件 Git 对象、摘要和最后改动提交见 SOURCE_PROVENANCE.json；来源清单不记录个人姓名、账号或作者字段。原源码中的版权与许可声明保持原样。
 
 源树未找到独立 LICENSE。此交接依据贡献者的本地整理与团队复用请求保留原来源，不将原源码自动改标为目标仓库顶层 MIT；第一方贡献授权由相应权利人和团队约定确认。这里没有替未知来源作新的许可声明。
 

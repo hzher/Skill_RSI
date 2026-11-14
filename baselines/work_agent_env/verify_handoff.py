@@ -1,6 +1,5 @@
 """Verify provenance, compile source and check pure contracts without services."""
 import argparse
-from collections import Counter
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -64,7 +63,7 @@ def main():
         'python': sys.version.split()[0], 'exported_files_verified': len(manifest['files']),
         'source_bytes_verified': sum(row['bytes'] for row in manifest['files']),
         'python_files_compiled': compiled, 'pure_contract_checks': 3,
-        'source_last_change_authors': dict(Counter(row['author'] for row in manifest['files'])),
+        'source_last_change_commits_resolved': sum(bool(row.get('last_change_commit')) for row in manifest['files']),
         'credential_pattern_findings': key_findings, 'synthetic_key_literals': fixtures,
         'errors': errors, 'model_calls': 0, 'docker_started': False, 'gpu_started': False,
         'scope': 'Git snapshot integrity, syntax and pure contract checks only; no full benchmark/training claim'}

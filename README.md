@@ -20,7 +20,7 @@ flowchart LR
 
 ## 本个人分支的基建交接
 
-`sunchengze` 分支将逸凡同步的 `work_agent_env@aa07d24` 整理为独立源码目录，供团队评估复用。请从 [基建交接说明](baselines/work_agent_env/README.md) 查看源码、依赖、启动、逐文件来源与实际验收范围。该目录不自动替换共享 `framework/`，私有任务、数据库、模型和完整轨迹未导入。
+本个人分支将固定版本 `work_agent_env@aa07d24` 整理为独立源码目录，供团队评估复用。请从 [基建交接说明](baselines/work_agent_env/README.md) 查看源码、依赖、启动、逐文件来源与实际验收范围。该目录不自动替换共享 `framework/`，私有任务、数据库、模型和完整轨迹未导入。
 
 ## 仓库与当前状态
 
@@ -34,41 +34,38 @@ flowchart LR
 | 成员分支                     | 成员通过个人分支协作；本分支为 `sunchengze`                                                 |
 | 访问与保护规则               | 见[仓库设置与状态](docs/REPOSITORY_SETTINGS.md)，不能把本文约定当成已生效的 GitHub 权限 |
 
-杨洋：上传初版主代码、将远端默认分支设为 `master`，并通知团队。下面的命令在该前提完成后使用。
+初版主代码已进入共享 `master` 基线。下面的命令以该分支为协作基础。
 
 ## 分支约定
 
 | 分支              | 用途                                     |
 | ----------------- | ---------------------------------------- |
 | `master`        | 团队共同主线，由维护者集成经过审核的变更 |
-| `yangyang`      | 对应成员自行创建的工作分支               |
-| `huangzhenghao` | 对应成员自行创建的工作分支               |
-| `zhaozilin`     | 对应成员自行创建的工作分支               |
-| `xuyifan`       | 对应成员自行创建的工作分支               |
+| `member-work`   | 成员自行创建的工作分支（示例名称）       |
 
 分支名只是协作约定，不是 GitHub 用户名，也不自动限制其他协作者写入。工作在自己的分支进行，通过 PR 合入 `master`，不互相覆盖成员分支。
 
 ### 1. 拉取主代码，创建自己的分支
 
-以 `yangyang` 为例，其他成员替换为自己的约定分支名：
+以 `member-work` 为例，使用时替换为自己的约定分支名：
 
 ```bash
 git clone https://github.com/hzher/Skill_RSI.git
 cd Skill_RSI
 git fetch origin
-git switch --no-track -c yangyang origin/master
-git push -u origin yangyang
+git switch --no-track -c member-work origin/master
+git push -u origin member-work
 ```
 
-如果自己的分支已经存在于远端，首次切换用 `git switch --track origin/yangyang`；本地已存在则用 `git switch yangyang`，无需再次创建。私有仓库需先获得协作权限，并使用自己的 GitHub 认证。
+如果自己的分支已经存在于远端，首次切换用 `git switch --track origin/member-work`；本地已存在则用 `git switch member-work`，无需再次创建。私有仓库需先获得协作权限，并使用自己的 GitHub 认证。
 
 ### 2. 开始修改前，同步主分支
 
 ```bash
 git fetch origin
-git switch yangyang
+git switch member-work
 git merge origin/master
-git push origin yangyang
+git push origin member-work
 ```
 
 遇到冲突先解决并确认结果，再提交和推送。长期成员分支通过 merge 同步，避免 rebase 后强推改写已共享的历史。
@@ -80,7 +77,7 @@ git push origin yangyang
 ```bash
 git add README.md
 git commit -m "docs: clarify trajectory reuse criteria"
-git push origin yangyang
+git push origin member-work
 ```
 
 在 GitHub 发起 Pull Request：**base 选择 `master`，compare 选择自己的分支**。填写目标、变更、验证和证据，关联对应 Issue。草稿阶段使用 Draft PR。

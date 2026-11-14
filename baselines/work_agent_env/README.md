@@ -1,10 +1,10 @@
 # Work Agent Environment 基建交接
 
-这是给团队评估复用的独立源码交接目录，来源是逸凡最后同步到 `MuguanMidgardian/work_agent_env` 的 `main@aa07d24e308e3adfa843ca70e3faf1ccfa8185eb`。目标为本仓库个人分支 `sunchengze`，共享基线为 `master@d068b79deb0e71f2f55e88487efff051dadd0f0a`。
+这是给团队评估复用的独立源码交接目录，来源是 `work_agent_env` 的固定版本 `main@aa07d24e308e3adfa843ca70e3faf1ccfa8185eb`。目标为本仓库当前个人分支，共享基线为 `master@d068b79deb0e71f2f55e88487efff051dadd0f0a`。
 
-`snapshot/` 包含 **505 个原文件、约 3.5 MB，其中 445 个 Python 文件**。导出从固定 Git 对象读取，保留原命名空间和规范字节；不复制工作区里的未提交内容、stash 或运行缓存。逐文件 Git blob、SHA256、最后改动作者和提交见 [SOURCE_PROVENANCE.json](SOURCE_PROVENANCE.json)。最后改动作者不等于该文件的全部作者。
+`snapshot/` 包含 **505 个原文件、约 3.5 MB，其中 445 个 Python 文件**。导出从固定 Git 对象读取，保留原命名空间和规范字节；不复制工作区里的未提交内容、stash 或运行缓存。逐文件 Git blob、SHA256 和最后改动提交见 [SOURCE_PROVENANCE.json](SOURCE_PROVENANCE.json)。交接说明与来源清单只记录项目和版本信息。
 
-本交接没有修改团队 `framework/`，也没有带入 `2026.11.13` 的 CL-Bench 实验封装、采集轨迹或之前个人工作树的共享适配提交。源码仍为逸凡版，团队可逐模块选择复用，不会因放入此目录而自动进入共享 Pipeline。
+本交接没有修改团队 `framework/`，也没有带入 `2026.11.13` 的 CL-Bench 实验封装、采集轨迹或之前个人工作树的共享适配提交。源码保持上述固定版本，团队可逐模块选择复用，不会因放入此目录而自动进入共享 Pipeline。
 
 ## 从哪里开始看
 
