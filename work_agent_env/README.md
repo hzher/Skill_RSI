@@ -26,17 +26,17 @@
 在本仓库根目录运行，Python 3.11+：
 
 ```bash
-python baselines/work_agent_env/verify_handoff.py
+python work_agent_env/verify_handoff.py
 ```
 
 检查导出文件摘要、Python 语法、纯任务合同和凭证形状；不启动模型、Docker 或 GPU。实际回执见 [verification.json](verification.json)。
 
-安装下述最小依赖后，在支持符号链接的 Linux 环境、从仓库根目录执行 `python tools/check_work_agent_env_handoff.py`，可复跑正常 CLI 与选定原测试。脚本使用重新核过摘要的临时副本，移除子进程模型凭证，并禁用容器测试，不会污染快照或访问真实模型。Windows 的原测试有符号链接权限前提；本次完整离线回归以 Linux 回执为准。
+安装下述最小依赖后，在支持符号链接的 Linux 环境、从仓库根目录执行 `python work_agent_env/tools/check_work_agent_env_handoff.py`，可复跑正常 CLI 与选定原测试。脚本使用重新核过摘要的临时副本，移除子进程模型凭证，并禁用容器测试，不会污染快照或访问真实模型。Windows 的原测试有符号链接权限前提；本次完整离线回归以 Linux 回执为准。
 
 正常 CLI 的静态任务检查需要原依赖中的 `jsonschema==4.25.1`。最小离线入口（无模型请求，不代表无安装网络）：
 
 ```bash
-cd baselines/work_agent_env/snapshot
+cd work_agent_env/snapshot
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install jsonschema==4.25.1

@@ -2,7 +2,7 @@
 
 本个人分支将固定版本 `work_agent_env@aa07d24` 整理为独立目录，供团队评估复用。
 
-入口：[源码、配置与复跑说明](../baselines/work_agent_env/README.md)；[模块复用边界](../baselines/work_agent_env/MODULE_MAP.md)；[逐文件来源](../baselines/work_agent_env/SOURCE_PROVENANCE.json)。
+入口：[源码、配置与复跑说明](README.md)；[模块复用边界](MODULE_MAP.md)；[逐文件来源](SOURCE_PROVENANCE.json)。
 
 范围为第一方通用任务、API Harness、资源服务、环境适配、经验/技能及训练接口。保留版本与依赖锁；不复制私有配置、数据库、完整轨迹、模型、受限题库和第三方 vendor。本提交不修改共享 `framework/`，不带入 CL-Bench 实验封装，也不宣称完整 RSI、GPU 更新或办公 benchmark 验收通过。
 

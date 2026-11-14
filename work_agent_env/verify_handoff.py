@@ -8,7 +8,7 @@ import re
 import sys
 
 PACK = Path(__file__).resolve().parent
-REPO = PACK.parent.parent
+REPO = PACK.parent
 SNAPSHOT = PACK / 'snapshot'
 
 

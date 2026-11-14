@@ -13,7 +13,8 @@ import subprocess
 
 PIN = 'aa07d24e308e3adfa843ca70e3faf1ccfa8185eb'
 SOURCE_PROJECT = 'work_agent_env'
-TARGET = Path(__file__).resolve().parents[1] / 'baselines/work_agent_env'
+ROOT = Path(__file__).resolve().parents[2]
+TARGET = ROOT / 'work_agent_env'
 CODE_ROOTS = {'adapters', 'workenv', 'integrations', 'resources_servers',
               'responses_api_agents', 'training', 'evaluation', 'scripts', 'tests'}
 CONFIGS = {'configs/.env.example', 'configs/task_adapter_profiles.json',
@@ -117,7 +118,7 @@ def export(source):
             else:
                 destination.write_bytes(data)
             row.update(sha256=hashlib.sha256(data).hexdigest(), bytes=len(data),
-                       destination=destination.relative_to(TARGET.parent.parent).as_posix(),
+                       destination=destination.relative_to(ROOT).as_posix(),
                        **revisions.get(row['source_file'], {'last_change_commit': None}))
     finally:
         process.stdin.close()

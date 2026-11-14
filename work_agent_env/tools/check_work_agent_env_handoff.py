@@ -13,8 +13,8 @@ import sys
 import tempfile
 import uuid
 
-ROOT = Path(__file__).resolve().parents[1]
-PACK = ROOT / 'baselines/work_agent_env'
+ROOT = Path(__file__).resolve().parents[2]
+PACK = ROOT / 'work_agent_env'
 SNAPSHOT = PACK / 'snapshot'
 
 

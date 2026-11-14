@@ -45,15 +45,15 @@ Codebase 的 `control/submissions/*.patch` 保存完整补丁，原生评分中�
 从仓库根目录执行，Python 3.11+，仅使用标准库，无模型请求：
 
 ```bash
-python experiments/cl-bench/native-codex-api-2026-11-11/tools/verify.py
-python experiments/cl-bench/native-codex-api-2026-11-11/tools/summarize.py
-python experiments/cl-bench/native-codex-api-2026-11-11/tools/test_export.py
+python cli_bench/tools/verify.py
+python cli_bench/tools/summarize.py
+python cli_bench/tools/test_export.py
 ```
 
 重建完整原始相对目录时，可选择一个空目录：
 
 ```bash
-python experiments/cl-bench/native-codex-api-2026-11-11/tools/verify.py --extract experiments/cl-bench/native-codex-api-2026-11-11/extracted
+python cli_bench/tools/verify.py --extract cli_bench/extracted
 ```
 
 解压后在 `extracted/runs/collections/<run_id>/` 下查看 `native/`、`control/native-calls/`、`control/submissions/`、日志及其他执行现场。解压器核对摘要并拒绝覆盖内容不同的现有文件。Windows 较深路径使用脚本的长路径支持；普通解压器可能受路径长度限制。
