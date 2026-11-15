@@ -9,6 +9,7 @@ import subprocess
 import threading
 from .storage import atomic, begin, seal, load
 from .budget import Budget
+from .interactive import run_native
 from .vendor.a2o import convert_request_a2o, StreamingA2OConverter, build_tool_name_mapping
 
 class MessagesBridge:
@@ -126,18 +127,20 @@ class ClaudeCodeExecutor:
                 '--tools', 'Read,Write,Edit,Glob,Grep,Bash', '--model', self.model.model,
                 '--max-turns', str(self.max_turns)]
         try:
-            result = subprocess.run(argv, input=prompt.encode(), capture_output=True, timeout=self.timeout)
-        except subprocess.TimeoutExpired:
-            atomic(path / 'failure.json', {'kind': 'native_timeout', 'budget_seconds': self.timeout})
-            raise
+            summary = run_native(argv, prompt, path, self.timeout, environment.close)
         finally:
             bridge.close()
-        (path / 'native-cli.jsonl').write_bytes(result.stdout)
-        (path / 'native-stderr.txt').write_bytes(result.stderr)
-        atomic(path / 'native-exit.json', {'exit_code': result.returncode})
-        native = [json.loads(line) for line in result.stdout.splitlines() if line.strip().startswith(b'{')]
+        native = []
+        for line in (path / 'native-cli.jsonl').read_bytes().splitlines():
+            try:
+                native.append(json.loads(line))
+            except ValueError:
+                pass
+        atomic(path / 'native-messages.json', native)
         terminal = [event for event in native if event.get('type') == 'result']
-        if result.returncode or not terminal or terminal[-1].get('is_error'):
+        if not summary['complete']:
+            atomic(path / 'failure.json', {'kind': 'native_timeout' if summary['timeout'] else 'native_incomplete',
+                                          'budget_seconds': self.timeout})
             raise RuntimeError('Native CLI terminal failed; preserve original execution')
         events, calls, returns = [], {}, {}
         for event in native:
@@ -149,7 +152,6 @@ class ClaudeCodeExecutor:
         if set(calls) != set(returns):
             raise RuntimeError('Native tool returns incomplete')
         # Preserve original messages and derive the same tool call/return event contract.
-        atomic(path / 'native-messages.json', native)
         for event in native:
             if event.get('type') == 'assistant':
                 events.append({'type': 'model', 'message': event['message']})

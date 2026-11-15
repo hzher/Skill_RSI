@@ -38,5 +38,21 @@
     "extracted_file": "skillrl/vendor/a2o.py",
     "extracted_sha256": "5f40081d4a6b6087af77697e8534067a1f31afbfb30ca32572740f99382e1fd6",
     "change": "byte identical"
+  },
+  {
+    "source": "runtime/clbench-opus55-rest80-20261113/response_protocol.py",
+    "source_commit": null,
+    "source_sha256": "9a1dd36ccacb2b2d947f7de6314945bb2d120e351f17284df07b6d1fbcb122aa",
+    "extracted_file": "skillrl/wire.py",
+    "extracted_sha256": "3b3ed9b0983437a557167e35bf7a169e31c574648c661ca819121929f0d0a128",
+    "change": "Consolidate runtime response/timing helpers; require complete finish and usage, merge known usage, handle mixed frame delimiters"
+  },
+  {
+    "source": "runtime/clbench-opus55-rest80-20261113/stream_timing.py",
+    "source_commit": null,
+    "source_sha256": "9e971ff077dd943107ef8abe66b09e5c77f9a7eb1eea28f364dab756db226841",
+    "extracted_file": "skillrl/wire.py",
+    "extracted_sha256": "3b3ed9b0983437a557167e35bf7a169e31c574648c661ca819121929f0d0a128",
+    "change": "Consolidate runtime response/timing helpers; require complete finish and usage, merge known usage, handle mixed frame delimiters"
   }
 ]

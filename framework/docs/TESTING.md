@@ -62,3 +62,6 @@ python3 tests/native_docker_rounds.py \
 本次WorkBuddy检查覆盖原题导出、逐题镜像与原生评分命令接口。使用者仍需给出自己固定的官方数据、镜像与评分钩子，并用真实提供商做小规模接入验收。正式任务的权限、参考奖励与原生checker语义由对应benchmark合同定义。
 
 其他benchmark可以配置Reviewer的action_tools，或实现自己的执行/环境适配器。原生数据里的其他工具名称应按真实动作语义登记，不能把读取目录或模型自述直接算采用。配置变化会记录到冻结plan。
+## CL-Bench原生接线回归
+
+2026-11-13最终40场景完整运行10轮，共400项通过，H20同套40项通过。新增用例与真实任务边界见[CL-Bench接线](CLBENCH_NATIVE.md)，机读结果见`reports/clbench-native-fix-20261113.json`。代码与数据库真实接线分别原生成功，工程失败轨迹和成本单列。

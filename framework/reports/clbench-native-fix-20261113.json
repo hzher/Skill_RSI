@@ -1,0 +1,157 @@
+{
+  "date": "2026-11-13",
+  "implementation_commits": [
+    "d031c3d",
+    "d88a3d3"
+  ],
+  "accepted": true,
+  "local_regression": {
+    "rounds": 10,
+    "tests_per_round": 40,
+    "checks": 400,
+    "passed": true,
+    "receipt_sha256": "f0935d8a8e1e9eeab6d6b9215576e7ca5971e17c082e4e85900c71607c4048a0"
+  },
+  "h20_regression": {
+    "tests": 40,
+    "passed": true
+  },
+  "benchmark_commit": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+  "benchmark_python_files_verified": 119,
+  "native_cli": {
+    "version": "2.1.160",
+    "sha256": "2b84cc2e04633619eab02b9f77ed00a56b64682b4fa7b3267149ee9eb1fecfc7",
+    "model": "claude-opus-5-5",
+    "effort": "high"
+  },
+  "real_cases": [
+    {
+      "case": "pilot-v5-code13",
+      "complete": true,
+      "native_exit_code": 0,
+      "native_pid_gone": true,
+      "driver_state": "gone",
+      "cwd": "/testbed",
+      "shared_container": true,
+      "official_actions": 3,
+      "tool_calls": 4,
+      "tool_returns": 4,
+      "stop_checks": 1,
+      "model_requests": 5,
+      "outcome": {
+        "instance_id": "jd__tenacity-609",
+        "instance_index": 13,
+        "metadata": {
+          "eval_status": "completed",
+          "steps": 3,
+          "timed_out": false
+        },
+        "raw_metric_higher_is_better": false,
+        "raw_metric_name": "issue_regret",
+        "raw_metric_value": 2.0,
+        "reward": 0.95,
+        "success": true
+      },
+      "workspace_files_verified": 111,
+      "result_sha256": "fe77ece52c8cfb930d1268743ef6fe48992bdff4d0346f9ff4ad0cf9c89b621b"
+    },
+    {
+      "case": "pilot-v6-database38",
+      "complete": true,
+      "native_exit_code": 0,
+      "native_pid_gone": true,
+      "driver_state": "gone",
+      "cwd": "/workspace",
+      "shared_container": false,
+      "official_actions": 8,
+      "tool_calls": 9,
+      "tool_returns": 9,
+      "stop_checks": 1,
+      "model_requests": 8,
+      "outcome": {
+        "instance_id": "102",
+        "instance_index": 0,
+        "metadata": {
+          "difficulty": "hard",
+          "num_actions": 8,
+          "num_queries": 7,
+          "regret": 7.0
+        },
+        "raw_metric_higher_is_better": false,
+        "raw_metric_name": "exploration_regret",
+        "raw_metric_value": 7.0,
+        "reward": 0.5333,
+        "success": true
+      },
+      "workspace_files_verified": null,
+      "result_sha256": "3100daab0661db4702d9c5b034cbe1f3e142ac8b28d7291a1c66e4f022b68c13"
+    }
+  ],
+  "engineering_attempts": {
+    "pre_upstream_failures": 3,
+    "model_involved_incomplete": 2,
+    "model_involved_complete": 2,
+    "forwarded_requests": 23,
+    "complete_responses": 23,
+    "usage": {
+      "input_tokens": {
+        "known_total": 55945,
+        "missing_requests": 0
+      },
+      "output_tokens": {
+        "known_total": 5976,
+        "missing_requests": 0
+      },
+      "cache_creation_input_tokens": {
+        "known_total": 36290,
+        "missing_requests": 0
+      },
+      "cache_read_input_tokens": {
+        "known_total": 103396,
+        "missing_requests": 0
+      }
+    },
+    "money": null
+  },
+  "limits": [
+    "real_integration_covers_code_and_database",
+    "code_success_used_v5; v6_adds_task_thread_ownership",
+    "mcp_only_official_actions",
+    "original_100_results_separately_archived"
+  ],
+  "source_sha256": {
+    "skillrl/__init__.py": "e8cbff40d35eb6e93624b4cc447d80286534896d410bea71c823d8312e93b3ad",
+    "skillrl/__main__.py": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3",
+    "skillrl/agents.py": "cb859ab0befad7f349a74355536b2895ec2cb9b0b8b809c4f7bfb25da3be568e",
+    "skillrl/benchmarks.py": "06385f1829fe6d3e2688881dc0c60a350915675ce8c6abfdcabf238a00820b89",
+    "skillrl/budget.py": "39354011e8e076b988cf7b420e2ab792f0a737b8e4732be281eccbce90e65476",
+    "skillrl/clbench.py": "28e4864c2290ad0c35392309d2a39e2e77bac2218ecda4239855493a387da6e0",
+    "skillrl/cli.py": "eb92928c5132d6ddc7bee1baaec5a7a276f3ccc33bb5e8375d65f6b772395486",
+    "skillrl/curation.py": "c2e5021d10353a1f7326ff8a9ee6f37591b2893b2dceccc282f4e93831f69901",
+    "skillrl/environments.py": "0e33b6320edbcbc1ac08491bed04f539cffeaa4ef8c02f2a335c2acf4fda1af8",
+    "skillrl/interactive.py": "aed38d0209050534ab414131252cecfa13f541bc7f6563291861c091c30bc2a7",
+    "skillrl/mcp_stdio.py": "b0fb2a63ac75dc5cec35d465f4303ae6558847370f00264490cd974c8a4709a8",
+    "skillrl/messages.py": "cb1bb4330c52d56c2d8e7e766ffbe3f287902a7beb8b4dcd9a5f96890204647e",
+    "skillrl/models.py": "3f762bceb0aae31b34b6c47498d75d25e88de2dc38334e0486a557682f1e21b1",
+    "skillrl/native.py": "131b929dba008af09b1da36ee1fcc6bb6e0e140df2bd74766c551ce6c88227a5",
+    "skillrl/pipeline.py": "2f32910040fab2d7140ad97d69936f9bba0b064f151a7448a9ae19557dcc7f3c",
+    "skillrl/reporting.py": "f19c643c3d4e90c0db1a42e63936c697eec9202c6749c3f3ef65e52d8dfeb6d3",
+    "skillrl/review.py": "223a8633f8a08d75ae215f7913319fd9805e31d0b6379cd7f99bf7091d91062c",
+    "skillrl/storage.py": "6c3421ea7dbfef05ab3750e0772b3ec55c66222692a52500e9425f7715f3612b",
+    "skillrl/vendor/__init__.py": "40acaa8c6d5dd3b517f801e77021785af16e9dad71a0a4f91888d5e69d6286a8",
+    "skillrl/vendor/a2o.py": "5f40081d4a6b6087af77697e8534067a1f31afbfb30ca32572740f99382e1fd6",
+    "skillrl/vendor/common.py": "75f08a0859cf6fb020f131c5815c020c9167227722fd105fd6f7cc96528e12dd",
+    "skillrl/vendor/library.py": "3e91331c572c15592059af2ad096c97f5bf25cf5eaecb598c4051ec7a335386a",
+    "skillrl/vendor/library_base.py": "a5aff4ea2d856dfc913c6e0dcc17d7f4ba95f1ffd7a8c97b89b2cd3fb97fe254",
+    "skillrl/vendor/submit.py": "5de328030114515b00da6456e85ce447b28c44ee7aa4e562adb0a3acc1ee7e39",
+    "skillrl/wire.py": "3b3ed9b0983437a557167e35bf7a169e31c574648c661ca819121929f0d0a128",
+    "skillrl/workbuddy.py": "862f18c8c176c9517492cf68c6aa1773502a9c65b82a7f70969c4d9341df4a5f",
+    "tests/native_docker_rounds.py": "85b26c84c2c6c6b7701ce08f932094ce4c6b15fc4c94201282f8b0cea83493d3",
+    "tests/run_rounds.py": "550389bec04528154946b13930e9ba2dd9552988c0923f50a4ca854a170cfca0",
+    "tests/support.py": "73f92afa294fe56371e7cf9276b40a885685aa2dc03a36a3a81716fbf7dafb01",
+    "tests/test_framework.py": "cd26d44dc10ce9f2b0802d12d40ef10fa3db6e9e9ade5968f902fb1b17f517a3",
+    "tests/test_interactive.py": "cbf7ed992ba7f11db9e9c86d043eadad462113f2f24345c83c8a0406e270d130",
+    "tests/test_messages.py": "019e915fda05844662c9e227b7a3b23cd82a4145aa7a4d4e294ab7ff763b57d2",
+    "tests/test_wire.py": "59fb9eb6cec1eb35ac87d379949008bd1aeb6ff8e54dbf08da4d1c6fcbac4597"
+  }
+}

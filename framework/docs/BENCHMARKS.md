@@ -1,5 +1,7 @@
 # Benchmark可替换接口
 
+Continual Learning Bench提供独立的逐题原生MCP工具绑定。它直接调用官方reset/step/evaluate，支持动态动作schema和真实容器cwd。配置与边界见[CL-Bench原生接线](CLBENCH_NATIVE.md)。
+
 任务和客观评分由benchmark适配器提供，LLM价值Judge使用统一事件与版本合同。WorkBuddy可以使用其原始任务环境和原生评分器，也可以替换为其他来源。原生评分器的代码和依赖由对应benchmark版本提供。
 
 ## 使用统一公开题单
