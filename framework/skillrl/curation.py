@@ -90,15 +90,33 @@ def observation(task, execution, snapshot, workspace):
     return evidence
 
 class Curator:
-    def __init__(self, model, *, max_turns=16, wall_seconds=900):
+    def __init__(self, model, *, max_turns=16, wall_seconds=900, execution_policy='legacy'):
+        from .task_policy import reliability_guidance
+        self.system = SYSTEM + reliability_guidance('legacy' if execution_policy=='legacy-bounded-v1' else execution_policy, curator=True)
+        self.execution_policy = execution_policy
+        self.bounded = execution_policy in ('verified-bounded-v1', 'legacy-bounded-v1')
+        if self.bounded:
+            self.system += ('\nUse index.json event_metadata to select relevant evidence, not every event. '
+                            'Read rejects files over 24000 characters; SearchEvidence can locate small literal '
+                            'excerpts in a large file, but excerpts do not grant full-event citation credit. '
+                            'Do not repeatedly request an oversized file. Prefer complete focused action/source '
+                            'events and complete parent skills. Do not invent a rule when only partial evidence exists.')
         self.model, self.max_turns, self.wall_seconds = model, max_turns, wall_seconds
 
     def settings(self):
-        return {'model': self.model.settings(), 'max_turns': self.max_turns, 'wall_seconds': self.wall_seconds}
+        return {'model': self.model.settings(), 'max_turns': self.max_turns, 'wall_seconds': self.wall_seconds,
+                'execution_policy': self.execution_policy}
 
     def run(self, task, execution, snapshot, workspace, library, path):
         path = Path(path)
         views = observation(task, execution, snapshot, workspace)
+        if self.bounded:
+            index = json.loads(views['index.json'])
+            index['event_metadata'] = [
+                {'path': f'events/e{i:05d}.json', 'type': event.get('type'), 'name': event.get('name'),
+                 'error': event.get('error'), 'characters': len(views[f'events/e{i:05d}.json'])}
+                for i, event in enumerate(execution['events'])]
+            views['index.json'] = json.dumps(index, ensure_ascii=False)
         if (path / 'result.json').exists():
             if load(path / 'observation.json') != views:
                 raise ValueError('Completed curator observation changed')
@@ -108,7 +126,7 @@ class Curator:
         if cached is not None:
             return cached
         atomic(path / 'observation.json', views)
-        messages = [{'role': 'system', 'content': SYSTEM},
+        messages = [{'role': 'system', 'content': self.system},
                     {'role': 'user', 'content': 'Read index.json, relevant complete events and parent skills; then choose a justified transaction.'}]
         read_events, read_parents = set(), set()
         artifacts = {row['path']: row for row in json.loads(views['index.json'])['artifacts']}
@@ -117,10 +135,21 @@ class Curator:
                  {'type': 'function', 'function': {'name': 'submit_transaction',
                     'description': 'Validate and atomically commit the original structured transaction; returns the actual commit.',
                     'parameters': schema(enforce_shapes=True)}}]
+        if self.bounded:
+            tools.append(tool('SearchEvidence', 'Find literal text excerpts in an indexed evidence file. Excerpts are partial and do not count as a full Read for citations.',
+                              {'path': {'type': 'string', 'enum': list(views)},
+                               'query': {'type': 'string', 'minLength': 2}}, ['path', 'query']))
         commit = None
         seen_calls = set()
         budget = Budget(wall_seconds=self.wall_seconds)
         for turn in range(self.max_turns):
+            if self.bounded and sum(len(json.dumps(m, ensure_ascii=False)) for m in messages) > 160_000:
+                # Do not send an already oversized request, fabricate a no-op,
+                # or discard the earlier evidence/committed transaction.
+                return seal(path, {'status': ('applied' if commit['applied_ops'] else 'no_op') if commit is not None else 'context_budget_exhausted',
+                                   'commit': commit, 'completion_reason': 'public_context_character_budget',
+                                   'budget': budget.result(), 'read_events': sorted(read_events),
+                                   'read_parents': sorted(read_parents)})
             response = budget.call(self.model, messages, tools if commit is None else [], path / 'requests' / f'{turn:04d}')
             message = response['message']
             messages.append(message)
@@ -151,10 +180,27 @@ class Curator:
                             result = source.read_text()
                         else:
                             raise ValueError('Unindexed evidence path')
+                        if self.bounded and len(result) > 24_000:
+                            raise ValueError(f'Complete Read exceeds 24000 characters ({len(result)}). Use event_metadata to select focused events or SearchEvidence; no citation credit granted for this rejected Read.')
                         if key.startswith('events/'):
                             read_events.add(Path(key).stem)
                         if key.startswith('parents/'):
                             read_parents.add(Path(key).stem)
+                    elif name == 'SearchEvidence' and self.bounded and set(args) == {'path', 'query'}:
+                        key, query = args['path'], args['query']
+                        if key not in views or not isinstance(query, str) or len(query) < 2:
+                            raise ValueError('Indexed evidence path and literal query of at least two characters required')
+                        content = views[key]
+                        position, matches = 0, []
+                        while len(matches) < 3:
+                            hit = content.casefold().find(query.casefold(), position)
+                            if hit < 0:
+                                break
+                            start, end = max(0, hit - 500), min(len(content), hit + len(query) + 1000)
+                            matches.append({'offset': start, 'text': content[start:end]})
+                            position = end
+                        result = {'path': key, 'characters': len(content), 'partial': True,
+                                  'full_read_citation_credit': False, 'matches': matches}
                     elif name == 'submit_transaction':
                         atomic(path / f'candidate-{turn:04d}-{len(seen_calls)}.json', args)
                         validate(args, schema(enforce_shapes=True))

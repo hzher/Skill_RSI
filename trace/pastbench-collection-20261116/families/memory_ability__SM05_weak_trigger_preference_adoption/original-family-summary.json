@@ -1,0 +1,2587 @@
+{
+  "family": "memory_ability/SM05_weak_trigger_preference_adoption",
+  "episodes": [
+    {
+      "episode": "cold_style_baseline",
+      "task_id": "SM05_COLD_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/cold_style_baseline/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [
+              "extract-actions-and-share-source-note"
+            ],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 1,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "max_results": 50
+                  },
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T14:20:27.664251+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-001"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:20:31.763910+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-001",
+                    "recipients": [
+                      "Maya Ortiz",
+                      "Noah Reed",
+                      "Priya Chen"
+                    ]
+                  },
+                  "message_index": 5,
+                  "name": "notes_share",
+                  "timestamp": "2026-11-15T14:20:38.999844+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-001"
+                  },
+                  "message_index": 7,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:20:44.322441+00:00"
+                },
+                {
+                  "args": {
+                    "action": "create",
+                    "name": "extract-actions-and-share-source-note",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 10,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T14:21:42.975801+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/cold_style_baseline/evaluation/SM05_COLD_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 1,
+              "skill_manage_action_counts": {
+                "create": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 2,
+                "notes_list": 1,
+                "notes_share": 1,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 1,
+            "skill_docs": {
+              "extract-actions-and-share-source-note": {
+                "content": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract owner, action, priority and due date from a source note, then share that note with its action owners after confirming the intended source.\"\n---\n## 适用条件\nUse when the user requests action-item extraction and authorizes sharing the source note with action owners.\n## 排除条件\nDoes not authorize executing the actions, creating tasks, or sharing with all participants. Do not treat a sole available note as proof that it matches a requested date.\n## 操作步骤\n1. Locate candidate notes with notes_list using max_results. Inspect notes, total, note_id, title and created_at; the observed call used max_results: 50. If total exceeds returned notes, discovery is incomplete; no pagination schema is established by this evidence.\n2. For a request such as today's note, compare available date metadata with the requested calendar date. If it conflicts or cannot identify the intended note, resolve the source before sharing. Being the only result does not establish a date match.\n3. Read the selected source with notes_get({note_id}). Derive owners from assigned action text, not the participants list. Extract each owner's action, priority and due date as stated; do not invent missing values or a due-date year.\n4. Build recipients from the distinct explicit action owners. Exclude observers and participants without an assigned action unless the user separately authorizes including them. Resolve ambiguous owner identities before sharing.\n5. Share the confirmed source using notes_share({note_id, recipients}), with the same note_id read for extraction and the exact intended owner set.\n6. Inspect the share result: require status shared and a record whose note_id and recipients match the intended source and exact owner set. Tool acceptance alone does not verify correct recipients; disclose any mismatch or uncertain outcome.\n7. Read the source again with notes_get({note_id}) and compare its content with the extracted version. Report the extracted actions, the verified sharing outcome and any unresolved source-date limitation. Do not claim the reread independently verifies access permissions.\n## 验证\n- The selected note satisfies the user's source and date constraints before sharing; unresolved identity or date conflicts are not silently bypassed.\n- Every extracted action is traceable to the source, and missing priority or date details have not been invented.\n- The returned share record confirms the intended note_id and exactly the authorized recipients, with no observer-only or otherwise excluded participants added.\n- The post-share source content matches the version used for extraction, and the final report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "preview": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract owner, action, priority and due date from a source note, then share that note with its action owners after confirming the intended source.\"\n---\n## 适用条件\nUse when the user requests action-item extraction and authorizes sharing the source note with action owners.\n## 排除条件\nDoes not authorize executing the actions, creating tasks, or sharing with all participants. Do not treat a sole available note as proof that it matches a requested date.\n## 操作步骤\n1. Locate candidate notes with notes_list using max_results. Inspect notes, total, note_id, title and created_at; the observed call used max_results: 50. If total exceeds returned notes, discovery is incomplete; no pagination schema is established by this evidence.\n2. For a request such as today's note, compare available date metadata with the requested calendar date. If it conflicts or cannot identify the intended note, resolve the source before sharing. Being the only result does not establish a date match.\n3. Read the selected source with notes_get({note_id}). Derive owners from assigned action text, not the participants list. Extract each owner's action, priority and due date as stated; do not invent missing values or a due-date year.\n4. Build recipients from the distinct explicit action owners. Exclude observers and participants without an assigned action unless the user separately authorizes including them. Resolve ambiguous owner identities before sharing.\n5. Share the confirmed source using notes_share({note_id, recipients}), with the same note_id read for extraction and the exact intended owner set.\n6. Inspect the share result: require status shared and a record whose note_id and recipients match the intended source and exact owner set. Tool acceptance alone does not verify correct recipients; disclose any mismatch or uncertain outcome.\n7. Read the source again with notes_get({note_id}) and compare its content with the extracted version. Report the extracted actions, the verified sharing outcome and any unresolved source-date limitation. Do not claim the reread independently verifies access permissions.\n## 验证\n- The selected note satisfies the user's source and date constraints before sharing; unresolved identity or date conflicts are not silently bypassed.\n- Every extracted action is traceable to the source, and missing priority or date details have not been invented.\n- The returned share record confirms the intended note_id and exactly the authorized recipients, with no observer-only or otherwise excluded participants added.\n- The post-share source content matches the version used for extraction, and the final report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "sha1": "67419fcfe39a8b45afb3426ad5170150c900ccef"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "Extracted from “Vendor Risk Planning Review” (`NOTE-SM05-001`):\n\n| Owner | Action | Priority | Due |\n|---|---|---|---|\n| Maya Ortiz | Finalize the exception dashboard backlog | Critical | May 18 |\n| Noah Reed | Archive the stale review queue | Normal | May 19 |\n| Priya Chen | Prepare the vendor digest handoff | Low | May 20 |\n\nShared the source note with all three owners. Observer Lena Park was excluded.\n\nThe only available note is dated April 17, 2026, so I could not verify it as today’s note.",
+          "hard_pass": false,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "max_results": 50
+                },
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T14:20:27.664251+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-001"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:20:31.763910+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-001",
+                  "recipients": [
+                    "Maya Ortiz",
+                    "Noah Reed",
+                    "Priya Chen"
+                  ]
+                },
+                "message_index": 5,
+                "name": "notes_share",
+                "timestamp": "2026-11-15T14:20:38.999844+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-001"
+                },
+                "message_index": 7,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:20:44.322441+00:00"
+              },
+              {
+                "args": {
+                  "action": "create",
+                  "name": "extract-actions-and-share-source-note",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 10,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T14:21:42.975801+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/cold_style_baseline/evaluation/SM05_COLD_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 1,
+            "skill_manage_action_counts": {
+              "create": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 2,
+              "notes_list": 1,
+              "notes_share": 1,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 0.5,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.5,
+            "skill_create_count": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": false,
+          "retrieval_signals": {
+            "expected_signal": "memory",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": "2026-11-15T14:20:38.999844+00:00",
+            "first_write_endpoint": "http://127.0.0.1:43501/notes/share",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 0.5,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {
+            "content_correctness": 0.0,
+            "grounding": 1.0,
+            "r1_t3_tsv_structure": 0.0,
+            "r2_t2_priority_normalization": 0.0,
+            "r3_t1_date_normalization": 0.0,
+            "share_correctness": 1.0
+          },
+          "task_id": "SM05_COLD_001",
+          "task_name": "Semantic Memory SM05 Cold Style Baseline",
+          "task_score": 0.6,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 43.942097536986694,
+            "tool_time_s": 0.013608194014523178,
+            "wall_time_s": 43.95570573100122
+          },
+          "token_usage": {
+            "input_tokens": 97671,
+            "output_tokens": 500,
+            "total_tokens": 98171
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/cold_style_baseline/evaluation/SM05_COLD_001/objective/native-trace.jsonl",
+          "trace_id": "SM05_COLD_001"
+        },
+        "score": 0
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "learn_a_explicit_save_preference",
+      "task_id": "SM05_LEARN_A_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/learn_a_explicit_save_preference/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [
+              "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default."
+            ],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "extract-actions-and-share-source-note"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 1,
+            "rule_keyword_hits": {
+              "hit_count": 2,
+              "hit_keywords": [
+                "TSV",
+                "owner, priority, task, due_date"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "TSV",
+                "owner, priority, task, due_date"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {},
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T14:22:01.014055+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-002"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:22:04.643055+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-002",
+                    "recipients": [
+                      "Maya Ortiz",
+                      "Noah Reed",
+                      "Priya Chen"
+                    ]
+                  },
+                  "message_index": 5,
+                  "name": "notes_share",
+                  "timestamp": "2026-11-15T14:22:12.787910+00:00"
+                },
+                {
+                  "args": {
+                    "action": "add",
+                    "text": "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default."
+                  },
+                  "message_index": 7,
+                  "name": "memory",
+                  "timestamp": "2026-11-15T14:22:12.799732+00:00"
+                },
+                {
+                  "args": {
+                    "action": "read"
+                  },
+                  "message_index": 9,
+                  "name": "memory",
+                  "timestamp": "2026-11-15T14:22:18.524252+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-002"
+                  },
+                  "message_index": 11,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:22:18.529173+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "name": "extract-actions-and-share-source-note",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 14,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T14:23:57.224016+00:00"
+                }
+              ],
+              "memory_action_counts": {
+                "add": 1,
+                "read": 1
+              },
+              "memory_calls": 2,
+              "memory_read_count": 1,
+              "memory_write_count": 1,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/learn_a_explicit_save_preference/evaluation/SM05_LEARN_A_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 1,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "memory": 2,
+                "notes_get": 2,
+                "notes_list": 1,
+                "notes_share": 1,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [
+              "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "extract-actions-and-share-source-note": {
+                "content": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract actions and share their source note.\"\n---\n## 适用条件\nUse for action extraction with authorization to share the source with action owners.\n## 排除条件\nNo authority to execute actions, create tasks or share with all participants. A sole note does not prove a requested date match.\n## 操作步骤\n1. Discover notes with notes_list({max_results: 50}); inspect notes, total, note_id, title and created_at. If total exceeds returned notes, discovery is incomplete; no pagination schema is established.\n2. Compare source date metadata with the requested calendar date. Resolve conflicts or uncertain source identity before sharing; being the only result does not establish a match.\n3. Read with notes_get({note_id}). Extract owner, action, priority and due date from assignments, not participants. Do not invent missing values or a due-date year.\n4. Default to TSV with exactly four columns: owner, priority, task, due_date, in that order. Use this durable team default in future similar sessions unless current instructions override it. Put status prose outside TSV.\n5. When asked to save the default, use memory({action: \"add\", text: ...}) with its scope, format and column order. Verify via memory({action: \"read\"}) that the matching entry exists with persisted: true before claiming persistence.\n6. Build distinct recipients from explicit action owners. Exclude observers and unassigned participants unless separately authorized. Resolve ambiguous identities before sharing.\n7. Call notes_share({note_id, recipients}) for the same confirmed note read for extraction. Require status shared and a record matching the intended note_id and exact recipient set; disclose mismatches or uncertain outcomes.\n8. Reread with notes_get({note_id}) and compare content with the extracted version. Report actions, verified sharing and unresolved source-date limitations. This reread does not independently verify access permissions.\n## 验证\n- Source and date constraints are resolved before sharing; each action is source-backed without invented priority or date details.\n- Unless overridden, TSV has header owner, priority, task, due_date in that order and exactly four fields per row.\n- When saving is requested, memory readback confirms the scoped default and persisted: true, or persistence uncertainty is disclosed.\n- Share record confirms the intended note_id and exact authorized owners, excluding observers and other unassigned participants.\n- Post-share source content matches extraction; the report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "preview": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract actions and share their source note.\"\n---\n## 适用条件\nUse for action extraction with authorization to share the source with action owners.\n## 排除条件\nNo authority to execute actions, create tasks or share with all participants. A sole note does not prove a requested date match.\n## 操作步骤\n1. Discover notes with notes_list({max_results: 50}); inspect notes, total, note_id, title and created_at. If total exceeds returned notes, discovery is incomplete; no pagination schema is established.\n2. Compare source date metadata with the requested calendar date. Resolve conflicts or uncertain source identity before sharing; being the only result does not establish a match.\n3. Read with notes_get({note_id}). Extract owner, action, priority and due date from assignments, not participants. Do not invent missing values or a due-date year.\n4. Default to TSV with exactly four columns: owner, priority, task, due_date, in that order. Use this durable team default in future similar sessions unless current instructions override it. Put status prose outside TSV.\n5. When asked to save the default, use memory({action: \"add\", text: ...}) with its scope, format and column order. Verify via memory({action: \"read\"}) that the matching entry exists with persisted: true before claiming persistence.\n6. Build distinct recipients from explicit action owners. Exclude observers and unassigned participants unless separately authorized. Resolve ambiguous identities before sharing.\n7. Call notes_share({note_id, recipients}) for the same confirmed note read for extraction. Require status shared and a record matching the intended note_id and exact recipient set; disclose mismatches or uncertain outcomes.\n8. Reread with notes_get({note_id}) and compare content with the extracted version. Report actions, verified sharing and unresolved source-date limitations. This reread does not independently verify access permissions.\n## 验证\n- Source and date constraints are resolved before sharing; each action is source-backed without invented priority or date details.\n- Unless overridden, TSV has header owner, priority, task, due_date in that order and exactly four fields per row.\n- When saving is requested, memory readback confirms the scoped default and persisted: true, or persistence uncertainty is disclosed.\n- Share record confirms the intended note_id and exact authorized owners, excluding observers and other unassigned participants.\n- Post-share source content matches extraction; the report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "sha1": "c01d7159350c77a8446755cea937d5b5601ea69c"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "No note dated today was returned. Reviewed NOTE-SM05-002, “Escalation Review Format Rollout” (2026-04-18).\n\n```tsv\nowner\tpriority\ttask\tdue_date\nMaya Ortiz\turgent\ttighten the vendor escalation rubric\tMay 21\nNoah Reed\tmedium\treconcile the open review backlog\tMay 22\nPriya Chen\tminor\tpublish the weekly routing digest\tMay 23\n```\n\nShared the source note with all three owners; excluded observer Owen Bell. Saved and verified the four-column TSV team default for future similar sessions.",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {},
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T14:22:01.014055+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-002"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:22:04.643055+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-002",
+                  "recipients": [
+                    "Maya Ortiz",
+                    "Noah Reed",
+                    "Priya Chen"
+                  ]
+                },
+                "message_index": 5,
+                "name": "notes_share",
+                "timestamp": "2026-11-15T14:22:12.787910+00:00"
+              },
+              {
+                "args": {
+                  "action": "add",
+                  "text": "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default."
+                },
+                "message_index": 7,
+                "name": "memory",
+                "timestamp": "2026-11-15T14:22:12.799732+00:00"
+              },
+              {
+                "args": {
+                  "action": "read"
+                },
+                "message_index": 9,
+                "name": "memory",
+                "timestamp": "2026-11-15T14:22:18.524252+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-002"
+                },
+                "message_index": 11,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:22:18.529173+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "name": "extract-actions-and-share-source-note",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 14,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T14:23:57.224016+00:00"
+              }
+            ],
+            "memory_action_counts": {
+              "add": 1,
+              "read": 1
+            },
+            "memory_calls": 2,
+            "memory_read_count": 1,
+            "memory_write_count": 1,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/learn_a_explicit_save_preference/evaluation/SM05_LEARN_A_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "memory": 2,
+              "notes_get": 2,
+              "notes_list": 1,
+              "notes_share": 1,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "TSV",
+              "owner, priority, task, due_date"
+            ],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 1,
+            "memory_write_count": 1,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 0.5,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "memory",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T14:22:18.524252+00:00",
+            "first_write_at": "2026-11-15T14:22:12.787910+00:00",
+            "first_write_endpoint": "http://127.0.0.1:43399/notes/share",
+            "memory_injection_count": 0,
+            "memory_read_count": 1,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {
+            "content_correctness": 1.0,
+            "grounding": 1.0,
+            "r1_t3_tsv_structure": 1.0,
+            "share_correctness": 1.0
+          },
+          "task_id": "SM05_LEARN_A_001",
+          "task_name": "Semantic Memory SM05 Learn A Explicit Save Preference",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 50.84768135409104,
+            "tool_time_s": 0.021795170905534178,
+            "wall_time_s": 50.86947652499657
+          },
+          "token_usage": {
+            "input_tokens": 96301,
+            "output_tokens": 564,
+            "total_tokens": 96865
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/learn_a_explicit_save_preference/evaluation/SM05_LEARN_A_001/objective/native-trace.jsonl",
+          "trace_id": "SM05_LEARN_A_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "learn_b_soft_preference",
+      "task_id": "SM05_LEARN_B_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/learn_b_soft_preference/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [
+              "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date."
+            ],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "extract-actions-and-share-source-note"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 1,
+            "rule_keyword_hits": {
+              "hit_count": 3,
+              "hit_keywords": [
+                "High",
+                "Medium",
+                "Low"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "High",
+                "Medium",
+                "Low"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default.",
+                "before": "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "max_results": 20
+                  },
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T14:24:16.829373+00:00"
+                },
+                {
+                  "args": {
+                    "action": "read"
+                  },
+                  "message_index": 3,
+                  "name": "memory",
+                  "timestamp": "2026-11-15T14:24:16.836267+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-003"
+                  },
+                  "message_index": 5,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:24:29.555467+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-003",
+                    "recipients": [
+                      "Maya Ortiz",
+                      "Noah Reed",
+                      "Priya Chen"
+                    ]
+                  },
+                  "message_index": 7,
+                  "name": "notes_share",
+                  "timestamp": "2026-11-15T14:24:40.772364+00:00"
+                },
+                {
+                  "args": {
+                    "action": "add",
+                    "text": "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date."
+                  },
+                  "message_index": 9,
+                  "name": "memory",
+                  "timestamp": "2026-11-15T14:24:40.785132+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "name": "extract-actions-and-share-source-note",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 12,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T14:25:43.444595+00:00"
+                }
+              ],
+              "memory_action_counts": {
+                "add": 1,
+                "read": 1
+              },
+              "memory_calls": 2,
+              "memory_read_count": 1,
+              "memory_write_count": 1,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/learn_b_soft_preference/evaluation/SM05_LEARN_B_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 1,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "memory": 2,
+                "notes_get": 1,
+                "notes_list": 1,
+                "notes_share": 1,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [
+              "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default.",
+              "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "extract-actions-and-share-source-note": {
+                "content": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract source-backed action items, apply standing summary defaults, and share the confirmed source note with authorized action owners.\"\n---\n## 适用条件\nUse for action extraction with authorization to share the source with action owners.\n## 排除条件\nNo authority to execute actions, create tasks or share with all participants. A sole note does not prove a requested date match.\n## 操作步骤\n1. Discover notes with notes_list({max_results: 50}); inspect notes, total, note_id, title and created_at. If total exceeds returned notes, discovery is incomplete; no pagination schema is established.\n2. Compare source date metadata with the requested calendar date. Resolve conflicts or uncertain source identity before sharing; being the only result does not establish a match.\n3. Read with notes_get({note_id}). Extract owner, action, priority and due date from assignments, not participants. Do not invent missing values or a due-date year.\n4. Default to TSV with exactly four columns: owner, priority, task, due_date, in that order. Use this durable team default in future similar sessions unless current instructions override it. Put status prose outside TSV.\n5. Normalize source-backed priority labels as High, Medium, or Low in similar action-item summaries as a standing style, unless current instructions override it. Do not invent missing priorities or assume a universal synonym mapping; resolve or disclose ambiguous normalization.\n6. When asked to save defaults, use memory({action: \"add\", text: ...}) with scope, TSV format and column order, and the standing priority-label style. Verify via memory({action: \"read\"}) that the matching entry exists with persisted: true before claiming persistence.\n7. Build distinct recipients from explicit action owners. Exclude observers and unassigned participants unless separately authorized. Resolve ambiguous identities before sharing.\n8. Call notes_share({note_id, recipients}) for the same confirmed note read for extraction. Require status shared and a record matching the intended note_id and exact recipient set; disclose mismatches or uncertain outcomes.\n9. Reread with notes_get({note_id}) and compare content with the extracted version. Report actions, verified sharing and unresolved source-date limitations. This reread does not independently verify access permissions.\n## 验证\n- Source and date constraints are resolved before sharing; each action is source-backed without invented priority or date details.\n- Unless overridden, TSV has header owner, priority, task, due_date in that order and exactly four fields per row.\n- Unless overridden, assigned priority labels are High, Medium, or Low; missing or ambiguous source priorities are not silently guessed.\n- When saving is requested, memory readback confirms the scoped defaults, including priority style, and persisted: true, or persistence uncertainty is disclosed.\n- Share record confirms the intended note_id and exact authorized owners, excluding observers and other unassigned participants.\n- Post-share source content matches extraction; the report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "preview": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract source-backed action items, apply standing summary defaults, and share the confirmed source note with authorized action owners.\"\n---\n## 适用条件\nUse for action extraction with authorization to share the source with action owners.\n## 排除条件\nNo authority to execute actions, create tasks or share with all participants. A sole note does not prove a requested date match.\n## 操作步骤\n1. Discover notes with notes_list({max_results: 50}); inspect notes, total, note_id, title and created_at. If total exceeds returned notes, discovery is incomplete; no pagination schema is established.\n2. Compare source date metadata with the requested calendar date. Resolve conflicts or uncertain source identity before sharing; being the only result does not establish a match.\n3. Read with notes_get({note_id}). Extract owner, action, priority and due date from assignments, not participants. Do not invent missing values or a due-date year.\n4. Default to TSV with exactly four columns: owner, priority, task, due_date, in that order. Use this durable team default in future similar sessions unless current instructions override it. Put status prose outside TSV.\n5. Normalize source-backed priority labels as High, Medium, or Low in similar action-item summaries as a standing style, unless current instructions override it. Do not invent missing priorities or assume a universal synonym mapping; resolve or disclose ambiguous normalization.\n6. When asked to save defaults, use memory({action: \"add\", text: ...}) with scope, TSV format and column order, and the standing priority-label style. Verify via memory({action: \"read\"}) that the matching entry exists with persisted: true before claiming persistence.\n7. Build distinct recipients from explicit action owners. Exclude observers and unassigned participants unless separately authorized. Resolve ambiguous identities before sharing.\n8. Call notes_share({note_id, recipients}) for the same confirmed note read for extraction. Require status shared and a record matching the intended note_id and exact recipient set; disclose mismatches or uncertain outcomes.\n9. Reread with notes_get({note_id}) and compare content with the extracted version. Report actions, verified sharing and unresolved source-date limitations. This reread does not independently verify access permissions.\n## 验证\n- Source and date constraints are resolved before sharing; each action is source-backed without invented priority or date details.\n- Unless overridden, TSV has header owner, priority, task, due_date in that order and exactly four fields per row.\n- Unless overridden, assigned priority labels are High, Medium, or Low; missing or ambiguous source priorities are not silently guessed.\n- When saving is requested, memory readback confirms the scoped defaults, including priority style, and persisted: true, or persistence uncertainty is disclosed.\n- Share record confirms the intended note_id and exact authorized owners, excluding observers and other unassigned participants.\n- Post-share source content matches extraction; the report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "sha1": "ed70321743d985099bfd1499403ec91aa28a9f2f"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "The only available note was “Backlog Hygiene Follow-up” (NOTE-SM05-003), dated April 19, 2026; no note dated today was available. Its action items are:\n\n```tsv\nowner\tpriority\ttask\tdue_date\nMaya Ortiz\tHigh\tclose the urgent triage gaps before Monday\tMay 24\nNoah Reed\tMedium\tupdate the normal-priority review roster\tMay 25\nPriya Chen\tLow\tarchive the minor duplicate escalations\tMay 26\n```\n\nShared the note with Maya Ortiz, Noah Reed, and Priya Chen. Dylan Moss was excluded because the note says he joined for dependency tracking only. Saved High, Medium, and Low as the priority-label style for future similar sessions while retaining the existing TSV default.",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "max_results": 20
+                },
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T14:24:16.829373+00:00"
+              },
+              {
+                "args": {
+                  "action": "read"
+                },
+                "message_index": 3,
+                "name": "memory",
+                "timestamp": "2026-11-15T14:24:16.836267+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-003"
+                },
+                "message_index": 5,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:24:29.555467+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-003",
+                  "recipients": [
+                    "Maya Ortiz",
+                    "Noah Reed",
+                    "Priya Chen"
+                  ]
+                },
+                "message_index": 7,
+                "name": "notes_share",
+                "timestamp": "2026-11-15T14:24:40.772364+00:00"
+              },
+              {
+                "args": {
+                  "action": "add",
+                  "text": "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date."
+                },
+                "message_index": 9,
+                "name": "memory",
+                "timestamp": "2026-11-15T14:24:40.785132+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "name": "extract-actions-and-share-source-note",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 12,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T14:25:43.444595+00:00"
+              }
+            ],
+            "memory_action_counts": {
+              "add": 1,
+              "read": 1
+            },
+            "memory_calls": 2,
+            "memory_read_count": 1,
+            "memory_write_count": 1,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/learn_b_soft_preference/evaluation/SM05_LEARN_B_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "memory": 2,
+              "notes_get": 1,
+              "notes_list": 1,
+              "notes_share": 1,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "High",
+              "Medium",
+              "Low"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 1,
+            "memory_read_count": 1,
+            "memory_write_count": 1,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 2,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "memory",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T14:24:16.836267+00:00",
+            "first_write_at": "2026-11-15T14:24:40.772364+00:00",
+            "first_write_endpoint": "http://127.0.0.1:36173/notes/share",
+            "memory_injection_count": 1,
+            "memory_read_count": 1,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 2,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {
+            "content_correctness": 1.0,
+            "grounding": 1.0,
+            "r1_t3_tsv_structure": 1.0,
+            "r2_t2_priority_normalization": 1.0,
+            "share_correctness": 1.0
+          },
+          "task_id": "SM05_LEARN_B_001",
+          "task_name": "Semantic Memory SM05 Learn B Soft Preference",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 56.0874586350983,
+            "tool_time_s": 0.0210279239108786,
+            "wall_time_s": 56.10848655900918
+          },
+          "token_usage": {
+            "input_tokens": 80184,
+            "output_tokens": 656,
+            "total_tokens": 80840
+          },
+          "tool_dispatch_count": 3,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/learn_b_soft_preference/evaluation/SM05_LEARN_B_001/objective/native-trace.jsonl",
+          "trace_id": "SM05_LEARN_B_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "update_or_stabilize_embedded_preference",
+      "task_id": "SM05_UPDATE_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/update_or_stabilize_embedded_preference/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [
+              "For future similar sessions reviewing notes and extracting action items, format due dates as YYYY/MM/DD. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date, and normalize priority labels as High, Medium, or Low."
+            ],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "extract-actions-and-share-source-note"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 1,
+            "rule_keyword_hits": {
+              "hit_count": 1,
+              "hit_keywords": [
+                "YYYY/MM/DD"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "YYYY/MM/DD"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default.",
+                "before": "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default."
+              },
+              {
+                "after": "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date.",
+                "before": "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "max_results": 100
+                  },
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T14:26:12.738168+00:00"
+                },
+                {
+                  "args": {
+                    "action": "read"
+                  },
+                  "message_index": 3,
+                  "name": "memory",
+                  "timestamp": "2026-11-15T14:26:12.744040+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-004"
+                  },
+                  "message_index": 5,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:26:19.004614+00:00"
+                },
+                {
+                  "args": {
+                    "action": "add",
+                    "text": "For future similar sessions reviewing notes and extracting action items, format due dates as YYYY/MM/DD. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date, and normalize priority labels as High, Medium, or Low."
+                  },
+                  "message_index": 7,
+                  "name": "memory",
+                  "timestamp": "2026-11-15T14:26:27.700101+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-004",
+                    "recipients": [
+                      "Maya Ortiz",
+                      "Noah Reed",
+                      "Priya Chen"
+                    ]
+                  },
+                  "message_index": 9,
+                  "name": "notes_share",
+                  "timestamp": "2026-11-15T14:26:27.707130+00:00"
+                },
+                {
+                  "args": {
+                    "action": "read"
+                  },
+                  "message_index": 11,
+                  "name": "memory",
+                  "timestamp": "2026-11-15T14:26:33.076987+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-004"
+                  },
+                  "message_index": 13,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:26:33.086297+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "name": "extract-actions-and-share-source-note",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 16,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T14:28:19.888708+00:00"
+                }
+              ],
+              "memory_action_counts": {
+                "add": 1,
+                "read": 2
+              },
+              "memory_calls": 3,
+              "memory_read_count": 2,
+              "memory_write_count": 1,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/update_or_stabilize_embedded_preference/evaluation/SM05_UPDATE_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 1,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "memory": 3,
+                "notes_get": 2,
+                "notes_list": 1,
+                "notes_share": 1,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [
+              "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default.",
+              "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date.",
+              "For future similar sessions reviewing notes and extracting action items, format due dates as YYYY/MM/DD. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date, and normalize priority labels as High, Medium, or Low."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "extract-actions-and-share-source-note": {
+                "content": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract actions and share their source using standing defaults.\"\n---\n## 适用条件\nAction extraction with authority to share the source with owners.\n## 排除条件\nDoes not authorize executing actions, creating tasks or sharing with all participants. A sole result does not prove a date match.\n## 操作步骤\n1. Discover with notes_list({max_results: 50}); inspect notes, total, note_id, title, created_at. If total exceeds returned notes, discovery is incomplete; no pagination schema is established.\n2. Compare source metadata with the requested calendar date. Resolve date conflicts or uncertain source identity before sharing; a sole result does not establish a match.\n3. Read notes_get({note_id}). Extract owner, action, priority and due date from assignments, not participants. Do not invent missing values or deadline years.\n4. Read defaults with memory({action: \"read\"}). For future similar summaries, use TSV with exactly four columns in order: owner, priority, task, due_date, unless current instructions override. Keep status prose outside TSV.\n5. Use High, Medium, or Low for source-backed priorities as a standing style unless overridden. Do not invent missing priorities or universal synonym mappings; resolve or disclose ambiguous normalization.\n6. Use YYYY/MM/DD for known due dates in future similar summaries unless overridden. Disclose missing years as unresolved; this format does not justify inferring a year from the note date.\n7. When asked to save defaults or adopt a note's standing preference, use memory({action: \"add\", text: ...}) with scope, TSV order, priority style and YYYY/MM/DD. Preserve existing defaults. Confirm the matching entry and persisted: true via memory({action: \"read\"}) before claiming persistence.\n8. Build distinct recipients from assigned owners. Exclude observers and unassigned participants unless separately authorized. Resolve ambiguous identities before sharing.\n9. Use notes_share({note_id, recipients}) for the confirmed extraction source. Require status shared and a record matching note_id and the exact intended recipient set; disclose mismatches or uncertainty.\n10. Reread notes_get({note_id}); compare content with extraction. Report actions, verified sharing and unresolved source-date limitations. Rereading content does not independently verify access permissions.\n## 验证\n- Resolve source identity and date constraints before sharing; actions contain no invented priorities or dates, including years.\n- Unless overridden, TSV has header owner, priority, task, due_date in order, with exactly four fields per row.\n- Unless overridden, source-backed priorities use High, Medium, or Low and known dates use YYYY/MM/DD; disclose unresolved priorities or date components.\n- When saving or adoption is requested, readback confirms scoped TSV, priority and date defaults with persisted: true; otherwise disclose persistence uncertainty.\n- Share record matches intended note_id and exact authorized owners, excluding observers and unassigned participants.\n- Post-share content matches extraction; report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "preview": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract actions and share their source using standing defaults.\"\n---\n## 适用条件\nAction extraction with authority to share the source with owners.\n## 排除条件\nDoes not authorize executing actions, creating tasks or sharing with all participants. A sole result does not prove a date match.\n## 操作步骤\n1. Discover with notes_list({max_results: 50}); inspect notes, total, note_id, title, created_at. If total exceeds returned notes, discovery is incomplete; no pagination schema is established.\n2. Compare source metadata with the requested calendar date. Resolve date conflicts or uncertain source identity before sharing; a sole result does not establish a match.\n3. Read notes_get({note_id}). Extract owner, action, priority and due date from assignments, not participants. Do not invent missing values or deadline years.\n4. Read defaults with memory({action: \"read\"}). For future similar summaries, use TSV with exactly four columns in order: owner, priority, task, due_date, unless current instructions override. Keep status prose outside TSV.\n5. Use High, Medium, or Low for source-backed priorities as a standing style unless overridden. Do not invent missing priorities or universal synonym mappings; resolve or disclose ambiguous normalization.\n6. Use YYYY/MM/DD for known due dates in future similar summaries unless overridden. Disclose missing years as unresolved; this format does not justify inferring a year from the note date.\n7. When asked to save defaults or adopt a note's standing preference, use memory({action: \"add\", text: ...}) with scope, TSV order, priority style and YYYY/MM/DD. Preserve existing defaults. Confirm the matching entry and persisted: true via memory({action: \"read\"}) before claiming persistence.\n8. Build distinct recipients from assigned owners. Exclude observers and unassigned participants unless separately authorized. Resolve ambiguous identities before sharing.\n9. Use notes_share({note_id, recipients}) for the confirmed extraction source. Require status shared and a record matching note_id and the exact intended recipient set; disclose mismatches or uncertainty.\n10. Reread notes_get({note_id}); compare content with extraction. Report actions, verified sharing and unresolved source-date limitations. Rereading content does not independently verify access permissions.\n## 验证\n- Resolve source identity and date constraints before sharing; actions contain no invented priorities or dates, including years.\n- Unless overridden, TSV has header owner, priority, task, due_date in order, with exactly four fields per row.\n- Unless overridden, source-backed priorities use High, Medium, or Low and known dates use YYYY/MM/DD; disclose unresolved priorities or date components.\n- When saving or adoption is requested, readback confirms scoped TSV, priority and date defaults with persisted: true; otherwise disclose persistence uncertainty.\n- Share record matches intended note_id and exact authorized owners, excluding observers and unassigned participants.\n- Post-share content matches extraction; report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "sha1": "becfad893211073108c0268303f48391651b2faa"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "```tsv\nowner\tpriority\ttask\tdue_date\nMaya Ortiz\tHigh\tRefresh the urgent partner exception queue\t2026/05/27\nNoah Reed\tMedium\tRepair the standard review export\t2026/05/28\nPriya Chen\tLow\tArchive the minor stale escalations\t2026/05/29\n```\n\nShared source note `NOTE-SM05-004` with all three owners; observer Cara Liu was excluded. Saved and verified the standing `YYYY/MM/DD` preference, preserving the existing TSV and priority defaults.\n\nThe only available note was dated April 20, 2026, rather than today. Deadline years were inferred from that date.",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "max_results": 100
+                },
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T14:26:12.738168+00:00"
+              },
+              {
+                "args": {
+                  "action": "read"
+                },
+                "message_index": 3,
+                "name": "memory",
+                "timestamp": "2026-11-15T14:26:12.744040+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-004"
+                },
+                "message_index": 5,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:26:19.004614+00:00"
+              },
+              {
+                "args": {
+                  "action": "add",
+                  "text": "For future similar sessions reviewing notes and extracting action items, format due dates as YYYY/MM/DD. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date, and normalize priority labels as High, Medium, or Low."
+                },
+                "message_index": 7,
+                "name": "memory",
+                "timestamp": "2026-11-15T14:26:27.700101+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-004",
+                  "recipients": [
+                    "Maya Ortiz",
+                    "Noah Reed",
+                    "Priya Chen"
+                  ]
+                },
+                "message_index": 9,
+                "name": "notes_share",
+                "timestamp": "2026-11-15T14:26:27.707130+00:00"
+              },
+              {
+                "args": {
+                  "action": "read"
+                },
+                "message_index": 11,
+                "name": "memory",
+                "timestamp": "2026-11-15T14:26:33.076987+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-004"
+                },
+                "message_index": 13,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:26:33.086297+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "name": "extract-actions-and-share-source-note",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 16,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T14:28:19.888708+00:00"
+              }
+            ],
+            "memory_action_counts": {
+              "add": 1,
+              "read": 2
+            },
+            "memory_calls": 3,
+            "memory_read_count": 2,
+            "memory_write_count": 1,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/update_or_stabilize_embedded_preference/evaluation/SM05_UPDATE_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "memory": 3,
+              "notes_get": 2,
+              "notes_list": 1,
+              "notes_share": 1,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "YYYY/MM/DD"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 2,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 1,
+            "memory_read_count": 2,
+            "memory_write_count": 1,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 3,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "memory",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 2,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T14:26:12.744040+00:00",
+            "first_write_at": "2026-11-15T14:26:27.707130+00:00",
+            "first_write_endpoint": "http://127.0.0.1:47345/notes/share",
+            "memory_injection_count": 1,
+            "memory_read_count": 2,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 3,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {
+            "content_correctness": 1.0,
+            "grounding": 1.0,
+            "r1_t3_tsv_structure": 1.0,
+            "r2_t2_priority_normalization": 1.0,
+            "r3_t1_date_normalization": 1.0,
+            "share_correctness": 1.0
+          },
+          "task_id": "SM05_UPDATE_001",
+          "task_name": "Semantic Memory SM05 Update Embedded Preference",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 59.106662659032736,
+            "tool_time_s": 0.02524298697244376,
+            "wall_time_s": 59.13190564600518
+          },
+          "token_usage": {
+            "input_tokens": 108410,
+            "output_tokens": 870,
+            "total_tokens": 109280
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 7,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/update_or_stabilize_embedded_preference/evaluation/SM05_UPDATE_001/objective/native-trace.jsonl",
+          "trace_id": "SM05_UPDATE_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "eval_near_apply_weak_trigger_style",
+      "task_id": "SM05_EVAL_NEAR_001",
+      "branch": "from_anchor",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/eval_near_apply_weak_trigger_style/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 5,
+              "hit_keywords": [
+                "TSV",
+                "High",
+                "Medium",
+                "Low",
+                "YYYY/MM/DD"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "TSV",
+                "High",
+                "Medium",
+                "Low",
+                "YYYY/MM/DD"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default.",
+                "before": "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default."
+              },
+              {
+                "after": "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date.",
+                "before": "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date."
+              },
+              {
+                "after": "For future similar sessions reviewing notes and extracting action items, format due dates as YYYY/MM/DD. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date, and normalize priority labels as High, Medium, or Low.",
+                "before": "For future similar sessions reviewing notes and extracting action items, format due dates as YYYY/MM/DD. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date, and normalize priority labels as High, Medium, or Low."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {},
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T14:28:38.303267+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-005"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:28:42.712705+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/eval_near_apply_weak_trigger_style/evaluation/SM05_EVAL_NEAR_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 1,
+                "notes_list": 1
+              }
+            },
+            "memory_entries": [
+              "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default.",
+              "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date.",
+              "For future similar sessions reviewing notes and extracting action items, format due dates as YYYY/MM/DD. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date, and normalize priority labels as High, Medium, or Low."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "extract-actions-and-share-source-note": {
+                "content": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract actions and share their source using standing defaults.\"\n---\n## 适用条件\nAction extraction with authority to share the source with owners.\n## 排除条件\nDoes not authorize executing actions, creating tasks or sharing with all participants. A sole result does not prove a date match.\n## 操作步骤\n1. Discover with notes_list({max_results: 50}); inspect notes, total, note_id, title, created_at. If total exceeds returned notes, discovery is incomplete; no pagination schema is established.\n2. Compare source metadata with the requested calendar date. Resolve date conflicts or uncertain source identity before sharing; a sole result does not establish a match.\n3. Read notes_get({note_id}). Extract owner, action, priority and due date from assignments, not participants. Do not invent missing values or deadline years.\n4. Read defaults with memory({action: \"read\"}). For future similar summaries, use TSV with exactly four columns in order: owner, priority, task, due_date, unless current instructions override. Keep status prose outside TSV.\n5. Use High, Medium, or Low for source-backed priorities as a standing style unless overridden. Do not invent missing priorities or universal synonym mappings; resolve or disclose ambiguous normalization.\n6. Use YYYY/MM/DD for known due dates in future similar summaries unless overridden. Disclose missing years as unresolved; this format does not justify inferring a year from the note date.\n7. When asked to save defaults or adopt a note's standing preference, use memory({action: \"add\", text: ...}) with scope, TSV order, priority style and YYYY/MM/DD. Preserve existing defaults. Confirm the matching entry and persisted: true via memory({action: \"read\"}) before claiming persistence.\n8. Build distinct recipients from assigned owners. Exclude observers and unassigned participants unless separately authorized. Resolve ambiguous identities before sharing.\n9. Use notes_share({note_id, recipients}) for the confirmed extraction source. Require status shared and a record matching note_id and the exact intended recipient set; disclose mismatches or uncertainty.\n10. Reread notes_get({note_id}); compare content with extraction. Report actions, verified sharing and unresolved source-date limitations. Rereading content does not independently verify access permissions.\n## 验证\n- Resolve source identity and date constraints before sharing; actions contain no invented priorities or dates, including years.\n- Unless overridden, TSV has header owner, priority, task, due_date in order, with exactly four fields per row.\n- Unless overridden, source-backed priorities use High, Medium, or Low and known dates use YYYY/MM/DD; disclose unresolved priorities or date components.\n- When saving or adoption is requested, readback confirms scoped TSV, priority and date defaults with persisted: true; otherwise disclose persistence uncertainty.\n- Share record matches intended note_id and exact authorized owners, excluding observers and unassigned participants.\n- Post-share content matches extraction; report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "preview": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract actions and share their source using standing defaults.\"\n---\n## 适用条件\nAction extraction with authority to share the source with owners.\n## 排除条件\nDoes not authorize executing actions, creating tasks or sharing with all participants. A sole result does not prove a date match.\n## 操作步骤\n1. Discover with notes_list({max_results: 50}); inspect notes, total, note_id, title, created_at. If total exceeds returned notes, discovery is incomplete; no pagination schema is established.\n2. Compare source metadata with the requested calendar date. Resolve date conflicts or uncertain source identity before sharing; a sole result does not establish a match.\n3. Read notes_get({note_id}). Extract owner, action, priority and due date from assignments, not participants. Do not invent missing values or deadline years.\n4. Read defaults with memory({action: \"read\"}). For future similar summaries, use TSV with exactly four columns in order: owner, priority, task, due_date, unless current instructions override. Keep status prose outside TSV.\n5. Use High, Medium, or Low for source-backed priorities as a standing style unless overridden. Do not invent missing priorities or universal synonym mappings; resolve or disclose ambiguous normalization.\n6. Use YYYY/MM/DD for known due dates in future similar summaries unless overridden. Disclose missing years as unresolved; this format does not justify inferring a year from the note date.\n7. When asked to save defaults or adopt a note's standing preference, use memory({action: \"add\", text: ...}) with scope, TSV order, priority style and YYYY/MM/DD. Preserve existing defaults. Confirm the matching entry and persisted: true via memory({action: \"read\"}) before claiming persistence.\n8. Build distinct recipients from assigned owners. Exclude observers and unassigned participants unless separately authorized. Resolve ambiguous identities before sharing.\n9. Use notes_share({note_id, recipients}) for the confirmed extraction source. Require status shared and a record matching note_id and the exact intended recipient set; disclose mismatches or uncertainty.\n10. Reread notes_get({note_id}); compare content with extraction. Report actions, verified sharing and unresolved source-date limitations. Rereading content does not independently verify access permissions.\n## 验证\n- Resolve source identity and date constraints before sharing; actions contain no invented priorities or dates, including years.\n- Unless overridden, TSV has header owner, priority, task, due_date in order, with exactly four fields per row.\n- Unless overridden, source-backed priorities use High, Medium, or Low and known dates use YYYY/MM/DD; disclose unresolved priorities or date components.\n- When saving or adoption is requested, readback confirms scoped TSV, priority and date defaults with persisted: true; otherwise disclose persistence uncertainty.\n- Share record matches intended note_id and exact authorized owners, excluding observers and unassigned participants.\n- Post-share content matches extraction; report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "sha1": "becfad893211073108c0268303f48391651b2faa"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "The only available note is **Risk Operations Daily Review** (`NOTE-SM05-005`), dated **April 21, 2026**. No note dated today, **November 15, 2026**, was returned.\n\nIts action items are:\n\n```tsv\nowner\tpriority\ttask\tdue_date\nMaya Ortiz\tHigh\tClose the critical vendor audit gap\t2026/05/30\nNoah Reed\tMedium\tReconcile the standard review roster\t2026/05/31\nPriya Chen\tLow\tArchive the low-value follow-up queue\t2026/06/01\n```\n\nI haven’t shared it because the date doesn’t match your request. Is this the intended source note? If so, the recipients will be the three owners above; Lena Park is listed only as an observer.",
+          "hard_pass": false,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {},
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T14:28:38.303267+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-005"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:28:42.712705+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/eval_near_apply_weak_trigger_style/evaluation/SM05_EVAL_NEAR_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 1,
+              "notes_list": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "TSV",
+              "High",
+              "Medium",
+              "Low",
+              "YYYY/MM/DD"
+            ],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 1,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": false,
+          "retrieval_signals": {
+            "expected_signal": "memory",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 1,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 0.83,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {
+            "content_correctness": 1.0,
+            "grounding": 1.0,
+            "r1_t3_tsv_structure": 1.0,
+            "r2_t2_priority_normalization": 1.0,
+            "r3_t1_date_normalization": 1.0,
+            "share_correctness": 0.0
+          },
+          "task_id": "SM05_EVAL_NEAR_001",
+          "task_name": "Semantic Memory SM05 Eval Near Weak Trigger Style",
+          "task_score": 0.864,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 44.569349839992356,
+            "tool_time_s": 0.006831192062236369,
+            "wall_time_s": 44.57618103205459
+          },
+          "token_usage": {
+            "input_tokens": 84023,
+            "output_tokens": 742,
+            "total_tokens": 84765
+          },
+          "tool_dispatch_count": 2,
+          "total_turns": 4,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/eval_near_apply_weak_trigger_style/evaluation/SM05_EVAL_NEAR_001/objective/native-trace.jsonl",
+          "trace_id": "SM05_EVAL_NEAR_001"
+        },
+        "score": 0
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "eval_far_transfer_weak_trigger_style",
+      "task_id": "SM05_EVAL_FAR_001",
+      "branch": "from_anchor",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/eval_far_transfer_weak_trigger_style/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 5,
+              "hit_keywords": [
+                "TSV",
+                "High",
+                "Medium",
+                "Low",
+                "YYYY/MM/DD"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "TSV",
+                "High",
+                "Medium",
+                "Low",
+                "YYYY/MM/DD"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default.",
+                "before": "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default."
+              },
+              {
+                "after": "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date.",
+                "before": "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date."
+              },
+              {
+                "after": "For future similar sessions reviewing notes and extracting action items, format due dates as YYYY/MM/DD. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date, and normalize priority labels as High, Medium, or Low.",
+                "before": "For future similar sessions reviewing notes and extracting action items, format due dates as YYYY/MM/DD. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date, and normalize priority labels as High, Medium, or Low."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {},
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T14:29:56.552364+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-006"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:30:01.781427+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-006",
+                    "recipients": [
+                      "Harper Cole",
+                      "Renee Shah",
+                      "Evan Lin"
+                    ]
+                  },
+                  "message_index": 5,
+                  "name": "notes_share",
+                  "timestamp": "2026-11-15T14:30:10.146627+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-006"
+                  },
+                  "message_index": 7,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:30:14.536356+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/eval_far_transfer_weak_trigger_style/evaluation/SM05_EVAL_FAR_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 2,
+                "notes_list": 1,
+                "notes_share": 1
+              }
+            },
+            "memory_entries": [
+              "For future similar sessions reviewing notes and extracting action items, use TSV with exactly four columns in this order: owner, priority, task, due_date. This is the durable team default.",
+              "For future similar sessions reviewing notes and extracting action items, normalize priority labels as High, Medium, or Low. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date.",
+              "For future similar sessions reviewing notes and extracting action items, format due dates as YYYY/MM/DD. Retain the existing TSV default with exactly four columns in order: owner, priority, task, due_date, and normalize priority labels as High, Medium, or Low."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "extract-actions-and-share-source-note": {
+                "content": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract actions and share their source using standing defaults.\"\n---\n## 适用条件\nAction extraction with authority to share the source with owners.\n## 排除条件\nDoes not authorize executing actions, creating tasks or sharing with all participants. A sole result does not prove a date match.\n## 操作步骤\n1. Discover with notes_list({max_results: 50}); inspect notes, total, note_id, title, created_at. If total exceeds returned notes, discovery is incomplete; no pagination schema is established.\n2. Compare source metadata with the requested calendar date. Resolve date conflicts or uncertain source identity before sharing; a sole result does not establish a match.\n3. Read notes_get({note_id}). Extract owner, action, priority and due date from assignments, not participants. Do not invent missing values or deadline years.\n4. Read defaults with memory({action: \"read\"}). For future similar summaries, use TSV with exactly four columns in order: owner, priority, task, due_date, unless current instructions override. Keep status prose outside TSV.\n5. Use High, Medium, or Low for source-backed priorities as a standing style unless overridden. Do not invent missing priorities or universal synonym mappings; resolve or disclose ambiguous normalization.\n6. Use YYYY/MM/DD for known due dates in future similar summaries unless overridden. Disclose missing years as unresolved; this format does not justify inferring a year from the note date.\n7. When asked to save defaults or adopt a note's standing preference, use memory({action: \"add\", text: ...}) with scope, TSV order, priority style and YYYY/MM/DD. Preserve existing defaults. Confirm the matching entry and persisted: true via memory({action: \"read\"}) before claiming persistence.\n8. Build distinct recipients from assigned owners. Exclude observers and unassigned participants unless separately authorized. Resolve ambiguous identities before sharing.\n9. Use notes_share({note_id, recipients}) for the confirmed extraction source. Require status shared and a record matching note_id and the exact intended recipient set; disclose mismatches or uncertainty.\n10. Reread notes_get({note_id}); compare content with extraction. Report actions, verified sharing and unresolved source-date limitations. Rereading content does not independently verify access permissions.\n## 验证\n- Resolve source identity and date constraints before sharing; actions contain no invented priorities or dates, including years.\n- Unless overridden, TSV has header owner, priority, task, due_date in order, with exactly four fields per row.\n- Unless overridden, source-backed priorities use High, Medium, or Low and known dates use YYYY/MM/DD; disclose unresolved priorities or date components.\n- When saving or adoption is requested, readback confirms scoped TSV, priority and date defaults with persisted: true; otherwise disclose persistence uncertainty.\n- Share record matches intended note_id and exact authorized owners, excluding observers and unassigned participants.\n- Post-share content matches extraction; report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "preview": "---\nname: extract-actions-and-share-source-note\ndescription: \"Extract actions and share their source using standing defaults.\"\n---\n## 适用条件\nAction extraction with authority to share the source with owners.\n## 排除条件\nDoes not authorize executing actions, creating tasks or sharing with all participants. A sole result does not prove a date match.\n## 操作步骤\n1. Discover with notes_list({max_results: 50}); inspect notes, total, note_id, title, created_at. If total exceeds returned notes, discovery is incomplete; no pagination schema is established.\n2. Compare source metadata with the requested calendar date. Resolve date conflicts or uncertain source identity before sharing; a sole result does not establish a match.\n3. Read notes_get({note_id}). Extract owner, action, priority and due date from assignments, not participants. Do not invent missing values or deadline years.\n4. Read defaults with memory({action: \"read\"}). For future similar summaries, use TSV with exactly four columns in order: owner, priority, task, due_date, unless current instructions override. Keep status prose outside TSV.\n5. Use High, Medium, or Low for source-backed priorities as a standing style unless overridden. Do not invent missing priorities or universal synonym mappings; resolve or disclose ambiguous normalization.\n6. Use YYYY/MM/DD for known due dates in future similar summaries unless overridden. Disclose missing years as unresolved; this format does not justify inferring a year from the note date.\n7. When asked to save defaults or adopt a note's standing preference, use memory({action: \"add\", text: ...}) with scope, TSV order, priority style and YYYY/MM/DD. Preserve existing defaults. Confirm the matching entry and persisted: true via memory({action: \"read\"}) before claiming persistence.\n8. Build distinct recipients from assigned owners. Exclude observers and unassigned participants unless separately authorized. Resolve ambiguous identities before sharing.\n9. Use notes_share({note_id, recipients}) for the confirmed extraction source. Require status shared and a record matching note_id and the exact intended recipient set; disclose mismatches or uncertainty.\n10. Reread notes_get({note_id}); compare content with extraction. Report actions, verified sharing and unresolved source-date limitations. Rereading content does not independently verify access permissions.\n## 验证\n- Resolve source identity and date constraints before sharing; actions contain no invented priorities or dates, including years.\n- Unless overridden, TSV has header owner, priority, task, due_date in order, with exactly four fields per row.\n- Unless overridden, source-backed priorities use High, Medium, or Low and known dates use YYYY/MM/DD; disclose unresolved priorities or date components.\n- When saving or adoption is requested, readback confirms scoped TSV, priority and date defaults with persisted: true; otherwise disclose persistence uncertainty.\n- Share record matches intended note_id and exact authorized owners, excluding observers and unassigned participants.\n- Post-share content matches extraction; report distinguishes confirmed sharing from unresolved facts.\n组合依赖 []\n",
+                "sha1": "becfad893211073108c0268303f48391651b2faa"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "Shared “Security Readiness Follow-up” (NOTE-SM05-006) with Harper Cole, Renee Shah, and Evan Lin. The service confirmed sharing with those three owners; observer Dylan Moss was excluded.\n\nNo note dated today, 2026-11-15, was returned. The available note is dated 2026-04-22. Deadlines below infer 2026 from that date; priorities are normalized to the team default.\n\n```tsv\nowner\tpriority\ttask\tdue_date\nHarper Cole\tHigh\tRotate the critical expiring certificates\t2026/06/02\nRenee Shah\tMedium\tValidate the normal rollback checklist\t2026/06/03\nEvan Lin\tLow\tArchive the minor bastion exceptions\t2026/06/04\n```",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {},
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T14:29:56.552364+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-006"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:30:01.781427+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-006",
+                  "recipients": [
+                    "Harper Cole",
+                    "Renee Shah",
+                    "Evan Lin"
+                  ]
+                },
+                "message_index": 5,
+                "name": "notes_share",
+                "timestamp": "2026-11-15T14:30:10.146627+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-006"
+                },
+                "message_index": 7,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:30:14.536356+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/eval_far_transfer_weak_trigger_style/evaluation/SM05_EVAL_FAR_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 2,
+              "notes_list": 1,
+              "notes_share": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "TSV",
+              "High",
+              "Medium",
+              "Low",
+              "YYYY/MM/DD"
+            ],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 1,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "memory",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": "2026-11-15T14:30:10.146627+00:00",
+            "first_write_endpoint": "http://127.0.0.1:35523/notes/share",
+            "memory_injection_count": 1,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {
+            "content_correctness": 1.0,
+            "grounding": 1.0,
+            "r1_t3_tsv_structure": 1.0,
+            "r2_t2_priority_normalization": 1.0,
+            "r3_t1_date_normalization": 1.0,
+            "share_correctness": 1.0
+          },
+          "task_id": "SM05_EVAL_FAR_001",
+          "task_name": "Semantic Memory SM05 Eval Far Weak Trigger Style",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 49.97632671298925,
+            "tool_time_s": 0.013550351024605334,
+            "wall_time_s": 49.989877064013854
+          },
+          "token_usage": {
+            "input_tokens": 112671,
+            "output_tokens": 562,
+            "total_tokens": 113233
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/eval_far_transfer_weak_trigger_style/evaluation/SM05_EVAL_FAR_001/objective/native-trace.jsonl",
+          "trace_id": "SM05_EVAL_FAR_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "control_shortcut_visible_style_rule",
+      "task_id": "SM05_CONTROL_002",
+      "branch": "fresh",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_shortcut_visible_style_rule/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [
+              "extract-actions-and-share-source"
+            ],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 5,
+              "hit_keywords": [
+                "TSV",
+                "High",
+                "Medium",
+                "Low",
+                "YYYY/MM/DD"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "TSV",
+                "High",
+                "Medium",
+                "Low",
+                "YYYY/MM/DD"
+              ]
+            },
+            "skill_count_delta": 1,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "max_results": 50
+                  },
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T14:31:44.083844+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-007"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:31:49.750261+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-007",
+                    "recipients": [
+                      "Asha Kim",
+                      "Ben Ortiz",
+                      "Cara Liu"
+                    ]
+                  },
+                  "message_index": 5,
+                  "name": "notes_share",
+                  "timestamp": "2026-11-15T14:31:55.417719+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-007"
+                  },
+                  "message_index": 7,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:32:02.584122+00:00"
+                },
+                {
+                  "args": {
+                    "action": "create",
+                    "name": "extract-actions-and-share-source",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 10,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T14:33:10.725644+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_shortcut_visible_style_rule/evaluation/SM05_CONTROL_002/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 1,
+              "skill_manage_action_counts": {
+                "create": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 2,
+                "notes_list": 1,
+                "notes_share": 1,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 1,
+            "skill_docs": {
+              "extract-actions-and-share-source": {
+                "content": "---\nname: extract-actions-and-share-source\ndescription: \"Extract assigned action items from a note and, when requested, share that source note with the distinct action owners rather than all meeting participants.\"\n---\n## 适用条件\nUse when a user requests action-item extraction from a note and explicitly asks to share the source with the owners.\n## 排除条件\nDo not share merely because extraction is requested. Do not treat attendees or observers as owners without an explicit assignment. Do not infer a universal priority mapping or date-year rule from a previous assistant response.\n## 操作步骤\n1. Locate the requested note with notes_list and read its full content with notes_get using its note_id. Resolve ambiguity about which note is intended before sharing.\n2. Extract each explicit assignment into an owner, task, stated priority and stated due date; distinguish actual assignments from attendance or observer mentions.\n3. Build a deduplicated recipient set from action owners only. Exclude participants who have no assigned action, and resolve ambiguous recipient identities before sharing.\n4. Normalize priorities and dates according to the current request and supported source context. If the mapping or date year is unresolved, clarify rather than silently converting uncertainty into a durable rule.\n5. Call notes_share with the source note_id and recipients equal to the owner set; do not substitute an extracted summary for the source note.\n6. Verify the share response has status shared, the returned record.note_id matches the intended source, and record.recipients matches the exact owner set with no observer-only participants.\n7. Render the extracted items in the currently requested format. If the request specifies the four-column TSV contract, use owner, priority, task, due_date in that order, High/Medium/Low priorities and YYYY/MM/DD dates; do not carry this task-only format into other requests.\n## 验证\n- Every output row corresponds to a source assignment, and every explicitly assigned owner is represented without adding observer-only participants.\n- Confirm actual successful sharing from the tool response, including the exact source note and recipient set; rereading note content alone does not verify permissions.\n- Check the requested field names, column order, priority vocabulary and date format. Do not claim a successful share when the write failed or its target set differs.\n组合依赖 []\n",
+                "preview": "---\nname: extract-actions-and-share-source\ndescription: \"Extract assigned action items from a note and, when requested, share that source note with the distinct action owners rather than all meeting participants.\"\n---\n## 适用条件\nUse when a user requests action-item extraction from a note and explicitly asks to share the source with the owners.\n## 排除条件\nDo not share merely because extraction is requested. Do not treat attendees or observers as owners without an explicit assignment. Do not infer a universal priority mapping or date-year rule from a previous assistant response.\n## 操作步骤\n1. Locate the requested note with notes_list and read its full content with notes_get using its note_id. Resolve ambiguity about which note is intended before sharing.\n2. Extract each explicit assignment into an owner, task, stated priority and stated due date; distinguish actual assignments from attendance or observer mentions.\n3. Build a deduplicated recipient set from action owners only. Exclude participants who have no assigned action, and resolve ambiguous recipient identities before sharing.\n4. Normalize priorities and dates according to the current request and supported source context. If the mapping or date year is unresolved, clarify rather than silently converting uncertainty into a durable rule.\n5. Call notes_share with the source note_id and recipients equal to the owner set; do not substitute an extracted summary for the source note.\n6. Verify the share response has status shared, the returned record.note_id matches the intended source, and record.recipients matches the exact owner set with no observer-only participants.\n7. Render the extracted items in the currently requested format. If the request specifies the four-column TSV contract, use owner, priority, task, due_date in that order, High/Medium/Low priorities and YYYY/MM/DD dates; do not carry this task-only format into other requests.\n## 验证\n- Every output row corresponds to a source assignment, and every explicitly assigned owner is represented without adding observer-only participants.\n- Confirm actual successful sharing from the tool response, including the exact source note and recipient set; rereading note content alone does not verify permissions.\n- Check the requested field names, column order, priority vocabulary and date format. Do not claim a successful share when the write failed or its target set differs.\n组合依赖 []\n",
+                "sha1": "c1a8a5fae24779dcd3b1fb82186d9dca5d3deab5"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "owner\tpriority\ttask\tdue_date\nAsha Kim\tHigh\tclose the urgent callback queue\t2026/06/05\nBen Ortiz\tMedium\trepair the normal macro routing bug\t2026/06/06\nCara Liu\tLow\tarchive the minor exception snippets\t2026/06/07",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "max_results": 50
+                },
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T14:31:44.083844+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-007"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:31:49.750261+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-007",
+                  "recipients": [
+                    "Asha Kim",
+                    "Ben Ortiz",
+                    "Cara Liu"
+                  ]
+                },
+                "message_index": 5,
+                "name": "notes_share",
+                "timestamp": "2026-11-15T14:31:55.417719+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-007"
+                },
+                "message_index": 7,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:32:02.584122+00:00"
+              },
+              {
+                "args": {
+                  "action": "create",
+                  "name": "extract-actions-and-share-source",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 10,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T14:33:10.725644+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_shortcut_visible_style_rule/evaluation/SM05_CONTROL_002/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 1,
+            "skill_manage_action_counts": {
+              "create": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 2,
+              "notes_list": 1,
+              "notes_share": 1,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "TSV",
+              "High",
+              "Medium",
+              "Low",
+              "YYYY/MM/DD"
+            ],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.666667,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.75,
+            "skill_create_count": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "memory",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": "2026-11-15T14:31:55.417719+00:00",
+            "first_write_endpoint": "http://127.0.0.1:37819/notes/share",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {
+            "content_correctness": 1.0,
+            "grounding": 1.0,
+            "r1_t3_tsv_structure": 1.0,
+            "r2_t2_priority_normalization": 1.0,
+            "r3_t1_date_normalization": 1.0,
+            "share_correctness": 1.0
+          },
+          "task_id": "SM05_CONTROL_002",
+          "task_name": "Semantic Memory SM05 Control Shortcut Style Rule",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 53.60275238699978,
+            "tool_time_s": 0.011820618994534016,
+            "wall_time_s": 53.614573005994316
+          },
+          "token_usage": {
+            "input_tokens": 116117,
+            "output_tokens": 472,
+            "total_tokens": 116589
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_shortcut_visible_style_rule/evaluation/SM05_CONTROL_002/objective/native-trace.jsonl",
+          "trace_id": "SM05_CONTROL_002"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "control_style_preference_control",
+      "task_id": "SM05_CONTROL_003",
+      "branch": "fresh",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_style_preference_control/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": [
+                "TSV",
+                "High",
+                "Medium",
+                "Low",
+                "YYYY/MM/DD"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "max_results": 50
+                  },
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T14:33:28.773068+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-008"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:33:34.710087+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-008",
+                    "recipients": [
+                      "Paula Reed",
+                      "Jonah Fisk",
+                      "Tessa Wu"
+                    ]
+                  },
+                  "message_index": 5,
+                  "name": "notes_share",
+                  "timestamp": "2026-11-15T14:33:42.600029+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-008"
+                  },
+                  "message_index": 7,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:33:46.634182+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_style_preference_control/evaluation/SM05_CONTROL_003/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 2,
+                "notes_list": 1,
+                "notes_share": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 0,
+            "skill_docs": {},
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "Shared source note `NOTE-SM05-008` with Paula Reed, Jonah Fisk, and Tessa Wu. Marta Hill was excluded as an observer.\n\n```tsv\nowner\tpriority\ttask\tdue_date\nPaula Reed\tHigh\tReconcile the urgent ad-spend variance\t2026/06/08\nJonah Fisk\tMedium\tConfirm the normal invoice retry threshold\t2026/06/09\nTessa Wu\tLow\tArchive the minor renewal exceptions\t2026/06/10\n```\n\nThe only available note is dated 2026-04-24, rather than today. Due-date years are inferred from that date.",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "max_results": 50
+                },
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T14:33:28.773068+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-008"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:33:34.710087+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-008",
+                  "recipients": [
+                    "Paula Reed",
+                    "Jonah Fisk",
+                    "Tessa Wu"
+                  ]
+                },
+                "message_index": 5,
+                "name": "notes_share",
+                "timestamp": "2026-11-15T14:33:42.600029+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-008"
+                },
+                "message_index": 7,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:33:46.634182+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_style_preference_control/evaluation/SM05_CONTROL_003/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 2,
+              "notes_list": 1,
+              "notes_share": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 0.5,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.5,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "memory",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": "2026-11-15T14:33:42.600029+00:00",
+            "first_write_endpoint": "http://127.0.0.1:44409/notes/share",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {
+            "content_correctness": 1.0,
+            "grounding": 1.0,
+            "r1_t3_tsv_structure": 1.0,
+            "r2_t2_priority_normalization": 1.0,
+            "r3_t1_date_normalization": 1.0,
+            "share_correctness": 1.0
+          },
+          "task_id": "SM05_CONTROL_003",
+          "task_name": "Semantic Memory SM05 Control Style Preference Control",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 46.34611191903241,
+            "tool_time_s": 0.011367625964339823,
+            "wall_time_s": 46.35747954499675
+          },
+          "token_usage": {
+            "input_tokens": 89314,
+            "output_tokens": 453,
+            "total_tokens": 89767
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_style_preference_control/evaluation/SM05_CONTROL_003/objective/native-trace.jsonl",
+          "trace_id": "SM05_CONTROL_003"
+        },
+        "score": 1
+      },
+      "active_skills": 0
+    },
+    {
+      "episode": "control_no_persistence_style",
+      "task_id": "SM05_CONTROL_001",
+      "branch": "fresh",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_no_persistence_style/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": [
+                "TSV",
+                "High",
+                "Medium",
+                "Low",
+                "YYYY/MM/DD"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "max_results": 100
+                  },
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T14:35:04.918274+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-005"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T14:35:09.774296+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "NOTE-SM05-005",
+                    "recipients": [
+                      "Maya Ortiz",
+                      "Noah Reed",
+                      "Priya Chen"
+                    ]
+                  },
+                  "message_index": 5,
+                  "name": "notes_share",
+                  "timestamp": "2026-11-15T14:35:24.456673+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_no_persistence_style/evaluation/SM05_CONTROL_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 1,
+                "notes_list": 1,
+                "notes_share": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 0,
+            "skill_docs": {},
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "Shared **Risk Operations Daily Review** (`NOTE-SM05-005`) with the three action owners:\n\n| Owner | Action item | Priority | Due |\n|---|---|---|---|\n| Maya Ortiz | Close the critical vendor audit gap | Critical | May 30 |\n| Noah Reed | Reconcile the standard review roster | Normal | May 31 |\n| Priya Chen | Archive the low-value follow-up queue | Low | June 1 |\n\nLena Park was listed as an observer and was not included in sharing.\n\nThe only available note is dated **April 21, 2026**, not today, **November 15, 2026**. Due dates are reproduced as written; the note does not specify a year.",
+          "hard_pass": false,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "max_results": 100
+                },
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T14:35:04.918274+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-005"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T14:35:09.774296+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "NOTE-SM05-005",
+                  "recipients": [
+                    "Maya Ortiz",
+                    "Noah Reed",
+                    "Priya Chen"
+                  ]
+                },
+                "message_index": 5,
+                "name": "notes_share",
+                "timestamp": "2026-11-15T14:35:24.456673+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_no_persistence_style/evaluation/SM05_CONTROL_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 1,
+              "notes_list": 1,
+              "notes_share": 1
+            }
+          },
+          "judge_score": 0.9,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 0.5,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.5,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": false,
+          "retrieval_signals": {
+            "expected_signal": "memory",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": "2026-11-15T14:35:24.456673+00:00",
+            "first_write_endpoint": "http://127.0.0.1:47787/notes/share",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 0.9,
+            "completion": 0.5,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {
+            "content_correctness": 0.0,
+            "grounding": 1.0,
+            "r1_t3_tsv_structure": 0.0,
+            "r2_t2_priority_normalization": 0.0,
+            "r3_t1_date_normalization": 0.0,
+            "share_correctness": 1.0
+          },
+          "task_id": "SM05_CONTROL_001",
+          "task_name": "Semantic Memory SM05 Control No Persistence Style",
+          "task_score": 0.6,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 47.98076685593696,
+            "tool_time_s": 0.010334274033084512,
+            "wall_time_s": 47.99110112997005
+          },
+          "token_usage": {
+            "input_tokens": 115718,
+            "output_tokens": 530,
+            "total_tokens": 116248
+          },
+          "tool_dispatch_count": 3,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/memory_ability__SM05_weak_trigger_preference_adoption/families/memory_ability/SM05_weak_trigger_preference_adoption/episodes/control_no_persistence_style/evaluation/SM05_CONTROL_001/objective/native-trace.jsonl",
+          "trace_id": "SM05_CONTROL_001"
+        },
+        "score": 0
+      },
+      "active_skills": 0
+    }
+  ],
+  "attempts_finished": true,
+  "complete": true,
+  "passed": 6,
+  "known_scores": 9,
+  "weights_updated": false,
+  "score_contract": "upstream grade_episode (including notes_memory hard_pass)"
+}

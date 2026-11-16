@@ -71,3 +71,19 @@ class TransportTests(unittest.TestCase):
             body, _ = self.call(folder, [Response(failed), Response(complete)], responses=True)
             self.assertEqual(body, complete)
             self.assertTrue(json.loads((Path(folder) / 'transport-attempts/0000/failure.json').read_text())['transient'])
+
+    def test_provider_upstream_stream_break_is_retried_with_original_budget(self):
+        failed = b'data: {"type":"response.failed","response":{"error":{"code":"upstream_stream_break","type":"upstream_error"}}}\n\n'
+        complete = b'data: {"type":"response.completed","response":{}}\n\n'
+        with tempfile.TemporaryDirectory() as folder:
+            body, _ = self.call(folder, [Response(failed), Response(complete)], responses=True)
+            self.assertEqual(body, complete)
+            self.assertEqual((Path(folder) / 'transport-attempts/0000/response.raw').read_bytes(), failed)
+            self.assertEqual(json.loads((Path(folder) / 'transport-summary.json').read_text())['physical_attempts'], 2)
+
+    def test_output_token_limit_is_not_misclassified_as_provider_outage(self):
+        failed = b'data: {"type":"response.incomplete","response":{"incomplete_details":{"reason":"max_output_tokens"}}}\n\n'
+        with tempfile.TemporaryDirectory() as folder:
+            with self.assertRaises(ValueError):
+                self.call(folder, [Response(failed)], responses=True)
+            self.assertFalse((Path(folder) / 'transport-attempts/0001').exists())

@@ -1,0 +1,2055 @@
+{
+  "family": "proactive_information_gathering/PG05_change_freeze_followup",
+  "episodes": [
+    {
+      "episode": "attempt_probe_pre",
+      "task_id": "PG05_ATTEMPT_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/attempt_probe_pre/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "change-freeze-lookup"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects.",
+                "before": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-A"
+                  },
+                  "message_index": 1,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-16T11:49:27.848159+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "Atlas Billing freeze CAB"
+                  },
+                  "message_index": 3,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:49:27.854970+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 50,
+                    "query": "Atlas Billing prod-us approval amendment revision"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:49:32.790015+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-A",
+                    "payload": {
+                      "content": "FREEZE_NOTE|CAB-FRZ-442|2026-05-03T01:30Z|2026-05-03T03:00Z|atlas-replay,atlas-docs-preview"
+                    }
+                  },
+                  "message_index": 7,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-16T11:49:38.263777+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "name": "change-freeze-lookup",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 10,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-16T11:50:28.365896+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/attempt_probe_pre/evaluation/PG05_ATTEMPT_001/objective/normalized-session.json",
+              "session_search_calls": 2,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 1,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 1,
+                "notes_update": 1,
+                "session_search": 2,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [
+              "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "change-freeze-lookup": {
+                "content": "---\nname: change-freeze-lookup\ndescription: \"Recover the applicable approved change freeze packet from prior decisions before updating or sharing a freeze note.\"\n---\n## 适用条件\nUse when a user refers to a previously approved change freeze packet without restating its exact details.\n## 排除条件\nDoes not authorize a new freeze or exception. Do not treat drafts, incomplete shells or partial recaps as authoritative packets.\n## 操作步骤\n1. Establish the requested project and scope from the request and current note, then search session history for matching freeze decisions.\n2. When matching approved packets conflict, compare approval revisions, approval issuance times and explicit replacement language to identify the applicable approved amendment; do not rely on search order or a 'latest' title alone.\n3. Reject stale or wrong-scope packets and one-off waivers that do not replace the current packet. Do not let incomplete shells, drafts or recaps override a complete approved decision.\n4. Recover the exact freeze packet ID, UTC start time, UTC end time and exception projects together from the selected approved revision; do not mix fields from earlier revisions or partial summaries.\n5. If approval or supersession remains unclear, search specifically for approval amendments or revisions before proceeding.\n6. Only after resolving the applicable packet, update or share the current freeze note or announcement in the requested format.\n## 验证\n- The selected packet matches the requested project and scope and is not superseded by another applicable approved revision in the retrieved decisions.\n- The packet ID, full UTC window and complete exception set all come from the same selected revision, with no stale exceptions carried over.\n- Any note update or announcement reproduces the recovered fields accurately and follows the user's requested format.\n组合依赖 []\n",
+                "preview": "---\nname: change-freeze-lookup\ndescription: \"Recover the applicable approved change freeze packet from prior decisions before updating or sharing a freeze note.\"\n---\n## 适用条件\nUse when a user refers to a previously approved change freeze packet without restating its exact details.\n## 排除条件\nDoes not authorize a new freeze or exception. Do not treat drafts, incomplete shells or partial recaps as authoritative packets.\n## 操作步骤\n1. Establish the requested project and scope from the request and current note, then search session history for matching freeze decisions.\n2. When matching approved packets conflict, compare approval revisions, approval issuance times and explicit replacement language to identify the applicable approved amendment; do not rely on search order or a 'latest' title alone.\n3. Reject stale or wrong-scope packets and one-off waivers that do not replace the current packet. Do not let incomplete shells, drafts or recaps override a complete approved decision.\n4. Recover the exact freeze packet ID, UTC start time, UTC end time and exception projects together from the selected approved revision; do not mix fields from earlier revisions or partial summaries.\n5. If approval or supersession remains unclear, search specifically for approval amendments or revisions before proceeding.\n6. Only after resolving the applicable packet, update or share the current freeze note or announcement in the requested format.\n## 验证\n- The selected packet matches the requested project and scope and is not superseded by another applicable approved revision in the retrieved decisions.\n- The packet ID, full UTC window and complete exception set all come from the same selected revision, with no stale exceptions carried over.\n- Any note update or announcement reproduces the recovered fields accurately and follows the user's requested format.\n组合依赖 []\n",
+                "sha1": "18f97cad1737c6ad4e278b77c4c8c498ee967a26"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "FREEZE_NOTE|CAB-FRZ-442|2026-05-03T01:30Z|2026-05-03T03:00Z|atlas-replay,atlas-docs-preview",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-A"
+                },
+                "message_index": 1,
+                "name": "notes_get",
+                "timestamp": "2026-11-16T11:49:27.848159+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "Atlas Billing freeze CAB"
+                },
+                "message_index": 3,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:49:27.854970+00:00"
+              },
+              {
+                "args": {
+                  "limit": 50,
+                  "query": "Atlas Billing prod-us approval amendment revision"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:49:32.790015+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-A",
+                  "payload": {
+                    "content": "FREEZE_NOTE|CAB-FRZ-442|2026-05-03T01:30Z|2026-05-03T03:00Z|atlas-replay,atlas-docs-preview"
+                  }
+                },
+                "message_index": 7,
+                "name": "notes_update",
+                "timestamp": "2026-11-16T11:49:38.263777+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "name": "change-freeze-lookup",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 10,
+                "name": "skill_manage",
+                "timestamp": "2026-11-16T11:50:28.365896+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/attempt_probe_pre/evaluation/PG05_ATTEMPT_001/objective/normalized-session.json",
+            "session_search_calls": 2,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 1,
+              "notes_update": 1,
+              "session_search": 2,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 2,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 2,
+            "session_search_count": 2,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 2,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:49:27.854970+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 2,
+            "session_search_count": 2,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG05_ATTEMPT_001",
+          "task_name": "PG05 Change Freeze Followup Attempt Probe",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 44.05463087192038,
+            "tool_time_s": 0.010740452096797526,
+            "wall_time_s": 44.06537132401718
+          },
+          "token_usage": {
+            "input_tokens": 73746,
+            "output_tokens": 353,
+            "total_tokens": 74099
+          },
+          "tool_dispatch_count": 2,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/attempt_probe_pre/evaluation/PG05_ATTEMPT_001/objective/native-trace.jsonl",
+          "trace_id": "PG05_ATTEMPT_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "reflection_gap_review",
+      "task_id": "PG05_REFLECTION_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/reflection_gap_review/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects.",
+                "before": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/reflection_gap_review/evaluation/PG05_REFLECTION_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {}
+            },
+            "memory_entries": [
+              "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "change-freeze-lookup": {
+                "content": "---\nname: change-freeze-lookup\ndescription: \"Recover the applicable approved change freeze packet from prior decisions before updating or sharing a freeze note.\"\n---\n## 适用条件\nUse when a user refers to a previously approved change freeze packet without restating its exact details.\n## 排除条件\nDoes not authorize a new freeze or exception. Do not treat drafts, incomplete shells or partial recaps as authoritative packets.\n## 操作步骤\n1. Establish the requested project and scope from the request and current note, then search session history for matching freeze decisions.\n2. When matching approved packets conflict, compare approval revisions, approval issuance times and explicit replacement language to identify the applicable approved amendment; do not rely on search order or a 'latest' title alone.\n3. Reject stale or wrong-scope packets and one-off waivers that do not replace the current packet. Do not let incomplete shells, drafts or recaps override a complete approved decision.\n4. Recover the exact freeze packet ID, UTC start time, UTC end time and exception projects together from the selected approved revision; do not mix fields from earlier revisions or partial summaries.\n5. If approval or supersession remains unclear, search specifically for approval amendments or revisions before proceeding.\n6. Only after resolving the applicable packet, update or share the current freeze note or announcement in the requested format.\n## 验证\n- The selected packet matches the requested project and scope and is not superseded by another applicable approved revision in the retrieved decisions.\n- The packet ID, full UTC window and complete exception set all come from the same selected revision, with no stale exceptions carried over.\n- Any note update or announcement reproduces the recovered fields accurately and follows the user's requested format.\n组合依赖 []\n",
+                "preview": "---\nname: change-freeze-lookup\ndescription: \"Recover the applicable approved change freeze packet from prior decisions before updating or sharing a freeze note.\"\n---\n## 适用条件\nUse when a user refers to a previously approved change freeze packet without restating its exact details.\n## 排除条件\nDoes not authorize a new freeze or exception. Do not treat drafts, incomplete shells or partial recaps as authoritative packets.\n## 操作步骤\n1. Establish the requested project and scope from the request and current note, then search session history for matching freeze decisions.\n2. When matching approved packets conflict, compare approval revisions, approval issuance times and explicit replacement language to identify the applicable approved amendment; do not rely on search order or a 'latest' title alone.\n3. Reject stale or wrong-scope packets and one-off waivers that do not replace the current packet. Do not let incomplete shells, drafts or recaps override a complete approved decision.\n4. Recover the exact freeze packet ID, UTC start time, UTC end time and exception projects together from the selected approved revision; do not mix fields from earlier revisions or partial summaries.\n5. If approval or supersession remains unclear, search specifically for approval amendments or revisions before proceeding.\n6. Only after resolving the applicable packet, update or share the current freeze note or announcement in the requested format.\n## 验证\n- The selected packet matches the requested project and scope and is not superseded by another applicable approved revision in the retrieved decisions.\n- The packet ID, full UTC window and complete exception set all come from the same selected revision, with no stale exceptions carried over.\n- Any note update or announcement reproduces the recovered fields accurately and follows the user's requested format.\n组合依赖 []\n",
+                "sha1": "18f97cad1737c6ad4e278b77c4c8c498ee967a26"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "ERROR_CLASS|Updated the freeze note from a weak cue without grounding it in the exact earlier approved packet.\nMISSED_CLUE|The applicable freeze packet, exact UTC window, and exception project list were not verified.\nNEXT_CHECK|Before updating or sharing a freeze note, search authorized session history for the latest matching CAB packet and verify its exact UTC window and exception projects.",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/reflection_gap_review/evaluation/PG05_REFLECTION_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {}
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG05_REFLECTION_001",
+          "task_name": "PG05 Change Freeze Followup Reflection",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 19.284997648966964,
+            "other_time_s": 19.284997648966964,
+            "tool_time_s": 0.0,
+            "wall_time_s": 19.284997648966964
+          },
+          "token_usage": {
+            "input_tokens": 10683,
+            "output_tokens": 107,
+            "total_tokens": 10790
+          },
+          "tool_dispatch_count": 0,
+          "total_turns": 1,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/reflection_gap_review/evaluation/PG05_REFLECTION_001/objective/native-trace.jsonl",
+          "trace_id": "PG05_REFLECTION_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "update_or_stabilize_policy_note",
+      "task_id": "PG05_UPDATE_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/update_or_stabilize_policy_note/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "change-freeze-lookup"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 7,
+              "hit_keywords": [
+                "latest matching",
+                "freeze packet",
+                "exact UTC start",
+                "exact UTC end",
+                "exception projects",
+                "before updating or sharing",
+                "stale or wrong-scope"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "latest matching",
+                "freeze packet",
+                "exact UTC start",
+                "exact UTC end",
+                "exception projects",
+                "before updating or sharing",
+                "stale or wrong-scope"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects.",
+                "before": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "change-freeze-lookup"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-16T11:51:26.758368+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "content": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                    "expected_sha256": "e065e6353b15d04ff6e14ec92ff6f124ae2ff50a54abdca4e0d707a0c164e31d",
+                    "name": "change-freeze-lookup",
+                    "reason": "Make the general prerequisite explicit: retrieve the latest matching approved freeze packet and verify its exact UTC window and exceptions before updating or sharing a note."
+                  },
+                  "message_index": 3,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-16T11:51:40.062374+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/update_or_stabilize_policy_note/evaluation/PG05_UPDATE_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 1,
+              "skill_update_count": 1,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "skill_manage": 1,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [
+              "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "change-freeze-lookup": {
+                "content": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "preview": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "sha1": "23e8193dedbd2557d2c50155cef0bdd16fa67df3"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "POLICY_UPDATED|change_freeze_lookup",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "change-freeze-lookup"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-16T11:51:26.758368+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "content": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                  "expected_sha256": "e065e6353b15d04ff6e14ec92ff6f124ae2ff50a54abdca4e0d707a0c164e31d",
+                  "name": "change-freeze-lookup",
+                  "reason": "Make the general prerequisite explicit: retrieve the latest matching approved freeze packet and verify its exact UTC window and exceptions before updating or sharing a note."
+                },
+                "message_index": 3,
+                "name": "skill_manage",
+                "timestamp": "2026-11-16T11:51:40.062374+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/update_or_stabilize_policy_note/evaluation/PG05_UPDATE_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 1,
+            "skill_update_count": 1,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "skill_manage": 1,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "latest matching",
+              "freeze packet",
+              "exact UTC start",
+              "exact UTC end",
+              "exception projects",
+              "before updating or sharing",
+              "stale or wrong-scope"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:51:26.758368+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG05_UPDATE_001",
+          "task_name": "PG05 Change Freeze Followup Policy Update",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 38.45439768698998,
+            "tool_time_s": 0.04804376600077376,
+            "wall_time_s": 38.50244145299075
+          },
+          "token_usage": {
+            "input_tokens": 45879,
+            "output_tokens": 641,
+            "total_tokens": 46520
+          },
+          "tool_dispatch_count": 1,
+          "total_turns": 4,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/update_or_stabilize_policy_note/evaluation/PG05_UPDATE_001/objective/native-trace.jsonl",
+          "trace_id": "PG05_UPDATE_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "eval_near_followup_a",
+      "task_id": "PG05_EVAL_NEAR_A_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_near_followup_a/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects.",
+                "before": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "change-freeze-lookup"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-16T11:52:37.696457+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-NA"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-16T11:52:42.565209+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "Nova Auth freeze"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:52:42.570398+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 50,
+                    "query": "Nova Auth prod-eu approved amendment"
+                  },
+                  "message_index": 7,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:52:47.835635+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-NA",
+                    "payload": {
+                      "content": "FREEZE_NOTE|CAB-FRZ-469|2026-05-04T22:30Z|2026-05-05T00:30Z|nova-drain,nova-admin-console"
+                    }
+                  },
+                  "message_index": 9,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-16T11:52:53.334796+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_near_followup_a/evaluation/PG05_EVAL_NEAR_A_001/objective/normalized-session.json",
+              "session_search_calls": 2,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 1,
+              "skill_update_count": 0,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 1,
+                "notes_update": 1,
+                "session_search": 2,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [
+              "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "change-freeze-lookup": {
+                "content": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "preview": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "sha1": "23e8193dedbd2557d2c50155cef0bdd16fa67df3"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "FREEZE_NOTE|CAB-FRZ-469|2026-05-04T22:30Z|2026-05-05T00:30Z|nova-drain,nova-admin-console",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "change-freeze-lookup"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-16T11:52:37.696457+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-NA"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-16T11:52:42.565209+00:00"
+              },
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "Nova Auth freeze"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:52:42.570398+00:00"
+              },
+              {
+                "args": {
+                  "limit": 50,
+                  "query": "Nova Auth prod-eu approved amendment"
+                },
+                "message_index": 7,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:52:47.835635+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-NA",
+                  "payload": {
+                    "content": "FREEZE_NOTE|CAB-FRZ-469|2026-05-04T22:30Z|2026-05-05T00:30Z|nova-drain,nova-admin-console"
+                  }
+                },
+                "message_index": 9,
+                "name": "notes_update",
+                "timestamp": "2026-11-16T11:52:53.334796+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_near_followup_a/evaluation/PG05_EVAL_NEAR_A_001/objective/normalized-session.json",
+            "session_search_calls": 2,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 1,
+              "notes_update": 1,
+              "session_search": 2,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 3,
+            "session_search_count": 2,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:52:42.570398+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 3,
+            "session_search_count": 2,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG05_EVAL_NEAR_A_001",
+          "task_name": "PG05 Change Freeze Followup Eval Near A",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 45.79077778698411,
+            "tool_time_s": 0.022283715021330863,
+            "wall_time_s": 45.81306150200544
+          },
+          "token_usage": {
+            "input_tokens": 89245,
+            "output_tokens": 349,
+            "total_tokens": 89594
+          },
+          "tool_dispatch_count": 2,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_near_followup_a/evaluation/PG05_EVAL_NEAR_A_001/objective/native-trace.jsonl",
+          "trace_id": "PG05_EVAL_NEAR_A_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "eval_near_followup_b",
+      "task_id": "PG05_EVAL_NEAR_B_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_near_followup_b/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects.",
+                "before": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "change-freeze-lookup"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-16T11:54:23.517942+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-NB"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-16T11:54:27.841698+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "Kappa Gateway"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:54:27.847508+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 30,
+                    "query": "Kappa Gateway prod-ap approved amendment"
+                  },
+                  "message_index": 7,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:54:32.274774+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-NB",
+                    "payload": {
+                      "content": "FREEZE_NOTE|CAB-FRZ-493|2026-05-06T09:00Z|2026-05-06T10:30Z|kappa-partner-sync,kappa-audit-mirror"
+                    }
+                  },
+                  "message_index": 9,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-16T11:54:37.876536+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_near_followup_b/evaluation/PG05_EVAL_NEAR_B_001/objective/normalized-session.json",
+              "session_search_calls": 2,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 1,
+              "skill_update_count": 0,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 1,
+                "notes_update": 1,
+                "session_search": 2,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [
+              "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "change-freeze-lookup": {
+                "content": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "preview": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "sha1": "23e8193dedbd2557d2c50155cef0bdd16fa67df3"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "FREEZE_NOTE|CAB-FRZ-493|2026-05-06T09:00Z|2026-05-06T10:30Z|kappa-partner-sync,kappa-audit-mirror",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "change-freeze-lookup"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-16T11:54:23.517942+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-NB"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-16T11:54:27.841698+00:00"
+              },
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "Kappa Gateway"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:54:27.847508+00:00"
+              },
+              {
+                "args": {
+                  "limit": 30,
+                  "query": "Kappa Gateway prod-ap approved amendment"
+                },
+                "message_index": 7,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:54:32.274774+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-NB",
+                  "payload": {
+                    "content": "FREEZE_NOTE|CAB-FRZ-493|2026-05-06T09:00Z|2026-05-06T10:30Z|kappa-partner-sync,kappa-audit-mirror"
+                  }
+                },
+                "message_index": 9,
+                "name": "notes_update",
+                "timestamp": "2026-11-16T11:54:37.876536+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_near_followup_b/evaluation/PG05_EVAL_NEAR_B_001/objective/normalized-session.json",
+            "session_search_calls": 2,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 1,
+              "notes_update": 1,
+              "session_search": 2,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 3,
+            "session_search_count": 2,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:54:27.847508+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 3,
+            "session_search_count": 2,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG05_EVAL_NEAR_B_001",
+          "task_name": "PG05 Change Freeze Followup Eval Near B",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 42.62960770598147,
+            "tool_time_s": 0.023788518039509654,
+            "wall_time_s": 42.65339622402098
+          },
+          "token_usage": {
+            "input_tokens": 81068,
+            "output_tokens": 362,
+            "total_tokens": 81430
+          },
+          "tool_dispatch_count": 2,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_near_followup_b/evaluation/PG05_EVAL_NEAR_B_001/objective/native-trace.jsonl",
+          "trace_id": "PG05_EVAL_NEAR_B_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "eval_far_followup_transfer",
+      "task_id": "PG05_EVAL_FAR_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_far_followup_transfer/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects.",
+                "before": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "change-freeze-lookup"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-16T11:55:57.710752+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 100,
+                    "query": "Meridian Data Bridge"
+                  },
+                  "message_index": 3,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:56:02.623984+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-FAR"
+                  },
+                  "message_index": 5,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-16T11:56:02.635214+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-FAR",
+                    "payload": {
+                      "content": "FREEZE_NOTE|CAB-FRZ-519|2026-05-07T04:30Z|2026-05-07T07:30Z|meridian-backfill,meridian-schema-preview"
+                    }
+                  },
+                  "message_index": 7,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-16T11:56:08.066487+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_far_followup_transfer/evaluation/PG05_EVAL_FAR_001/objective/normalized-session.json",
+              "session_search_calls": 1,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 1,
+              "skill_update_count": 0,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 1,
+                "notes_update": 1,
+                "session_search": 1,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [
+              "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "change-freeze-lookup": {
+                "content": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "preview": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "sha1": "23e8193dedbd2557d2c50155cef0bdd16fa67df3"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "FREEZE_NOTE|CAB-FRZ-519|2026-05-07T04:30Z|2026-05-07T07:30Z|meridian-backfill,meridian-schema-preview",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "change-freeze-lookup"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-16T11:55:57.710752+00:00"
+              },
+              {
+                "args": {
+                  "limit": 100,
+                  "query": "Meridian Data Bridge"
+                },
+                "message_index": 3,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:56:02.623984+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-FAR"
+                },
+                "message_index": 5,
+                "name": "notes_get",
+                "timestamp": "2026-11-16T11:56:02.635214+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-FAR",
+                  "payload": {
+                    "content": "FREEZE_NOTE|CAB-FRZ-519|2026-05-07T04:30Z|2026-05-07T07:30Z|meridian-backfill,meridian-schema-preview"
+                  }
+                },
+                "message_index": 7,
+                "name": "notes_update",
+                "timestamp": "2026-11-16T11:56:08.066487+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_far_followup_transfer/evaluation/PG05_EVAL_FAR_001/objective/normalized-session.json",
+            "session_search_calls": 1,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 1,
+              "notes_update": 1,
+              "session_search": 1,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 2,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 2,
+            "session_search_count": 1,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 2,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:56:02.623984+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 2,
+            "session_search_count": 1,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG05_EVAL_FAR_001",
+          "task_name": "PG05 Change Freeze Followup Eval Far",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 35.407172982930206,
+            "tool_time_s": 0.01983825903153047,
+            "wall_time_s": 35.427011241961736
+          },
+          "token_usage": {
+            "input_tokens": 63971,
+            "output_tokens": 316,
+            "total_tokens": 64287
+          },
+          "tool_dispatch_count": 2,
+          "total_turns": 5,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/eval_far_followup_transfer/evaluation/PG05_EVAL_FAR_001/objective/native-trace.jsonl",
+          "trace_id": "PG05_EVAL_FAR_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "control_preload_visible_hint",
+      "task_id": "PG05_CONTROL_PRELOAD_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/control_preload_visible_hint/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects.",
+                "before": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "Atlas Billing change freeze"
+                  },
+                  "message_index": 1,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:57:43.424245+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-CP"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-16T11:57:43.439540+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 50,
+                    "query": "Atlas Billing prod-us approval amendment revision"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:57:49.600121+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "",
+                    "session_id": "pg05-freeze-446"
+                  },
+                  "message_index": 7,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:57:55.861004+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "",
+                    "session_id": "pg05-freeze-443"
+                  },
+                  "message_index": 9,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:57:55.865085+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "",
+                    "session_id": "pg05-freeze-447"
+                  },
+                  "message_index": 11,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:57:55.869102+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-CP",
+                    "payload": {
+                      "content": "FREEZE_NOTE|CAB-FRZ-442|2026-05-03T01:30Z|2026-05-03T03:00Z|atlas-replay,atlas-docs-preview"
+                    }
+                  },
+                  "message_index": 13,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-16T11:58:01.343713+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/control_preload_visible_hint/evaluation/PG05_CONTROL_PRELOAD_001/objective/normalized-session.json",
+              "session_search_calls": 5,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 1,
+                "notes_update": 1,
+                "session_search": 5
+              }
+            },
+            "memory_entries": [
+              "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "change-freeze-lookup": {
+                "content": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "preview": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "sha1": "23e8193dedbd2557d2c50155cef0bdd16fa67df3"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "FREEZE_NOTE|CAB-FRZ-442|2026-05-03T01:30Z|2026-05-03T03:00Z|atlas-replay,atlas-docs-preview",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "Atlas Billing change freeze"
+                },
+                "message_index": 1,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:57:43.424245+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-CP"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-16T11:57:43.439540+00:00"
+              },
+              {
+                "args": {
+                  "limit": 50,
+                  "query": "Atlas Billing prod-us approval amendment revision"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:57:49.600121+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "",
+                  "session_id": "pg05-freeze-446"
+                },
+                "message_index": 7,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:57:55.861004+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "",
+                  "session_id": "pg05-freeze-443"
+                },
+                "message_index": 9,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:57:55.865085+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "",
+                  "session_id": "pg05-freeze-447"
+                },
+                "message_index": 11,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:57:55.869102+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-CP",
+                  "payload": {
+                    "content": "FREEZE_NOTE|CAB-FRZ-442|2026-05-03T01:30Z|2026-05-03T03:00Z|atlas-replay,atlas-docs-preview"
+                  }
+                },
+                "message_index": 13,
+                "name": "notes_update",
+                "timestamp": "2026-11-16T11:58:01.343713+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/control_preload_visible_hint/evaluation/PG05_CONTROL_PRELOAD_001/objective/normalized-session.json",
+            "session_search_calls": 5,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 1,
+              "notes_update": 1,
+              "session_search": 5
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 5,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 0.5,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 0.5,
+            "retrieval_signal_count": 5,
+            "session_search_count": 5,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 5,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:57:43.424245+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 5,
+            "session_search_count": 5,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG05_CONTROL_PRELOAD_001",
+          "task_name": "PG05 Change Freeze Followup Control Preload",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 45.745383834932,
+            "tool_time_s": 0.019348252099007368,
+            "wall_time_s": 45.76473208703101
+          },
+          "token_usage": {
+            "input_tokens": 161815,
+            "output_tokens": 624,
+            "total_tokens": 162439
+          },
+          "tool_dispatch_count": 2,
+          "total_turns": 8,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/control_preload_visible_hint/evaluation/PG05_CONTROL_PRELOAD_001/objective/native-trace.jsonl",
+          "trace_id": "PG05_CONTROL_PRELOAD_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "control_boundary_latest_packet",
+      "task_id": "PG05_CONTROL_BOUNDARY_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/control_boundary_latest_packet/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects.",
+                "before": "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "change freeze lookup"
+                  },
+                  "message_index": 1,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:59:27.108213+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-CB"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-16T11:59:32.493199+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 50,
+                    "query": "Atlas Billing prod-us approval amendment revision"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:59:32.500436+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 100,
+                    "query": "Atlas Billing"
+                  },
+                  "message_index": 7,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:59:39.136840+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "FREEZE-PG05-CB",
+                    "payload": {
+                      "content": "FREEZE_NOTE|CAB-FRZ-442|2026-05-03T01:30Z|2026-05-03T03:00Z|atlas-replay,atlas-docs-preview"
+                    }
+                  },
+                  "message_index": 9,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-16T11:59:44.785140+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/control_boundary_latest_packet/evaluation/PG05_CONTROL_BOUNDARY_001/objective/normalized-session.json",
+              "session_search_calls": 3,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 1,
+                "notes_update": 1,
+                "session_search": 3
+              }
+            },
+            "memory_entries": [
+              "Change freeze windows are episodic and time-sensitive.\nBefore updating or sharing a freeze note, search session history for the latest matching CAB packet and recover the exact UTC window plus exception projects."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "change-freeze-lookup": {
+                "content": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "preview": "---\nname: change-freeze-lookup\ndescription: \"Recover and verify the latest matching approved change freeze packet before updating or sharing the current freeze note.\"\n---\n## Applicability\nUse for change freeze follow-ups that refer to a previously approved packet.\n\n## General rule\nBefore updating or sharing the current freeze note, search session history for the latest matching approved freeze packet and verify its exact UTC start, exact UTC end, and complete exception projects. Reject stale or wrong-scope packets.\n\n## Procedure\n1. Establish the requested project and scope from the request and current note, then search authorized session history for matching approved freeze packets and amendments.\n2. Identify the latest applicable approved revision using approval revisions, approval issuance times, and explicit replacement language. Do not rely on search order or a title claiming to be latest.\n3. Reject stale or wrong-scope packets. Drafts, incomplete shells, partial recaps, and one-off waivers do not replace an approved packet unless an approved decision explicitly says so.\n4. Verify the exact UTC start, exact UTC end, and complete exception projects together against the selected approved revision. Keep all fields from that same revision; do not carry forward stale exceptions or combine partial summaries.\n5. If approval, scope, or supersession remains unclear, search session history for the relevant approval or amendment before proceeding. Do not invent missing details or present an unresolved packet as current.\n6. Only after these checks, update or share the current freeze note in the requested format.\n\n## Verification\n- The selected packet is the latest applicable approved revision for the requested scope.\n- The exact UTC start, exact UTC end, and complete exception projects are verified from the same revision.\n- The current freeze note reproduces those verified details accurately.\n\nThis procedure does not authorize a new freeze or exception.\n",
+                "sha1": "23e8193dedbd2557d2c50155cef0bdd16fa67df3"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "FREEZE_NOTE|CAB-FRZ-442|2026-05-03T01:30Z|2026-05-03T03:00Z|atlas-replay,atlas-docs-preview",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "change freeze lookup"
+                },
+                "message_index": 1,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:59:27.108213+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-CB"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-16T11:59:32.493199+00:00"
+              },
+              {
+                "args": {
+                  "limit": 50,
+                  "query": "Atlas Billing prod-us approval amendment revision"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:59:32.500436+00:00"
+              },
+              {
+                "args": {
+                  "limit": 100,
+                  "query": "Atlas Billing"
+                },
+                "message_index": 7,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:59:39.136840+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "FREEZE-PG05-CB",
+                  "payload": {
+                    "content": "FREEZE_NOTE|CAB-FRZ-442|2026-05-03T01:30Z|2026-05-03T03:00Z|atlas-replay,atlas-docs-preview"
+                  }
+                },
+                "message_index": 9,
+                "name": "notes_update",
+                "timestamp": "2026-11-16T11:59:44.785140+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/control_boundary_latest_packet/evaluation/PG05_CONTROL_BOUNDARY_001/objective/normalized-session.json",
+            "session_search_calls": 3,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 1,
+              "notes_update": 1,
+              "session_search": 3
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 0.5,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 0.5,
+            "retrieval_signal_count": 3,
+            "session_search_count": 3,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:59:27.108213+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 3,
+            "session_search_count": 3,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG05_CONTROL_BOUNDARY_001",
+          "task_name": "PG05 Change Freeze Followup Control Boundary",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 49.00990868808003,
+            "tool_time_s": 0.0206992439343594,
+            "wall_time_s": 49.03060793201439
+          },
+          "token_usage": {
+            "input_tokens": 177751,
+            "output_tokens": 506,
+            "total_tokens": 178257
+          },
+          "tool_dispatch_count": 2,
+          "total_turns": 8,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG05_change_freeze_followup/families/proactive_information_gathering/PG05_change_freeze_followup/episodes/control_boundary_latest_packet/evaluation/PG05_CONTROL_BOUNDARY_001/objective/native-trace.jsonl",
+          "trace_id": "PG05_CONTROL_BOUNDARY_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    }
+  ],
+  "attempts_finished": true,
+  "complete": true,
+  "passed": 8,
+  "known_scores": 8,
+  "weights_updated": false,
+  "score_contract": "upstream grade_episode (including notes_memory hard_pass)"
+}

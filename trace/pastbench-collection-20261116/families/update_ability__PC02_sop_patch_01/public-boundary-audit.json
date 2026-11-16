@@ -1,0 +1,45 @@
+{
+  "validated": true,
+  "observed_at": "2026-11-15T15:53:53.617969+00:00",
+  "tasks_checked": 7,
+  "scope": "Exact Executor initial public prompt, MCP skill inputs, public task identity and score-blind Curator observation/system prompt.",
+  "limits": "Authorized history/memory/skill provenance is covered by subset-audit.json. This is input-boundary verification, not an adversarial filesystem isolation proof.",
+  "script_sha256": "e0137cab3298e07e36e6fb975a54911848715e96e63bee19153a76c43847e9dd",
+  "tasks": [
+    {
+      "task_id": "V2_F02_I01",
+      "prompt_sha256": "ea0bccddf4dd6c6e0223f2f41fe615d648ef9fb75827eff92cb01aa2dc9cfcdd",
+      "curator_observation_sha256": "d0923849d2a7369c882c423f8b01852b1fcc4c3bb609444686d6ba12ed513e11"
+    },
+    {
+      "task_id": "V2_F02_I03",
+      "prompt_sha256": "c3860a5bc5d151fd0cda3fc394f35b4f2362a0127a1a986585687094f0a9d4e3",
+      "curator_observation_sha256": "50d4269d054c9655448279222377ebc2364d56626f6021ef25def1426f628a59"
+    },
+    {
+      "task_id": "V2_F02_I04",
+      "prompt_sha256": "47f800720c94d3663e4ab1a6fe2fe5713f668176fa1e989542984837a751716a",
+      "curator_observation_sha256": "1b6318efe25974d9e046873ac79eb93349e94d43c60af9f7c0a01acc19d6d31a"
+    },
+    {
+      "task_id": "V2_F02_I05",
+      "prompt_sha256": "b9ddc311f1856781c0ac2709b5a542518f932e24c5767f0eb04dcae415818241",
+      "curator_observation_sha256": "fc4e8767e3c9fb2afafc454ebb2897deddef3bfc405dc06505d9b7959b8cfbd5"
+    },
+    {
+      "task_id": "V2_F02_C01",
+      "prompt_sha256": "cc2caea01e5c05b12dc55ffc8c6c8c83db0d1b126a1e9ce0e50ef325471d455d",
+      "curator_observation_sha256": "05284935ddcc88cc5221202c78a1582a7670fa8ed3213a69cb7acde0e9db0e69"
+    },
+    {
+      "task_id": "V2_F02_C02",
+      "prompt_sha256": "eae54a019909ff32f8775293440392999f9975df0bdc8e332a15971657553f12",
+      "curator_observation_sha256": "70342ff3b2f1d4396d7b74ec1c281885536515e2ca2e22294fb988d885da61ce"
+    },
+    {
+      "task_id": "V2_F02_C03",
+      "prompt_sha256": "67a197a3d5f4bbfaa9ca37864776055d31a96ebfdae498f4f17f4e62ea46d508",
+      "curator_observation_sha256": "55a6ffc03b48418d3ff2866a659a29cdce30e3461dd0b848b3210ad52a475eb4"
+    }
+  ]
+}

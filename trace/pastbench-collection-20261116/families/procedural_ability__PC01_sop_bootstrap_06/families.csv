@@ -1,0 +1,2 @@
+family,category,attempted,execution_complete,pipeline_complete,passed,failed,unknown,skill_reads,memory_writes,session_searches,mean_task_score
+procedural_ability/PC01_sop_bootstrap_06,procedural_ability,8,8,8,5,3,0,3,0,0,0.8799999999999999

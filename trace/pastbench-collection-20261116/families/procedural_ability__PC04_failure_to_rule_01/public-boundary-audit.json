@@ -1,0 +1,55 @@
+{
+  "validated": true,
+  "observed_at": "2026-11-15T15:56:06.185058+00:00",
+  "tasks_checked": 9,
+  "scope": "Exact Executor initial public prompt, MCP skill inputs, public task identity and score-blind Curator observation/system prompt.",
+  "limits": "Authorized history/memory/skill provenance is covered by subset-audit.json. This is input-boundary verification, not an adversarial filesystem isolation proof.",
+  "script_sha256": "e0137cab3298e07e36e6fb975a54911848715e96e63bee19153a76c43847e9dd",
+  "tasks": [
+    {
+      "task_id": "V2_F07_I01",
+      "prompt_sha256": "f9b9d642d5c7e8bf95dac520423046fa022bd01ee5c4ea602066b7f5148451d2",
+      "curator_observation_sha256": "11a0a8504f4bcf07cea8e1450ce323a823abd3ed8f549ce2c9eeeb02cdb40dbf"
+    },
+    {
+      "task_id": "V2_F07_I02",
+      "prompt_sha256": "420916b26cb83edc42a0c5738953b92d58ea1ca6519770b31e50d55fe65d035a",
+      "curator_observation_sha256": "02bbb6fe0ac38b61314e218d5338bb3e414230dc5ddce97b20dc77a0a5010cba"
+    },
+    {
+      "task_id": "V2_F07_I03",
+      "prompt_sha256": "9950831c813db61e6940e4756df15752a3e93c50428eff3bec7949242c5f8e54",
+      "curator_observation_sha256": "426c599fe768f512da1abe5a168e5a3194b46c6326f009c8eef1a7de281655a5"
+    },
+    {
+      "task_id": "V2_F07_I03b",
+      "prompt_sha256": "d905508a4b153221b964d802daef59086603a544bff3135d99c1a2b77e38a2ce",
+      "curator_observation_sha256": "7a11c5df320ad307561d0ed3663855f1cc067e53536741b7b990451c8f24a9f2"
+    },
+    {
+      "task_id": "V2_F07_I04",
+      "prompt_sha256": "16053660ae5466624abde56dbd5e7233ee7c192ff6f9847336063bb00dfa56dd",
+      "curator_observation_sha256": "c67d7bf1adf857471ab734462e37fb287e72ed905413ccd67510a629f9c11f87"
+    },
+    {
+      "task_id": "V2_F07_I05",
+      "prompt_sha256": "e84efe103722a7cded5f5e4bae736a627ae29368c6e8efeaf728231d1b7e5ec6",
+      "curator_observation_sha256": "283c630840b3a942d0a333491fca3d5be88e9baff0d3559bbdda5588989ea8cf"
+    },
+    {
+      "task_id": "V2_F07_C01",
+      "prompt_sha256": "28dd95893b23dfc977cfc599d1d59dd883bdeba758dd21c7111fa1eaa4ac4916",
+      "curator_observation_sha256": "904612fd59b460ae38d32abf0c2525dc6b2b6da4c3a35cb028fb90f8134651dd"
+    },
+    {
+      "task_id": "V2_F07_C02",
+      "prompt_sha256": "f8f9bf3cb0b5d3544fe04005324ffab725669e76b7a0b36ae0201638892c6e09",
+      "curator_observation_sha256": "27aa3aeefac5cc98361bdf7080d5ecf34793225d65bf6d2048f567a43b9090d2"
+    },
+    {
+      "task_id": "V2_F07_C03",
+      "prompt_sha256": "79f017ebd4c8bc0a40f579782310ae6339a3be70c3529234d20f6b1bb2eae027",
+      "curator_observation_sha256": "fefb9d6bcd222f0c5f7c6758df8e029f3ce7419a23a7d424e08924f972574770"
+    }
+  ]
+}

@@ -108,12 +108,19 @@ class ResponsesRecorder:
 
 
 class CodexExecutor:
-    def __init__(self, model, *, cli='codex', timeout=600, reasoning_effort='medium'):
+    def __init__(self, model, *, cli='codex', timeout=600, reasoning_effort='medium', execution_policy='legacy', mcp_module='skillrl.codex_mcp'):
+        if mcp_module not in ('skillrl.codex_mcp', 'skillrl.bounded_mcp'):
+            raise ValueError('Unknown benchmark MCP transport module')
+        self.mcp_module = mcp_module
+        from .task_policy import reliability_guidance
+        self.execution_guidance = reliability_guidance(execution_policy)
+        self.execution_policy = execution_policy
         self.model, self.cli, self.timeout, self.reasoning_effort = model, cli, timeout, reasoning_effort
 
     def settings(self):
         return {'backend': 'codex', 'model': self.model.settings(), 'cli': self.cli,
-                'timeout': self.timeout, 'reasoning_effort': self.reasoning_effort}
+                'timeout': self.timeout, 'reasoning_effort': self.reasoning_effort,
+                'execution_policy': self.execution_policy, 'mcp_module': self.mcp_module}
 
     def execute(self, task, environment, snapshot, path):
         path = Path(path).resolve()
@@ -133,6 +140,9 @@ class CodexExecutor:
                   'events': str(path / 'mcp-events.jsonl'),
                   'memory': str(environment.memory_path) if flags['memory_enabled'] else None,
                   'sessions': str(environment.sessions_path) if flags['session_search_enabled'] else None}
+        capability = getattr(environment, 'skill_write_capability', None)
+        if capability:
+            config['skill_write'] = capability
         atomic(path / 'mcp.json', config)
         catalog = [{k: entry[k] for k in ('name', 'description', 'skill_id', 'raw_sha256')} for entry in provided_skills]
         memory_before = load(environment.memory_path) if environment.memory_path.exists() else []
@@ -143,7 +153,7 @@ class CodexExecutor:
                   'Read useful skills using the MCP Skill tool, or solve directly. '
                   'Use the memory tool to save or correct durable user/team preferences when appropriate. '
                   'Do not persist one-off task content as a global rule. '
-                  'Report only actions actually performed.\n\n' + task.instruction +
+                  'Report only actions actually performed.\n' + self.execution_guidance + '\n' + task.instruction +
                   '\n\nDurable memory available to this session:\n' + json.dumps(injected_memory, ensure_ascii=False) +
                   '\n\nOptional skill catalog:\n' + json.dumps(catalog, ensure_ascii=False))
         atomic(path / 'prompt.json', {'prompt': prompt})
@@ -153,7 +163,7 @@ class CodexExecutor:
                if not any(s in k.upper() for s in ('API_KEY', 'TOKEN', 'SECRET', 'PASSWORD', 'CODEX'))}
         env['CODEX_HOME'] = str(home)
         env['PYTHONPATH'] = str(Path(__file__).resolve().parent.parent)
-        mcp = {'command': sys.executable, 'args': ['-m', 'skillrl.codex_mcp', str(path / 'mcp.json')],
+        mcp = {'command': sys.executable, 'args': ['-m', self.mcp_module, str(path / 'mcp.json')],
                'env': {'PYTHONPATH': env['PYTHONPATH']}, 'startup_timeout_sec': 30, 'tool_timeout_sec': 90,
                'default_tools_approval_mode': 'approve'}
         with ResponsesRecorder(self.model.base_url, key, path / 'wire', self.timeout,
@@ -205,5 +215,7 @@ class CodexExecutor:
                   'persistence_flags': flags, 'memory_injected': injected_memory, 'memory_before': memory_before,
                   'memory_after': load(environment.memory_path) if environment.memory_path.exists() else [],
                   'wall_seconds': time.monotonic() - started}
+        if capability:
+            record['skill_write_capability'] = capability
         atomic(path / 'events.json', events)
         return seal(path, record)

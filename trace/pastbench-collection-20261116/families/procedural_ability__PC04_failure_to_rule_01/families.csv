@@ -1,0 +1,2 @@
+family,category,attempted,execution_complete,pipeline_complete,passed,failed,unknown,skill_reads,memory_writes,session_searches,mean_task_score
+procedural_ability/PC04_failure_to_rule_01,procedural_ability,9,9,6,2,7,0,5,0,0,0.8604666666666668

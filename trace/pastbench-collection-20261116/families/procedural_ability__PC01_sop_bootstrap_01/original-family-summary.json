@@ -1,0 +1,3681 @@
+{
+  "family": "procedural_ability/PC01_sop_bootstrap_01",
+  "episodes": [
+    {
+      "episode": "F01_I01_skill_baseline_cold",
+      "task_id": "V2_F01_I01",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I01_skill_baseline_cold/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [
+              "triage-correlated-outages-with-incomplete-kb"
+            ],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close"
+              ]
+            },
+            "skill_count_delta": 1,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "status": "open"
+                  },
+                  "message_index": 1,
+                  "name": "helpdesk_list_tickets",
+                  "timestamp": "2026-11-15T14:47:57.650573+00:00"
+                },
+                {
+                  "args": {
+                    "query": "incident triage SOP"
+                  },
+                  "message_index": 3,
+                  "name": "kb_search",
+                  "timestamp": "2026-11-15T14:47:57.658758+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_brief"
+                  },
+                  "message_index": 5,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T14:48:03.678213+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-A101"
+                  },
+                  "message_index": 7,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:48:03.683314+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-A102"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:48:03.687031+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-A103"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:48:03.694140+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-A104"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:48:03.697719+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "KB-F01-SOP"
+                  },
+                  "message_index": 15,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T14:48:09.368491+00:00"
+                },
+                {
+                  "args": {
+                    "category": "incident",
+                    "internal_note": "Correlated outage: TK-A101, TK-A102, and TK-A103 report AuthHub auth-cluster-3 unavailable in eu-west-1 starting approximately 08:14–08:15 UTC, with HTTP 500 from /api/auth/token and widespread authentication failure. Critical priority based on region-wide impact and blocked service-account CI/CD authentication. Related tickets retained open. KB incident triage index reviewed; referenced KB-F01-SOP unavailable, so classification is based on reported impact rather than verified SOP rules.",
+                    "priority": "critical",
+                    "tags": [
+                      "cluster-outage",
+                      "auth-cluster-3",
+                      "eu-west-1"
+                    ],
+                    "ticket_id": "TK-A101"
+                  },
+                  "message_index": 17,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:48:21.799235+00:00"
+                },
+                {
+                  "args": {
+                    "category": "incident",
+                    "internal_note": "Correlated outage: TK-A101, TK-A102, and TK-A103 report AuthHub auth-cluster-3 unavailable in eu-west-1 starting approximately 08:14–08:15 UTC, with HTTP 500 from /api/auth/token and widespread authentication failure. Critical priority based on region-wide impact and blocked service-account CI/CD authentication. Related tickets retained open. KB incident triage index reviewed; referenced KB-F01-SOP unavailable, so classification is based on reported impact rather than verified SOP rules.",
+                    "priority": "critical",
+                    "tags": [
+                      "cluster-outage",
+                      "auth-cluster-3",
+                      "eu-west-1"
+                    ],
+                    "ticket_id": "TK-A102"
+                  },
+                  "message_index": 19,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:48:21.805458+00:00"
+                },
+                {
+                  "args": {
+                    "category": "incident",
+                    "internal_note": "Correlated outage: TK-A101, TK-A102, and TK-A103 report AuthHub auth-cluster-3 unavailable in eu-west-1 starting approximately 08:14–08:15 UTC, with HTTP 500 from /api/auth/token and widespread authentication failure. Critical priority based on region-wide impact and blocked service-account CI/CD authentication. Related tickets retained open. KB incident triage index reviewed; referenced KB-F01-SOP unavailable, so classification is based on reported impact rather than verified SOP rules.",
+                    "priority": "critical",
+                    "tags": [
+                      "cluster-outage",
+                      "auth-cluster-3",
+                      "eu-west-1"
+                    ],
+                    "ticket_id": "TK-A103"
+                  },
+                  "message_index": 21,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:48:21.810613+00:00"
+                },
+                {
+                  "args": {
+                    "category": "service-request",
+                    "internal_note": "Routine scheduled password reset due to the 90-day rotation policy; reporter states no urgency. No evidence linking this request to the auth-cluster-3 outage (TK-A101, TK-A102, TK-A103). Retained open; no password reset or credential sharing performed. KB full triage SOP unavailable; classified from the ticket description.",
+                    "priority": "low",
+                    "ticket_id": "TK-A104"
+                  },
+                  "message_index": 23,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:48:21.815869+00:00"
+                },
+                {
+                  "args": {
+                    "action": "create",
+                    "name": "triage-correlated-outages-with-incomplete-kb",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 26,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T14:49:36.284511+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I01_skill_baseline_cold/evaluation/V2_F01_I01/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 1,
+              "skill_manage_action_counts": {
+                "create": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 4,
+                "helpdesk_list_tickets": 1,
+                "helpdesk_update_ticket": 4,
+                "kb_get_article": 2,
+                "kb_search": 1,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 1,
+            "skill_docs": {
+              "triage-correlated-outages-with-incomplete-kb": {
+                "content": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Correlate open helpdesk tickets into an outage group, distinguish unrelated requests, and apply documented triage updates without claiming unavailable SOP authority or closing tickets.\"\n---\n## 适用条件\nUse when asked to triage and update open tickets for a shared outage, especially when a KB search yields only an index or brief rather than the full procedure. Follow the current task's limits and output requirements.\n## 排除条件\nDoes not reconstruct missing SOP rules, prescribe universal priority labels or tags, authorize escalation, resolve the outage, fulfill underlying service requests, or authorize ticket closure.\n## 操作步骤\n1. Search the KB for the triage procedure and retrieve the relevant article. If it only references a full SOP, attempt to retrieve that SOP; explicitly distinguish a missing procedure from usable guidance.\n2. Use helpdesk_list_tickets to enumerate open tickets and helpdesk_get_ticket to inspect each candidate's full description before classifying it.\n3. Compare affected service or cluster, region, symptoms or endpoint errors, onset time, and reported impact. Group tickets with converging evidence rather than relying on similar titles alone.\n4. Keep unrelated requests separate when their descriptions show a different cause or routine maintenance need. Do not infer outage membership merely because both involve authentication.\n5. Choose supported priority and category values from available guidance and reported impact. When the SOP is unavailable, document that classification is impact-based; do not present inferred labels or tags as mandatory SOP rules.\n6. Use helpdesk_update_ticket for the requested triage changes. Record related ticket references, correlation evidence, impact rationale, and the KB limitation in notes; apply consistent outage labels where appropriate. Preserve open status when closure is prohibited.\n7. Inspect update results for the intended fields and unchanged open status. Report only confirmed updates in the requested format, with a concise evidence-based reason for each ticket.\n## 验证\n- The outage group is supported by multiple matching details in full ticket descriptions, and unrelated requests remain outside it.\n- Classification notes distinguish available KB guidance from judgment based on impact; no unavailable SOP requirements are asserted.\n- Tool results confirm requested priority/category changes and show tickets remain open; triage does not perform unrelated remediation.\n组合依赖 []\n",
+                "preview": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Correlate open helpdesk tickets into an outage group, distinguish unrelated requests, and apply documented triage updates without claiming unavailable SOP authority or closing tickets.\"\n---\n## 适用条件\nUse when asked to triage and update open tickets for a shared outage, especially when a KB search yields only an index or brief rather than the full procedure. Follow the current task's limits and output requirements.\n## 排除条件\nDoes not reconstruct missing SOP rules, prescribe universal priority labels or tags, authorize escalation, resolve the outage, fulfill underlying service requests, or authorize ticket closure.\n## 操作步骤\n1. Search the KB for the triage procedure and retrieve the relevant article. If it only references a full SOP, attempt to retrieve that SOP; explicitly distinguish a missing procedure from usable guidance.\n2. Use helpdesk_list_tickets to enumerate open tickets and helpdesk_get_ticket to inspect each candidate's full description before classifying it.\n3. Compare affected service or cluster, region, symptoms or endpoint errors, onset time, and reported impact. Group tickets with converging evidence rather than relying on similar titles alone.\n4. Keep unrelated requests separate when their descriptions show a different cause or routine maintenance need. Do not infer outage membership merely because both involve authentication.\n5. Choose supported priority and category values from available guidance and reported impact. When the SOP is unavailable, document that classification is impact-based; do not present inferred labels or tags as mandatory SOP rules.\n6. Use helpdesk_update_ticket for the requested triage changes. Record related ticket references, correlation evidence, impact rationale, and the KB limitation in notes; apply consistent outage labels where appropriate. Preserve open status when closure is prohibited.\n7. Inspect update results for the intended fields and unchanged open status. Report only confirmed updates in the requested format, with a concise evidence-based reason for each ticket.\n## 验证\n- The outage group is supported by multiple matching details in full ticket descriptions, and unrelated requests remain outside it.\n- Classification notes distinguish available KB guidance from judgment based on impact; no unavailable SOP requirements are asserted.\n- Tool results confirm requested priority/category changes and show tickets remain open; triage does not perform unrelated remediation.\n组合依赖 []\n",
+                "sha1": "2bdfc103415e75c37fa22b60fce55a651eee68d8"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "TK-A101|critical|incident|Same auth-cluster-3 outage; region-wide login failures in eu-west-1. Updated; remains open.\nTK-A102|critical|incident|Same outage; token endpoint HTTP 500 errors block logins and CI/CD. Updated; remains open.\nTK-A103|critical|incident|Same outage; monitoring and SRE confirm regional authentication failure. Updated; remains open.\nTK-A104|low|service-request|Unrelated scheduled password reset with no urgency. Updated; remains open.",
+          "grader_checks": {
+            "normalized_before_caps": 0.43750000000000017,
+            "original_component_checks_penalties_and_caps_retained": true,
+            "positive_budget": 0.8,
+            "raw_earned_before_caps": 0.35000000000000014,
+            "schema": "positive-budget-v1"
+          },
+          "grading_contract": "positive-budget-v1",
+          "hard_pass": false,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "status": "open"
+                },
+                "message_index": 1,
+                "name": "helpdesk_list_tickets",
+                "timestamp": "2026-11-15T14:47:57.650573+00:00"
+              },
+              {
+                "args": {
+                  "query": "incident triage SOP"
+                },
+                "message_index": 3,
+                "name": "kb_search",
+                "timestamp": "2026-11-15T14:47:57.658758+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_brief"
+                },
+                "message_index": 5,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T14:48:03.678213+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-A101"
+                },
+                "message_index": 7,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:48:03.683314+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-A102"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:48:03.687031+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-A103"
+                },
+                "message_index": 11,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:48:03.694140+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-A104"
+                },
+                "message_index": 13,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:48:03.697719+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "KB-F01-SOP"
+                },
+                "message_index": 15,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T14:48:09.368491+00:00"
+              },
+              {
+                "args": {
+                  "category": "incident",
+                  "internal_note": "Correlated outage: TK-A101, TK-A102, and TK-A103 report AuthHub auth-cluster-3 unavailable in eu-west-1 starting approximately 08:14–08:15 UTC, with HTTP 500 from /api/auth/token and widespread authentication failure. Critical priority based on region-wide impact and blocked service-account CI/CD authentication. Related tickets retained open. KB incident triage index reviewed; referenced KB-F01-SOP unavailable, so classification is based on reported impact rather than verified SOP rules.",
+                  "priority": "critical",
+                  "tags": [
+                    "cluster-outage",
+                    "auth-cluster-3",
+                    "eu-west-1"
+                  ],
+                  "ticket_id": "TK-A101"
+                },
+                "message_index": 17,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:48:21.799235+00:00"
+              },
+              {
+                "args": {
+                  "category": "incident",
+                  "internal_note": "Correlated outage: TK-A101, TK-A102, and TK-A103 report AuthHub auth-cluster-3 unavailable in eu-west-1 starting approximately 08:14–08:15 UTC, with HTTP 500 from /api/auth/token and widespread authentication failure. Critical priority based on region-wide impact and blocked service-account CI/CD authentication. Related tickets retained open. KB incident triage index reviewed; referenced KB-F01-SOP unavailable, so classification is based on reported impact rather than verified SOP rules.",
+                  "priority": "critical",
+                  "tags": [
+                    "cluster-outage",
+                    "auth-cluster-3",
+                    "eu-west-1"
+                  ],
+                  "ticket_id": "TK-A102"
+                },
+                "message_index": 19,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:48:21.805458+00:00"
+              },
+              {
+                "args": {
+                  "category": "incident",
+                  "internal_note": "Correlated outage: TK-A101, TK-A102, and TK-A103 report AuthHub auth-cluster-3 unavailable in eu-west-1 starting approximately 08:14–08:15 UTC, with HTTP 500 from /api/auth/token and widespread authentication failure. Critical priority based on region-wide impact and blocked service-account CI/CD authentication. Related tickets retained open. KB incident triage index reviewed; referenced KB-F01-SOP unavailable, so classification is based on reported impact rather than verified SOP rules.",
+                  "priority": "critical",
+                  "tags": [
+                    "cluster-outage",
+                    "auth-cluster-3",
+                    "eu-west-1"
+                  ],
+                  "ticket_id": "TK-A103"
+                },
+                "message_index": 21,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:48:21.810613+00:00"
+              },
+              {
+                "args": {
+                  "category": "service-request",
+                  "internal_note": "Routine scheduled password reset due to the 90-day rotation policy; reporter states no urgency. No evidence linking this request to the auth-cluster-3 outage (TK-A101, TK-A102, TK-A103). Retained open; no password reset or credential sharing performed. KB full triage SOP unavailable; classified from the ticket description.",
+                  "priority": "low",
+                  "ticket_id": "TK-A104"
+                },
+                "message_index": 23,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:48:21.815869+00:00"
+              },
+              {
+                "args": {
+                  "action": "create",
+                  "name": "triage-correlated-outages-with-incomplete-kb",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 26,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T14:49:36.284511+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I01_skill_baseline_cold/evaluation/V2_F01_I01/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 1,
+            "skill_manage_action_counts": {
+              "create": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 4,
+              "helpdesk_list_tickets": 1,
+              "helpdesk_update_ticket": 4,
+              "kb_get_article": 2,
+              "kb_search": 1,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 0.7,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 0.5,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.5,
+            "skill_create_count": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": false,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": "2026-11-15T14:48:21.799235+00:00",
+            "first_write_endpoint": "http://127.0.0.1:56761/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 0.7,
+            "completion": 0.40249999999999997,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "V2_F01_I01",
+          "task_name": "F01 Skill Bootstrap — AuthHub Cold Start",
+          "task_score": 0.522,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 44.1016817088821,
+            "tool_time_s": 0.02651184709975496,
+            "wall_time_s": 44.12819355598185
+          },
+          "token_usage": {
+            "input_tokens": 95806,
+            "output_tokens": 840,
+            "total_tokens": 96646
+          },
+          "tool_dispatch_count": 12,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I01_skill_baseline_cold/evaluation/V2_F01_I01/objective/native-trace.jsonl",
+          "trace_id": "V2_F01_I01"
+        },
+        "score": 0
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "F01_I02_skill_learn_a",
+      "task_id": "V2_F01_I02",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I02_skill_learn_a/report.json",
+      "complete": false,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "triage-correlated-outages-with-incomplete-kb"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 6,
+              "hit_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close",
+                "distinct reporters",
+                "2-hour"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close",
+                "distinct reporters",
+                "2-hour"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "max_results": 10,
+                    "query": "Shared Incident SOP"
+                  },
+                  "message_index": 1,
+                  "name": "kb_search",
+                  "timestamp": "2026-11-15T14:49:53.213096+00:00"
+                },
+                {
+                  "args": {
+                    "status": "open"
+                  },
+                  "message_index": 3,
+                  "name": "helpdesk_list_tickets",
+                  "timestamp": "2026-11-15T14:49:53.221092+00:00"
+                },
+                {
+                  "args": {
+                    "name": "triage-correlated-outages-with-incomplete-kb"
+                  },
+                  "message_index": 5,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-15T14:49:53.232410+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_sop"
+                  },
+                  "message_index": 7,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T14:50:12.170080+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-B201"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:50:12.176834+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-B203"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:50:12.182169+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-B202"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:50:12.187112+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-B205"
+                  },
+                  "message_index": 15,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:50:12.191270+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-B204"
+                  },
+                  "message_index": 17,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:50:12.195685+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "content": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Triage shared cluster outages using the full Shared Incident SOP, verify its threshold and exclusions, and update qualifying tickets without closing them.\"\n---\n## Source and scope\nShared Incident SOP v1, KB article kb_f01_sop (updated 2026-04-01). Retrieve current KB guidance each run; follow current task limits. This skill now includes the full SOP despite its historical name. Do not treat a missing or incomplete KB as authority to invent SOP rules.\n## Procedure\n1. Use helpdesk_list_tickets to enumerate open tickets. Read every open ticket using helpdesk_get_ticket and identify cluster names, distinct reporters, timestamps, symptoms, and impact.\n2. Trigger: three or more tickets from distinct reporters all point to the same cluster failure within a 2-hour window. Correlate full descriptions rather than titles alone.\n3. Exclude requests, training tickets, and same-system low-impact issues. Do not escalate a single-reporter ticket unless it has a matching cluster error. Config drift or rate limit adjustments on the same cluster are not incidents unless they cause user-facing errors.\n4. For each qualifying cluster incident ticket only, use helpdesk_update_ticket to set priority=critical and category=cluster-incident. Add tags sev1-correlated and cross-team-verified, preserving existing unrelated tags.\n5. Add this exact internal note to each: 'SOP-F01 applied — awaiting root-cause owner assignment'.\n6. Do not close any ticket; leave resolution to on-call. Do not update excluded tickets.\n7. Inspect tool results to verify fields, tags, note, and open status. Retrieve tickets again if results do not establish the final state. Report only confirmed updates, one line per ticket: TICKET_ID|priority|category|why. Explain cluster membership and threshold evidence concisely.\n## Verification\nConfirm at least three distinct reporters and a 2-hour window for the same cluster failure; all selected tickets have matching failure evidence; exclusions remain untouched; required changes succeeded and no ticket was closed.\n",
+                    "expected_sha256": "9aa52255f1afc60d6f5cb9df089f76a239fc8a12b679e9a0bf2ef34ff55916c3",
+                    "name": "triage-correlated-outages-with-incomplete-kb",
+                    "reason": "The full Shared Incident SOP is now available; replace incomplete-KB fallback with verified SOP rules for reusable triage."
+                  },
+                  "message_index": 19,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T14:50:28.408773+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-B201"
+                  },
+                  "message_index": 21,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:50:33.224345+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-B202"
+                  },
+                  "message_index": 23,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:50:33.229502+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-B203"
+                  },
+                  "message_index": 25,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:50:33.234524+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I02_skill_learn_a/evaluation/V2_F01_I02/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 1,
+              "skill_update_count": 1,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 5,
+                "helpdesk_list_tickets": 1,
+                "helpdesk_update_ticket": 3,
+                "kb_get_article": 1,
+                "kb_search": 1,
+                "skill_manage": 1,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 1,
+            "skill_docs": {
+              "triage-correlated-outages-with-incomplete-kb": {
+                "content": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Triage shared cluster outages using the full Shared Incident SOP, verify its threshold and exclusions, and update qualifying tickets without closing them.\"\n---\n## Source and scope\nShared Incident SOP v1, KB article kb_f01_sop (updated 2026-04-01). Retrieve current KB guidance each run; follow current task limits. This skill now includes the full SOP despite its historical name. Do not treat a missing or incomplete KB as authority to invent SOP rules.\n## Procedure\n1. Use helpdesk_list_tickets to enumerate open tickets. Read every open ticket using helpdesk_get_ticket and identify cluster names, distinct reporters, timestamps, symptoms, and impact.\n2. Trigger: three or more tickets from distinct reporters all point to the same cluster failure within a 2-hour window. Correlate full descriptions rather than titles alone.\n3. Exclude requests, training tickets, and same-system low-impact issues. Do not escalate a single-reporter ticket unless it has a matching cluster error. Config drift or rate limit adjustments on the same cluster are not incidents unless they cause user-facing errors.\n4. For each qualifying cluster incident ticket only, use helpdesk_update_ticket to set priority=critical and category=cluster-incident. Add tags sev1-correlated and cross-team-verified, preserving existing unrelated tags.\n5. Add this exact internal note to each: 'SOP-F01 applied — awaiting root-cause owner assignment'.\n6. Do not close any ticket; leave resolution to on-call. Do not update excluded tickets.\n7. Inspect tool results to verify fields, tags, note, and open status. Retrieve tickets again if results do not establish the final state. Report only confirmed updates, one line per ticket: TICKET_ID|priority|category|why. Explain cluster membership and threshold evidence concisely.\n## Verification\nConfirm at least three distinct reporters and a 2-hour window for the same cluster failure; all selected tickets have matching failure evidence; exclusions remain untouched; required changes succeeded and no ticket was closed.\n",
+                "preview": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Triage shared cluster outages using the full Shared Incident SOP, verify its threshold and exclusions, and update qualifying tickets without closing them.\"\n---\n## Source and scope\nShared Incident SOP v1, KB article kb_f01_sop (updated 2026-04-01). Retrieve current KB guidance each run; follow current task limits. This skill now includes the full SOP despite its historical name. Do not treat a missing or incomplete KB as authority to invent SOP rules.\n## Procedure\n1. Use helpdesk_list_tickets to enumerate open tickets. Read every open ticket using helpdesk_get_ticket and identify cluster names, distinct reporters, timestamps, symptoms, and impact.\n2. Trigger: three or more tickets from distinct reporters all point to the same cluster failure within a 2-hour window. Correlate full descriptions rather than titles alone.\n3. Exclude requests, training tickets, and same-system low-impact issues. Do not escalate a single-reporter ticket unless it has a matching cluster error. Config drift or rate limit adjustments on the same cluster are not incidents unless they cause user-facing errors.\n4. For each qualifying cluster incident ticket only, use helpdesk_update_ticket to set priority=critical and category=cluster-incident. Add tags sev1-correlated and cross-team-verified, preserving existing unrelated tags.\n5. Add this exact internal note to each: 'SOP-F01 applied — awaiting root-cause owner assignment'.\n6. Do not close any ticket; leave resolution to on-call. Do not update excluded tickets.\n7. Inspect tool results to verify fields, tags, note, and open status. Retrieve tickets again if results do not establish the final state. Report only confirmed updates, one line per ticket: TICKET_ID|priority|category|why. Explain cluster membership and threshold evidence concisely.\n## Verification\nConfirm at least three distinct reporters and a 2-hour window for the same cluster failure; all selected tickets have matching failure evidence; exclusions remain untouched; required changes succeeded and no ticket was closed.\n",
+                "sha1": "b281b70c3604d04f287fdad91e3f21938f3d8505"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "TK-B201|critical|cluster-incident|payroll-cluster-2 salary 503s; three distinct reporters within 19 minutes meet SOP threshold.\nTK-B202|critical|cluster-incident|payroll-cluster-2 worker OOM failures match the qualifying outage.\nTK-B203|critical|cluster-incident|Confirms payroll-cluster-2 outage with matching 503s and OOM failures.",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "max_results": 10,
+                  "query": "Shared Incident SOP"
+                },
+                "message_index": 1,
+                "name": "kb_search",
+                "timestamp": "2026-11-15T14:49:53.213096+00:00"
+              },
+              {
+                "args": {
+                  "status": "open"
+                },
+                "message_index": 3,
+                "name": "helpdesk_list_tickets",
+                "timestamp": "2026-11-15T14:49:53.221092+00:00"
+              },
+              {
+                "args": {
+                  "name": "triage-correlated-outages-with-incomplete-kb"
+                },
+                "message_index": 5,
+                "name": "skill_view",
+                "timestamp": "2026-11-15T14:49:53.232410+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_sop"
+                },
+                "message_index": 7,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T14:50:12.170080+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-B201"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:50:12.176834+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-B203"
+                },
+                "message_index": 11,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:50:12.182169+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-B202"
+                },
+                "message_index": 13,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:50:12.187112+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-B205"
+                },
+                "message_index": 15,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:50:12.191270+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-B204"
+                },
+                "message_index": 17,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:50:12.195685+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "content": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Triage shared cluster outages using the full Shared Incident SOP, verify its threshold and exclusions, and update qualifying tickets without closing them.\"\n---\n## Source and scope\nShared Incident SOP v1, KB article kb_f01_sop (updated 2026-04-01). Retrieve current KB guidance each run; follow current task limits. This skill now includes the full SOP despite its historical name. Do not treat a missing or incomplete KB as authority to invent SOP rules.\n## Procedure\n1. Use helpdesk_list_tickets to enumerate open tickets. Read every open ticket using helpdesk_get_ticket and identify cluster names, distinct reporters, timestamps, symptoms, and impact.\n2. Trigger: three or more tickets from distinct reporters all point to the same cluster failure within a 2-hour window. Correlate full descriptions rather than titles alone.\n3. Exclude requests, training tickets, and same-system low-impact issues. Do not escalate a single-reporter ticket unless it has a matching cluster error. Config drift or rate limit adjustments on the same cluster are not incidents unless they cause user-facing errors.\n4. For each qualifying cluster incident ticket only, use helpdesk_update_ticket to set priority=critical and category=cluster-incident. Add tags sev1-correlated and cross-team-verified, preserving existing unrelated tags.\n5. Add this exact internal note to each: 'SOP-F01 applied — awaiting root-cause owner assignment'.\n6. Do not close any ticket; leave resolution to on-call. Do not update excluded tickets.\n7. Inspect tool results to verify fields, tags, note, and open status. Retrieve tickets again if results do not establish the final state. Report only confirmed updates, one line per ticket: TICKET_ID|priority|category|why. Explain cluster membership and threshold evidence concisely.\n## Verification\nConfirm at least three distinct reporters and a 2-hour window for the same cluster failure; all selected tickets have matching failure evidence; exclusions remain untouched; required changes succeeded and no ticket was closed.\n",
+                  "expected_sha256": "9aa52255f1afc60d6f5cb9df089f76a239fc8a12b679e9a0bf2ef34ff55916c3",
+                  "name": "triage-correlated-outages-with-incomplete-kb",
+                  "reason": "The full Shared Incident SOP is now available; replace incomplete-KB fallback with verified SOP rules for reusable triage."
+                },
+                "message_index": 19,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T14:50:28.408773+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-B201"
+                },
+                "message_index": 21,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:50:33.224345+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-B202"
+                },
+                "message_index": 23,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:50:33.229502+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-B203"
+                },
+                "message_index": 25,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:50:33.234524+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I02_skill_learn_a/evaluation/V2_F01_I02/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 1,
+            "skill_update_count": 1,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 5,
+              "helpdesk_list_tickets": 1,
+              "helpdesk_update_ticket": 3,
+              "kb_get_article": 1,
+              "kb_search": 1,
+              "skill_manage": 1,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "sev1-correlated",
+              "cross-team-verified",
+              "critical",
+              "do not close",
+              "distinct reporters",
+              "2-hour"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T14:49:53.232410+00:00",
+            "first_write_at": "2026-11-15T14:50:33.224345+00:00",
+            "first_write_endpoint": "http://127.0.0.1:39093/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "V2_F01_I02",
+          "task_name": "F01 Skill Bootstrap — PayrollSync Learn A",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 65.90190201206133,
+            "tool_time_s": 0.08963886392302811,
+            "wall_time_s": 65.99154087598436
+          },
+          "token_usage": {
+            "input_tokens": 105968,
+            "output_tokens": 1075,
+            "total_tokens": 107043
+          },
+          "tool_dispatch_count": 12,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I02_skill_learn_a/evaluation/V2_F01_I02/objective/native-trace.jsonl",
+          "trace_id": "V2_F01_I02"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "F01_I03_skill_update_or_stabilize",
+      "task_id": "V2_F01_I03",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I03_skill_update_or_stabilize/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 4,
+              "hit_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "triage-correlated-outages-with-incomplete-kb"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-15T14:52:23.190959+00:00"
+                },
+                {
+                  "args": {},
+                  "message_index": 3,
+                  "name": "helpdesk_list_tickets",
+                  "timestamp": "2026-11-15T14:52:23.200849+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-C302"
+                  },
+                  "message_index": 5,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:52:28.989935+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-C301"
+                  },
+                  "message_index": 7,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:52:28.994935+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-C303"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:52:28.999663+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-C304"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:52:29.003939+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-C305"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:52:29.007747+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_sop"
+                  },
+                  "message_index": 15,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T14:52:35.500901+00:00"
+                },
+                {
+                  "args": {
+                    "query": "Shared Incident SOP"
+                  },
+                  "message_index": 17,
+                  "name": "kb_search",
+                  "timestamp": "2026-11-15T14:52:39.823931+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_brief"
+                  },
+                  "message_index": 19,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T14:52:44.580095+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-C302"
+                  },
+                  "message_index": 21,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:52:51.341494+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-C301"
+                  },
+                  "message_index": 23,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:52:51.346649+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-C303"
+                  },
+                  "message_index": 25,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:52:51.351392+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I03_skill_update_or_stabilize/evaluation/V2_F01_I03/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 1,
+              "skill_update_count": 0,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 5,
+                "helpdesk_list_tickets": 1,
+                "helpdesk_update_ticket": 3,
+                "kb_get_article": 2,
+                "kb_search": 1,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 1,
+            "skill_docs": {
+              "triage-correlated-outages-with-incomplete-kb": {
+                "content": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Triage shared cluster outages using the full Shared Incident SOP, verify its threshold and exclusions, and update qualifying tickets without closing them.\"\n---\n## Source and scope\nShared Incident SOP v1, KB article kb_f01_sop (updated 2026-04-01). Retrieve current KB guidance each run; follow current task limits. This skill now includes the full SOP despite its historical name. Do not treat a missing or incomplete KB as authority to invent SOP rules.\n## Procedure\n1. Use helpdesk_list_tickets to enumerate open tickets. Read every open ticket using helpdesk_get_ticket and identify cluster names, distinct reporters, timestamps, symptoms, and impact.\n2. Trigger: three or more tickets from distinct reporters all point to the same cluster failure within a 2-hour window. Correlate full descriptions rather than titles alone.\n3. Exclude requests, training tickets, and same-system low-impact issues. Do not escalate a single-reporter ticket unless it has a matching cluster error. Config drift or rate limit adjustments on the same cluster are not incidents unless they cause user-facing errors.\n4. For each qualifying cluster incident ticket only, use helpdesk_update_ticket to set priority=critical and category=cluster-incident. Add tags sev1-correlated and cross-team-verified, preserving existing unrelated tags.\n5. Add this exact internal note to each: 'SOP-F01 applied — awaiting root-cause owner assignment'.\n6. Do not close any ticket; leave resolution to on-call. Do not update excluded tickets.\n7. Inspect tool results to verify fields, tags, note, and open status. Retrieve tickets again if results do not establish the final state. Report only confirmed updates, one line per ticket: TICKET_ID|priority|category|why. Explain cluster membership and threshold evidence concisely.\n## Verification\nConfirm at least three distinct reporters and a 2-hour window for the same cluster failure; all selected tickets have matching failure evidence; exclusions remain untouched; required changes succeeded and no ticket was closed.\n",
+                "preview": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Triage shared cluster outages using the full Shared Incident SOP, verify its threshold and exclusions, and update qualifying tickets without closing them.\"\n---\n## Source and scope\nShared Incident SOP v1, KB article kb_f01_sop (updated 2026-04-01). Retrieve current KB guidance each run; follow current task limits. This skill now includes the full SOP despite its historical name. Do not treat a missing or incomplete KB as authority to invent SOP rules.\n## Procedure\n1. Use helpdesk_list_tickets to enumerate open tickets. Read every open ticket using helpdesk_get_ticket and identify cluster names, distinct reporters, timestamps, symptoms, and impact.\n2. Trigger: three or more tickets from distinct reporters all point to the same cluster failure within a 2-hour window. Correlate full descriptions rather than titles alone.\n3. Exclude requests, training tickets, and same-system low-impact issues. Do not escalate a single-reporter ticket unless it has a matching cluster error. Config drift or rate limit adjustments on the same cluster are not incidents unless they cause user-facing errors.\n4. For each qualifying cluster incident ticket only, use helpdesk_update_ticket to set priority=critical and category=cluster-incident. Add tags sev1-correlated and cross-team-verified, preserving existing unrelated tags.\n5. Add this exact internal note to each: 'SOP-F01 applied — awaiting root-cause owner assignment'.\n6. Do not close any ticket; leave resolution to on-call. Do not update excluded tickets.\n7. Inspect tool results to verify fields, tags, note, and open status. Retrieve tickets again if results do not establish the final state. Report only confirmed updates, one line per ticket: TICKET_ID|priority|category|why. Explain cluster membership and threshold evidence concisely.\n## Verification\nConfirm at least three distinct reporters and a 2-hour window for the same cluster failure; all selected tickets have matching failure evidence; exclusions remain untouched; required changes succeeded and no ticket was closed.\n",
+                "sha1": "b281b70c3604d04f287fdad91e3f21938f3d8505"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "TK-C301|critical|cluster-incident|datasync-cluster-1 replication lag; 3 distinct reporters within 35 minutes; remains open\nTK-C302|critical|cluster-incident|datasync-cluster-1 saturation and ETL timeouts; 3 distinct reporters within 35 minutes; remains open\nTK-C303|critical|cluster-incident|datasync-cluster-1 cascading pod starvation, confirmed shared cause; 3 distinct reporters within 35 minutes; remains open",
+          "grader_checks": {
+            "normalized_before_caps": 1.0,
+            "original_component_checks_penalties_and_caps_retained": true,
+            "positive_budget": 0.8500000000000001,
+            "raw_earned_before_caps": 0.8500000000000002,
+            "schema": "positive-budget-v1"
+          },
+          "grading_contract": "positive-budget-v1",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "triage-correlated-outages-with-incomplete-kb"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-15T14:52:23.190959+00:00"
+              },
+              {
+                "args": {},
+                "message_index": 3,
+                "name": "helpdesk_list_tickets",
+                "timestamp": "2026-11-15T14:52:23.200849+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-C302"
+                },
+                "message_index": 5,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:52:28.989935+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-C301"
+                },
+                "message_index": 7,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:52:28.994935+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-C303"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:52:28.999663+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-C304"
+                },
+                "message_index": 11,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:52:29.003939+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-C305"
+                },
+                "message_index": 13,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:52:29.007747+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_sop"
+                },
+                "message_index": 15,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T14:52:35.500901+00:00"
+              },
+              {
+                "args": {
+                  "query": "Shared Incident SOP"
+                },
+                "message_index": 17,
+                "name": "kb_search",
+                "timestamp": "2026-11-15T14:52:39.823931+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_brief"
+                },
+                "message_index": 19,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T14:52:44.580095+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-C302"
+                },
+                "message_index": 21,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:52:51.341494+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-C301"
+                },
+                "message_index": 23,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:52:51.346649+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-C303"
+                },
+                "message_index": 25,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:52:51.351392+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I03_skill_update_or_stabilize/evaluation/V2_F01_I03/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 5,
+              "helpdesk_list_tickets": 1,
+              "helpdesk_update_ticket": 3,
+              "kb_get_article": 2,
+              "kb_search": 1,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "sev1-correlated",
+              "cross-team-verified",
+              "critical",
+              "do not close"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.75,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T14:52:23.190959+00:00",
+            "first_write_at": "2026-11-15T14:52:51.341494+00:00",
+            "first_write_endpoint": "http://127.0.0.1:50119/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "V2_F01_I03",
+          "task_name": "F01 Skill Bootstrap — DataSync Learn B",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 57.73101551097352,
+            "tool_time_s": 0.03351720503997058,
+            "wall_time_s": 57.76453271601349
+          },
+          "token_usage": {
+            "input_tokens": 178438,
+            "output_tokens": 650,
+            "total_tokens": 179088
+          },
+          "tool_dispatch_count": 12,
+          "total_turns": 8,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I03_skill_update_or_stabilize/evaluation/V2_F01_I03/objective/native-trace.jsonl",
+          "trace_id": "V2_F01_I03"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "F01_I04_skill_eval_near",
+      "task_id": "V2_F01_I04",
+      "branch": "from_anchor",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I04_skill_eval_near/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 4,
+              "hit_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "triage-correlated-outages-with-incomplete-kb"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-15T14:55:20.315494+00:00"
+                },
+                {
+                  "args": {
+                    "status": "open"
+                  },
+                  "message_index": 3,
+                  "name": "helpdesk_list_tickets",
+                  "timestamp": "2026-11-15T14:55:27.313660+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_sop"
+                  },
+                  "message_index": 5,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T14:55:27.323687+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D401"
+                  },
+                  "message_index": 7,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:55:33.849507+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D402"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:55:33.886709+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D403"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:55:33.891391+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D404"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:55:33.895282+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D405"
+                  },
+                  "message_index": 15,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:55:33.899728+00:00"
+                },
+                {
+                  "args": {
+                    "max_results": 5,
+                    "query": "Shared Incident SOP"
+                  },
+                  "message_index": 17,
+                  "name": "kb_search",
+                  "timestamp": "2026-11-15T14:55:33.905503+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-D401"
+                  },
+                  "message_index": 19,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:55:43.375084+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-D402"
+                  },
+                  "message_index": 21,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:55:43.380305+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-D403"
+                  },
+                  "message_index": 23,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:55:43.384252+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D401"
+                  },
+                  "message_index": 25,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:55:43.388739+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D402"
+                  },
+                  "message_index": 27,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:55:43.392572+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D403"
+                  },
+                  "message_index": 29,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:55:43.396534+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I04_skill_eval_near/evaluation/V2_F01_I04/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 1,
+              "skill_update_count": 0,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 8,
+                "helpdesk_list_tickets": 1,
+                "helpdesk_update_ticket": 3,
+                "kb_get_article": 1,
+                "kb_search": 1,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 1,
+            "skill_docs": {
+              "triage-correlated-outages-with-incomplete-kb": {
+                "content": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Triage shared cluster outages using the full Shared Incident SOP, verify its threshold and exclusions, and update qualifying tickets without closing them.\"\n---\n## Source and scope\nShared Incident SOP v1, KB article kb_f01_sop (updated 2026-04-01). Retrieve current KB guidance each run; follow current task limits. This skill now includes the full SOP despite its historical name. Do not treat a missing or incomplete KB as authority to invent SOP rules.\n## Procedure\n1. Use helpdesk_list_tickets to enumerate open tickets. Read every open ticket using helpdesk_get_ticket and identify cluster names, distinct reporters, timestamps, symptoms, and impact.\n2. Trigger: three or more tickets from distinct reporters all point to the same cluster failure within a 2-hour window. Correlate full descriptions rather than titles alone.\n3. Exclude requests, training tickets, and same-system low-impact issues. Do not escalate a single-reporter ticket unless it has a matching cluster error. Config drift or rate limit adjustments on the same cluster are not incidents unless they cause user-facing errors.\n4. For each qualifying cluster incident ticket only, use helpdesk_update_ticket to set priority=critical and category=cluster-incident. Add tags sev1-correlated and cross-team-verified, preserving existing unrelated tags.\n5. Add this exact internal note to each: 'SOP-F01 applied — awaiting root-cause owner assignment'.\n6. Do not close any ticket; leave resolution to on-call. Do not update excluded tickets.\n7. Inspect tool results to verify fields, tags, note, and open status. Retrieve tickets again if results do not establish the final state. Report only confirmed updates, one line per ticket: TICKET_ID|priority|category|why. Explain cluster membership and threshold evidence concisely.\n## Verification\nConfirm at least three distinct reporters and a 2-hour window for the same cluster failure; all selected tickets have matching failure evidence; exclusions remain untouched; required changes succeeded and no ticket was closed.\n",
+                "preview": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Triage shared cluster outages using the full Shared Incident SOP, verify its threshold and exclusions, and update qualifying tickets without closing them.\"\n---\n## Source and scope\nShared Incident SOP v1, KB article kb_f01_sop (updated 2026-04-01). Retrieve current KB guidance each run; follow current task limits. This skill now includes the full SOP despite its historical name. Do not treat a missing or incomplete KB as authority to invent SOP rules.\n## Procedure\n1. Use helpdesk_list_tickets to enumerate open tickets. Read every open ticket using helpdesk_get_ticket and identify cluster names, distinct reporters, timestamps, symptoms, and impact.\n2. Trigger: three or more tickets from distinct reporters all point to the same cluster failure within a 2-hour window. Correlate full descriptions rather than titles alone.\n3. Exclude requests, training tickets, and same-system low-impact issues. Do not escalate a single-reporter ticket unless it has a matching cluster error. Config drift or rate limit adjustments on the same cluster are not incidents unless they cause user-facing errors.\n4. For each qualifying cluster incident ticket only, use helpdesk_update_ticket to set priority=critical and category=cluster-incident. Add tags sev1-correlated and cross-team-verified, preserving existing unrelated tags.\n5. Add this exact internal note to each: 'SOP-F01 applied — awaiting root-cause owner assignment'.\n6. Do not close any ticket; leave resolution to on-call. Do not update excluded tickets.\n7. Inspect tool results to verify fields, tags, note, and open status. Retrieve tickets again if results do not establish the final state. Report only confirmed updates, one line per ticket: TICKET_ID|priority|category|why. Explain cluster membership and threshold evidence concisely.\n## Verification\nConfirm at least three distinct reporters and a 2-hour window for the same cluster failure; all selected tickets have matching failure evidence; exclusions remain untouched; required changes succeeded and no ticket was closed.\n",
+                "sha1": "b281b70c3604d04f287fdad91e3f21938f3d8505"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "TK-D401|critical|cluster-incident|notify-cluster-5 overload causes 504s and missing alerts; three distinct reporters within 23 minutes meet SOP threshold; remains open.\nTK-D402|critical|cluster-incident|Same notify-cluster-5 overload causes worker crashes and 200,000+ queued notifications; three distinct reporters within 23 minutes meet SOP threshold; remains open.\nTK-D403|critical|cluster-incident|Same notify-cluster-5 resource exhaustion causes connection rejection across three delivery channels; three distinct reporters within 23 minutes meet SOP threshold; remains open.",
+          "grader_checks": {
+            "normalized_before_caps": 1.0,
+            "original_component_checks_penalties_and_caps_retained": true,
+            "positive_budget": 0.88,
+            "raw_earned_before_caps": 0.8800000000000001,
+            "schema": "positive-budget-v1"
+          },
+          "grading_contract": "positive-budget-v1",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "triage-correlated-outages-with-incomplete-kb"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-15T14:55:20.315494+00:00"
+              },
+              {
+                "args": {
+                  "status": "open"
+                },
+                "message_index": 3,
+                "name": "helpdesk_list_tickets",
+                "timestamp": "2026-11-15T14:55:27.313660+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_sop"
+                },
+                "message_index": 5,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T14:55:27.323687+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D401"
+                },
+                "message_index": 7,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:55:33.849507+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D402"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:55:33.886709+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D403"
+                },
+                "message_index": 11,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:55:33.891391+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D404"
+                },
+                "message_index": 13,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:55:33.895282+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D405"
+                },
+                "message_index": 15,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:55:33.899728+00:00"
+              },
+              {
+                "args": {
+                  "max_results": 5,
+                  "query": "Shared Incident SOP"
+                },
+                "message_index": 17,
+                "name": "kb_search",
+                "timestamp": "2026-11-15T14:55:33.905503+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-D401"
+                },
+                "message_index": 19,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:55:43.375084+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-D402"
+                },
+                "message_index": 21,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:55:43.380305+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-D403"
+                },
+                "message_index": 23,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:55:43.384252+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D401"
+                },
+                "message_index": 25,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:55:43.388739+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D402"
+                },
+                "message_index": 27,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:55:43.392572+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D403"
+                },
+                "message_index": 29,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:55:43.396534+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I04_skill_eval_near/evaluation/V2_F01_I04/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 8,
+              "helpdesk_list_tickets": 1,
+              "helpdesk_update_ticket": 3,
+              "kb_get_article": 1,
+              "kb_search": 1,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "sev1-correlated",
+              "cross-team-verified",
+              "critical",
+              "do not close"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.75,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T14:55:20.315494+00:00",
+            "first_write_at": "2026-11-15T14:55:43.375084+00:00",
+            "first_write_endpoint": "http://127.0.0.1:42383/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "V2_F01_I04",
+          "task_name": "F01 Skill Bootstrap — NotifyHub Eval Near",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 54.83998931001406,
+            "tool_time_s": 0.03829709702404216,
+            "wall_time_s": 54.878286407038104
+          },
+          "token_usage": {
+            "input_tokens": 142472,
+            "output_tokens": 834,
+            "total_tokens": 143306
+          },
+          "tool_dispatch_count": 14,
+          "total_turns": 7,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I04_skill_eval_near/evaluation/V2_F01_I04/objective/native-trace.jsonl",
+          "trace_id": "V2_F01_I04"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "F01_I05_skill_eval_far",
+      "task_id": "V2_F01_I05",
+      "branch": "from_anchor",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I05_skill_eval_far/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 4,
+              "hit_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "triage-correlated-outages-with-incomplete-kb"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-15T14:57:36.714992+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_sop"
+                  },
+                  "message_index": 3,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T14:57:47.323047+00:00"
+                },
+                {
+                  "args": {
+                    "status": "open"
+                  },
+                  "message_index": 5,
+                  "name": "helpdesk_list_tickets",
+                  "timestamp": "2026-11-15T14:57:47.328405+00:00"
+                },
+                {
+                  "args": {
+                    "max_results": 10,
+                    "query": "Shared Incident SOP cluster outage threshold exclusions"
+                  },
+                  "message_index": 7,
+                  "name": "kb_search",
+                  "timestamp": "2026-11-15T14:57:54.276643+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-E504"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:57:54.283256+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-E502"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:57:54.287934+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-E503"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:57:54.292671+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-E501"
+                  },
+                  "message_index": 15,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:57:54.296962+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-E505"
+                  },
+                  "message_index": 17,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:57:54.301218+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_brief"
+                  },
+                  "message_index": 19,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T14:58:00.072281+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-E501"
+                  },
+                  "message_index": 21,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:58:07.802413+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-E502"
+                  },
+                  "message_index": 23,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:58:07.806736+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-E503"
+                  },
+                  "message_index": 25,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T14:58:07.810567+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I05_skill_eval_far/evaluation/V2_F01_I05/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 1,
+              "skill_update_count": 0,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 5,
+                "helpdesk_list_tickets": 1,
+                "helpdesk_update_ticket": 3,
+                "kb_get_article": 2,
+                "kb_search": 1,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 1,
+            "skill_docs": {
+              "triage-correlated-outages-with-incomplete-kb": {
+                "content": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Triage shared cluster outages using the full Shared Incident SOP, verify its threshold and exclusions, and update qualifying tickets without closing them.\"\n---\n## Source and scope\nShared Incident SOP v1, KB article kb_f01_sop (updated 2026-04-01). Retrieve current KB guidance each run; follow current task limits. This skill now includes the full SOP despite its historical name. Do not treat a missing or incomplete KB as authority to invent SOP rules.\n## Procedure\n1. Use helpdesk_list_tickets to enumerate open tickets. Read every open ticket using helpdesk_get_ticket and identify cluster names, distinct reporters, timestamps, symptoms, and impact.\n2. Trigger: three or more tickets from distinct reporters all point to the same cluster failure within a 2-hour window. Correlate full descriptions rather than titles alone.\n3. Exclude requests, training tickets, and same-system low-impact issues. Do not escalate a single-reporter ticket unless it has a matching cluster error. Config drift or rate limit adjustments on the same cluster are not incidents unless they cause user-facing errors.\n4. For each qualifying cluster incident ticket only, use helpdesk_update_ticket to set priority=critical and category=cluster-incident. Add tags sev1-correlated and cross-team-verified, preserving existing unrelated tags.\n5. Add this exact internal note to each: 'SOP-F01 applied — awaiting root-cause owner assignment'.\n6. Do not close any ticket; leave resolution to on-call. Do not update excluded tickets.\n7. Inspect tool results to verify fields, tags, note, and open status. Retrieve tickets again if results do not establish the final state. Report only confirmed updates, one line per ticket: TICKET_ID|priority|category|why. Explain cluster membership and threshold evidence concisely.\n## Verification\nConfirm at least three distinct reporters and a 2-hour window for the same cluster failure; all selected tickets have matching failure evidence; exclusions remain untouched; required changes succeeded and no ticket was closed.\n",
+                "preview": "---\nname: triage-correlated-outages-with-incomplete-kb\ndescription: \"Triage shared cluster outages using the full Shared Incident SOP, verify its threshold and exclusions, and update qualifying tickets without closing them.\"\n---\n## Source and scope\nShared Incident SOP v1, KB article kb_f01_sop (updated 2026-04-01). Retrieve current KB guidance each run; follow current task limits. This skill now includes the full SOP despite its historical name. Do not treat a missing or incomplete KB as authority to invent SOP rules.\n## Procedure\n1. Use helpdesk_list_tickets to enumerate open tickets. Read every open ticket using helpdesk_get_ticket and identify cluster names, distinct reporters, timestamps, symptoms, and impact.\n2. Trigger: three or more tickets from distinct reporters all point to the same cluster failure within a 2-hour window. Correlate full descriptions rather than titles alone.\n3. Exclude requests, training tickets, and same-system low-impact issues. Do not escalate a single-reporter ticket unless it has a matching cluster error. Config drift or rate limit adjustments on the same cluster are not incidents unless they cause user-facing errors.\n4. For each qualifying cluster incident ticket only, use helpdesk_update_ticket to set priority=critical and category=cluster-incident. Add tags sev1-correlated and cross-team-verified, preserving existing unrelated tags.\n5. Add this exact internal note to each: 'SOP-F01 applied — awaiting root-cause owner assignment'.\n6. Do not close any ticket; leave resolution to on-call. Do not update excluded tickets.\n7. Inspect tool results to verify fields, tags, note, and open status. Retrieve tickets again if results do not establish the final state. Report only confirmed updates, one line per ticket: TICKET_ID|priority|category|why. Explain cluster membership and threshold evidence concisely.\n## Verification\nConfirm at least three distinct reporters and a 2-hour window for the same cluster failure; all selected tickets have matching failure evidence; exclusions remain untouched; required changes succeeded and no ticket was closed.\n",
+                "sha1": "b281b70c3604d04f287fdad91e3f21938f3d8505"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "TK-E501|critical|cluster-incident|search-index-cluster-2 shard corruption; three distinct reporters within 25 minutes; remains open\nTK-E502|critical|cluster-incident|Same cluster corruption causing empty search results; three distinct reporters within 25 minutes; remains open\nTK-E503|critical|cluster-incident|OOM during corrupted-shard rebuild on same cluster; three distinct reporters within 25 minutes; remains open",
+          "grader_checks": {
+            "normalized_before_caps": 1.0,
+            "original_component_checks_penalties_and_caps_retained": true,
+            "positive_budget": 0.88,
+            "raw_earned_before_caps": 0.8800000000000001,
+            "schema": "positive-budget-v1"
+          },
+          "grading_contract": "positive-budget-v1",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "triage-correlated-outages-with-incomplete-kb"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-15T14:57:36.714992+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_sop"
+                },
+                "message_index": 3,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T14:57:47.323047+00:00"
+              },
+              {
+                "args": {
+                  "status": "open"
+                },
+                "message_index": 5,
+                "name": "helpdesk_list_tickets",
+                "timestamp": "2026-11-15T14:57:47.328405+00:00"
+              },
+              {
+                "args": {
+                  "max_results": 10,
+                  "query": "Shared Incident SOP cluster outage threshold exclusions"
+                },
+                "message_index": 7,
+                "name": "kb_search",
+                "timestamp": "2026-11-15T14:57:54.276643+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-E504"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:57:54.283256+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-E502"
+                },
+                "message_index": 11,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:57:54.287934+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-E503"
+                },
+                "message_index": 13,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:57:54.292671+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-E501"
+                },
+                "message_index": 15,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:57:54.296962+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-E505"
+                },
+                "message_index": 17,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:57:54.301218+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_brief"
+                },
+                "message_index": 19,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T14:58:00.072281+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-E501"
+                },
+                "message_index": 21,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:58:07.802413+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-E502"
+                },
+                "message_index": 23,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:58:07.806736+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-E503"
+                },
+                "message_index": 25,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T14:58:07.810567+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I05_skill_eval_far/evaluation/V2_F01_I05/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 5,
+              "helpdesk_list_tickets": 1,
+              "helpdesk_update_ticket": 3,
+              "kb_get_article": 2,
+              "kb_search": 1,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "sev1-correlated",
+              "cross-team-verified",
+              "critical",
+              "do not close"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.75,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T14:57:36.714992+00:00",
+            "first_write_at": "2026-11-15T14:58:07.802413+00:00",
+            "first_write_endpoint": "http://127.0.0.1:57237/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "V2_F01_I05",
+          "task_name": "F01 Skill Bootstrap — SearchIndex Eval Far",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 61.773034260142595,
+            "tool_time_s": 0.036640476901084185,
+            "wall_time_s": 61.80967473704368
+          },
+          "token_usage": {
+            "input_tokens": 133186,
+            "output_tokens": 761,
+            "total_tokens": 133947
+          },
+          "tool_dispatch_count": 12,
+          "total_turns": 8,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_I05_skill_eval_far/evaluation/V2_F01_I05/objective/native-trace.jsonl",
+          "trace_id": "V2_F01_I05"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "F01_C02_control_shortcut",
+      "task_id": "V2_F01_C02",
+      "branch": "fresh",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C02_control_shortcut/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [
+              "correlate-helpdesk-cluster-incidents"
+            ],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 1,
+              "hit_keywords": [
+                "do not close"
+              ],
+              "hit_rate": 0.25,
+              "required_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close"
+              ]
+            },
+            "skill_count_delta": 1,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "status": "open"
+                  },
+                  "message_index": 1,
+                  "name": "helpdesk_list_tickets",
+                  "timestamp": "2026-11-15T14:59:51.040440+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-A102"
+                  },
+                  "message_index": 3,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:59:56.262988+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-A101"
+                  },
+                  "message_index": 5,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:59:56.267057+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-A103"
+                  },
+                  "message_index": 7,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:59:56.270305+00:00"
+                },
+                {
+                  "args": {
+                    "max_results": 10,
+                    "query": "Shared Incident SOP v1 cluster failure correlation"
+                  },
+                  "message_index": 9,
+                  "name": "kb_search",
+                  "timestamp": "2026-11-15T14:59:56.274645+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-A104"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T14:59:56.281954+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_brief"
+                  },
+                  "message_index": 13,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T15:00:00.024970+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "KB-F01-SOP"
+                  },
+                  "message_index": 15,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T15:00:04.125341+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-A101"
+                  },
+                  "message_index": 17,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:00:10.988673+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-A102"
+                  },
+                  "message_index": 19,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:00:10.993696+00:00"
+                },
+                {
+                  "args": {
+                    "category": "cluster-incident",
+                    "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                    "priority": "critical",
+                    "tags": [
+                      "sev1-correlated",
+                      "cross-team-verified"
+                    ],
+                    "ticket_id": "TK-A103"
+                  },
+                  "message_index": 21,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:00:10.997777+00:00"
+                },
+                {
+                  "args": {
+                    "action": "create",
+                    "name": "correlate-helpdesk-cluster-incidents",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 24,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T15:01:21.905694+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C02_control_shortcut/evaluation/V2_F01_C02/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 1,
+              "skill_manage_action_counts": {
+                "create": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 4,
+                "helpdesk_list_tickets": 1,
+                "helpdesk_update_ticket": 3,
+                "kb_get_article": 2,
+                "kb_search": 1,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 1,
+            "skill_docs": {
+              "correlate-helpdesk-cluster-incidents": {
+                "content": "---\nname: correlate-helpdesk-cluster-incidents\ndescription: \"Triage open helpdesk tickets against the current shared-incident SOP using full ticket details, KB consultation, cross-reporter correlation, and verified selective updates.\"\n---\n## 适用条件\nUse when asked to identify and update tickets belonging to a shared cluster failure under an explicit incident SOP. Current task instructions govern thresholds, required fields, notes, and output format.\n## 排除条件\nDo not classify requests, training, low-impact same-system issues, or non-impacting configuration/rate-limit changes as incidents merely because they mention the same system. Do not escalate an isolated report without matching cluster-error evidence.\n## 操作步骤\n1. List open tickets with the helpdesk tool, then retrieve every listed ticket's full details. Use returned identifiers rather than guessed IDs or titles alone.\n2. Search the KB and retrieve relevant articles when required. Distinguish an index or brief from the full procedure and follow its reference if available.\n3. If a referenced article is unavailable, do not invent its rules or claim to have read it. Apply the explicit current task SOP when sufficient; seek clarification if necessary decision rules are missing.\n4. Group tickets by cluster and matching user-facing failure symptoms. Compare reporters and timestamps against the current SOP's distinct-reporter threshold and time window.\n5. Evaluate each ticket separately for exclusions. Shared system or cluster names alone do not establish a shared incident; routine requests remain unchanged.\n6. For each qualifying ticket, call the update tool with the SOP's required priority, category, tags, and exact internal note. Do not close tickets when resolution belongs to on-call.\n7. Inspect update results for success and required field values, including the ticket remaining open. Do not report an attempted or failed mutation as completed.\n8. Return the requested per-ticket output format, using confirmed field values and concise correlation or exclusion reasons. Represent unset fields accurately rather than inventing defaults.\n## 验证\n- Every open ticket returned by discovery has a corresponding detail read before classification.\n- The incident group meets the current SOP's reporter and timing criteria and shares a supported cluster failure; excluded requests are not updated.\n- Required KB consultation is evidenced, and unavailable referenced content is not treated as retrieved guidance.\n- Successful update responses confirm required fields and open status; final output agrees with these responses and clearly identifies unchanged tickets.\n组合依赖 []\n",
+                "preview": "---\nname: correlate-helpdesk-cluster-incidents\ndescription: \"Triage open helpdesk tickets against the current shared-incident SOP using full ticket details, KB consultation, cross-reporter correlation, and verified selective updates.\"\n---\n## 适用条件\nUse when asked to identify and update tickets belonging to a shared cluster failure under an explicit incident SOP. Current task instructions govern thresholds, required fields, notes, and output format.\n## 排除条件\nDo not classify requests, training, low-impact same-system issues, or non-impacting configuration/rate-limit changes as incidents merely because they mention the same system. Do not escalate an isolated report without matching cluster-error evidence.\n## 操作步骤\n1. List open tickets with the helpdesk tool, then retrieve every listed ticket's full details. Use returned identifiers rather than guessed IDs or titles alone.\n2. Search the KB and retrieve relevant articles when required. Distinguish an index or brief from the full procedure and follow its reference if available.\n3. If a referenced article is unavailable, do not invent its rules or claim to have read it. Apply the explicit current task SOP when sufficient; seek clarification if necessary decision rules are missing.\n4. Group tickets by cluster and matching user-facing failure symptoms. Compare reporters and timestamps against the current SOP's distinct-reporter threshold and time window.\n5. Evaluate each ticket separately for exclusions. Shared system or cluster names alone do not establish a shared incident; routine requests remain unchanged.\n6. For each qualifying ticket, call the update tool with the SOP's required priority, category, tags, and exact internal note. Do not close tickets when resolution belongs to on-call.\n7. Inspect update results for success and required field values, including the ticket remaining open. Do not report an attempted or failed mutation as completed.\n8. Return the requested per-ticket output format, using confirmed field values and concise correlation or exclusion reasons. Represent unset fields accurately rather than inventing defaults.\n## 验证\n- Every open ticket returned by discovery has a corresponding detail read before classification.\n- The incident group meets the current SOP's reporter and timing criteria and shares a supported cluster failure; excluded requests are not updated.\n- Required KB consultation is evidenced, and unavailable referenced content is not treated as retrieved guidance.\n- Successful update responses confirm required fields and open status; final output agrees with these responses and clearly identifies unchanged tickets.\n组合依赖 []\n",
+                "sha1": "662e4df237969c3fa9a3b52a814c2177c289f60b"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "TK-A101|critical|cluster-incident|auth-cluster-3 failure corroborated by three distinct reporters within 14 minutes; tags and internal note applied; left open.\nTK-A102|critical|cluster-incident|Matching auth-cluster-3 HTTP 500 errors; three distinct reporters within 14 minutes; tags and internal note applied; left open.\nTK-A103|critical|cluster-incident|Matching auth-cluster-3 outage and login failures; three distinct reporters within 14 minutes; tags and internal note applied; left open.\nTK-A104|||Unchanged: routine password reset request; excluded by SOP; priority and category unset.",
+          "grader_checks": {
+            "normalized_before_caps": 1.0,
+            "original_component_checks_penalties_and_caps_retained": true,
+            "positive_budget": 0.8,
+            "raw_earned_before_caps": 0.8000000000000002,
+            "schema": "positive-budget-v1"
+          },
+          "grading_contract": "positive-budget-v1",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "status": "open"
+                },
+                "message_index": 1,
+                "name": "helpdesk_list_tickets",
+                "timestamp": "2026-11-15T14:59:51.040440+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-A102"
+                },
+                "message_index": 3,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:59:56.262988+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-A101"
+                },
+                "message_index": 5,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:59:56.267057+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-A103"
+                },
+                "message_index": 7,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:59:56.270305+00:00"
+              },
+              {
+                "args": {
+                  "max_results": 10,
+                  "query": "Shared Incident SOP v1 cluster failure correlation"
+                },
+                "message_index": 9,
+                "name": "kb_search",
+                "timestamp": "2026-11-15T14:59:56.274645+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-A104"
+                },
+                "message_index": 11,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T14:59:56.281954+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_brief"
+                },
+                "message_index": 13,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T15:00:00.024970+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "KB-F01-SOP"
+                },
+                "message_index": 15,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T15:00:04.125341+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-A101"
+                },
+                "message_index": 17,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:00:10.988673+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-A102"
+                },
+                "message_index": 19,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:00:10.993696+00:00"
+              },
+              {
+                "args": {
+                  "category": "cluster-incident",
+                  "internal_note": "SOP-F01 applied — awaiting root-cause owner assignment",
+                  "priority": "critical",
+                  "tags": [
+                    "sev1-correlated",
+                    "cross-team-verified"
+                  ],
+                  "ticket_id": "TK-A103"
+                },
+                "message_index": 21,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:00:10.997777+00:00"
+              },
+              {
+                "args": {
+                  "action": "create",
+                  "name": "correlate-helpdesk-cluster-incidents",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 24,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T15:01:21.905694+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C02_control_shortcut/evaluation/V2_F01_C02/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 1,
+            "skill_manage_action_counts": {
+              "create": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 4,
+              "helpdesk_list_tickets": 1,
+              "helpdesk_update_ticket": 3,
+              "kb_get_article": 2,
+              "kb_search": 1,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.25,
+            "artifact_rule_quality": 0.25,
+            "artifact_rule_quality_keywords": [
+              "do not close"
+            ],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.416667,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.75,
+            "skill_create_count": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": "2026-11-15T15:00:10.988673+00:00",
+            "first_write_endpoint": "http://127.0.0.1:44613/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "V2_F01_C02",
+          "task_name": "F01 Control — Shortcut (SOP in Prompt)",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 48.764951538003515,
+            "tool_time_s": 0.026912129018455744,
+            "wall_time_s": 48.79186366702197
+          },
+          "token_usage": {
+            "input_tokens": 140406,
+            "output_tokens": 575,
+            "total_tokens": 140981
+          },
+          "tool_dispatch_count": 11,
+          "total_turns": 7,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C02_control_shortcut/evaluation/V2_F01_C02/objective/native-trace.jsonl",
+          "trace_id": "V2_F01_C02"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "F01_C03_control_surface_memorization",
+      "task_id": "V2_F01_C03",
+      "branch": "fresh",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C03_control_surface_memorization/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [
+              "shared-infrastructure-ticket-triage"
+            ],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 1,
+              "hit_keywords": [
+                "critical"
+              ],
+              "hit_rate": 0.25,
+              "required_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close"
+              ]
+            },
+            "skill_count_delta": 1,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "status": "open"
+                  },
+                  "message_index": 1,
+                  "name": "helpdesk_list_tickets",
+                  "timestamp": "2026-11-15T15:01:41.818338+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D401"
+                  },
+                  "message_index": 3,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T15:01:48.696642+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D402"
+                  },
+                  "message_index": 5,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T15:01:48.700523+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D404"
+                  },
+                  "message_index": 7,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T15:01:48.704001+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D405"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T15:01:48.711364+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D403"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T15:01:48.715138+00:00"
+                },
+                {
+                  "args": {
+                    "max_results": 5,
+                    "query": "ticket triage priority category incident shared infrastructure"
+                  },
+                  "message_index": 13,
+                  "name": "kb_search",
+                  "timestamp": "2026-11-15T15:01:48.720669+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_brief"
+                  },
+                  "message_index": 15,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T15:01:55.119455+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "KB-F01-SOP"
+                  },
+                  "message_index": 17,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T15:02:00.108907+00:00"
+                },
+                {
+                  "args": {
+                    "max_results": 5,
+                    "query": "KB-F01-SOP"
+                  },
+                  "message_index": 19,
+                  "name": "kb_search",
+                  "timestamp": "2026-11-15T15:02:04.598543+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_sop"
+                  },
+                  "message_index": 21,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T15:02:09.228179+00:00"
+                },
+                {
+                  "args": {
+                    "category": "incident-management",
+                    "max_results": 20,
+                    "query": ""
+                  },
+                  "message_index": 23,
+                  "name": "kb_search",
+                  "timestamp": "2026-11-15T15:02:15.911807+00:00"
+                },
+                {
+                  "args": {
+                    "category": "incident",
+                    "internal_note": "Critical shared infrastructure outage: notify-cluster-5 overload has stopped notification jobs and critical mobile alerts since 15:30 UTC. Correlate with TK-D402 and TK-D403; TK-D403 reports resource exhaustion affecting push, SMS and email-trigger. Needs immediate SRE/infrastructure attention and coordinated incident response. Leave open.",
+                    "priority": "critical",
+                    "tags": [
+                      "shared-infrastructure",
+                      "notify-cluster-5",
+                      "ap-southeast-1"
+                    ],
+                    "ticket_id": "TK-D401"
+                  },
+                  "message_index": 25,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:02:40.677947+00:00"
+                },
+                {
+                  "args": {
+                    "category": "incident",
+                    "internal_note": "Part of the same notify-cluster-5 outage as TK-D401 and TK-D403: coordinator unreachable, worker crash loops and over 200,000 queued notifications. Needs immediate SRE/infrastructure attention with shared incident coordination. Leave open.",
+                    "priority": "critical",
+                    "tags": [
+                      "shared-infrastructure",
+                      "notify-cluster-5",
+                      "ap-southeast-1"
+                    ],
+                    "ticket_id": "TK-D402"
+                  },
+                  "message_index": 27,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:02:40.682862+00:00"
+                },
+                {
+                  "args": {
+                    "category": "incident",
+                    "internal_note": "Shared cluster-level outage confirmed by SRE: resource exhaustion rejects connections and affects push, SMS and email-trigger delivery. Correlate TK-D401 and TK-D402 under this shared infrastructure incident; prioritize immediate SRE/infrastructure response and recovery of delivery/backlog. Leave open.",
+                    "priority": "critical",
+                    "tags": [
+                      "shared-infrastructure",
+                      "notify-cluster-5",
+                      "ap-southeast-1"
+                    ],
+                    "ticket_id": "TK-D403"
+                  },
+                  "message_index": 29,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:02:40.687212+00:00"
+                },
+                {
+                  "args": {
+                    "category": "training",
+                    "internal_note": "Routine training request for four new support staff next week; arrange a one-hour NotifyHub admin session Monday or Tuesday afternoon. No reported service failure or evidence linking this request to the notify-cluster-5 outage. Leave open.",
+                    "priority": "low",
+                    "ticket_id": "TK-D404"
+                  },
+                  "message_index": 31,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:02:40.691441+00:00"
+                },
+                {
+                  "args": {
+                    "category": "maintenance",
+                    "internal_note": "Routine configuration drift: 2000 req/s versus baseline 2048 req/s, explicitly reported as having no user-facing effect. Schedule baseline realignment for the next maintenance window. Shares the cluster with TK-D401/TK-D402/TK-D403 but no evidence establishes this drift as an outage cause; retain low priority unless new impact evidence emerges. Leave open.",
+                    "priority": "low",
+                    "tags": [
+                      "notify-cluster-5"
+                    ],
+                    "ticket_id": "TK-D405"
+                  },
+                  "message_index": 33,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:02:40.695802+00:00"
+                },
+                {
+                  "args": {
+                    "action": "create",
+                    "name": "shared-infrastructure-ticket-triage",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 36,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T15:03:56.579093+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C03_control_surface_memorization/evaluation/V2_F01_C03/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 1,
+              "skill_manage_action_counts": {
+                "create": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 5,
+                "helpdesk_list_tickets": 1,
+                "helpdesk_update_ticket": 5,
+                "kb_get_article": 3,
+                "kb_search": 3,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 1,
+            "skill_docs": {
+              "shared-infrastructure-ticket-triage": {
+                "content": "---\nname: shared-infrastructure-ticket-triage\ndescription: \"Triage helpdesk tickets using service impact and shared failure evidence, then verify targeted updates.\"\n---\n## 适用条件\nUse when reviewing open helpdesk tickets for incidents, urgent issues, or a possible shared infrastructure failure.\n## 排除条件\nDoes not authorize closing tickets, performing infrastructure repairs, or treating inferred relationships as confirmed causes. Local incident policy governs required fields and severity labels.\n## 操作步骤\n1. List tickets in the requested scope, then retrieve each ticket's full details before classifying or updating it.\n2. Extract affected services, infrastructure identifiers, regions, timing, symptoms, reported impact, and explicit cause evidence. Compare these details across tickets.\n3. Correlate reports when their failure evidence supports a shared incident. A shared product or cluster name alone does not establish an outage relationship or cause.\n4. Assign priority and category from documented impact and available policy. Distinguish delivery failures and blocked critical work from routine training or maintenance with no reported user impact.\n5. When consulting a procedure index, retrieve the referenced procedure. If unavailable, do not invent its escalation criteria, required tags, or other mandatory rules.\n6. Apply needed ticket updates with concise evidence-based notes, related ticket references, and supported tags. Preserve existing information and obey any instruction to leave tickets open.\n7. Inspect update responses for the requested fields and status; retrieve the ticket again if confirmation is incomplete. Report ticket ID, priority, category, and a brief reason in the requested format.\n## 验证\n- Each classification is supported by full ticket details rather than the title alone.\n- Shared incident links cite failure or cause evidence; routine tickets are not escalated solely because they mention the same infrastructure.\n- Updates are confirmed, prohibited status changes have not occurred, and the final report agrees with the confirmed ticket fields.\n组合依赖 []\n",
+                "preview": "---\nname: shared-infrastructure-ticket-triage\ndescription: \"Triage helpdesk tickets using service impact and shared failure evidence, then verify targeted updates.\"\n---\n## 适用条件\nUse when reviewing open helpdesk tickets for incidents, urgent issues, or a possible shared infrastructure failure.\n## 排除条件\nDoes not authorize closing tickets, performing infrastructure repairs, or treating inferred relationships as confirmed causes. Local incident policy governs required fields and severity labels.\n## 操作步骤\n1. List tickets in the requested scope, then retrieve each ticket's full details before classifying or updating it.\n2. Extract affected services, infrastructure identifiers, regions, timing, symptoms, reported impact, and explicit cause evidence. Compare these details across tickets.\n3. Correlate reports when their failure evidence supports a shared incident. A shared product or cluster name alone does not establish an outage relationship or cause.\n4. Assign priority and category from documented impact and available policy. Distinguish delivery failures and blocked critical work from routine training or maintenance with no reported user impact.\n5. When consulting a procedure index, retrieve the referenced procedure. If unavailable, do not invent its escalation criteria, required tags, or other mandatory rules.\n6. Apply needed ticket updates with concise evidence-based notes, related ticket references, and supported tags. Preserve existing information and obey any instruction to leave tickets open.\n7. Inspect update responses for the requested fields and status; retrieve the ticket again if confirmation is incomplete. Report ticket ID, priority, category, and a brief reason in the requested format.\n## 验证\n- Each classification is supported by full ticket details rather than the title alone.\n- Shared incident links cite failure or cause evidence; routine tickets are not escalated solely because they mention the same infrastructure.\n- Updates are confirmed, prohibited status changes have not occurred, and the final report agrees with the confirmed ticket fields.\n组合依赖 []\n",
+                "sha1": "b5720bc4e703d0110323b8e6a472558eae1ae0a2"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "TK-D401|critical|incident|Shared notify-cluster-5 outage blocks critical mobile alerts; linked to D402 and D403.\nTK-D402|critical|incident|Same cluster outage causes worker crashes and over 200,000 queued notifications.\nTK-D403|critical|incident|Shared cluster resource exhaustion disrupts push, SMS, and email-trigger delivery.\nTK-D404|low|training|Routine onboarding training request with no outage impact.\nTK-D405|low|maintenance|Minor configuration drift with no reported user impact or established outage link.",
+          "grader_checks": {
+            "normalized_before_caps": 0.43750000000000017,
+            "original_component_checks_penalties_and_caps_retained": true,
+            "positive_budget": 0.8,
+            "raw_earned_before_caps": 0.35000000000000014,
+            "schema": "positive-budget-v1"
+          },
+          "grading_contract": "positive-budget-v1",
+          "hard_pass": false,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "status": "open"
+                },
+                "message_index": 1,
+                "name": "helpdesk_list_tickets",
+                "timestamp": "2026-11-15T15:01:41.818338+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D401"
+                },
+                "message_index": 3,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T15:01:48.696642+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D402"
+                },
+                "message_index": 5,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T15:01:48.700523+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D404"
+                },
+                "message_index": 7,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T15:01:48.704001+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D405"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T15:01:48.711364+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D403"
+                },
+                "message_index": 11,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T15:01:48.715138+00:00"
+              },
+              {
+                "args": {
+                  "max_results": 5,
+                  "query": "ticket triage priority category incident shared infrastructure"
+                },
+                "message_index": 13,
+                "name": "kb_search",
+                "timestamp": "2026-11-15T15:01:48.720669+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_brief"
+                },
+                "message_index": 15,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T15:01:55.119455+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "KB-F01-SOP"
+                },
+                "message_index": 17,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T15:02:00.108907+00:00"
+              },
+              {
+                "args": {
+                  "max_results": 5,
+                  "query": "KB-F01-SOP"
+                },
+                "message_index": 19,
+                "name": "kb_search",
+                "timestamp": "2026-11-15T15:02:04.598543+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_sop"
+                },
+                "message_index": 21,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T15:02:09.228179+00:00"
+              },
+              {
+                "args": {
+                  "category": "incident-management",
+                  "max_results": 20,
+                  "query": ""
+                },
+                "message_index": 23,
+                "name": "kb_search",
+                "timestamp": "2026-11-15T15:02:15.911807+00:00"
+              },
+              {
+                "args": {
+                  "category": "incident",
+                  "internal_note": "Critical shared infrastructure outage: notify-cluster-5 overload has stopped notification jobs and critical mobile alerts since 15:30 UTC. Correlate with TK-D402 and TK-D403; TK-D403 reports resource exhaustion affecting push, SMS and email-trigger. Needs immediate SRE/infrastructure attention and coordinated incident response. Leave open.",
+                  "priority": "critical",
+                  "tags": [
+                    "shared-infrastructure",
+                    "notify-cluster-5",
+                    "ap-southeast-1"
+                  ],
+                  "ticket_id": "TK-D401"
+                },
+                "message_index": 25,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:02:40.677947+00:00"
+              },
+              {
+                "args": {
+                  "category": "incident",
+                  "internal_note": "Part of the same notify-cluster-5 outage as TK-D401 and TK-D403: coordinator unreachable, worker crash loops and over 200,000 queued notifications. Needs immediate SRE/infrastructure attention with shared incident coordination. Leave open.",
+                  "priority": "critical",
+                  "tags": [
+                    "shared-infrastructure",
+                    "notify-cluster-5",
+                    "ap-southeast-1"
+                  ],
+                  "ticket_id": "TK-D402"
+                },
+                "message_index": 27,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:02:40.682862+00:00"
+              },
+              {
+                "args": {
+                  "category": "incident",
+                  "internal_note": "Shared cluster-level outage confirmed by SRE: resource exhaustion rejects connections and affects push, SMS and email-trigger delivery. Correlate TK-D401 and TK-D402 under this shared infrastructure incident; prioritize immediate SRE/infrastructure response and recovery of delivery/backlog. Leave open.",
+                  "priority": "critical",
+                  "tags": [
+                    "shared-infrastructure",
+                    "notify-cluster-5",
+                    "ap-southeast-1"
+                  ],
+                  "ticket_id": "TK-D403"
+                },
+                "message_index": 29,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:02:40.687212+00:00"
+              },
+              {
+                "args": {
+                  "category": "training",
+                  "internal_note": "Routine training request for four new support staff next week; arrange a one-hour NotifyHub admin session Monday or Tuesday afternoon. No reported service failure or evidence linking this request to the notify-cluster-5 outage. Leave open.",
+                  "priority": "low",
+                  "ticket_id": "TK-D404"
+                },
+                "message_index": 31,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:02:40.691441+00:00"
+              },
+              {
+                "args": {
+                  "category": "maintenance",
+                  "internal_note": "Routine configuration drift: 2000 req/s versus baseline 2048 req/s, explicitly reported as having no user-facing effect. Schedule baseline realignment for the next maintenance window. Shares the cluster with TK-D401/TK-D402/TK-D403 but no evidence establishes this drift as an outage cause; retain low priority unless new impact evidence emerges. Leave open.",
+                  "priority": "low",
+                  "tags": [
+                    "notify-cluster-5"
+                  ],
+                  "ticket_id": "TK-D405"
+                },
+                "message_index": 33,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:02:40.695802+00:00"
+              },
+              {
+                "args": {
+                  "action": "create",
+                  "name": "shared-infrastructure-ticket-triage",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 36,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T15:03:56.579093+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C03_control_surface_memorization/evaluation/V2_F01_C03/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 1,
+            "skill_manage_action_counts": {
+              "create": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 5,
+              "helpdesk_list_tickets": 1,
+              "helpdesk_update_ticket": 5,
+              "kb_get_article": 3,
+              "kb_search": 3,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 0.8,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.25,
+            "artifact_rule_quality": 0.25,
+            "artifact_rule_quality_keywords": [
+              "critical"
+            ],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.416667,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.75,
+            "skill_create_count": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": false,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": "2026-11-15T15:02:40.677947+00:00",
+            "first_write_endpoint": "http://127.0.0.1:60507/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 0.8,
+            "completion": 0.4175,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "V2_F01_C03",
+          "task_name": "F01 Control — Surface Memorization (Keywords Only)",
+          "task_score": 0.534,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 89.01470557792345,
+            "tool_time_s": 0.03490622102981433,
+            "wall_time_s": 89.04961179895326
+          },
+          "token_usage": {
+            "input_tokens": 227290,
+            "output_tokens": 1219,
+            "total_tokens": 228509
+          },
+          "tool_dispatch_count": 17,
+          "total_turns": 10,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C03_control_surface_memorization/evaluation/V2_F01_C03/objective/native-trace.jsonl",
+          "trace_id": "V2_F01_C03"
+        },
+        "score": 0
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "F01_C01_control_no_persistence",
+      "task_id": "V2_F01_C01",
+      "branch": "fresh",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C01_control_no_persistence/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": [
+                "sev1-correlated",
+                "cross-team-verified",
+                "critical",
+                "do not close"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": []
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "max_results": 10,
+                    "query": "cluster incident SOP"
+                  },
+                  "message_index": 1,
+                  "name": "kb_search",
+                  "timestamp": "2026-11-15T15:04:36.005127+00:00"
+                },
+                {
+                  "args": {},
+                  "message_index": 3,
+                  "name": "helpdesk_list_tickets",
+                  "timestamp": "2026-11-15T15:04:36.013785+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "kb_f01_brief"
+                  },
+                  "message_index": 5,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T15:04:42.522425+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D401"
+                  },
+                  "message_index": 7,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T15:04:42.528054+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D403"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T15:04:42.532339+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D405"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T15:04:42.541364+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D404"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T15:04:42.545786+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "TK-D402"
+                  },
+                  "message_index": 15,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-15T15:04:42.549762+00:00"
+                },
+                {
+                  "args": {
+                    "article_id": "KB-F01-SOP"
+                  },
+                  "message_index": 17,
+                  "name": "kb_get_article",
+                  "timestamp": "2026-11-15T15:04:59.331179+00:00"
+                },
+                {
+                  "args": {
+                    "internal_note": "Confirmed cluster incident: monitoring reports notify-cluster-5 in ap-southeast-1 overloaded and unable to process notification jobs; NotifyHub returns 504 errors and critical mobile alerts are not delivered. Priority and category remain unset pending the full SOP. The available KB index explicitly omits procedure steps and tagging rules, KB-F01-SOP was not found, and no saved SOP skill is available. Ticket remains open.",
+                    "ticket_id": "TK-D401"
+                  },
+                  "message_index": 19,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:05:24.803865+00:00"
+                },
+                {
+                  "args": {
+                    "internal_note": "Confirmed cluster incident: notification-worker pods in ap-southeast-1 are crash-looping because overloaded notify-cluster-5 cannot provide coordinator connectivity; more than 200,000 notifications are queued. Priority and category remain unset pending the full SOP. The available KB index explicitly omits procedure steps and tagging rules, KB-F01-SOP was not found, and no saved SOP skill is available. Ticket remains open.",
+                    "ticket_id": "TK-D402"
+                  },
+                  "message_index": 21,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:05:24.809795+00:00"
+                },
+                {
+                  "args": {
+                    "internal_note": "Confirmed cluster incident: SRE traced notification 504 errors to resource exhaustion on notify-cluster-5 in ap-southeast-1; connections are rejected and push, SMS, and email-trigger delivery are affected. Priority and category remain unset pending the full SOP. The available KB index explicitly omits procedure steps and tagging rules, KB-F01-SOP was not found, and no saved SOP skill is available. Ticket remains open.",
+                    "ticket_id": "TK-D403"
+                  },
+                  "message_index": 23,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-15T15:05:24.814352+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C01_control_no_persistence/evaluation/V2_F01_C01/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 5,
+                "helpdesk_list_tickets": 1,
+                "helpdesk_update_ticket": 3,
+                "kb_get_article": 2,
+                "kb_search": 1
+              }
+            },
+            "memory_entries": [],
+            "memory_file_exists": false,
+            "skill_count": 0,
+            "skill_docs": {},
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "TK-D401|unset|unset|Confirmed cluster overload blocking critical alerts; added internal note, left open. Full SOP unavailable; classification deferred.\nTK-D402|unset|unset|Confirmed cluster overload causing crash loops and 200,000+ queued notifications; added internal note, left open. Full SOP unavailable; classification deferred.\nTK-D403|unset|unset|Confirmed cluster exhaustion affecting three delivery channels; added internal note, left open. Full SOP unavailable; classification deferred.\nTK-D404|unset|unset|Training request; unchanged and open.\nTK-D405|unset|unset|Configuration drift with no user impact; unchanged and open.",
+          "grader_checks": {
+            "normalized_before_caps": 0.8125000000000001,
+            "original_component_checks_penalties_and_caps_retained": true,
+            "positive_budget": 0.8,
+            "raw_earned_before_caps": 0.6500000000000001,
+            "schema": "positive-budget-v1"
+          },
+          "grading_contract": "positive-budget-v1",
+          "hard_pass": false,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "max_results": 10,
+                  "query": "cluster incident SOP"
+                },
+                "message_index": 1,
+                "name": "kb_search",
+                "timestamp": "2026-11-15T15:04:36.005127+00:00"
+              },
+              {
+                "args": {},
+                "message_index": 3,
+                "name": "helpdesk_list_tickets",
+                "timestamp": "2026-11-15T15:04:36.013785+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "kb_f01_brief"
+                },
+                "message_index": 5,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T15:04:42.522425+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D401"
+                },
+                "message_index": 7,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T15:04:42.528054+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D403"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T15:04:42.532339+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D405"
+                },
+                "message_index": 11,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T15:04:42.541364+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D404"
+                },
+                "message_index": 13,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T15:04:42.545786+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "TK-D402"
+                },
+                "message_index": 15,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-15T15:04:42.549762+00:00"
+              },
+              {
+                "args": {
+                  "article_id": "KB-F01-SOP"
+                },
+                "message_index": 17,
+                "name": "kb_get_article",
+                "timestamp": "2026-11-15T15:04:59.331179+00:00"
+              },
+              {
+                "args": {
+                  "internal_note": "Confirmed cluster incident: monitoring reports notify-cluster-5 in ap-southeast-1 overloaded and unable to process notification jobs; NotifyHub returns 504 errors and critical mobile alerts are not delivered. Priority and category remain unset pending the full SOP. The available KB index explicitly omits procedure steps and tagging rules, KB-F01-SOP was not found, and no saved SOP skill is available. Ticket remains open.",
+                  "ticket_id": "TK-D401"
+                },
+                "message_index": 19,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:05:24.803865+00:00"
+              },
+              {
+                "args": {
+                  "internal_note": "Confirmed cluster incident: notification-worker pods in ap-southeast-1 are crash-looping because overloaded notify-cluster-5 cannot provide coordinator connectivity; more than 200,000 notifications are queued. Priority and category remain unset pending the full SOP. The available KB index explicitly omits procedure steps and tagging rules, KB-F01-SOP was not found, and no saved SOP skill is available. Ticket remains open.",
+                  "ticket_id": "TK-D402"
+                },
+                "message_index": 21,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:05:24.809795+00:00"
+              },
+              {
+                "args": {
+                  "internal_note": "Confirmed cluster incident: SRE traced notification 504 errors to resource exhaustion on notify-cluster-5 in ap-southeast-1; connections are rejected and push, SMS, and email-trigger delivery are affected. Priority and category remain unset pending the full SOP. The available KB index explicitly omits procedure steps and tagging rules, KB-F01-SOP was not found, and no saved SOP skill is available. Ticket remains open.",
+                  "ticket_id": "TK-D403"
+                },
+                "message_index": 23,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-15T15:05:24.814352+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C01_control_no_persistence/evaluation/V2_F01_C01/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 5,
+              "helpdesk_list_tickets": 1,
+              "helpdesk_update_ticket": 3,
+              "kb_get_article": 2,
+              "kb_search": 1
+            }
+          },
+          "judge_score": 0.55,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 0.5,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 0.5,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 0.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": false,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": "2026-11-15T15:05:24.803865+00:00",
+            "first_write_endpoint": "http://127.0.0.1:55257/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 0.55,
+            "completion": 0.7731250000000001,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "V2_F01_C01",
+          "task_name": "F01 Control — No Persistence (NotifyHub Eval Near)",
+          "task_score": 0.8185,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 88.39094750303775,
+            "tool_time_s": 0.026655905006919056,
+            "wall_time_s": 88.41760340804467
+          },
+          "token_usage": {
+            "input_tokens": 150584,
+            "output_tokens": 907,
+            "total_tokens": 151491
+          },
+          "tool_dispatch_count": 12,
+          "total_turns": 7,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/procedural_ability__PC01_sop_bootstrap_01/families/procedural_ability/PC01_sop_bootstrap_01/episodes/F01_C01_control_no_persistence/evaluation/V2_F01_C01/objective/native-trace.jsonl",
+          "trace_id": "V2_F01_C01"
+        },
+        "score": 0
+      },
+      "active_skills": 0
+    }
+  ],
+  "attempts_finished": true,
+  "complete": false,
+  "passed": 5,
+  "known_scores": 8,
+  "weights_updated": false,
+  "score_contract": "upstream grade_episode (including notes_memory hard_pass)"
+}

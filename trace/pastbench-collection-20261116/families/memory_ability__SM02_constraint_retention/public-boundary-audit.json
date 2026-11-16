@@ -1,0 +1,50 @@
+{
+  "validated": true,
+  "observed_at": "2026-11-15T14:21:02.670716+00:00",
+  "tasks_checked": 8,
+  "scope": "Exact Executor initial public prompt, MCP skill inputs, public task identity and score-blind Curator observation/system prompt.",
+  "limits": "Authorized history/memory/skill provenance is covered by subset-audit.json. This is input-boundary verification, not an adversarial filesystem isolation proof.",
+  "script_sha256": "e0137cab3298e07e36e6fb975a54911848715e96e63bee19153a76c43847e9dd",
+  "tasks": [
+    {
+      "task_id": "SM02_COLD_001",
+      "prompt_sha256": "2f7b3bdec08a9883e89c143459453dedaac01f33954dc210a54444b8074d1a07",
+      "curator_observation_sha256": "10ee7a98158b7ba79b15d84e7f4679e3ec56541a875e0959636eaa02de8b839f"
+    },
+    {
+      "task_id": "SM02_LEARN_A_001",
+      "prompt_sha256": "235b97a1b0ffc6558881c35786607d33cfee58bc3ccb8f03eb0b0f7719b3d24d",
+      "curator_observation_sha256": "4ed28ee9fcfc722173ac3cd5c683c488f89ab52de6b8879b08fefc9418c0a8ea"
+    },
+    {
+      "task_id": "SM02_LEARN_B_001",
+      "prompt_sha256": "bce869e31acea5b5daf0538ecc3c84ded7741e4faee8f66772bd99451fece01d",
+      "curator_observation_sha256": "e34baf3859e03714e49908e80e4df97317e77141c906d2ef6e4279da2971baf9"
+    },
+    {
+      "task_id": "SM02_EVAL_NEAR_001",
+      "prompt_sha256": "592abd4d2ce6b9a7418343a3da3d39a368b425f84195b1cec88acccac3ed3af6",
+      "curator_observation_sha256": "c66ad22ce35495ee7e76084b9f44d68d54bae1fdfe5ecc761eb0efb608eb42cc"
+    },
+    {
+      "task_id": "SM02_EVAL_FAR_001",
+      "prompt_sha256": "52fb5c33c80a82837a01b75149b54860b3cfbdf0b5475ca9e919beda73f25809",
+      "curator_observation_sha256": "3615222662e1a9d3b7e04ec924017cd3f445b3b479e39f3b0cb7f993a8daacbe"
+    },
+    {
+      "task_id": "SM02_CONTROL_002",
+      "prompt_sha256": "885d19e4db4292dd2f904066b8e34e50174b69f1d82931ae3729f87649a50338",
+      "curator_observation_sha256": "c0374bfbbd1f60e2f5e2c99b02791579d66cca7970e50de0eae8585ba0c33882"
+    },
+    {
+      "task_id": "SM02_CONTROL_001",
+      "prompt_sha256": "e685b3bf45231197400078ff32c0f661ae985d5c9040353ded5ffe88e9ddbcec",
+      "curator_observation_sha256": "75ef3705129fe42ebbae60a824bab5f0083dbfad173e0322074fcd0723ed7db3"
+    },
+    {
+      "task_id": "SM02_CONTROL_003",
+      "prompt_sha256": "2bde9593fff727a2658d5b2b72773fefd814b054b6cc230898d71d532cb51fed",
+      "curator_observation_sha256": "a47e8cf5a78789000c052ebbfe393277410437f3e6717619330b79fd6b639b33"
+    }
+  ]
+}

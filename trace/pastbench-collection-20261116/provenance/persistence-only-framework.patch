@@ -1,0 +1,95 @@
+--- before/skillrl/pastbench_full.py
++++ after/skillrl/pastbench_full.py
+@@ -315,6 +315,8 @@
+             family_id = yaml.safe_load((self.episode.parent / 'family.yaml').read_text())['family_id']
+             environment.skill_write_capability = {'contract': self.skill_authoring['contract'], 'task_id': task.id,
+                 'authorized_task_ids': self.skill_authoring['tasks'], 'library': str(self.root / 'library'), 'sequence': family_id}
++        from .pastbench_persistence import restore_environment_flags
++        restore_environment_flags(environment, self.spec)
+         return environment
+ 
+     def evaluate(self, task, workspace, execution):
+@@ -422,6 +424,10 @@
+     if not manifest.exists():
+         generate_manifest(family, manifest, repo_root=source)
+     specifications = yaml.safe_load(manifest.read_text())['episodes']
++    from .pastbench_persistence import restore_specifications, persistence_runtime_enabled
++    specifications = restore_specifications(specifications, config.get('persistence_restoration'))
++    if config.get('persistence_restoration'):
++        atomic(output / 'effective-persistence-specifications.json', specifications)
+     family_path = source / 'self-evolve-tasks-v2' / family
+     family_doc = yaml.safe_load((family_path / 'family.yaml').read_text())
+     public = output / 'public-empty'
+@@ -476,13 +482,13 @@
+         rows.append(row)
+         atomic(output / 'family-progress.json', rows)
+         print(json.dumps({'event': 'episode_done', 'family': family, **row}), flush=True)
+-        if execution_path.exists() and specification['persistence_allowed']:
++        if execution_path.exists() and persistence_runtime_enabled(specification):
+             archive_session(root, benchmark.task, load(execution_path))
+         previous = root
+         if specification.get('history_save_anchor'):
+             anchor = output / 'anchors' / specification['history_save_anchor']
+             if not anchor.exists():
+-                inherit(root, anchor)
++                inherit(previous, anchor)
+         if not row['complete'] and not continue_on_error:
+             break
+         if config.get('stop_on_infrastructure_error') and (
+--- before/skillrl/pastbench_persistence.py
++++ after/skillrl/pastbench_persistence.py
+@@ -0,0 +1,41 @@
++"""Collection profile: keep ordinary stages enabled; restore original controls."""
++from copy import deepcopy
++
++PROTOCOL = 'experience-collection-control-switches-v1'
++FLAG_NAMES = frozenset(('memory_enabled', 'user_profile_enabled', 'skills_enabled', 'session_search_enabled'))
++
++
++def restore_specifications(specifications, restoration):
++    if restoration is None:
++        return specifications
++    if restoration.get('protocol') != PROTOCOL or not restoration.get('upstream_commit'):
++        raise ValueError('Unknown or unpinned persistence restoration')
++    rules = restoration['episodes']
++    from pathlib import Path
++    if set(rules) != {Path(s['task']).name for s in specifications}:
++        raise ValueError('Persistence rules must cover the exact whole-family inventory')
++    result = deepcopy(specifications)
++    for spec in result:
++        rule = rules[Path(spec['task']).name]
++        flags = rule['tool_flags']
++        if set(flags) != FLAG_NAMES or any(type(v) is not bool for v in flags.values()):
++            raise ValueError('Four explicit boolean persistence flags required')
++        for field in ('persistence_allowed', 'history_mode', 'history_load_anchor', 'history_save_anchor'):
++            spec[field] = rule[field]
++        spec['persistence_tool_flags'] = dict(flags)
++        spec['persistence_runtime_enabled'] = bool(rule['persistence_allowed'])
++        spec['persistence_restoration_protocol'] = PROTOCOL
++    return result
++
++
++def restore_environment_flags(environment, specification):
++    flags = specification.get('persistence_tool_flags')
++    if flags is None:
++        return
++    environment.persistence_flags = dict(flags)
++    if not flags['skills_enabled'] and hasattr(environment, 'skill_write_capability'):
++        del environment.skill_write_capability
++
++
++def persistence_runtime_enabled(specification):
++    return specification.get('persistence_runtime_enabled', specification['persistence_allowed'])
+--- before/skillrl/pg01_tools.py
++++ after/skillrl/pg01_tools.py
+@@ -23,6 +23,10 @@
+ 
+ def tool_flags(flags, *, task_id, contract, persistence_allowed):
+     result = dict(flags)
++    # Collection profile retains skill access for evaluation, while control
++    # permissions remain exactly those resolved by the original benchmark.
++    if '_CONTROL_' in task_id:
++        return result
+     if contract == CONTRACT and task_id in READ_STAGES and persistence_allowed:
+         # Reading a general procedure supports, and never substitutes for, history lookup.
+         result['skills_enabled'] = True

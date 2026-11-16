@@ -1,0 +1,121 @@
+{
+  "changed_controls": [
+    {
+      "family": "memory_ability/EP01_prior_case_recall",
+      "task_id": "EP01_I06_control_history_recovery",
+      "before": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": false,
+        "session_search_enabled": true
+      },
+      "after": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": false,
+        "session_search_enabled": false
+      }
+    },
+    {
+      "family": "proactive_information_gathering/PG01_release_decision_followup",
+      "task_id": "PG01_CONTROL_PRELOAD_001",
+      "before": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": true,
+        "session_search_enabled": true
+      },
+      "after": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": false,
+        "session_search_enabled": true
+      }
+    },
+    {
+      "family": "proactive_information_gathering/PG01_release_decision_followup",
+      "task_id": "PG01_CONTROL_BOUNDARY_001",
+      "before": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": true,
+        "session_search_enabled": true
+      },
+      "after": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": false,
+        "session_search_enabled": true
+      }
+    },
+    {
+      "family": "proactive_information_gathering/PG03_oncall_handoff_lookup",
+      "task_id": "PG03_CONTROL_PRELOAD_001",
+      "before": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": true,
+        "session_search_enabled": true
+      },
+      "after": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": false,
+        "session_search_enabled": true
+      }
+    },
+    {
+      "family": "proactive_information_gathering/PG03_oncall_handoff_lookup",
+      "task_id": "PG03_CONTROL_BOUNDARY_001",
+      "before": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": true,
+        "session_search_enabled": true
+      },
+      "after": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": false,
+        "session_search_enabled": true
+      }
+    },
+    {
+      "family": "proactive_information_gathering/PG05_change_freeze_followup",
+      "task_id": "PG05_CONTROL_PRELOAD_001",
+      "before": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": true,
+        "session_search_enabled": true
+      },
+      "after": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": false,
+        "session_search_enabled": true
+      }
+    },
+    {
+      "family": "proactive_information_gathering/PG05_change_freeze_followup",
+      "task_id": "PG05_CONTROL_BOUNDARY_001",
+      "before": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": true,
+        "session_search_enabled": true
+      },
+      "after": {
+        "memory_enabled": false,
+        "user_profile_enabled": false,
+        "skills_enabled": false,
+        "session_search_enabled": true
+      }
+    }
+  ],
+  "non_control_switch_changes": 0,
+  "benchmark_bytes_unchanged": true,
+  "regression_tests_passed": 89,
+  "expected_rerun_tasks": 32,
+  "reuse_tasks": 172
+}

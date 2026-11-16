@@ -1,0 +1,50 @@
+{
+  "validated": true,
+  "observed_at": "2026-11-15T14:30:48.755048+00:00",
+  "tasks_checked": 8,
+  "scope": "Exact Executor initial public prompt, MCP skill inputs, public task identity and score-blind Curator observation/system prompt.",
+  "limits": "Authorized history/memory/skill provenance is covered by subset-audit.json. This is input-boundary verification, not an adversarial filesystem isolation proof.",
+  "script_sha256": "e0137cab3298e07e36e6fb975a54911848715e96e63bee19153a76c43847e9dd",
+  "tasks": [
+    {
+      "task_id": "EP02_I01_exception_cold",
+      "prompt_sha256": "d5d8c82f803beaebf1d7874c2aaea979557a464e181a43ff4656dc7add4e60c2",
+      "curator_observation_sha256": "ac8403ffa2b2fb8379409d2a9f845ea649a30a13492b8d8dc9c3cdef79f3edc1"
+    },
+    {
+      "task_id": "EP02_I02_seed_exception",
+      "prompt_sha256": "d13f43f9df6842b3b98ac209fc65bcf572687e1b731089377629539cd5c61558",
+      "curator_observation_sha256": "5f15c55a3b182c66fa1baa52d9b7eeafbfca9f130580b36bed6192f8edf1ea72"
+    },
+    {
+      "task_id": "EP02_I03_context_noise",
+      "prompt_sha256": "c903cc1bdfb61b9aeaf719df6cd2cb7f3e2b8191abf6170dce8aa097b504b529",
+      "curator_observation_sha256": "553c2ac45e1d6a4889ba050030f323011e336b9901e43efcba5f012aa0d9985e"
+    },
+    {
+      "task_id": "EP02_I04_eval_near",
+      "prompt_sha256": "0fdbd1e22b0593b4a285adee08e1e44786f219e9a5f7b3723b47b1a001974da4",
+      "curator_observation_sha256": "6aacef0090c1fecd8030a7c0eda7314187772862a0df9a63e99c5fcabdc6d4b4"
+    },
+    {
+      "task_id": "EP02_I05_eval_far",
+      "prompt_sha256": "bd372152537237c98e3ed4ff25364392ac7271ee47836986dcd0d54bd6629b52",
+      "curator_observation_sha256": "f8688433ed1d55cb23679d10e419d59a43eef45798b4c133977d1634aa879e97"
+    },
+    {
+      "task_id": "EP02_I07_control_shortcut",
+      "prompt_sha256": "5454f8d44dd8ef57213fba4f11d132054516a16c82ffd79ff8e4777b1dc97602",
+      "curator_observation_sha256": "c17b19737c60dd0bda43f222519e7bf3a39304e7f57de93e990283140fc312ec"
+    },
+    {
+      "task_id": "EP02_I08_control_wrong_mechanism",
+      "prompt_sha256": "ec689f8dbf362069495076aa7687add2fc96636ffd03ab19abe3242304333f2a",
+      "curator_observation_sha256": "f57c9acbb750720a67b6a67b01387ffaca1834428a0519a854a385492617f202"
+    },
+    {
+      "task_id": "EP02_I06_control_no_persistence",
+      "prompt_sha256": "d871415374329df6c7b6039cd7371c3c0e4684fc407432ea72651cb061cf39ca",
+      "curator_observation_sha256": "5306d5c3efce18b79c2c289cb45a3fd7db5bf03228423b9186316310ed52fa39"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "validated": true,
+  "observed_at": "2026-11-15T14:54:03.106124+00:00",
+  "tasks_checked": 8,
+  "scope": "Exact Executor initial public prompt, MCP skill inputs, public task identity and score-blind Curator observation/system prompt.",
+  "limits": "Authorized history/memory/skill provenance is covered by subset-audit.json. This is input-boundary verification, not an adversarial filesystem isolation proof.",
+  "script_sha256": "e0137cab3298e07e36e6fb975a54911848715e96e63bee19153a76c43847e9dd",
+  "tasks": [
+    {
+      "task_id": "PG04_ATTEMPT_001",
+      "prompt_sha256": "e14548bd915c6dda4be6df21805194ba94a073cedd409ef9accc103791c6a175",
+      "curator_observation_sha256": "0071b89175770e8ab31aa336238a52cb737b4b973ffd330e0a6198ff2d9c27dc"
+    },
+    {
+      "task_id": "PG04_REFLECTION_001",
+      "prompt_sha256": "0f88d95a2f37ff2445c0786d3c2afa2e8d5f79daf947199c3a60386970ea617e",
+      "curator_observation_sha256": "c2bdb455ab68e5360c29023ad710ac5c859f6b817daec3a5d727fde61b6dfeff"
+    },
+    {
+      "task_id": "PG04_UPDATE_001",
+      "prompt_sha256": "43de3de80549f6733a2c568f68852e6d43e802887b9f2b56f3ff7c965a8a6995",
+      "curator_observation_sha256": "b8dab157b1034725f45c33aa671a93114e31208bd4d7010e03d8aad1da5f7a81"
+    },
+    {
+      "task_id": "PG04_EVAL_NEAR_A_001",
+      "prompt_sha256": "4d26c313ca999e65f4247a8ac20f92de154dc03f80771d3a174a4dbb95841277",
+      "curator_observation_sha256": "1c1df1ffb4c74708d6d02094fc8e532e57d10e457527208d9458856812785139"
+    },
+    {
+      "task_id": "PG04_EVAL_NEAR_B_001",
+      "prompt_sha256": "e25c5ba7e0ade06ea60354d353c9066c71e0ac0305c56f7f2982a921f2de0c41",
+      "curator_observation_sha256": "1b1914d145d1445cb2fdc3135948e692b69151ce4925c5ab7f18fef990897fe4"
+    },
+    {
+      "task_id": "PG04_EVAL_FAR_001",
+      "prompt_sha256": "0b98cf8e5a0e76870b2e179bc854648734cb47a4f50895ac5ba245bd4fffe9d5",
+      "curator_observation_sha256": "9c1e0017172af16f7b395ead26ad7726f9789e19d2dcb8d2ebf2be11afe2cba1"
+    },
+    {
+      "task_id": "PG04_CONTROL_PRELOAD_001",
+      "prompt_sha256": "1850bb529295e19796187aef4c84363cd3a9e3ef89f8916e51d3cffa20b90a84",
+      "curator_observation_sha256": "b1cf82625bf4dd7a492411426732eb0159367c63668f8d28638b6c115732334d"
+    },
+    {
+      "task_id": "PG04_CONTROL_BOUNDARY_001",
+      "prompt_sha256": "7a5dec6196dbe77ae63ccda234f8f76dc9b99d48b2a7e67095aed01407f82771",
+      "curator_observation_sha256": "7dcec4b31a8044e3d7f62ccad16befac623947acdc929a7a59346407d4fccc43"
+    }
+  ]
+}

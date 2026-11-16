@@ -27,10 +27,11 @@ def serve(config):
             elif method == 'tools/list':
                 catalog = [{k: item[k] for k in ('name', 'description', 'inputSchema')}
                            for item in tools.values()]
-                if skills:
+                authoring = config.get('skill_write', {}).get('contract') == 'public-skill-authoring-v1'
+                if skills or authoring:
                     catalog.append({'name': 'Skill', 'description': 'Read one optional complete skill by name.',
                                     'inputSchema': {'type': 'object', 'properties': {
-                                        'name': {'type': 'string', 'enum': list(skills)}},
+                                        'name': {'type': 'string'} if authoring else {'type': 'string', 'enum': list(skills)}},
                                         'required': ['name'], 'additionalProperties': False}})
                 if config.get('memory'):
                     catalog.append({'name': 'memory', 'description': 'Read or maintain durable user/team memory across sessions. Save only durable facts/preferences; replace obsolete rules and keep temporary instructions scoped.',
@@ -43,6 +44,17 @@ def serve(config):
                         'inputSchema': {'type': 'object', 'properties': {'query': {'type': 'string'},
                             'session_id': {'type': 'string'}, 'limit': {'type': 'integer', 'minimum': 1, 'maximum': 8}},
                             'required': ['query'], 'additionalProperties': False}})
+                if config.get('skill_write'):
+                    authoring = config['skill_write'].get('contract') == 'public-skill-authoring-v1'
+                    catalog.append({'name': 'skill_manage',
+                        'description': ('Create or edit a durable skill when requested by the public task. Supply complete Markdown with name and description frontmatter (maximum 3500 characters). For edits, read the full current skill with Skill first and supply expected_sha256. A successful response confirms actual persistence.' if authoring else 'Edit an existing durable skill. Read its full current version with Skill first; supply its raw_sha256 and full replacement Markdown. A successful response confirms persistence.'),
+                        'inputSchema': {'type': 'object', 'properties': {
+                            'action': {'type': 'string', 'enum': ['create', 'edit'] if authoring else ['edit']},
+                            'name': {'type': 'string'} if authoring else {'type': 'string', 'enum': list(skills)},
+                            'content': {'type': 'string'}, 'expected_sha256': {'type': 'string'},
+                            'reason': {'type': 'string'}},
+                            'required': ['action', 'name', 'content', 'reason'] if authoring else ['action', 'name', 'content', 'expected_sha256', 'reason'],
+                            'additionalProperties': False}})
                 result = {'tools': catalog}
             elif method == 'tools/call':
                 name, args = request['params']['name'], request['params'].get('arguments', {})
@@ -90,7 +102,15 @@ def serve(config):
                         temporary.replace(memory_path)
                     value = {'action': action, 'entries': entries, 'persisted': True}
                 elif name == 'Skill':
-                    value = skills[args['name']]
+                    from .pg01_tools import current_skill
+                    value = current_skill(config, args['name'])
+                elif name == 'skill_manage':
+                    if config.get('skill_write', {}).get('contract') == 'public-skill-authoring-v1':
+                        from .skill_authoring import save_skill
+                        value = save_skill(config, args, request['id'])
+                    else:
+                        from .pg01_tools import edit_skill
+                        value = edit_skill(config, args, request['id'])
                 else:
                     item = tools[name]
                     req = urllib.request.Request(item['url'], data=json.dumps(args).encode(),

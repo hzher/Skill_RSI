@@ -111,7 +111,16 @@ class Pipeline:
                     atomic(path / 'exposure.json', exposure)
                     # Build the immutable observation before any verifier starts.
                     from .curation import observation
-                    atomic(path / 'curation-observation.json', observation(task, execution, snapshot, path / 'public-artifacts'))
+                    curator_snapshot = snapshot
+                    if execution.get('skill_write_capability'):
+                        # Actor edits are real parent-state changes. Never let Curator read
+                        # a stale pre-edit body while committing against the post-edit state.
+                        if (path / 'curator-snapshot.json').exists():
+                            curator_snapshot = load(path / 'curator-snapshot.json')
+                        else:
+                            curator_snapshot = self.snapshot(library)
+                            atomic(path / 'curator-snapshot.json', curator_snapshot)
+                    atomic(path / 'curation-observation.json', observation(task, execution, curator_snapshot, path / 'public-artifacts'))
                     after_curation = getattr(self.benchmark, 'evaluate_after_curation', False)
                     objective_future = Future() if after_curation else grading.submit(
                         self.evaluate, task, execution, path / 'public-artifacts')
@@ -122,7 +131,7 @@ class Pipeline:
                         # A crash after commit never reissues a model or a transaction.
                         atomic(stage / 'result.json', {'status': 'committed_final_unresolved', 'commit': processed})
                     try:
-                        self.curator.run(task, execution, snapshot, path / 'public-artifacts', library, stage)
+                        self.curator.run(task, execution, curator_snapshot, path / 'public-artifacts', library, stage)
                     finally:
                         if after_curation:
                             objective_future.set_result(self.evaluate(task, execution, path / 'public-artifacts'))

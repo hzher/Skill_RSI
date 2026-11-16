@@ -1,0 +1,2 @@
+family,category,attempted,execution_complete,pipeline_complete,passed,failed,unknown,skill_reads,memory_writes,session_searches,mean_task_score
+update_ability/SM07_scoped_rule_migration,update_ability,8,8,8,6,2,0,0,1,0,0.84

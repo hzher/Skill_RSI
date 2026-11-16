@@ -1,0 +1,2507 @@
+{
+  "family": "update_ability/EP03_recall_then_modify",
+  "episodes": [
+    {
+      "episode": "EP03_I01_modify_cold",
+      "task_id": "EP03_I01_modify_cold",
+      "branch": "fresh",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I01_modify_cold/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "onboarding-playbook-cache"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 2,
+              "hit_keywords": [
+                "onboarding",
+                "playbook"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "onboarding",
+                "playbook"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts.",
+                "before": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "settled onboarding playbook current shell"
+                  },
+                  "message_index": 1,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:34:53.009307+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "onboarding shell"
+                  },
+                  "message_index": 3,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:35:00.889749+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "shell metadata"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:35:00.892964+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "current shell record"
+                  },
+                  "message_index": 7,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:35:00.900063+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "PLAYBOOK"
+                  },
+                  "message_index": 9,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:35:00.903171+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 100,
+                    "query": "shell"
+                  },
+                  "message_index": 11,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:35:14.597136+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 100,
+                    "query": "metadata"
+                  },
+                  "message_index": 13,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:35:14.601350+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 100,
+                    "query": "owner"
+                  },
+                  "message_index": 15,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:35:14.604253+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 100,
+                    "query": "status"
+                  },
+                  "message_index": 17,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:35:14.607493+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 100,
+                    "query": "current"
+                  },
+                  "message_index": 19,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:35:14.610425+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 100,
+                    "query": "duration"
+                  },
+                  "message_index": 21,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:35:14.613042+00:00"
+                },
+                {
+                  "args": {},
+                  "message_index": 23,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T15:35:29.595246+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-701"
+                  },
+                  "message_index": 25,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:35:36.655101+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-702"
+                  },
+                  "message_index": 27,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:35:36.659236+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-703"
+                  },
+                  "message_index": 29,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:35:36.662954+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "REQ-8800"
+                  },
+                  "message_index": 31,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:35:36.666044+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-701",
+                    "payload": {
+                      "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 48h. Owner: Carol. Status: active."
+                    }
+                  },
+                  "message_index": 33,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-15T15:35:48.207176+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-701"
+                  },
+                  "message_index": 35,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:35:54.385109+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "name": "onboarding-playbook-cache",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 38,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T15:37:40.679117+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I01_modify_cold/evaluation/EP03_I01_modify_cold/objective/normalized-session.json",
+              "session_search_calls": 11,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 1,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 5,
+                "notes_list": 1,
+                "notes_update": 1,
+                "session_search": 11,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [
+              "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "onboarding-playbook-cache": {
+                "content": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook from prior-session evidence and apply it to the matching current approved shell without changing shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, and note retrieval are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change an approved SLA without authorization.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n3. Retrieve the candidate shell and any coordination request; confirm the request permits applying the approved content and preserves existing metadata and SLA terms.\n4. Replace only the shell content with the approved steps and owner/status details, preserving every existing metadata field.\n5. Retrieve the updated shell and compare its metadata with the pre-update record; confirm the content contains the approved playbook and any authorized duration uses the required persisted notation.\n## 验证\n- The source is explicitly approved and its steps, owner, status, and SLA match the applied content.\n- Only the intended shell content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell and no draft or regional content was used.\n组合依赖 []\n",
+                "preview": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook from prior-session evidence and apply it to the matching current approved shell without changing shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, and note retrieval are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change an approved SLA without authorization.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n3. Retrieve the candidate shell and any coordination request; confirm the request permits applying the approved content and preserves existing metadata and SLA terms.\n4. Replace only the shell content with the approved steps and owner/status details, preserving every existing metadata field.\n5. Retrieve the updated shell and compare its metadata with the pre-update record; confirm the content contains the approved playbook and any authorized duration uses the required persisted notation.\n## 验证\n- The source is explicitly approved and its steps, owner, status, and SLA match the applied content.\n- Only the intended shell content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell and no draft or regional content was used.\n组合依赖 []\n",
+                "sha1": "5feec1ae729d4a40965eff6a9ba1ef02a1aa242e"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "PLAYBOOK\n\nStep 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 48h. Owner: Carol. Status: active.",
+          "hard_pass": false,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "settled onboarding playbook current shell"
+                },
+                "message_index": 1,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:34:53.009307+00:00"
+              },
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "onboarding shell"
+                },
+                "message_index": 3,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:35:00.889749+00:00"
+              },
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "shell metadata"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:35:00.892964+00:00"
+              },
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "current shell record"
+                },
+                "message_index": 7,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:35:00.900063+00:00"
+              },
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "PLAYBOOK"
+                },
+                "message_index": 9,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:35:00.903171+00:00"
+              },
+              {
+                "args": {
+                  "limit": 100,
+                  "query": "shell"
+                },
+                "message_index": 11,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:35:14.597136+00:00"
+              },
+              {
+                "args": {
+                  "limit": 100,
+                  "query": "metadata"
+                },
+                "message_index": 13,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:35:14.601350+00:00"
+              },
+              {
+                "args": {
+                  "limit": 100,
+                  "query": "owner"
+                },
+                "message_index": 15,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:35:14.604253+00:00"
+              },
+              {
+                "args": {
+                  "limit": 100,
+                  "query": "status"
+                },
+                "message_index": 17,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:35:14.607493+00:00"
+              },
+              {
+                "args": {
+                  "limit": 100,
+                  "query": "current"
+                },
+                "message_index": 19,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:35:14.610425+00:00"
+              },
+              {
+                "args": {
+                  "limit": 100,
+                  "query": "duration"
+                },
+                "message_index": 21,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:35:14.613042+00:00"
+              },
+              {
+                "args": {},
+                "message_index": 23,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T15:35:29.595246+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-701"
+                },
+                "message_index": 25,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:35:36.655101+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-702"
+                },
+                "message_index": 27,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:35:36.659236+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-703"
+                },
+                "message_index": 29,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:35:36.662954+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "REQ-8800"
+                },
+                "message_index": 31,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:35:36.666044+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-701",
+                  "payload": {
+                    "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 48h. Owner: Carol. Status: active."
+                  }
+                },
+                "message_index": 33,
+                "name": "notes_update",
+                "timestamp": "2026-11-15T15:35:48.207176+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-701"
+                },
+                "message_index": 35,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:35:54.385109+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "name": "onboarding-playbook-cache",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 38,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T15:37:40.679117+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I01_modify_cold/evaluation/EP03_I01_modify_cold/objective/normalized-session.json",
+            "session_search_calls": 11,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 5,
+              "notes_list": 1,
+              "notes_update": 1,
+              "session_search": 11,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 0.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "onboarding",
+              "playbook"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 11,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 11,
+            "session_search_count": 11,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": false,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 11,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T15:34:53.009307+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 11,
+            "session_search_count": 11,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 0.0,
+            "completion": 0.2125,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {},
+          "task_id": "EP03_I01_modify_cold",
+          "task_name": "EP03 Recall Then Modify — Cold",
+          "task_score": 0.37,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 100.14181484695291,
+            "tool_time_s": 0.02370868605794385,
+            "wall_time_s": 100.16552353301086
+          },
+          "token_usage": {
+            "input_tokens": 226039,
+            "output_tokens": 1195,
+            "total_tokens": 227234
+          },
+          "tool_dispatch_count": 7,
+          "total_turns": 12,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I01_modify_cold/evaluation/EP03_I01_modify_cold/objective/native-trace.jsonl",
+          "trace_id": "EP03_I01_modify_cold"
+        },
+        "score": 0
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "EP03_I02_modify_seed",
+      "task_id": "EP03_I02_modify_seed",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I02_modify_seed/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "onboarding-playbook-cache"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 2,
+              "hit_keywords": [
+                "onboarding",
+                "playbook"
+              ],
+              "hit_rate": 0.666667,
+              "required_keywords": [
+                "onboarding",
+                "playbook",
+                "24h"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts.",
+                "before": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "onboarding playbook"
+                  },
+                  "message_index": 1,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:38:43.271721+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-711"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:38:43.286255+00:00"
+                },
+                {
+                  "args": {},
+                  "message_index": 5,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T15:38:50.272906+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-711",
+                    "payload": {
+                      "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active."
+                    }
+                  },
+                  "message_index": 7,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-15T15:39:01.714173+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "name": "onboarding-playbook-cache",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 10,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T15:40:03.393678+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I02_modify_seed/evaluation/EP03_I02_modify_seed/objective/normalized-session.json",
+              "session_search_calls": 1,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 1,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 1,
+                "notes_list": 1,
+                "notes_update": 1,
+                "session_search": 1,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [
+              "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "onboarding-playbook-cache": {
+                "content": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, note retrieval, and an authoritative update are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n3. Retrieve the candidate shell and any authoritative request; confirm the request identifies the permitted content or SLA change and requires metadata preservation.\n4. Apply the approved playbook to the shell, changing only the explicitly authorized field or SLA while preserving every other step, owner, status, and metadata field.\n5. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The source is explicitly approved and the applied steps, owner, status, and any authorized SLA match the evidence.\n- Only the explicitly authorized content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell, the authorized SLA is applied when requested, and no draft or regional content was used.\n组合依赖 []\n",
+                "preview": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, note retrieval, and an authoritative update are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n3. Retrieve the candidate shell and any authoritative request; confirm the request identifies the permitted content or SLA change and requires metadata preservation.\n4. Apply the approved playbook to the shell, changing only the explicitly authorized field or SLA while preserving every other step, owner, status, and metadata field.\n5. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The source is explicitly approved and the applied steps, owner, status, and any authorized SLA match the evidence.\n- Only the explicitly authorized content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell, the authorized SLA is applied when requested, and no draft or regional content was used.\n组合依赖 []\n",
+                "sha1": "a4ded40ab332d77106aec339b3fbda54f176c24d"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "PLAYBOOK|mentor_sla_24h|DOC-711",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "onboarding playbook"
+                },
+                "message_index": 1,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:38:43.271721+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-711"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:38:43.286255+00:00"
+              },
+              {
+                "args": {},
+                "message_index": 5,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T15:38:50.272906+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-711",
+                  "payload": {
+                    "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active."
+                  }
+                },
+                "message_index": 7,
+                "name": "notes_update",
+                "timestamp": "2026-11-15T15:39:01.714173+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "name": "onboarding-playbook-cache",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 10,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T15:40:03.393678+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I02_modify_seed/evaluation/EP03_I02_modify_seed/objective/normalized-session.json",
+            "session_search_calls": 1,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 1,
+              "notes_list": 1,
+              "notes_update": 1,
+              "session_search": 1,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.666667,
+            "artifact_rule_quality_keywords": [
+              "onboarding",
+              "playbook"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 1,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T15:38:43.271721+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 1,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {},
+          "task_id": "EP03_I02_modify_seed",
+          "task_name": "EP03 Recall Then Modify — Seed",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 81.02615362394135,
+            "tool_time_s": 0.012532061024103314,
+            "wall_time_s": 81.03868568496546
+          },
+          "token_usage": {
+            "input_tokens": 137662,
+            "output_tokens": 293,
+            "total_tokens": 137955
+          },
+          "tool_dispatch_count": 3,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I02_modify_seed/evaluation/EP03_I02_modify_seed/objective/native-trace.jsonl",
+          "trace_id": "EP03_I02_modify_seed"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "EP03_I04_eval_near",
+      "task_id": "EP03_I04_eval_near",
+      "branch": "from_anchor",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I04_eval_near/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 2,
+              "hit_keywords": [
+                "onboarding",
+                "playbook"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "onboarding",
+                "playbook"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts.",
+                "before": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {},
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T15:40:40.869076+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "onboarding playbook"
+                  },
+                  "message_index": 3,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:40:40.875523+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-722"
+                  },
+                  "message_index": 5,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:40:48.584580+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-723"
+                  },
+                  "message_index": 7,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:40:48.590433+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "REQ-8801"
+                  },
+                  "message_index": 9,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:40:48.594774+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-721"
+                  },
+                  "message_index": 11,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:40:48.599315+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-721",
+                    "payload": {
+                      "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active."
+                    }
+                  },
+                  "message_index": 13,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-15T15:40:54.835851+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-721"
+                  },
+                  "message_index": 15,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:41:01.022807+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I04_eval_near/evaluation/EP03_I04_eval_near/objective/normalized-session.json",
+              "session_search_calls": 1,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 5,
+                "notes_list": 1,
+                "notes_update": 1,
+                "session_search": 1
+              }
+            },
+            "memory_entries": [
+              "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "onboarding-playbook-cache": {
+                "content": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, note retrieval, and an authoritative update are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n3. Retrieve the candidate shell and any authoritative request; confirm the request identifies the permitted content or SLA change and requires metadata preservation.\n4. Apply the approved playbook to the shell, changing only the explicitly authorized field or SLA while preserving every other step, owner, status, and metadata field.\n5. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The source is explicitly approved and the applied steps, owner, status, and any authorized SLA match the evidence.\n- Only the explicitly authorized content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell, the authorized SLA is applied when requested, and no draft or regional content was used.\n组合依赖 []\n",
+                "preview": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, note retrieval, and an authoritative update are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n3. Retrieve the candidate shell and any authoritative request; confirm the request identifies the permitted content or SLA change and requires metadata preservation.\n4. Apply the approved playbook to the shell, changing only the explicitly authorized field or SLA while preserving every other step, owner, status, and metadata field.\n5. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The source is explicitly approved and the applied steps, owner, status, and any authorized SLA match the evidence.\n- Only the explicitly authorized content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell, the authorized SLA is applied when requested, and no draft or regional content was used.\n组合依赖 []\n",
+                "sha1": "a4ded40ab332d77106aec339b3fbda54f176c24d"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "PLAYBOOK",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {},
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T15:40:40.869076+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "onboarding playbook"
+                },
+                "message_index": 3,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:40:40.875523+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-722"
+                },
+                "message_index": 5,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:40:48.584580+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-723"
+                },
+                "message_index": 7,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:40:48.590433+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "REQ-8801"
+                },
+                "message_index": 9,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:40:48.594774+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-721"
+                },
+                "message_index": 11,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:40:48.599315+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-721",
+                  "payload": {
+                    "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active."
+                  }
+                },
+                "message_index": 13,
+                "name": "notes_update",
+                "timestamp": "2026-11-15T15:40:54.835851+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-721"
+                },
+                "message_index": 15,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:41:01.022807+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I04_eval_near/evaluation/EP03_I04_eval_near/objective/normalized-session.json",
+            "session_search_calls": 1,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 5,
+              "notes_list": 1,
+              "notes_update": 1,
+              "session_search": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "onboarding",
+              "playbook"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 1,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T15:40:40.875523+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 1,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {},
+          "task_id": "EP03_I04_eval_near",
+          "task_name": "EP03 Recall Then Modify — Eval Near",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 61.64991232287139,
+            "tool_time_s": 0.018999686115421355,
+            "wall_time_s": 61.66891200898681
+          },
+          "token_usage": {
+            "input_tokens": 234778,
+            "output_tokens": 370,
+            "total_tokens": 235148
+          },
+          "tool_dispatch_count": 7,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I04_eval_near/evaluation/EP03_I04_eval_near/objective/native-trace.jsonl",
+          "trace_id": "EP03_I04_eval_near"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "EP03_I05_eval_far",
+      "task_id": "EP03_I05_eval_far",
+      "branch": "from_anchor",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I05_eval_far/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "onboarding-playbook-cache"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 2,
+              "hit_keywords": [
+                "onboarding",
+                "playbook"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "onboarding",
+                "playbook"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts.",
+                "before": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "onboarding playbook"
+                  },
+                  "message_index": 1,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:44:25.124873+00:00"
+                },
+                {
+                  "args": {},
+                  "message_index": 3,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T15:44:31.716629+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-733"
+                  },
+                  "message_index": 5,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:44:37.638255+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-731"
+                  },
+                  "message_index": 7,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:44:37.643630+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "REQ-8802"
+                  },
+                  "message_index": 9,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:44:37.652676+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-732"
+                  },
+                  "message_index": 11,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:44:37.657066+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-731",
+                    "payload": {
+                      "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active."
+                    }
+                  },
+                  "message_index": 13,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-15T15:44:45.247071+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "name": "onboarding-playbook-cache",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 16,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T15:46:46.715089+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I05_eval_far/evaluation/EP03_I05_eval_far/objective/normalized-session.json",
+              "session_search_calls": 1,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 1,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 4,
+                "notes_list": 1,
+                "notes_update": 1,
+                "session_search": 1,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [
+              "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "onboarding-playbook-cache": {
+                "content": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, note retrieval, and an authoritative source are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook. Resolve the original approval against later explicit authorized revisions for the same playbook; recover the latest settled version, using saved update results as corroboration. Prefer authorized sources over drafts, regional checklists, and unrelated discussions.\n2. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n3. Retrieve the candidate shell and any authoritative request; distinguish restoration from a newly authorized content or SLA change. A coordination request that preserves the settled SLA does not require a new change or revert a prior authorized revision. Confirm metadata preservation.\n4. Apply the approved playbook to the shell, changing only the explicitly authorized field or SLA while preserving every other step, owner, status, and metadata field.\n5. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The recovered source accounts for later authorized revisions rather than stopping at the original approval; applied steps, owner, status, and any authorized SLA match that evidence.\n- Only the explicitly authorized content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell, the settled SLA is preserved unless a new change is authorized, and no draft or regional content was used.\n组合依赖 []\n",
+                "preview": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, note retrieval, and an authoritative source are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook. Resolve the original approval against later explicit authorized revisions for the same playbook; recover the latest settled version, using saved update results as corroboration. Prefer authorized sources over drafts, regional checklists, and unrelated discussions.\n2. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n3. Retrieve the candidate shell and any authoritative request; distinguish restoration from a newly authorized content or SLA change. A coordination request that preserves the settled SLA does not require a new change or revert a prior authorized revision. Confirm metadata preservation.\n4. Apply the approved playbook to the shell, changing only the explicitly authorized field or SLA while preserving every other step, owner, status, and metadata field.\n5. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The recovered source accounts for later authorized revisions rather than stopping at the original approval; applied steps, owner, status, and any authorized SLA match that evidence.\n- Only the explicitly authorized content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell, the settled SLA is preserved unless a new change is authorized, and no draft or regional content was used.\n组合依赖 []\n",
+                "sha1": "9a29af58b13f2e991a37850534da6c062d93015d"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "PLAYBOOK",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "onboarding playbook"
+                },
+                "message_index": 1,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:44:25.124873+00:00"
+              },
+              {
+                "args": {},
+                "message_index": 3,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T15:44:31.716629+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-733"
+                },
+                "message_index": 5,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:44:37.638255+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-731"
+                },
+                "message_index": 7,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:44:37.643630+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "REQ-8802"
+                },
+                "message_index": 9,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:44:37.652676+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-732"
+                },
+                "message_index": 11,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:44:37.657066+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-731",
+                  "payload": {
+                    "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active."
+                  }
+                },
+                "message_index": 13,
+                "name": "notes_update",
+                "timestamp": "2026-11-15T15:44:45.247071+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "name": "onboarding-playbook-cache",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 16,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T15:46:46.715089+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I05_eval_far/evaluation/EP03_I05_eval_far/objective/normalized-session.json",
+            "session_search_calls": 1,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 4,
+              "notes_list": 1,
+              "notes_update": 1,
+              "session_search": 1,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "onboarding",
+              "playbook"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 1,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T15:44:25.124873+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 1,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {},
+          "task_id": "EP03_I05_eval_far",
+          "task_name": "EP03 Recall Then Modify — Eval Far",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 61.93198525707703,
+            "tool_time_s": 0.016657617932651192,
+            "wall_time_s": 61.94864287500968
+          },
+          "token_usage": {
+            "input_tokens": 149560,
+            "output_tokens": 273,
+            "total_tokens": 149833
+          },
+          "tool_dispatch_count": 6,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I05_eval_far/evaluation/EP03_I05_eval_far/objective/native-trace.jsonl",
+          "trace_id": "EP03_I05_eval_far"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "EP03_I06_control_no_persistence",
+      "task_id": "EP03_I06_control_no_persistence",
+      "branch": "from_anchor",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I06_control_no_persistence/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 2,
+              "hit_keywords": [
+                "onboarding",
+                "playbook"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "onboarding",
+                "playbook"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts.",
+                "before": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {},
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T15:47:30.594258+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-741"
+                  },
+                  "message_index": 3,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:47:37.294041+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-743"
+                  },
+                  "message_index": 5,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:47:37.298583+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-742"
+                  },
+                  "message_index": 7,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:47:37.301772+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "REQ-8803"
+                  },
+                  "message_index": 9,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:47:37.305356+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I06_control_no_persistence/evaluation/EP03_I06_control_no_persistence/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 4,
+                "notes_list": 1
+              }
+            },
+            "memory_entries": [
+              "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "onboarding-playbook-cache": {
+                "content": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, note retrieval, and an authoritative update are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n3. Retrieve the candidate shell and any authoritative request; confirm the request identifies the permitted content or SLA change and requires metadata preservation.\n4. Apply the approved playbook to the shell, changing only the explicitly authorized field or SLA while preserving every other step, owner, status, and metadata field.\n5. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The source is explicitly approved and the applied steps, owner, status, and any authorized SLA match the evidence.\n- Only the explicitly authorized content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell, the authorized SLA is applied when requested, and no draft or regional content was used.\n组合依赖 []\n",
+                "preview": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, note retrieval, and an authoritative update are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n3. Retrieve the candidate shell and any authoritative request; confirm the request identifies the permitted content or SLA change and requires metadata preservation.\n4. Apply the approved playbook to the shell, changing only the explicitly authorized field or SLA while preserving every other step, owner, status, and metadata field.\n5. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The source is explicitly approved and the applied steps, owner, status, and any authorized SLA match the evidence.\n- Only the explicitly authorized content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell, the authorized SLA is applied when requested, and no draft or regional content was used.\n组合依赖 []\n",
+                "sha1": "a4ded40ab332d77106aec339b3fbda54f176c24d"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "PLAYBOOK\n\nNo records changed. The provided tools do not include `session_search`, so I could not recover the approved playbook or settled mentor handoff SLA. Today’s shells contain only placeholders and cannot establish the approved content.",
+          "hard_pass": false,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {},
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T15:47:30.594258+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-741"
+                },
+                "message_index": 3,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:47:37.294041+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-743"
+                },
+                "message_index": 5,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:47:37.298583+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-742"
+                },
+                "message_index": 7,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:47:37.301772+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "REQ-8803"
+                },
+                "message_index": 9,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:47:37.305356+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I06_control_no_persistence/evaluation/EP03_I06_control_no_persistence/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 4,
+              "notes_list": 1
+            }
+          },
+          "judge_score": 0.15,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "onboarding",
+              "playbook"
+            ],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": false,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 0.15,
+            "completion": 0.10750000000000001,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {},
+          "task_id": "EP03_I06_control_no_persistence",
+          "task_name": "EP03 Recall Then Modify — Control No Persistence",
+          "task_score": 0.286,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 60.705887596996035,
+            "tool_time_s": 0.011597556003835052,
+            "wall_time_s": 60.71748515299987
+          },
+          "token_usage": {
+            "input_tokens": 119697,
+            "output_tokens": 340,
+            "total_tokens": 120037
+          },
+          "tool_dispatch_count": 5,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I06_control_no_persistence/evaluation/EP03_I06_control_no_persistence/objective/native-trace.jsonl",
+          "trace_id": "EP03_I06_control_no_persistence"
+        },
+        "score": 0
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "EP03_I07_control_shortcut",
+      "task_id": "EP03_I07_control_shortcut",
+      "branch": "from_anchor",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I07_control_shortcut/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "onboarding-playbook-cache"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 2,
+              "hit_keywords": [
+                "onboarding",
+                "playbook"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "onboarding",
+                "playbook"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts.",
+                "before": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {},
+                  "message_index": 1,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T15:49:51.389991+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "onboarding mentor handoff"
+                  },
+                  "message_index": 3,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:49:51.396876+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-751"
+                  },
+                  "message_index": 5,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:49:57.092633+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-503"
+                  },
+                  "message_index": 7,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:49:57.097395+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-751",
+                    "payload": {
+                      "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active."
+                    }
+                  },
+                  "message_index": 9,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-15T15:50:02.083656+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "name": "onboarding-playbook-cache",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 12,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T15:51:00.218300+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I07_control_shortcut/evaluation/EP03_I07_control_shortcut/objective/normalized-session.json",
+              "session_search_calls": 1,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 1,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 2,
+                "notes_list": 1,
+                "notes_update": 1,
+                "session_search": 1,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [
+              "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "onboarding-playbook-cache": {
+                "content": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, note retrieval, and an authoritative update are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. Resolve the approved baseline together with later explicit authorized revisions applicable to the current task. Use the resulting settled version rather than reverting to the original approval; current public task instructions take priority.\n3. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n4. Retrieve the candidate shell and any authoritative request; confirm the request identifies the permitted content or SLA change and requires metadata preservation.\n5. Apply the approved playbook to the shell, changing only the explicitly authorized field or SLA while preserving every other step, owner, status, and metadata field.\n6. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The source is explicitly approved and the applied steps, owner, status, and any authorized SLA match the evidence, including applicable later authorized revisions.\n- Only the explicitly authorized content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell, the authorized SLA is applied when requested, and no draft or regional content was used.\n组合依赖 []\n",
+                "preview": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook into a current shell and prior-session search, note listing, note retrieval, and an authoritative update are available.\n## 排除条件\nDo not use draft, regional, candidate, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. Resolve the approved baseline together with later explicit authorized revisions applicable to the current task. Use the resulting settled version rather than reverting to the original approval; current public task instructions take priority.\n3. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers.\n4. Retrieve the candidate shell and any authoritative request; confirm the request identifies the permitted content or SLA change and requires metadata preservation.\n5. Apply the approved playbook to the shell, changing only the explicitly authorized field or SLA while preserving every other step, owner, status, and metadata field.\n6. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The source is explicitly approved and the applied steps, owner, status, and any authorized SLA match the evidence, including applicable later authorized revisions.\n- Only the explicitly authorized content changed; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the approved playbook is present in the matching current shell, the authorized SLA is applied when requested, and no draft or regional content was used.\n组合依赖 []\n",
+                "sha1": "8ad97a5b95bcc6b34d0a0885944f01521022f62a"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "PLAYBOOK|mentor_sla_24h",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {},
+                "message_index": 1,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T15:49:51.389991+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "onboarding mentor handoff"
+                },
+                "message_index": 3,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:49:51.396876+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-751"
+                },
+                "message_index": 5,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:49:57.092633+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-503"
+                },
+                "message_index": 7,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:49:57.097395+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-751",
+                  "payload": {
+                    "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active."
+                  }
+                },
+                "message_index": 9,
+                "name": "notes_update",
+                "timestamp": "2026-11-15T15:50:02.083656+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "name": "onboarding-playbook-cache",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 12,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T15:51:00.218300+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I07_control_shortcut/evaluation/EP03_I07_control_shortcut/objective/normalized-session.json",
+            "session_search_calls": 1,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 2,
+              "notes_list": 1,
+              "notes_update": 1,
+              "session_search": 1,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "onboarding",
+              "playbook"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 1,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T15:49:51.396876+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 1,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {},
+          "task_id": "EP03_I07_control_shortcut",
+          "task_name": "EP03 Recall Then Modify — Control Shortcut",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 47.63851526303915,
+            "tool_time_s": 0.01467417599633336,
+            "wall_time_s": 47.653189439035486
+          },
+          "token_usage": {
+            "input_tokens": 117612,
+            "output_tokens": 300,
+            "total_tokens": 117912
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 6,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I07_control_shortcut/evaluation/EP03_I07_control_shortcut/objective/native-trace.jsonl",
+          "trace_id": "EP03_I07_control_shortcut"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "EP03_I08_control_wrong_mechanism",
+      "task_id": "EP03_I08_control_wrong_mechanism",
+      "branch": "from_anchor",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I08_control_wrong_mechanism/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "onboarding-playbook-cache"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 2,
+              "hit_keywords": [
+                "onboarding",
+                "playbook"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "onboarding",
+                "playbook"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts.",
+                "before": "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts."
+              },
+              {
+                "after": "Durable onboarding cache copied from an old convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- Do not spend time checking prior session history unless someone insists.",
+                "before": "Durable onboarding cache copied from an old convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- Do not spend time checking prior session history unless someone insists."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "onboarding-playbook-cache"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-15T15:51:22.350072+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "settled onboarding playbook approved"
+                  },
+                  "message_index": 3,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:51:29.544426+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "current approved onboarding shell"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:51:29.554613+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "DOC-437 onboarding"
+                  },
+                  "message_index": 7,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:51:29.559948+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "mentor handoff SLA"
+                  },
+                  "message_index": 9,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:51:29.564913+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 50,
+                    "query": "convenience cache proposed rewrite settled onboarding"
+                  },
+                  "message_index": 11,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:51:45.758116+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 50,
+                    "query": "settled mentor handoff SLA"
+                  },
+                  "message_index": 13,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:51:45.763703+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 50,
+                    "query": "proposed rewrite onboarding"
+                  },
+                  "message_index": 15,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:51:45.769187+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 50,
+                    "query": "today's notes onboarding"
+                  },
+                  "message_index": 17,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:51:45.774334+00:00"
+                },
+                {
+                  "args": {},
+                  "message_index": 19,
+                  "name": "notes_list",
+                  "timestamp": "2026-11-15T15:51:52.721933+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 100,
+                    "query": "",
+                    "session_id": "EP03_I02_modify_seed"
+                  },
+                  "message_index": 21,
+                  "name": "session_search",
+                  "timestamp": "2026-11-15T15:52:00.628961+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-761"
+                  },
+                  "message_index": 23,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:52:08.486920+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-504"
+                  },
+                  "message_index": 25,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:52:08.492193+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-761",
+                    "payload": {
+                      "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active."
+                    }
+                  },
+                  "message_index": 27,
+                  "name": "notes_update",
+                  "timestamp": "2026-11-15T15:52:17.438926+00:00"
+                },
+                {
+                  "args": {
+                    "note_id": "DOC-761"
+                  },
+                  "message_index": 29,
+                  "name": "notes_get",
+                  "timestamp": "2026-11-15T15:52:23.676013+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "name": "onboarding-playbook-cache",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 32,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-15T15:55:02.471309+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I08_control_wrong_mechanism/evaluation/EP03_I08_control_wrong_mechanism/objective/normalized-session.json",
+              "session_search_calls": 9,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 1,
+              "skill_update_count": 1,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "notes_get": 3,
+                "notes_list": 1,
+                "notes_update": 1,
+                "session_search": 9,
+                "skill_manage": 1,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [
+              "Onboarding durable cache copied from a convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- This memory is a wrong-mechanism distractor; prefer session_search for prior approved artifacts.",
+              "Durable onboarding cache copied from an old convenience memo.\n- Treat DOC-437 as the canonical onboarding playbook shell.\n- Step 1 says the manager sends the welcome link.\n- Step 2 says HR ships swag.\n- Step 4 says mentor assignment is optional after week one.\n- Do not spend time checking prior session history unless someone insists."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "onboarding-playbook-cache": {
+                "content": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook or apply an authorized update to a current shell, with prior-session search, note listing, and note retrieval available.\n## 排除条件\nDo not use draft, regional, candidate, proposed-rewrite, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized restoration or update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. Follow relevant session references to the approved baseline and subsequent authorized updates. Recover the resulting settled version, including saved SLA revisions; do not stop at an older approval or treat a newer proposal or cache as superseding it.\n3. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers; do not reuse a historical destination ID without checking current notes.\n4. Retrieve the candidate shell and any authoritative request. Confirm whether the current instruction authorizes restoration of the settled version or a further content or SLA change, and preserve shell metadata.\n5. Apply the settled approved playbook to the shell, making only any further explicitly authorized change while preserving every other step, owner, status, and metadata field.\n6. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The source reflects the approved baseline plus subsequent authorized settled updates; applied steps, owner, status, and SLA match that evidence.\n- Only the explicitly authorized restoration or content change occurred; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the settled playbook is present in the matching current shell, any authorized SLA is applied, and no draft, proposed rewrite, regional content, or stale cache was used.\n组合依赖 []\n",
+                "preview": "---\nname: onboarding-playbook-cache\ndescription: \"Recover the approved onboarding playbook, apply authorized content or SLA updates to the matching current approved shell, and preserve unrelated content and shell metadata.\"\n---\n## 适用条件\nUse when Operations must restore a settled onboarding playbook or apply an authorized update to a current shell, with prior-session search, note listing, and note retrieval available.\n## 排除条件\nDo not use draft, regional, candidate, proposed-rewrite, or stale cached playbooks; do not alter title, tags, status, timestamps, participants, or duration metadata; do not change content beyond the explicitly authorized restoration or update.\n## 操作步骤\n1. Search prior-session records for the settled onboarding playbook and prefer the explicitly approved source over drafts, regional checklists, and unrelated discussions.\n2. Follow relevant session references to the approved baseline and subsequent authorized updates. Recover the resulting settled version, including saved SLA revisions; do not stop at an older approval or treat a newer proposal or cache as superseding it.\n3. List current notes and identify the matching approved artifact shell by title and approval/artifact-shell markers; do not reuse a historical destination ID without checking current notes.\n4. Retrieve the candidate shell and any authoritative request. Confirm whether the current instruction authorizes restoration of the settled version or a further content or SLA change, and preserve shell metadata.\n5. Apply the settled approved playbook to the shell, making only any further explicitly authorized change while preserving every other step, owner, status, and metadata field.\n6. Retrieve the updated shell and compare its metadata and unchanged content with the pre-update record; confirm any persisted duration uses the required Nh notation.\n## 验证\n- The source reflects the approved baseline plus subsequent authorized settled updates; applied steps, owner, status, and SLA match that evidence.\n- Only the explicitly authorized restoration or content change occurred; title, tags, status, creation time, participants, and duration remain unchanged.\n- The final retrieval confirms the settled playbook is present in the matching current shell, any authorized SLA is applied, and no draft, proposed rewrite, regional content, or stale cache was used.\n组合依赖 []\n",
+                "sha1": "9450bf3f0ee6f62cd3191678d2fbe02c040a3f95"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "PLAYBOOK\n\nStep 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active.",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "onboarding-playbook-cache"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-15T15:51:22.350072+00:00"
+              },
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "settled onboarding playbook approved"
+                },
+                "message_index": 3,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:51:29.544426+00:00"
+              },
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "current approved onboarding shell"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:51:29.554613+00:00"
+              },
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "DOC-437 onboarding"
+                },
+                "message_index": 7,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:51:29.559948+00:00"
+              },
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "mentor handoff SLA"
+                },
+                "message_index": 9,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:51:29.564913+00:00"
+              },
+              {
+                "args": {
+                  "limit": 50,
+                  "query": "convenience cache proposed rewrite settled onboarding"
+                },
+                "message_index": 11,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:51:45.758116+00:00"
+              },
+              {
+                "args": {
+                  "limit": 50,
+                  "query": "settled mentor handoff SLA"
+                },
+                "message_index": 13,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:51:45.763703+00:00"
+              },
+              {
+                "args": {
+                  "limit": 50,
+                  "query": "proposed rewrite onboarding"
+                },
+                "message_index": 15,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:51:45.769187+00:00"
+              },
+              {
+                "args": {
+                  "limit": 50,
+                  "query": "today's notes onboarding"
+                },
+                "message_index": 17,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:51:45.774334+00:00"
+              },
+              {
+                "args": {},
+                "message_index": 19,
+                "name": "notes_list",
+                "timestamp": "2026-11-15T15:51:52.721933+00:00"
+              },
+              {
+                "args": {
+                  "limit": 100,
+                  "query": "",
+                  "session_id": "EP03_I02_modify_seed"
+                },
+                "message_index": 21,
+                "name": "session_search",
+                "timestamp": "2026-11-15T15:52:00.628961+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-761"
+                },
+                "message_index": 23,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:52:08.486920+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-504"
+                },
+                "message_index": 25,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:52:08.492193+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-761",
+                  "payload": {
+                    "content": "Step 1: HR emails welcome packet. Step 2: manager books kickoff call. Step 3: IT provisions laptop. Step 4: mentor assigned within 24h. Owner: Carol. Status: active."
+                  }
+                },
+                "message_index": 27,
+                "name": "notes_update",
+                "timestamp": "2026-11-15T15:52:17.438926+00:00"
+              },
+              {
+                "args": {
+                  "note_id": "DOC-761"
+                },
+                "message_index": 29,
+                "name": "notes_get",
+                "timestamp": "2026-11-15T15:52:23.676013+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "name": "onboarding-playbook-cache",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 32,
+                "name": "skill_manage",
+                "timestamp": "2026-11-15T15:55:02.471309+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I08_control_wrong_mechanism/evaluation/EP03_I08_control_wrong_mechanism/objective/normalized-session.json",
+            "session_search_calls": 9,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 1,
+            "skill_update_count": 1,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "notes_get": 3,
+              "notes_list": 1,
+              "notes_update": 1,
+              "session_search": 9,
+              "skill_manage": 1,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "onboarding",
+              "playbook"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 10,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 10,
+            "session_search_count": 9,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 10,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-15T15:51:29.544426+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 10,
+            "session_search_count": 9,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "framework Curator; mapped from actual applied_ops",
+          "task_components": {},
+          "task_id": "EP03_I08_control_wrong_mechanism",
+          "task_name": "EP03 Recall Then Modify — Control Wrong Mechanism",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 93.95771895797225,
+            "tool_time_s": 0.03132574202027172,
+            "wall_time_s": 93.98904469999252
+          },
+          "token_usage": {
+            "input_tokens": 395809,
+            "output_tokens": 1153,
+            "total_tokens": 396962
+          },
+          "tool_dispatch_count": 5,
+          "total_turns": 11,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/modified-full204-20261115/campaigns/update_ability__EP03_recall_then_modify/families/update_ability/EP03_recall_then_modify/episodes/EP03_I08_control_wrong_mechanism/evaluation/EP03_I08_control_wrong_mechanism/objective/native-trace.jsonl",
+          "trace_id": "EP03_I08_control_wrong_mechanism"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    }
+  ],
+  "attempts_finished": true,
+  "complete": true,
+  "passed": 5,
+  "known_scores": 7,
+  "weights_updated": false,
+  "score_contract": "upstream grade_episode (including notes_memory hard_pass)"
+}

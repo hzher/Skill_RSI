@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-11-16T13:09:30.545206+00:00",
+  "verified": true,
+  "file_digests_verified": 690,
+  "unique_tasks": 204,
+  "origins": {
+    "rerun": 32,
+    "reused": 172
+  },
+  "execution_flags_verified": 203,
+  "controls_verified": 71,
+  "persistence_off_controls": 23,
+  "changed_controls": 7,
+  "non_control_changes": 0,
+  "credential_matches": 0,
+  "scanned_payloads": 11492,
+  "largest_file_bytes": 6396417,
+  "successful_native_turns": 811,
+  "benchmark_source_unchanged": true,
+  "training_updates": 0,
+  "totals": {
+    "planned": 204,
+    "scored": 203,
+    "passed": 138,
+    "failed": 65,
+    "unknown": 1,
+    "execution_complete": 203,
+    "successful_trajectory": 127
+  }
+}

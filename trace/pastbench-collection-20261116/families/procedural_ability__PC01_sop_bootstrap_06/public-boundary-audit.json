@@ -1,0 +1,50 @@
+{
+  "validated": true,
+  "observed_at": "2026-11-15T15:42:06.905138+00:00",
+  "tasks_checked": 8,
+  "scope": "Exact Executor initial public prompt, MCP skill inputs, public task identity and score-blind Curator observation/system prompt.",
+  "limits": "Authorized history/memory/skill provenance is covered by subset-audit.json. This is input-boundary verification, not an adversarial filesystem isolation proof.",
+  "script_sha256": "e0137cab3298e07e36e6fb975a54911848715e96e63bee19153a76c43847e9dd",
+  "tasks": [
+    {
+      "task_id": "SE_FX01_I01",
+      "prompt_sha256": "58b8972d8c0c621bdb33bd48e36404012f8978c2d2b50bd23ac9bf3110c10e75",
+      "curator_observation_sha256": "023430fecc9b3d686a9dbab856573ff5d0d8363b90ac3893adb26ed29280f71d"
+    },
+    {
+      "task_id": "SE_FX01_I02",
+      "prompt_sha256": "f3747dd73c5d46e27321cb4f7287592e8e9c51372d964f4c985957c3fad5b4cf",
+      "curator_observation_sha256": "94a04a3ab30436ace54c8d9483a09122f519b07637d241cb7f0062af477ebb69"
+    },
+    {
+      "task_id": "SE_FX01_I02B",
+      "prompt_sha256": "e1e1c37e92836adc393733d813f8f065848b07ad4810d19d26acb7e847a06989",
+      "curator_observation_sha256": "84895b54ec2dfbfaafcbd1030fa0674b8126f4e53bba03bb9cd02f65bfa5e920"
+    },
+    {
+      "task_id": "SE_FX01_I03",
+      "prompt_sha256": "5798f76dd8f51c3de13c30d31fb78ee5d689ab5480c6b2cb08ad22b236c13772",
+      "curator_observation_sha256": "a0e15676c3ffdb424a66407b3f96c6fd1ddfb896e3f407acef2345389b0bea44"
+    },
+    {
+      "task_id": "SE_FX01_I03B",
+      "prompt_sha256": "b32f519cab91fc11a96bdc46bf903566a56aabff500395e1c035c4c8c6fe406c",
+      "curator_observation_sha256": "011680f20192de17131f50bb00c9b68a66cccd9e6c782face088b1e80e0488fb"
+    },
+    {
+      "task_id": "SE_FX01_C02",
+      "prompt_sha256": "cb14c94dfaf7f118a12570f464bf52031edca9f4ae09a123590b283df5abfcd1",
+      "curator_observation_sha256": "d0df992ac66fb5482386d8975c517bb6da90e47f5d6681fa64c29e899d88cee5"
+    },
+    {
+      "task_id": "SE_FX01_C03",
+      "prompt_sha256": "6c9181fc7443a1a3699b35d79c01da541d93b57598f289d34389bb80d1b05a3a",
+      "curator_observation_sha256": "9110e7370b5da925613b0039897a6a91990a04356ebc9ca77d2f0d981f16582b"
+    },
+    {
+      "task_id": "SE_FX01_C01",
+      "prompt_sha256": "922ac89d7ec2b6d5824a1acdb7ce250b00013bd028cfb8a19c4e42bd525a0e2b",
+      "curator_observation_sha256": "0f4169396cf1583fec896c41962408f3a4dc7f0f9a80261e11ff407f0351c3dc"
+    }
+  ]
+}

@@ -62,7 +62,7 @@ def buffered_request(request, path, *, timeout, options, secret='', responses=Fa
                         if event.get('type') not in ('response.failed', 'response.incomplete'):
                             continue
                         code = (event.get('response', {}).get('error') or {}).get('code')
-                        if code in ('upstream_error', 'server_error', 'rate_limit_exceeded', 'temporarily_unavailable'):
+                        if code in ('upstream_error', 'upstream_stream_break', 'server_error', 'rate_limit_exceeded', 'temporarily_unavailable'):
                             raise TemporaryProviderError('Provider temporary SSE error: ' + code)
                         raise ValueError('Provider returned a terminal unsuccessful response')
                     if not any(e.get('type') == 'response.completed' for e in events):

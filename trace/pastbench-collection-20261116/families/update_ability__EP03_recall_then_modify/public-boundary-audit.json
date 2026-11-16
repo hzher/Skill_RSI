@@ -1,0 +1,45 @@
+{
+  "validated": true,
+  "observed_at": "2026-11-15T15:55:38.484565+00:00",
+  "tasks_checked": 7,
+  "scope": "Exact Executor initial public prompt, MCP skill inputs, public task identity and score-blind Curator observation/system prompt.",
+  "limits": "Authorized history/memory/skill provenance is covered by subset-audit.json. This is input-boundary verification, not an adversarial filesystem isolation proof.",
+  "script_sha256": "e0137cab3298e07e36e6fb975a54911848715e96e63bee19153a76c43847e9dd",
+  "tasks": [
+    {
+      "task_id": "EP03_I01_modify_cold",
+      "prompt_sha256": "2a115dafee966696c47ec0669c85ae41f40117f497088689ef872f661a6ef2ee",
+      "curator_observation_sha256": "2b082904375e02fd829e05bb34f9950e0b475fa0138ec2f6123eadad0b820ff5"
+    },
+    {
+      "task_id": "EP03_I02_modify_seed",
+      "prompt_sha256": "0ad1abcf0445b5e54425500517263bcfd3c523e63cd6bcd165ac35877dc98091",
+      "curator_observation_sha256": "bcac62f38bbd66e32d49178311b55d26c91f9cc8d26fa8d416647cf440d49b02"
+    },
+    {
+      "task_id": "EP03_I04_eval_near",
+      "prompt_sha256": "4fe523249ce96c38b326989aff7e8294d885db5701b20df6f83efd65ee0dfbb8",
+      "curator_observation_sha256": "c8e0c51211ca922698ef73b39fdea1323afb30a1d6a8da9df551d5fcdba3e76a"
+    },
+    {
+      "task_id": "EP03_I05_eval_far",
+      "prompt_sha256": "95b59a4d6902f03263946a59a9bb56e0d31de8ddb52ec2b10200aaa234b7d85a",
+      "curator_observation_sha256": "b5380857dc8d1e0034b58096befd3911aa7b1d0b2b1123741d08c63f95db5858"
+    },
+    {
+      "task_id": "EP03_I06_control_no_persistence",
+      "prompt_sha256": "a5d1f1dc74c95f1ef2a231de8ed7a4d984c6fd94d4401e386f3d12ba24d0dc10",
+      "curator_observation_sha256": "c702212c44baf9d71d3decb87b7bd2b9cb32889f845ced6e26c48e7bd68d9bb9"
+    },
+    {
+      "task_id": "EP03_I07_control_shortcut",
+      "prompt_sha256": "b5142fa391e738e6e6ce6c2c25441b05fb7f8270824fc047d1a2ab86dc2acc3f",
+      "curator_observation_sha256": "0fecbf966a1a2c97158a537a4cabcac46af586aaea59546ccd0b1e23d7281516"
+    },
+    {
+      "task_id": "EP03_I08_control_wrong_mechanism",
+      "prompt_sha256": "d52c660c8c7e22af204421f945fe55d4db6fbdc2f3048f5c2eeb86f1cd41ec37",
+      "curator_observation_sha256": "1aa2a5556822b41b88f61b8689f9abdc47111b9e70ee254f20e02331e2f5a203"
+    }
+  ]
+}

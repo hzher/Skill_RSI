@@ -1,0 +1,2 @@
+family,category,attempted,execution_complete,pipeline_complete,passed,failed,unknown,skill_reads,memory_writes,session_searches,mean_task_score
+procedural_ability/PC03_latent_rule_induction_01,procedural_ability,7,6,4,5,1,1,3,0,0,0.9183333333333333

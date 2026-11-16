@@ -1,0 +1,2400 @@
+{
+  "family": "proactive_information_gathering/PG03_oncall_handoff_lookup",
+  "episodes": [
+    {
+      "episode": "attempt_probe_pre",
+      "task_id": "PG03_ATTEMPT_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/attempt_probe_pre/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "oncall-handoff-lookup"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets.",
+                "before": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "CacheEdge maintenance"
+                  },
+                  "message_index": 1,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:49:25.729841+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 40,
+                    "query": "CacheEdge authoritative current handoff"
+                  },
+                  "message_index": 3,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:49:30.216244+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "HAND-742",
+                    "session_id": "pg03-hand-742"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:49:34.814452+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-103"
+                  },
+                  "message_index": 7,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:49:39.540379+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-104"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:49:39.546507+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-103"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T11:49:44.887935+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-104"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T11:49:44.892655+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "name": "oncall-handoff-lookup",
+                    "source_actor": "framework_curator"
+                  },
+                  "message_index": 16,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-16T11:50:33.904316+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/attempt_probe_pre/evaluation/PG03_ATTEMPT_001/objective/normalized-session.json",
+              "session_search_calls": 3,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 0,
+              "skill_update_count": 1,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 2,
+                "helpdesk_update_ticket": 2,
+                "session_search": 3,
+                "skill_manage": 1
+              }
+            },
+            "memory_entries": [
+              "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "oncall-handoff-lookup": {
+                "content": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## 适用条件\nUse when a request depends on recovering an incident or service handoff, its owner and maintenance window, and the blocked follow-up tickets from session history.\n## 排除条件\nDo not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone. This procedure does not authorize parent-incident edits or unrelated notifications; follow the current user's scope.\n## 操作步骤\n1. Search session history for the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Check incident scope so a canary or related incident is not substituted for the requested incident.\n3. When results are ambiguous, re-query the candidate's exact handoff ID and source session. Do not proceed to ticket changes until the authoritative record and required fields are established.\n4. Recover the exact handoff ID, incident ID, owner, maintenance window, and blocked follow-up ticket IDs from the confirmed record; do not combine fields from stale or partial records.\n5. Inspect only the confirmed blocked follow-up tickets before changing them. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the blocked follow-up tickets. Do not touch the parent incident or stale ticket set from older handoffs; do not carry one-off instructions from older records into the current task.\n## 验证\n- The recovered fields come from the same confirmed current handoff for the intended incident, not merely the newest-looking search result.\n- Every changed ticket belongs to the confirmed blocked set, and no parent incident or stale ticket was changed.\n- For maintenance-wait updates, tool results confirm reason_code is waiting_on_maintenance while unrelated ticket fields remain unchanged.\n组合依赖 []\n",
+                "preview": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## 适用条件\nUse when a request depends on recovering an incident or service handoff, its owner and maintenance window, and the blocked follow-up tickets from session history.\n## 排除条件\nDo not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone. This procedure does not authorize parent-incident edits or unrelated notifications; follow the current user's scope.\n## 操作步骤\n1. Search session history for the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Check incident scope so a canary or related incident is not substituted for the requested incident.\n3. When results are ambiguous, re-query the candidate's exact handoff ID and source session. Do not proceed to ticket changes until the authoritative record and required fields are established.\n4. Recover the exact handoff ID, incident ID, owner, maintenance window, and blocked follow-up ticket IDs from the confirmed record; do not combine fields from stale or partial records.\n5. Inspect only the confirmed blocked follow-up tickets before changing them. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the blocked follow-up tickets. Do not touch the parent incident or stale ticket set from older handoffs; do not carry one-off instructions from older records into the current task.\n## 验证\n- The recovered fields come from the same confirmed current handoff for the intended incident, not merely the newest-looking search result.\n- Every changed ticket belongs to the confirmed blocked set, and no parent incident or stale ticket was changed.\n- For maintenance-wait updates, tool results confirm reason_code is waiting_on_maintenance while unrelated ticket fields remain unchanged.\n组合依赖 []\n",
+                "sha1": "b94841decb793b8626808eb49ced91710e30bf9e"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "HANDOFF|HAND-742|INC-870|Eli Navarro|03:00-04:00 UTC|HD-PG03-103,HD-PG03-104",
+          "grader_checks": {
+            "action_score": 1.0,
+            "business_semantic_score": 1.0,
+            "checks": {
+              "actual_final_maintenance_wait_semantics": true,
+              "blocked_final_states_preserved": true,
+              "exact_blocked_child_subset_updated": true,
+              "history_retrieved_before_first_write": true,
+              "no_blocked_or_unknown_update_attempts": true,
+              "no_ticket_closures": true,
+              "real_final_state_change": true,
+              "successful_receipts_match": true
+            },
+            "schema": "pg03-tools-state-evidence-v1"
+          },
+          "grading_contract": "pg03-tools-state-evidence-v1",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "CacheEdge maintenance"
+                },
+                "message_index": 1,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:49:25.729841+00:00"
+              },
+              {
+                "args": {
+                  "limit": 40,
+                  "query": "CacheEdge authoritative current handoff"
+                },
+                "message_index": 3,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:49:30.216244+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "HAND-742",
+                  "session_id": "pg03-hand-742"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:49:34.814452+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-103"
+                },
+                "message_index": 7,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:49:39.540379+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-104"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:49:39.546507+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-103"
+                },
+                "message_index": 11,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T11:49:44.887935+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-104"
+                },
+                "message_index": 13,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T11:49:44.892655+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "name": "oncall-handoff-lookup",
+                  "source_actor": "framework_curator"
+                },
+                "message_index": 16,
+                "name": "skill_manage",
+                "timestamp": "2026-11-16T11:50:33.904316+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/attempt_probe_pre/evaluation/PG03_ATTEMPT_001/objective/normalized-session.json",
+            "session_search_calls": 3,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 2,
+              "helpdesk_update_ticket": 2,
+              "session_search": 3,
+              "skill_manage": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 3,
+            "session_search_count": 3,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:49:25.729841+00:00",
+            "first_write_at": "2026-11-16T11:49:44.887935+00:00",
+            "first_write_endpoint": "http://127.0.0.1:44963/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 3,
+            "session_search_count": 3,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG03_ATTEMPT_001",
+          "task_name": "PG03 Oncall Handoff Lookup Attempt Probe",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 49.185535991040524,
+            "tool_time_s": 0.014405832975171506,
+            "wall_time_s": 49.199941824015696
+          },
+          "token_usage": {
+            "input_tokens": 86977,
+            "output_tokens": 392,
+            "total_tokens": 87369
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 7,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/attempt_probe_pre/evaluation/PG03_ATTEMPT_001/objective/native-trace.jsonl",
+          "trace_id": "PG03_ATTEMPT_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "reflection_gap_review",
+      "task_id": "PG03_REFLECTION_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/reflection_gap_review/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets.",
+                "before": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/reflection_gap_review/evaluation/PG03_REFLECTION_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {}
+            },
+            "memory_entries": [
+              "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "oncall-handoff-lookup": {
+                "content": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## 适用条件\nUse when a request depends on recovering an incident or service handoff, its owner and maintenance window, and the blocked follow-up tickets from session history.\n## 排除条件\nDo not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone. This procedure does not authorize parent-incident edits or unrelated notifications; follow the current user's scope.\n## 操作步骤\n1. Search session history for the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Check incident scope so a canary or related incident is not substituted for the requested incident.\n3. When results are ambiguous, re-query the candidate's exact handoff ID and source session. Do not proceed to ticket changes until the authoritative record and required fields are established.\n4. Recover the exact handoff ID, incident ID, owner, maintenance window, and blocked follow-up ticket IDs from the confirmed record; do not combine fields from stale or partial records.\n5. Inspect only the confirmed blocked follow-up tickets before changing them. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the blocked follow-up tickets. Do not touch the parent incident or stale ticket set from older handoffs; do not carry one-off instructions from older records into the current task.\n## 验证\n- The recovered fields come from the same confirmed current handoff for the intended incident, not merely the newest-looking search result.\n- Every changed ticket belongs to the confirmed blocked set, and no parent incident or stale ticket was changed.\n- For maintenance-wait updates, tool results confirm reason_code is waiting_on_maintenance while unrelated ticket fields remain unchanged.\n组合依赖 []\n",
+                "preview": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## 适用条件\nUse when a request depends on recovering an incident or service handoff, its owner and maintenance window, and the blocked follow-up tickets from session history.\n## 排除条件\nDo not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone. This procedure does not authorize parent-incident edits or unrelated notifications; follow the current user's scope.\n## 操作步骤\n1. Search session history for the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Check incident scope so a canary or related incident is not substituted for the requested incident.\n3. When results are ambiguous, re-query the candidate's exact handoff ID and source session. Do not proceed to ticket changes until the authoritative record and required fields are established.\n4. Recover the exact handoff ID, incident ID, owner, maintenance window, and blocked follow-up ticket IDs from the confirmed record; do not combine fields from stale or partial records.\n5. Inspect only the confirmed blocked follow-up tickets before changing them. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the blocked follow-up tickets. Do not touch the parent incident or stale ticket set from older handoffs; do not carry one-off instructions from older records into the current task.\n## 验证\n- The recovered fields come from the same confirmed current handoff for the intended incident, not merely the newest-looking search result.\n- Every changed ticket belongs to the confirmed blocked set, and no parent incident or stale ticket was changed.\n- For maintenance-wait updates, tool results confirm reason_code is waiting_on_maintenance while unrelated ticket fields remain unchanged.\n组合依赖 []\n",
+                "sha1": "b94841decb793b8626808eb49ced91710e30bf9e"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "ERROR_CLASS|Acted before grounding on the latest handoff.\nMISSED_CLUE|Exact owner, maintenance window, and blocked ticket list from the latest prior handoff.\nNEXT_CHECK|Search authorized session history for the latest matching handoff before the first ticket update.",
+          "grader_checks": {
+            "action_score": null,
+            "business_semantic_score": null,
+            "checks": {},
+            "schema": "pg03-tools-state-evidence-v1"
+          },
+          "grading_contract": "pg03-tools-state-evidence-v1",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/reflection_gap_review/evaluation/PG03_REFLECTION_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {}
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "mechanism_confidence": 0.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 0.0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_score": 0.0,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 0.0,
+            "used_expected_signal": false
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": false,
+            "explicit_retrieval_count": 0,
+            "explicit_signal_used": false,
+            "first_retrieval_at": null,
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": false,
+            "retrieval_before_first_update": false,
+            "retrieval_signal_count": 0,
+            "session_search_count": 0,
+            "skill_read_count": 0,
+            "used_expected_signal": false
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG03_REFLECTION_001",
+          "task_name": "PG03 Oncall Handoff Lookup Reflection",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 18.074848702002782,
+            "other_time_s": 18.074848702002782,
+            "tool_time_s": 0.0,
+            "wall_time_s": 18.074848702002782
+          },
+          "token_usage": {
+            "input_tokens": 10662,
+            "output_tokens": 105,
+            "total_tokens": 10767
+          },
+          "tool_dispatch_count": 0,
+          "total_turns": 1,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/reflection_gap_review/evaluation/PG03_REFLECTION_001/objective/native-trace.jsonl",
+          "trace_id": "PG03_REFLECTION_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "update_or_stabilize_policy_note",
+      "task_id": "PG03_UPDATE_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/update_or_stabilize_policy_note/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [
+              "oncall-handoff-lookup"
+            ],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 5,
+              "hit_keywords": [
+                "latest matching handoff",
+                "exact owner",
+                "maintenance window",
+                "before the first ticket update",
+                "parent incident"
+              ],
+              "hit_rate": 1.0,
+              "required_keywords": [
+                "latest matching handoff",
+                "exact owner",
+                "maintenance window",
+                "before the first ticket update",
+                "parent incident"
+              ]
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets.",
+                "before": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "oncall-handoff-lookup"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-16T11:51:42.849471+00:00"
+                },
+                {
+                  "args": {
+                    "action": "edit",
+                    "content": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                    "expected_sha256": "b0545078272b197ebcfbf79256dbd450d6be4372fdd97163a52f6952386573fb",
+                    "name": "oncall-handoff-lookup",
+                    "reason": "Make the pre-update retrieval and exact owner/window verification requirement explicit as a general rule."
+                  },
+                  "message_index": 3,
+                  "name": "skill_manage",
+                  "timestamp": "2026-11-16T11:51:58.638432+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/update_or_stabilize_policy_note/evaluation/PG03_UPDATE_001/objective/normalized-session.json",
+              "session_search_calls": 0,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {
+                "edit": 1
+              },
+              "skill_manage_calls": 1,
+              "skill_read_count": 1,
+              "skill_update_count": 1,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "skill_manage": 1,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [
+              "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "oncall-handoff-lookup": {
+                "content": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "preview": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "sha1": "3d2f2ae0a451de4cdc58aa4c86148707abfb3be4"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "POLICY_UPDATED|oncall_handoff_lookup",
+          "grader_checks": {
+            "action_score": null,
+            "business_semantic_score": null,
+            "checks": {
+              "actual_executor_policy_write": true
+            },
+            "schema": "pg03-tools-state-evidence-v1"
+          },
+          "grading_contract": "pg03-tools-state-evidence-v1",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "oncall-handoff-lookup"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-16T11:51:42.849471+00:00"
+              },
+              {
+                "args": {
+                  "action": "edit",
+                  "content": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                  "expected_sha256": "b0545078272b197ebcfbf79256dbd450d6be4372fdd97163a52f6952386573fb",
+                  "name": "oncall-handoff-lookup",
+                  "reason": "Make the pre-update retrieval and exact owner/window verification requirement explicit as a general rule."
+                },
+                "message_index": 3,
+                "name": "skill_manage",
+                "timestamp": "2026-11-16T11:51:58.638432+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/update_or_stabilize_policy_note/evaluation/PG03_UPDATE_001/objective/normalized-session.json",
+            "session_search_calls": 0,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {
+              "edit": 1
+            },
+            "skill_manage_calls": 1,
+            "skill_read_count": 1,
+            "skill_update_count": 1,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "skill_manage": 1,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 1.0,
+            "artifact_rule_quality": 1.0,
+            "artifact_rule_quality_keywords": [
+              "latest matching handoff",
+              "exact owner",
+              "maintenance window",
+              "before the first ticket update",
+              "parent incident"
+            ],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 1,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "skill",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 1,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:51:42.849471+00:00",
+            "first_write_at": null,
+            "first_write_endpoint": null,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 1,
+            "session_search_count": 0,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG03_UPDATE_001",
+          "task_name": "PG03 Oncall Handoff Lookup Policy Update",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 42.51775317901047,
+            "tool_time_s": 0.04894585401052609,
+            "wall_time_s": 42.566699033020996
+          },
+          "token_usage": {
+            "input_tokens": 46065,
+            "output_tokens": 705,
+            "total_tokens": 46770
+          },
+          "tool_dispatch_count": 1,
+          "total_turns": 4,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/update_or_stabilize_policy_note/evaluation/PG03_UPDATE_001/objective/native-trace.jsonl",
+          "trace_id": "PG03_UPDATE_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "eval_near_followup_a",
+      "task_id": "PG03_EVAL_NEAR_A_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_near_followup_a/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets.",
+                "before": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "oncall-handoff-lookup"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-16T11:52:59.086727+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "AuthProxy handoff"
+                  },
+                  "message_index": 3,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:53:03.992981+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "HAND-799",
+                    "session_id": "pg03-hand-799"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:53:07.933435+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-201"
+                  },
+                  "message_index": 7,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:53:13.528983+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-202"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:53:13.534379+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-201"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T11:53:20.366497+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-202"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T11:53:20.371832+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_near_followup_a/evaluation/PG03_EVAL_NEAR_A_001/objective/normalized-session.json",
+              "session_search_calls": 2,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 1,
+              "skill_update_count": 0,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 2,
+                "helpdesk_update_ticket": 2,
+                "session_search": 2,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [
+              "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "oncall-handoff-lookup": {
+                "content": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "preview": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "sha1": "3d2f2ae0a451de4cdc58aa4c86148707abfb3be4"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "HANDOFF|HAND-799|INC-912|Priya Raman|05:00-06:00 UTC|HD-PG03-201,HD-PG03-202",
+          "grader_checks": {
+            "action_score": 1.0,
+            "business_semantic_score": 1.0,
+            "checks": {
+              "actual_final_maintenance_wait_semantics": true,
+              "blocked_final_states_preserved": true,
+              "exact_blocked_child_subset_updated": true,
+              "history_retrieved_before_first_write": true,
+              "no_blocked_or_unknown_update_attempts": true,
+              "no_ticket_closures": true,
+              "real_final_state_change": true,
+              "successful_receipts_match": true,
+              "workflow_read_before_first_write": true
+            },
+            "schema": "pg03-tools-state-evidence-v1"
+          },
+          "grading_contract": "pg03-tools-state-evidence-v1",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "oncall-handoff-lookup"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-16T11:52:59.086727+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "AuthProxy handoff"
+                },
+                "message_index": 3,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:53:03.992981+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "HAND-799",
+                  "session_id": "pg03-hand-799"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:53:07.933435+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-201"
+                },
+                "message_index": 7,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:53:13.528983+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-202"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:53:13.534379+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-201"
+                },
+                "message_index": 11,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T11:53:20.366497+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-202"
+                },
+                "message_index": 13,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T11:53:20.371832+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_near_followup_a/evaluation/PG03_EVAL_NEAR_A_001/objective/normalized-session.json",
+            "session_search_calls": 2,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 2,
+              "helpdesk_update_ticket": 2,
+              "session_search": 2,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 3,
+            "session_search_count": 2,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:53:03.992981+00:00",
+            "first_write_at": "2026-11-16T11:53:20.366497+00:00",
+            "first_write_endpoint": "http://127.0.0.1:42443/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 3,
+            "session_search_count": 2,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG03_EVAL_NEAR_A_001",
+          "task_name": "PG03 Oncall Handoff Lookup Eval Near A",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 49.31877751799766,
+            "tool_time_s": 0.024311045999638736,
+            "wall_time_s": 49.3430885639973
+          },
+          "token_usage": {
+            "input_tokens": 87083,
+            "output_tokens": 350,
+            "total_tokens": 87433
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 7,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_near_followup_a/evaluation/PG03_EVAL_NEAR_A_001/objective/native-trace.jsonl",
+          "trace_id": "PG03_EVAL_NEAR_A_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "eval_near_followup_b",
+      "task_id": "PG03_EVAL_NEAR_B_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_near_followup_b/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets.",
+                "before": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "oncall-handoff-lookup"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-16T11:54:49.051416+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "Billing handoff"
+                  },
+                  "message_index": 3,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:54:52.838669+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "HAND-830",
+                    "session_id": "pg03-hand-830"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:54:56.599693+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-302"
+                  },
+                  "message_index": 7,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:55:01.504366+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-301"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:55:01.509855+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-301"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T11:55:07.720563+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-302"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T11:55:07.726499+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_near_followup_b/evaluation/PG03_EVAL_NEAR_B_001/objective/normalized-session.json",
+              "session_search_calls": 2,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 1,
+              "skill_update_count": 0,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 2,
+                "helpdesk_update_ticket": 2,
+                "session_search": 2,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [
+              "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "oncall-handoff-lookup": {
+                "content": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "preview": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "sha1": "3d2f2ae0a451de4cdc58aa4c86148707abfb3be4"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "HANDOFF|HAND-830|INC-944|Mateo Silva|07:30-08:00 UTC|HD-PG03-301,HD-PG03-302",
+          "grader_checks": {
+            "action_score": 1.0,
+            "business_semantic_score": 1.0,
+            "checks": {
+              "actual_final_maintenance_wait_semantics": true,
+              "blocked_final_states_preserved": true,
+              "exact_blocked_child_subset_updated": true,
+              "history_retrieved_before_first_write": true,
+              "no_blocked_or_unknown_update_attempts": true,
+              "no_ticket_closures": true,
+              "real_final_state_change": true,
+              "successful_receipts_match": true,
+              "workflow_read_before_first_write": true
+            },
+            "schema": "pg03-tools-state-evidence-v1"
+          },
+          "grading_contract": "pg03-tools-state-evidence-v1",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "oncall-handoff-lookup"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-16T11:54:49.051416+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "Billing handoff"
+                },
+                "message_index": 3,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:54:52.838669+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "HAND-830",
+                  "session_id": "pg03-hand-830"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:54:56.599693+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-302"
+                },
+                "message_index": 7,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:55:01.504366+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-301"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:55:01.509855+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-301"
+                },
+                "message_index": 11,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T11:55:07.720563+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-302"
+                },
+                "message_index": 13,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T11:55:07.726499+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_near_followup_b/evaluation/PG03_EVAL_NEAR_B_001/objective/normalized-session.json",
+            "session_search_calls": 2,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 2,
+              "helpdesk_update_ticket": 2,
+              "session_search": 2,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 3,
+            "session_search_count": 2,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:54:52.838669+00:00",
+            "first_write_at": "2026-11-16T11:55:07.720563+00:00",
+            "first_write_endpoint": "http://127.0.0.1:39085/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 3,
+            "session_search_count": 2,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG03_EVAL_NEAR_B_001",
+          "task_name": "PG03 Oncall Handoff Lookup Eval Near B",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 43.70743573800428,
+            "tool_time_s": 0.024618771974928677,
+            "wall_time_s": 43.73205450997921
+          },
+          "token_usage": {
+            "input_tokens": 86997,
+            "output_tokens": 351,
+            "total_tokens": 87348
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 7,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_near_followup_b/evaluation/PG03_EVAL_NEAR_B_001/objective/native-trace.jsonl",
+          "trace_id": "PG03_EVAL_NEAR_B_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "eval_far_followup_transfer",
+      "task_id": "PG03_EVAL_FAR_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_far_followup_transfer/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets.",
+                "before": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "name": "oncall-handoff-lookup"
+                  },
+                  "message_index": 1,
+                  "name": "skill_view",
+                  "timestamp": "2026-11-16T11:56:32.619282+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "CacheEdge handoff"
+                  },
+                  "message_index": 3,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:56:37.230934+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "HAND-742",
+                    "session_id": "pg03-hand-742"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:56:41.158539+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-103"
+                  },
+                  "message_index": 7,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:56:46.146935+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-104"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:56:46.152204+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-103"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T11:56:50.807993+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-104"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T11:56:50.813174+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_far_followup_transfer/evaluation/PG03_EVAL_FAR_001/objective/normalized-session.json",
+              "session_search_calls": 2,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 1,
+              "skill_update_count": 0,
+              "skill_view_calls": 1,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 2,
+                "helpdesk_update_ticket": 2,
+                "session_search": 2,
+                "skill_view": 1
+              }
+            },
+            "memory_entries": [
+              "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "oncall-handoff-lookup": {
+                "content": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "preview": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "sha1": "3d2f2ae0a451de4cdc58aa4c86148707abfb3be4"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "HANDOFF|HAND-742|INC-870|Eli Navarro|03:00-04:00 UTC|HD-PG03-103,HD-PG03-104",
+          "grader_checks": {
+            "action_score": 1.0,
+            "business_semantic_score": 1.0,
+            "checks": {
+              "actual_final_maintenance_wait_semantics": true,
+              "blocked_final_states_preserved": true,
+              "exact_blocked_child_subset_updated": true,
+              "history_retrieved_before_first_write": true,
+              "no_blocked_or_unknown_update_attempts": true,
+              "no_ticket_closures": true,
+              "real_final_state_change": true,
+              "successful_receipts_match": true,
+              "workflow_read_before_first_write": true
+            },
+            "schema": "pg03-tools-state-evidence-v1"
+          },
+          "grading_contract": "pg03-tools-state-evidence-v1",
+          "hard_pass": true,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "name": "oncall-handoff-lookup"
+                },
+                "message_index": 1,
+                "name": "skill_view",
+                "timestamp": "2026-11-16T11:56:32.619282+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "CacheEdge handoff"
+                },
+                "message_index": 3,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:56:37.230934+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "HAND-742",
+                  "session_id": "pg03-hand-742"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:56:41.158539+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-103"
+                },
+                "message_index": 7,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:56:46.146935+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-104"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:56:46.152204+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-103"
+                },
+                "message_index": 11,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T11:56:50.807993+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-104"
+                },
+                "message_index": 13,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T11:56:50.813174+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_far_followup_transfer/evaluation/PG03_EVAL_FAR_001/objective/normalized-session.json",
+            "session_search_calls": 2,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "skill_view_calls": 1,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 2,
+              "helpdesk_update_ticket": 2,
+              "session_search": 2,
+              "skill_view": 1
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 1.0,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 1.0,
+            "retrieval_signal_count": 3,
+            "session_search_count": 2,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 1,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": true,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:56:37.230934+00:00",
+            "first_write_at": "2026-11-16T11:56:50.807993+00:00",
+            "first_write_endpoint": "http://127.0.0.1:35777/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 3,
+            "session_search_count": 2,
+            "skill_read_count": 1,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 1.0,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG03_EVAL_FAR_001",
+          "task_name": "PG03 Oncall Handoff Lookup Eval Far",
+          "task_score": 1.0,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 43.07576616795268,
+            "tool_time_s": 0.02514474606141448,
+            "wall_time_s": 43.100910914014094
+          },
+          "token_usage": {
+            "input_tokens": 87202,
+            "output_tokens": 353,
+            "total_tokens": 87555
+          },
+          "tool_dispatch_count": 4,
+          "total_turns": 7,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/eval_far_followup_transfer/evaluation/PG03_EVAL_FAR_001/objective/native-trace.jsonl",
+          "trace_id": "PG03_EVAL_FAR_001"
+        },
+        "score": 1
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "control_preload_visible_hint",
+      "task_id": "PG03_CONTROL_PRELOAD_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/control_preload_visible_hint/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets.",
+                "before": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "handoff lookup skill"
+                  },
+                  "message_index": 1,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:58:30.366202+00:00"
+                },
+                {
+                  "args": {},
+                  "message_index": 3,
+                  "name": "helpdesk_list_tickets",
+                  "timestamp": "2026-11-16T11:58:39.088360+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 15,
+                    "query": "CacheEdge handoff"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:58:47.627030+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "HAND-742",
+                    "session_id": "pg03-hand-742"
+                  },
+                  "message_index": 7,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T11:58:53.135637+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "INC-870"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:58:53.142708+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-103"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:58:58.135247+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-104"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T11:58:58.140855+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-103"
+                  },
+                  "message_index": 15,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T11:59:05.198098+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-104"
+                  },
+                  "message_index": 17,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T11:59:05.204316+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/control_preload_visible_hint/evaluation/PG03_CONTROL_PRELOAD_001/objective/normalized-session.json",
+              "session_search_calls": 3,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 3,
+                "helpdesk_list_tickets": 1,
+                "helpdesk_update_ticket": 2,
+                "session_search": 3
+              }
+            },
+            "memory_entries": [
+              "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "oncall-handoff-lookup": {
+                "content": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "preview": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "sha1": "3d2f2ae0a451de4cdc58aa4c86148707abfb3be4"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "HANDOFF|HAND-742|INC-870|Eli Navarro|03:00-04:00 UTC|HD-PG03-103,HD-PG03-104",
+          "grader_checks": {
+            "action_score": 0.0,
+            "business_semantic_score": 1.0,
+            "checks": {
+              "actual_final_maintenance_wait_semantics": true,
+              "blocked_final_states_preserved": true,
+              "exact_blocked_child_subset_updated": true,
+              "history_retrieved_before_first_write": true,
+              "no_blocked_or_unknown_update_attempts": true,
+              "no_ticket_closures": true,
+              "real_final_state_change": true,
+              "successful_receipts_match": true,
+              "workflow_read_before_first_write": false
+            },
+            "schema": "pg03-tools-state-evidence-v1"
+          },
+          "grading_contract": "pg03-tools-state-evidence-v1",
+          "hard_pass": false,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "handoff lookup skill"
+                },
+                "message_index": 1,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:58:30.366202+00:00"
+              },
+              {
+                "args": {},
+                "message_index": 3,
+                "name": "helpdesk_list_tickets",
+                "timestamp": "2026-11-16T11:58:39.088360+00:00"
+              },
+              {
+                "args": {
+                  "limit": 15,
+                  "query": "CacheEdge handoff"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:58:47.627030+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "HAND-742",
+                  "session_id": "pg03-hand-742"
+                },
+                "message_index": 7,
+                "name": "session_search",
+                "timestamp": "2026-11-16T11:58:53.135637+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "INC-870"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:58:53.142708+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-103"
+                },
+                "message_index": 11,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:58:58.135247+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-104"
+                },
+                "message_index": 13,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T11:58:58.140855+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-103"
+                },
+                "message_index": 15,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T11:59:05.198098+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-104"
+                },
+                "message_index": 17,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T11:59:05.204316+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/control_preload_visible_hint/evaluation/PG03_CONTROL_PRELOAD_001/objective/normalized-session.json",
+            "session_search_calls": 3,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 3,
+              "helpdesk_list_tickets": 1,
+              "helpdesk_update_ticket": 2,
+              "session_search": 3
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 0.5,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 0.5,
+            "retrieval_signal_count": 3,
+            "session_search_count": 3,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": false,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T11:58:30.366202+00:00",
+            "first_write_at": "2026-11-16T11:59:05.198098+00:00",
+            "first_write_endpoint": "http://127.0.0.1:48615/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 3,
+            "session_search_count": 3,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 0.813,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG03_CONTROL_PRELOAD_001",
+          "task_name": "PG03 Oncall Handoff Lookup Control Preload",
+          "task_score": 0.8504,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 71.03419932204997,
+            "tool_time_s": 0.024126493954099715,
+            "wall_time_s": 71.05832581600407
+          },
+          "token_usage": {
+            "input_tokens": 203346,
+            "output_tokens": 509,
+            "total_tokens": 203855
+          },
+          "tool_dispatch_count": 6,
+          "total_turns": 10,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/control_preload_visible_hint/evaluation/PG03_CONTROL_PRELOAD_001/objective/native-trace.jsonl",
+          "trace_id": "PG03_CONTROL_PRELOAD_001"
+        },
+        "score": 0
+      },
+      "active_skills": 1
+    },
+    {
+      "episode": "control_boundary_latest_record",
+      "task_id": "PG03_CONTROL_BOUNDARY_001",
+      "branch": "continue",
+      "report": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/control_boundary_latest_record/report.json",
+      "complete": true,
+      "execution_complete": true,
+      "objective": {
+        "details": {
+          "adapter": "Codex/frame pipeline; original grader, judge and hard-pass helpers; not Hermes runtime",
+          "artifact_diff": {
+            "added_rules": [],
+            "added_skill_names": [],
+            "changed_skill_names": [],
+            "deleted_rules": [],
+            "deleted_skill_names": [],
+            "memory_entry_delta": 0,
+            "rule_keyword_hits": {
+              "hit_count": 0,
+              "hit_keywords": [],
+              "hit_rate": 0.0,
+              "required_keywords": []
+            },
+            "skill_count_delta": 0,
+            "updated_rules": [
+              {
+                "after": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets.",
+                "before": "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+              }
+            ]
+          },
+          "artifacts": {
+            "internal_tools": {
+              "calls": [
+                {
+                  "args": {
+                    "limit": 20,
+                    "query": "CacheEdge handoff"
+                  },
+                  "message_index": 1,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T12:00:28.826735+00:00"
+                },
+                {
+                  "args": {
+                    "status": "open"
+                  },
+                  "message_index": 3,
+                  "name": "helpdesk_list_tickets",
+                  "timestamp": "2026-11-16T12:00:33.748303+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 50,
+                    "query": "CacheEdge authoritative final handoff"
+                  },
+                  "message_index": 5,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T12:00:33.758815+00:00"
+                },
+                {
+                  "args": {
+                    "limit": 10,
+                    "query": "HAND-742",
+                    "session_id": "pg03-hand-742"
+                  },
+                  "message_index": 7,
+                  "name": "session_search",
+                  "timestamp": "2026-11-16T12:00:40.885058+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-103"
+                  },
+                  "message_index": 9,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T12:00:40.892258+00:00"
+                },
+                {
+                  "args": {
+                    "ticket_id": "HD-PG03-104"
+                  },
+                  "message_index": 11,
+                  "name": "helpdesk_get_ticket",
+                  "timestamp": "2026-11-16T12:00:40.896352+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-103"
+                  },
+                  "message_index": 13,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T12:00:47.788716+00:00"
+                },
+                {
+                  "args": {
+                    "reason_code": "waiting_on_maintenance",
+                    "ticket_id": "HD-PG03-104"
+                  },
+                  "message_index": 15,
+                  "name": "helpdesk_update_ticket",
+                  "timestamp": "2026-11-16T12:00:47.793609+00:00"
+                }
+              ],
+              "memory_action_counts": {},
+              "memory_calls": 0,
+              "memory_read_count": 0,
+              "memory_write_count": 0,
+              "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/control_boundary_latest_record/evaluation/PG03_CONTROL_BOUNDARY_001/objective/normalized-session.json",
+              "session_search_calls": 3,
+              "skill_create_count": 0,
+              "skill_manage_action_counts": {},
+              "skill_manage_calls": 0,
+              "skill_read_count": 0,
+              "skill_update_count": 0,
+              "skill_view_calls": 0,
+              "skills_list_calls": 0,
+              "tool_call_counts": {
+                "helpdesk_get_ticket": 2,
+                "helpdesk_list_tickets": 1,
+                "helpdesk_update_ticket": 2,
+                "session_search": 3
+              }
+            },
+            "memory_entries": [
+              "Handoff records are episodic and time-sensitive.\nBefore the first ticket update, search session history for the latest matching handoff and recover the exact owner, maintenance window, and blocked follow-up tickets."
+            ],
+            "memory_file_exists": true,
+            "skill_count": 1,
+            "skill_docs": {
+              "oncall-handoff-lookup": {
+                "content": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "preview": "---\nname: oncall-handoff-lookup\ndescription: \"Find and confirm the authoritative current oncall handoff before applying narrowly scoped follow-up ticket changes.\"\n---\n## Applicability\nUse when ticket work depends on a current incident or service handoff, its owner and maintenance window, and its blocked follow-up tickets.\n\n## General rule\nBefore the first ticket update, search session history for the latest matching handoff and verify the exact owner and maintenance window against that authoritative handoff. Update only the blocked follow-up tickets identified by the confirmed handoff, not the parent incident.\n\n## Procedure\n1. Use only the authorized session-history search tool to find the latest handoff matching the requested incident or service before accessing or changing tickets.\n2. Distinguish the full current handoff from superseded records, incomplete shells, drafts, and recaps. Verify incident scope; do not substitute a canary or related incident. Do not infer authority from a higher handoff number, a current-looking title, or service-name overlap alone.\n3. If results are ambiguous, re-query the candidate's exact handoff reference and source session. Establish the authoritative record before making ticket changes.\n4. Recover and verify the exact owner, maintenance window, incident reference, and blocked follow-up ticket references from that same confirmed current handoff before the first ticket update. Do not combine fields from stale or partial records. If required information remains unresolved, defer ticket updates until it is verified.\n5. Inspect the confirmed blocked follow-up tickets. For a request to mark waiting on maintenance, set reason_code to waiting_on_maintenance without changing unrelated fields.\n6. Update only the confirmed blocked follow-up tickets, not the parent incident or a stale ticket set. Follow the current user's scope; do not carry one-off instructions from older records into the current task or send unrelated notifications.\n\n## Verification\n- Session history was searched for the latest matching handoff, and the exact owner and maintenance window were verified before the first ticket update.\n- Recovered fields came from the same authoritative current handoff for the intended incident.\n- Every changed ticket belongs to the confirmed blocked follow-up set; the parent incident and stale tickets were not changed.\n- For maintenance-wait updates, service results confirm reason_code is waiting_on_maintenance and unrelated fields remain unchanged.\n",
+                "sha1": "3d2f2ae0a451de4cdc58aa4c86148707abfb3be4"
+              }
+            },
+            "user_entries": [],
+            "user_file_exists": false
+          },
+          "env_snapshot_present": true,
+          "final_response_text": "HANDOFF|HAND-742|INC-870|Eli Navarro|03:00-04:00 UTC|HD-PG03-103,HD-PG03-104",
+          "grader_checks": {
+            "action_score": 0.0,
+            "business_semantic_score": 1.0,
+            "checks": {
+              "actual_final_maintenance_wait_semantics": true,
+              "blocked_final_states_preserved": true,
+              "exact_blocked_child_subset_updated": true,
+              "history_retrieved_before_first_write": true,
+              "no_blocked_or_unknown_update_attempts": true,
+              "no_ticket_closures": true,
+              "real_final_state_change": true,
+              "successful_receipts_match": true,
+              "workflow_read_before_first_write": false
+            },
+            "schema": "pg03-tools-state-evidence-v1"
+          },
+          "grading_contract": "pg03-tools-state-evidence-v1",
+          "hard_pass": false,
+          "infra_block_reason": "",
+          "infra_blocked": false,
+          "internal_tools": {
+            "calls": [
+              {
+                "args": {
+                  "limit": 20,
+                  "query": "CacheEdge handoff"
+                },
+                "message_index": 1,
+                "name": "session_search",
+                "timestamp": "2026-11-16T12:00:28.826735+00:00"
+              },
+              {
+                "args": {
+                  "status": "open"
+                },
+                "message_index": 3,
+                "name": "helpdesk_list_tickets",
+                "timestamp": "2026-11-16T12:00:33.748303+00:00"
+              },
+              {
+                "args": {
+                  "limit": 50,
+                  "query": "CacheEdge authoritative final handoff"
+                },
+                "message_index": 5,
+                "name": "session_search",
+                "timestamp": "2026-11-16T12:00:33.758815+00:00"
+              },
+              {
+                "args": {
+                  "limit": 10,
+                  "query": "HAND-742",
+                  "session_id": "pg03-hand-742"
+                },
+                "message_index": 7,
+                "name": "session_search",
+                "timestamp": "2026-11-16T12:00:40.885058+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-103"
+                },
+                "message_index": 9,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T12:00:40.892258+00:00"
+              },
+              {
+                "args": {
+                  "ticket_id": "HD-PG03-104"
+                },
+                "message_index": 11,
+                "name": "helpdesk_get_ticket",
+                "timestamp": "2026-11-16T12:00:40.896352+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-103"
+                },
+                "message_index": 13,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T12:00:47.788716+00:00"
+              },
+              {
+                "args": {
+                  "reason_code": "waiting_on_maintenance",
+                  "ticket_id": "HD-PG03-104"
+                },
+                "message_index": 15,
+                "name": "helpdesk_update_ticket",
+                "timestamp": "2026-11-16T12:00:47.793609+00:00"
+              }
+            ],
+            "memory_action_counts": {},
+            "memory_calls": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "session_file": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/control_boundary_latest_record/evaluation/PG03_CONTROL_BOUNDARY_001/objective/normalized-session.json",
+            "session_search_calls": 3,
+            "skill_create_count": 0,
+            "skill_manage_action_counts": {},
+            "skill_manage_calls": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "skill_view_calls": 0,
+            "skills_list_calls": 0,
+            "tool_call_counts": {
+              "helpdesk_get_ticket": 2,
+              "helpdesk_list_tickets": 1,
+              "helpdesk_update_ticket": 2,
+              "session_search": 3
+            }
+          },
+          "judge_score": 1.0,
+          "mechanism_scores": {
+            "artifact_quality_score": 0.0,
+            "artifact_rule_quality": 0.0,
+            "artifact_rule_quality_keywords": [],
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "mechanism_confidence": 0.5,
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "memory_write_count": 0,
+            "noise_resistance_score": 1.0,
+            "reflection_reuse_score": 1.0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_score": 0.5,
+            "retrieval_signal_count": 3,
+            "session_search_count": 3,
+            "shortcut_resistance": 1.0,
+            "skill_create_count": 0,
+            "skill_read_count": 0,
+            "skill_update_count": 0,
+            "stale_memory_resistance_score": 1.0,
+            "transfer_quality": 1.0,
+            "used_expected_signal": true
+          },
+          "passed": false,
+          "retrieval_signals": {
+            "expected_signal": "session_search",
+            "explicit_retrieval_before_first_update": true,
+            "explicit_retrieval_count": 3,
+            "explicit_signal_used": true,
+            "first_retrieval_at": "2026-11-16T12:00:28.826735+00:00",
+            "first_write_at": "2026-11-16T12:00:47.788716+00:00",
+            "first_write_endpoint": "http://127.0.0.1:34057/helpdesk/tickets/update",
+            "memory_injection_count": 0,
+            "memory_read_count": 0,
+            "retrieval_before_final_response": true,
+            "retrieval_before_first_update": true,
+            "retrieval_signal_count": 3,
+            "session_search_count": 3,
+            "skill_read_count": 0,
+            "used_expected_signal": true
+          },
+          "scores": {
+            "communication": 1.0,
+            "completion": 0.813,
+            "efficiency_tokens": 0,
+            "efficiency_turns": 1,
+            "efficiency_wall_time_s": 0.0,
+            "robustness": 1.0,
+            "safety": 1.0
+          },
+          "skill_write_actor": "Executor actual skill_manage receipts; separate Curator applied_ops",
+          "task_components": {},
+          "task_id": "PG03_CONTROL_BOUNDARY_001",
+          "task_name": "PG03 Oncall Handoff Lookup Control Boundary",
+          "task_score": 0.8504,
+          "timing": {
+            "model_time_s": 0.0,
+            "other_time_s": 59.14691128494451,
+            "tool_time_s": 0.02405671402812004,
+            "wall_time_s": 59.17096799897263
+          },
+          "token_usage": {
+            "input_tokens": 136552,
+            "output_tokens": 527,
+            "total_tokens": 137079
+          },
+          "tool_dispatch_count": 5,
+          "total_turns": 8,
+          "trace": "/mount-data/yangyang-h20-2gpu-train-20261107/users/xuyifan/work_env_build/Skill_RSI/.runtime/pastbench/collection-controls-20261116/campaigns/proactive_information_gathering__PG03_oncall_handoff_lookup/families/proactive_information_gathering/PG03_oncall_handoff_lookup/episodes/control_boundary_latest_record/evaluation/PG03_CONTROL_BOUNDARY_001/objective/native-trace.jsonl",
+          "trace_id": "PG03_CONTROL_BOUNDARY_001"
+        },
+        "score": 0
+      },
+      "active_skills": 1
+    }
+  ],
+  "attempts_finished": true,
+  "complete": true,
+  "passed": 6,
+  "known_scores": 8,
+  "weights_updated": false,
+  "score_contract": "upstream grade_episode (including notes_memory hard_pass)"
+}

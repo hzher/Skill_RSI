@@ -1,0 +1,2 @@
+family,category,attempted,execution_complete,pipeline_complete,passed,failed,unknown,skill_reads,memory_writes,session_searches,mean_task_score
+memory_ability/EP02_exception_list_recall,memory_ability,8,8,8,7,1,0,0,1,19,0.9928625
