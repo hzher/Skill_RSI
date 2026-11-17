@@ -108,6 +108,8 @@ class RecordingBridge:
                     atomic(path / "headers.json", {"status": status, "headers": public})
                     self.send_response(status)
                     self.send_header("Content-Type", response.headers.get("Content-Type", "application/json"))
+                    if response.headers.get("Retry-After"):
+                        self.send_header("Retry-After", response.headers["Retry-After"])
                     self.end_headers()
                     response_started = True
                     chunks = []

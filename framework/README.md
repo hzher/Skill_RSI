@@ -4,7 +4,7 @@
 
 执行器先用题首快照做题，管理器从实际过程整理下一版手册。客观评分走独立分支，管理器只看真实部署中可以获得的信息。新版本的价值需要关联后续消费者。本实现迭代技能文本，模型权重保持固定；梯度RL优化器可消费导出的奖励和轨迹，优化器本身由训练系统接入。
 
-Continual Learning Bench的空技能基线提供独立原生MCP入口，每题使用固定官方动作、真实cwd和持续录制。安装该benchmark的官方依赖后使用`python3 -m skillrl.clbench`，配置、能力边界及留档说明见[CL-Bench原生接线](docs/CLBENCH_NATIVE.md)。
+Continual Learning Bench的空技能基线提供独立原生MCP入口，每题使用固定官方动作、真实cwd和持续录制。安装该benchmark的官方依赖后使用`python3 -m skillrl.clbench`，配置、能力边界及留档说明见[CL-Bench原生接线](docs/CLBENCH_NATIVE.md)。持续上下文实验使用`python3 -m skillrl.continual`，原生会话与笔记目录贯穿题目序列，配置和压缩证据见[持续会话](docs/CONTINUAL_CONTEXT.md)。
 
 ```mermaid
 flowchart LR

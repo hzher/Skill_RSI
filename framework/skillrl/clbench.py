@@ -107,7 +107,7 @@ def execute(config, family, index, output):
     cached = begin(path, intent)
     if cached is not None:
         return cached
-    task = environment = bridge = server = None
+    task = environment = bridge = server = gateway = None
     owner = ThreadPoolExecutor(max_workers=1, thread_name_prefix="benchmark")
     container = None
     runtime = "/tmp/skillrl-native-" + hashlib.sha256(str(path).encode()).hexdigest()[:16]
@@ -146,13 +146,24 @@ def execute(config, family, index, output):
         docker(["cp", str(path / "settings.json"), container + ":" + runtime + "/settings.json"])
         if config.get("api_key_command"):
             key = subprocess.check_output(config["api_key_command"]).decode().strip()
-        else:
+        elif config.get("api_key_env"):
             key = os.environ[config["api_key_env"]]
-        bridge = RecordingBridge(config["base_url"], key, config["model"], path / "requests", bind=config["bridge_bind"], timeout=config.get("timeout", 900))
+        else:
+            key = ""
+        base_url = config["base_url"]
+        if config.get("upstream_protocol") == "chat":
+            from .chat_gateway import ChatMessagesGateway
+            gateway = ChatMessagesGateway(base_url, key, config["model"], path / "upstream", timeout=config.get("request_timeout", config.get("timeout", 900)))
+            gateway_port = gateway.start()
+            base_url = f"http://127.0.0.1:{gateway_port}/v1"
+            key = "local-chat-gateway"
+        bridge = RecordingBridge(base_url, key, config["model"], path / "requests", bind=config["bridge_bind"], timeout=config.get("timeout", 900))
         port = bridge.start()
         api = "http://" + config["bridge_advertise"] + ":" + str(port) + "/" + bridge.token
         args = native_arguments(container, task.cwd, runtime, api, config["model"], config.get("max_turns", 64))
         args[args.index(container):args.index(container)] = ["-e", "BENCHMARK_RPC_URL=" + public_rpc]
+        if config.get("request_timeout"):
+            args[args.index(container):args.index(container)] = ["-e", "API_TIMEOUT_MS=" + str(config["request_timeout"] * 1000)]
         prompt = (
             "Complete this one task using the native benchmark MCP tools. All task actions execute in the official environment and count toward its own budget. "
             "Use benchmark.status to read the current action schema and benchmark.act to apply an action. Tool results contain the official observation and next schema. "
@@ -167,9 +178,16 @@ def execute(config, family, index, output):
         bridge = None
         records = [json.loads(p.read_text()) for p in sorted((path / "requests").glob("*/receipt.json"))]
         closed = all(r["complete"] or r["disposition"] in ("gateway_error", "http_rejection", "local_rejection") for r in records)
+        if gateway:
+            gateway.close()
+            gateway = None
+            upstream = [json.loads(p.read_text()) for p in sorted((path / "upstream").glob("*/receipt.json"))]
+            closed = closed and all(r["complete"] or r["disposition"] in ("http_rejection", "upstream_error") for r in upstream)
+        else:
+            upstream = records
         complete = native["complete"] and task.done and not broker.failed and closed and captured.returncode == 0 and workspace_saved is not False
         record = {**intent, "complete": complete, "initialization_terminal": False, "native": native,
-                  "task_actions": task.actions, "objective": owner.submit(task.outcome).result(), "model_requests": sum(r["forwarded"] for r in records),
+                  "task_actions": task.actions, "objective": owner.submit(task.outcome).result(), "model_requests": sum(r["forwarded"] for r in upstream),
                   "ingress_attempts": len(records), "all_requests_closed": closed,
                   "workspace_captured": workspace_saved, "initial_skills": [], "curation_calls": 0}
         return seal(path, record)
@@ -181,6 +199,8 @@ def execute(config, family, index, output):
             server.close()
         if bridge:
             bridge.close()
+        if gateway:
+            gateway.close()
         if environment:
             environment.close()
         if task:
