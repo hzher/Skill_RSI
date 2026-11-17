@@ -1,88 +1,73 @@
-# Skill RL 可复用框架
+# Rollout采集框架 · 协作者上手
 
-## Rollout采集与CLI框架入口
+使用Claude Code调用DeepSeek API采集任务轨迹，支持分类长会话、乱序长会话和逐题独立session。初始技能为空，采集模式关闭技能精炼。
 
-当前采集入口为`python3 -m skillrl.collect`，支持分类100题长会话、同100题乱序长会话，以及300题逐题独立session。完整配置、冻结输入、官方301题全量选项及启动命令见[三模式采集说明](docs/ROLLOUT_COLLECTION.md)。两个长会话合计200题次，初始空技能且关闭精炼。
+## 1. 准备环境
 
-[Claude Code CLM](companions/claude-code-clm/README.md)和[Codex CLM](companions/codex-clm/README.md)的独立源码、启动器与测试位于`companions/`，来源与验证边界见[双CLI说明](companions/README.md)。
+需要Python 3.11以上、Docker使用权限、Claude Code可执行文件，以及已安装依赖和任务镜像的CL-Bench。H20上的题库目录为`/mount-data/Datasets/continual-learning-bench/repository`。
 
-从公开任务执行、可观测轨迹、版本化技能管理，到独立客观评分和逐版本LLM评审的完整实现。整个 `framework/` 可以复制到另一个仓库或服务器运行，运行时只依赖Python标准库。模型、镜像、题库和原生评分器由使用者配置。
-
-执行器先用题首快照做题，管理器从实际过程整理下一版手册。客观评分走独立分支，管理器只看真实部署中可以获得的信息。新版本的价值需要关联后续消费者。本实现迭代技能文本，模型权重保持固定；梯度RL优化器可消费导出的奖励和轨迹，优化器本身由训练系统接入。
-
-Continual Learning Bench的空技能基线提供独立原生MCP入口，每题使用固定官方动作、真实cwd和持续录制。安装该benchmark的官方依赖后使用`python3 -m skillrl.clbench`，配置、能力边界及留档说明见[CL-Bench原生接线](docs/CLBENCH_NATIVE.md)。持续上下文实验使用`python3 -m skillrl.continual`，原生会话与笔记目录贯穿题目序列，配置和压缩证据见[持续会话](docs/CONTINUAL_CONTEXT.md)。
-
-```mermaid
-flowchart LR
-  A[Benchmark公开任务适配器] --> B[冻结技能快照]
-  B --> C[执行器与任务环境]
-  C --> D[封存公开轨迹与产物]
-  D --> E[Skill管理器]
-  E --> F[父Read SHA DAG 原子提交]
-  F --> B
-  D --> G[Benchmark客观评分适配器]
-  D --> H[正文曝光证明]
-  H --> I[采用评审]
-  G --> J[效果评审与校准信用]
-  I --> J
+```bash
+git clone --branch yangyang https://github.com/hzher/Skill_RSI.git
+cd Skill_RSI/framework
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -e .
+cp examples/clbench/config.example.json config.local.json
 ```
 
-## 同事如何开始
+编辑`config.local.json`，填写自己的API端点、Claude二进制路径、容器镜像摘要、Docker internal网络及桥地址。示例配置保留了这些字段。将API密钥放入环境变量`DEEPSEEK_API_KEY`。
 
-Python 3.11或更新版本，macOS/Linux均可运行文件工具模式。Docker任务和原生Claude Code模式需要Linux Docker或可挂载当前工作目录的Docker Desktop。`DirectoryEnvironment`只提供受限文件读写，用于可信任务及协议验证。
+先检查题单和顺序，该检查的范围为输入配置。
 
-```sh
-cd framework
-python3 -m venv .venv
-. .venv/bin/activate
-python3 -m pip install -e .
-python3 -m skillrl examples/local.json --check
+```bash
+python3 -m skillrl.collect --mode grouped --config config.local.json --plan examples/clbench/paired-100.json --check
+```
+
+## 2. 选择采集模式
+
+**分类顺序100题**，同一个session连续执行。
+
+```bash
+python3 -m skillrl.collect --mode grouped --config config.local.json --plan examples/clbench/paired-100.json --output runs/grouped
+```
+
+**同100题打乱顺序**，使用另一条持续session。
+
+```bash
+python3 -m skillrl.collect --mode shuffled --config config.local.json --plan examples/clbench/paired-100.json --output runs/shuffled
+```
+
+这两条命令可分别在两个终端运行，共200题次。每条链保留自己的上下文和笔记，官方任务沙箱逐题切换。
+
+**300题逐题独立执行**，各题使用独立HOME和session。
+
+```bash
+python3 -m skillrl.collect --mode independent --config config.local.json --plan examples/clbench/independent-300.json --output runs/independent300
+```
+
+官方题库实际301题，完整覆盖时改用`independent-301.json`。初始化就已终态的题单独记录官方结果。各次新实验使用独立输出目录，恢复时沿用原目录并检查已有intent和结果。
+
+## 3. 查看轨迹
+
+输出目录包含逐题结果、原生会话、工具调用及返回、完整模型请求和SSE响应、API返回的thinking、token用量与计时。持续会话还保存笔记版本、压缩边界及前后快照。
+
+- `cases/`保存各题结果与工具、原生日志。
+- `requests/`、`upstream/`保存模型输入输出，独立模式的这些目录位于各题目录内。
+- `result.json`或`collection-result.json`保存整轮结果，`PROGRESS.json`显示执行进度。
+
+## 4. 使用两套CLI上下文编辑框架
+
+| 框架 | 说明与配置 | 启动入口 |
+| --- | --- | --- |
+| Claude Code CLM | [使用说明](companions/claude-code-clm/README.md) | `bin/claude-clm` |
+| Codex CLM | [使用说明](companions/codex-clm/README.md) | `bin/codex-clm` |
+
+两套CLI各自在自己的目录运行。原H20部署路径、二进制、镜像与API配置见各自README。
+
+## 测试与更多说明
+
+```bash
 python3 tests/run_rounds.py --rounds 10
 ```
 
-直接复制目录也可在该目录运行 `python3 -m skillrl ...`，无需导入父仓库模块。pip安装时构建环境可能下载setuptools，运行时无需第三方Python库。
-
-修改 `examples/local.json` 的三个模型端点、模型名称和凭据环境变量，然后执行。
-
-```sh
-export EXECUTOR_API_KEY='填写执行模型密钥'
-export CURATOR_API_KEY='填写管理模型密钥'
-export JUDGE_API_KEY='填写评审模型密钥'
-skillrl examples/local.json
-```
-
-密钥只从环境变量读取。示例模型名称和域名需要替换为你的服务。运行目录、数据路径相对配置文件解析，评分器命令argv中的文件路径建议使用绝对路径。
-
-示例是独立编写的一道聚合题，答案只供示例评分器使用。生产环境的私有答案、数据授权和访问权限由相应benchmark适配器管理。
-
-## 两种执行入口
-
-|入口|实际工具运行方式|Skill发现与加载|
-|---|---|---|
-|`claude-code`|Docker里运行原生Claude Code，Read/Write/Edit/Glob/Grep/Bash由SDK执行|公开目录与只读Skill文件，模型按需Read全文|
-|`openai-tools`|框架调用OpenAI兼容API，文件工具或Docker Bash执行真实动作|完整元数据目录与可选Skill工具，全部请求使用auto选择|
-
-原生模式内置Messages到Chat Completions桥接，因此执行模型可使用现有DeepSeek兼容服务。桥接保留原生输入、实际转发请求、响应、usage和原生退出码。上游密钥保留在宿主。Skill原生工具说明曾带有强制调用要求，本封装通过可选Read目录接入技能，避免继续引入该强制策略。
-
-## 可以替换的部分
-
-- **Benchmark**负责题单、公开输入、任务环境和客观评分。WorkBuddy、单JSON、多文件或其他数据来源都通过同一接口接入。
-- **Executor**可使用原生Claude Code或OpenAI工具循环，模型端点独立配置。
-- **Curator**通过真实Read和结构化事务管理技能，支持add/update/merge/split/archive与no-op。
-- **Reviewer**先判采用，再判观察性效果，绑定确切Skill版本和后续业务动作。
-
-[完整架构与边界](docs/ARCHITECTURE.md) · [接入WorkBuddy和其他benchmark](docs/BENCHMARKS.md) · [部署、恢复与结果读取](docs/OPERATIONS.md) · [测试方法和实际结果](docs/TESTING.md)
-
-## 本目录包含什么
-
-```text
-skillrl/                 执行、轨迹、管理、评审与适配接口
-skillrl/vendor/          从已运行实现提取的事务库及协议转换
-examples/                可执行配置、公开样例和独立示例评分数据
-tests/                   独立场景、十轮回归入口、原生Docker测试入口
-docs/                    架构、适配、部署和测试文档
-reports/                 本次发布的实际验证摘要
-SOURCE_PROVENANCE.json   提取来源、原提交与逐文件SHA
-```
-
-本版本保留原事务库的资源边界，包括活跃库上限24、每技能3500字符、一次最多8项原子操作。它们会明确拒绝超限提案，并记录原候选。扩大资源边界时应版本化配置与相应验证。生成数量不作为管理目标。
+[三模式详细说明](docs/ROLLOUT_COLLECTION.md) · [双CLI机制](companions/README.md) · [技能管理与评审架构](docs/ARCHITECTURE.md) · [接入其他Benchmark](docs/BENCHMARKS.md) · [验证结果](reports/ROLLOUT_RELEASE_20261117.md)
