@@ -1,0 +1,15 @@
+{
+  "time": 1794911976.6507819,
+  "core_rounds": 10,
+  "core_checks": 540,
+  "companion_rounds_each": 10,
+  "companion_checks": 120,
+  "source_hashes_match_tested_files": true,
+  "upstream_companion_files": 26,
+  "upstream_byte_and_executable_modes_match": true,
+  "credential_pattern_matches": [],
+  "new_local_links_resolve": true,
+  "scanned_files": 104,
+  "new_scientific_executions": 0,
+  "real_provider_calls": 0
+}

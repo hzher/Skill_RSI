@@ -1,0 +1,1810 @@
+{
+  "official_commit": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+  "source_total": 301,
+  "selection_rule": "Historical first300 coverage, excluding the separately completed database_exploration-012",
+  "tasks": [
+    {
+      "id": "blind_spectrum_monitoring-000",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-001",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-002",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-003",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-004",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-005",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 5,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-006",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 6,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-007",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 7,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-008",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 8,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-009",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 9,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-010",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 10,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-011",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 11,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-012",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 12,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-013",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 13,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-014",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 14,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-015",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 15,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-016",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 16,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-017",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 17,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-018",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 18,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-019",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 19,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-020",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 20,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-021",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 21,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-022",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 22,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-023",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 23,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-024",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 24,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-025",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 25,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-026",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 26,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-027",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 27,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-028",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 28,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-029",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 29,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-030",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 30,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-031",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 31,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-032",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 32,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-033",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 33,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-034",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 34,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-035",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 35,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-036",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 36,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-037",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 37,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-038",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 38,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-039",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 39,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-040",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 40,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-041",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 41,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-042",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 42,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-043",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 43,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-044",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 44,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-045",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 45,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-046",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 46,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-047",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 47,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-048",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 48,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-049",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 49,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-050",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 50,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-051",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 51,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-052",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 52,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-053",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 53,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-054",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 54,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-055",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 55,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-056",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 56,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-057",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 57,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-058",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 58,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-059",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 59,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-060",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 60,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-061",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 61,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-062",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 62,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-063",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 63,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-064",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 64,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-065",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 65,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-066",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 66,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-067",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 67,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-068",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 68,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-069",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 69,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-070",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 70,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-071",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 71,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-072",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 72,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-073",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 73,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-074",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 74,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-075",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 75,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-076",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 76,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-077",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 77,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-078",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 78,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-079",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 79,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-080",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 80,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-081",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 81,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-082",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 82,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-083",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 83,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-084",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 84,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-085",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 85,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-086",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 86,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-087",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 87,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-088",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 88,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-089",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 89,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-000",
+      "family": "codebase_adaptation",
+      "canonical_index": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-001",
+      "family": "codebase_adaptation",
+      "canonical_index": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-002",
+      "family": "codebase_adaptation",
+      "canonical_index": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-003",
+      "family": "codebase_adaptation",
+      "canonical_index": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-004",
+      "family": "codebase_adaptation",
+      "canonical_index": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-005",
+      "family": "codebase_adaptation",
+      "canonical_index": 5,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-006",
+      "family": "codebase_adaptation",
+      "canonical_index": 6,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-007",
+      "family": "codebase_adaptation",
+      "canonical_index": 7,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-008",
+      "family": "codebase_adaptation",
+      "canonical_index": 8,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-009",
+      "family": "codebase_adaptation",
+      "canonical_index": 9,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-010",
+      "family": "codebase_adaptation",
+      "canonical_index": 10,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-011",
+      "family": "codebase_adaptation",
+      "canonical_index": 11,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-012",
+      "family": "codebase_adaptation",
+      "canonical_index": 12,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-013",
+      "family": "codebase_adaptation",
+      "canonical_index": 13,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-014",
+      "family": "codebase_adaptation",
+      "canonical_index": 14,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-015",
+      "family": "codebase_adaptation",
+      "canonical_index": 15,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-016",
+      "family": "codebase_adaptation",
+      "canonical_index": 16,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-017",
+      "family": "codebase_adaptation",
+      "canonical_index": 17,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-018",
+      "family": "codebase_adaptation",
+      "canonical_index": 18,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-000",
+      "family": "cohort_studies",
+      "canonical_index": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-001",
+      "family": "cohort_studies",
+      "canonical_index": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-002",
+      "family": "cohort_studies",
+      "canonical_index": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-003",
+      "family": "cohort_studies",
+      "canonical_index": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-004",
+      "family": "cohort_studies",
+      "canonical_index": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-005",
+      "family": "cohort_studies",
+      "canonical_index": 5,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-006",
+      "family": "cohort_studies",
+      "canonical_index": 6,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-007",
+      "family": "cohort_studies",
+      "canonical_index": 7,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-008",
+      "family": "cohort_studies",
+      "canonical_index": 8,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-009",
+      "family": "cohort_studies",
+      "canonical_index": 9,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-010",
+      "family": "cohort_studies",
+      "canonical_index": 10,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-011",
+      "family": "cohort_studies",
+      "canonical_index": 11,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-012",
+      "family": "cohort_studies",
+      "canonical_index": 12,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-013",
+      "family": "cohort_studies",
+      "canonical_index": 13,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-014",
+      "family": "cohort_studies",
+      "canonical_index": 14,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-015",
+      "family": "cohort_studies",
+      "canonical_index": 15,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-016",
+      "family": "cohort_studies",
+      "canonical_index": 16,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-017",
+      "family": "cohort_studies",
+      "canonical_index": 17,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-018",
+      "family": "cohort_studies",
+      "canonical_index": 18,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-019",
+      "family": "cohort_studies",
+      "canonical_index": 19,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-000",
+      "family": "database_exploration",
+      "canonical_index": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-001",
+      "family": "database_exploration",
+      "canonical_index": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-002",
+      "family": "database_exploration",
+      "canonical_index": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-003",
+      "family": "database_exploration",
+      "canonical_index": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-004",
+      "family": "database_exploration",
+      "canonical_index": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-005",
+      "family": "database_exploration",
+      "canonical_index": 5,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-006",
+      "family": "database_exploration",
+      "canonical_index": 6,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-007",
+      "family": "database_exploration",
+      "canonical_index": 7,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-008",
+      "family": "database_exploration",
+      "canonical_index": 8,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-009",
+      "family": "database_exploration",
+      "canonical_index": 9,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-010",
+      "family": "database_exploration",
+      "canonical_index": 10,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-011",
+      "family": "database_exploration",
+      "canonical_index": 11,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-013",
+      "family": "database_exploration",
+      "canonical_index": 13,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-014",
+      "family": "database_exploration",
+      "canonical_index": 14,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-015",
+      "family": "database_exploration",
+      "canonical_index": 15,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-016",
+      "family": "database_exploration",
+      "canonical_index": 16,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-017",
+      "family": "database_exploration",
+      "canonical_index": 17,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-018",
+      "family": "database_exploration",
+      "canonical_index": 18,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-019",
+      "family": "database_exploration",
+      "canonical_index": 19,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-020",
+      "family": "database_exploration",
+      "canonical_index": 20,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-021",
+      "family": "database_exploration",
+      "canonical_index": 21,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-022",
+      "family": "database_exploration",
+      "canonical_index": 22,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-023",
+      "family": "database_exploration",
+      "canonical_index": 23,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-024",
+      "family": "database_exploration",
+      "canonical_index": 24,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-025",
+      "family": "database_exploration",
+      "canonical_index": 25,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-026",
+      "family": "database_exploration",
+      "canonical_index": 26,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-027",
+      "family": "database_exploration",
+      "canonical_index": 27,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-028",
+      "family": "database_exploration",
+      "canonical_index": 28,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-029",
+      "family": "database_exploration",
+      "canonical_index": 29,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-030",
+      "family": "database_exploration",
+      "canonical_index": 30,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-031",
+      "family": "database_exploration",
+      "canonical_index": 31,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-032",
+      "family": "database_exploration",
+      "canonical_index": 32,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-033",
+      "family": "database_exploration",
+      "canonical_index": 33,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-034",
+      "family": "database_exploration",
+      "canonical_index": 34,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-035",
+      "family": "database_exploration",
+      "canonical_index": 35,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-036",
+      "family": "database_exploration",
+      "canonical_index": 36,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-037",
+      "family": "database_exploration",
+      "canonical_index": 37,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-038",
+      "family": "database_exploration",
+      "canonical_index": 38,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-039",
+      "family": "database_exploration",
+      "canonical_index": 39,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-000",
+      "family": "exploitable_poker",
+      "canonical_index": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-001",
+      "family": "exploitable_poker",
+      "canonical_index": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-002",
+      "family": "exploitable_poker",
+      "canonical_index": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-003",
+      "family": "exploitable_poker",
+      "canonical_index": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-004",
+      "family": "exploitable_poker",
+      "canonical_index": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-005",
+      "family": "exploitable_poker",
+      "canonical_index": 5,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-006",
+      "family": "exploitable_poker",
+      "canonical_index": 6,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-007",
+      "family": "exploitable_poker",
+      "canonical_index": 7,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-008",
+      "family": "exploitable_poker",
+      "canonical_index": 8,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-009",
+      "family": "exploitable_poker",
+      "canonical_index": 9,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-010",
+      "family": "exploitable_poker",
+      "canonical_index": 10,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-011",
+      "family": "exploitable_poker",
+      "canonical_index": 11,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-012",
+      "family": "exploitable_poker",
+      "canonical_index": 12,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-013",
+      "family": "exploitable_poker",
+      "canonical_index": 13,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-014",
+      "family": "exploitable_poker",
+      "canonical_index": 14,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-015",
+      "family": "exploitable_poker",
+      "canonical_index": 15,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-016",
+      "family": "exploitable_poker",
+      "canonical_index": 16,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-017",
+      "family": "exploitable_poker",
+      "canonical_index": 17,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-018",
+      "family": "exploitable_poker",
+      "canonical_index": 18,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-019",
+      "family": "exploitable_poker",
+      "canonical_index": 19,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-020",
+      "family": "exploitable_poker",
+      "canonical_index": 20,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-021",
+      "family": "exploitable_poker",
+      "canonical_index": 21,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-022",
+      "family": "exploitable_poker",
+      "canonical_index": 22,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-023",
+      "family": "exploitable_poker",
+      "canonical_index": 23,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-024",
+      "family": "exploitable_poker",
+      "canonical_index": 24,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-025",
+      "family": "exploitable_poker",
+      "canonical_index": 25,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-026",
+      "family": "exploitable_poker",
+      "canonical_index": 26,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-027",
+      "family": "exploitable_poker",
+      "canonical_index": 27,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-028",
+      "family": "exploitable_poker",
+      "canonical_index": 28,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-029",
+      "family": "exploitable_poker",
+      "canonical_index": 29,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-030",
+      "family": "exploitable_poker",
+      "canonical_index": 30,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-031",
+      "family": "exploitable_poker",
+      "canonical_index": 31,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-032",
+      "family": "exploitable_poker",
+      "canonical_index": 32,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-033",
+      "family": "exploitable_poker",
+      "canonical_index": 33,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-034",
+      "family": "exploitable_poker",
+      "canonical_index": 34,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-035",
+      "family": "exploitable_poker",
+      "canonical_index": 35,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-036",
+      "family": "exploitable_poker",
+      "canonical_index": 36,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-037",
+      "family": "exploitable_poker",
+      "canonical_index": 37,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-038",
+      "family": "exploitable_poker",
+      "canonical_index": 38,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-039",
+      "family": "exploitable_poker",
+      "canonical_index": 39,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-040",
+      "family": "exploitable_poker",
+      "canonical_index": 40,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-041",
+      "family": "exploitable_poker",
+      "canonical_index": 41,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-042",
+      "family": "exploitable_poker",
+      "canonical_index": 42,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-043",
+      "family": "exploitable_poker",
+      "canonical_index": 43,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-044",
+      "family": "exploitable_poker",
+      "canonical_index": 44,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-045",
+      "family": "exploitable_poker",
+      "canonical_index": 45,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-046",
+      "family": "exploitable_poker",
+      "canonical_index": 46,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-047",
+      "family": "exploitable_poker",
+      "canonical_index": 47,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-048",
+      "family": "exploitable_poker",
+      "canonical_index": 48,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-049",
+      "family": "exploitable_poker",
+      "canonical_index": 49,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-050",
+      "family": "exploitable_poker",
+      "canonical_index": 50,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-051",
+      "family": "exploitable_poker",
+      "canonical_index": 51,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-052",
+      "family": "exploitable_poker",
+      "canonical_index": 52,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-053",
+      "family": "exploitable_poker",
+      "canonical_index": 53,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-054",
+      "family": "exploitable_poker",
+      "canonical_index": 54,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-055",
+      "family": "exploitable_poker",
+      "canonical_index": 55,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-056",
+      "family": "exploitable_poker",
+      "canonical_index": 56,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-057",
+      "family": "exploitable_poker",
+      "canonical_index": 57,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-058",
+      "family": "exploitable_poker",
+      "canonical_index": 58,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-059",
+      "family": "exploitable_poker",
+      "canonical_index": 59,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-060",
+      "family": "exploitable_poker",
+      "canonical_index": 60,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-061",
+      "family": "exploitable_poker",
+      "canonical_index": 61,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-062",
+      "family": "exploitable_poker",
+      "canonical_index": 62,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-063",
+      "family": "exploitable_poker",
+      "canonical_index": 63,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-064",
+      "family": "exploitable_poker",
+      "canonical_index": 64,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-065",
+      "family": "exploitable_poker",
+      "canonical_index": 65,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-066",
+      "family": "exploitable_poker",
+      "canonical_index": 66,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-067",
+      "family": "exploitable_poker",
+      "canonical_index": 67,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-068",
+      "family": "exploitable_poker",
+      "canonical_index": 68,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-069",
+      "family": "exploitable_poker",
+      "canonical_index": 69,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-070",
+      "family": "exploitable_poker",
+      "canonical_index": 70,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-071",
+      "family": "exploitable_poker",
+      "canonical_index": 71,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-072",
+      "family": "exploitable_poker",
+      "canonical_index": 72,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-073",
+      "family": "exploitable_poker",
+      "canonical_index": 73,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-074",
+      "family": "exploitable_poker",
+      "canonical_index": 74,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-075",
+      "family": "exploitable_poker",
+      "canonical_index": 75,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-076",
+      "family": "exploitable_poker",
+      "canonical_index": 76,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-077",
+      "family": "exploitable_poker",
+      "canonical_index": 77,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-078",
+      "family": "exploitable_poker",
+      "canonical_index": 78,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-079",
+      "family": "exploitable_poker",
+      "canonical_index": 79,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-080",
+      "family": "exploitable_poker",
+      "canonical_index": 80,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-081",
+      "family": "exploitable_poker",
+      "canonical_index": 81,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-082",
+      "family": "exploitable_poker",
+      "canonical_index": 82,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-083",
+      "family": "exploitable_poker",
+      "canonical_index": 83,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-084",
+      "family": "exploitable_poker",
+      "canonical_index": 84,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-085",
+      "family": "exploitable_poker",
+      "canonical_index": 85,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-086",
+      "family": "exploitable_poker",
+      "canonical_index": 86,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-087",
+      "family": "exploitable_poker",
+      "canonical_index": 87,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-088",
+      "family": "exploitable_poker",
+      "canonical_index": 88,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-089",
+      "family": "exploitable_poker",
+      "canonical_index": 89,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-090",
+      "family": "exploitable_poker",
+      "canonical_index": 90,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-091",
+      "family": "exploitable_poker",
+      "canonical_index": 91,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-092",
+      "family": "exploitable_poker",
+      "canonical_index": 92,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-093",
+      "family": "exploitable_poker",
+      "canonical_index": 93,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-094",
+      "family": "exploitable_poker",
+      "canonical_index": 94,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-095",
+      "family": "exploitable_poker",
+      "canonical_index": 95,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-096",
+      "family": "exploitable_poker",
+      "canonical_index": 96,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-097",
+      "family": "exploitable_poker",
+      "canonical_index": 97,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-098",
+      "family": "exploitable_poker",
+      "canonical_index": 98,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-099",
+      "family": "exploitable_poker",
+      "canonical_index": 99,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-100",
+      "family": "exploitable_poker",
+      "canonical_index": 100,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-101",
+      "family": "exploitable_poker",
+      "canonical_index": 101,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-102",
+      "family": "exploitable_poker",
+      "canonical_index": 102,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-103",
+      "family": "exploitable_poker",
+      "canonical_index": 103,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-104",
+      "family": "exploitable_poker",
+      "canonical_index": 104,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-105",
+      "family": "exploitable_poker",
+      "canonical_index": 105,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-106",
+      "family": "exploitable_poker",
+      "canonical_index": 106,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-107",
+      "family": "exploitable_poker",
+      "canonical_index": 107,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-108",
+      "family": "exploitable_poker",
+      "canonical_index": 108,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-109",
+      "family": "exploitable_poker",
+      "canonical_index": 109,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-110",
+      "family": "exploitable_poker",
+      "canonical_index": 110,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-111",
+      "family": "exploitable_poker",
+      "canonical_index": 111,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-112",
+      "family": "exploitable_poker",
+      "canonical_index": 112,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-113",
+      "family": "exploitable_poker",
+      "canonical_index": 113,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-114",
+      "family": "exploitable_poker",
+      "canonical_index": 114,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-115",
+      "family": "exploitable_poker",
+      "canonical_index": 115,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-116",
+      "family": "exploitable_poker",
+      "canonical_index": 116,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-117",
+      "family": "exploitable_poker",
+      "canonical_index": 117,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-118",
+      "family": "exploitable_poker",
+      "canonical_index": 118,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-119",
+      "family": "exploitable_poker",
+      "canonical_index": 119,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-000",
+      "family": "sales_prediction",
+      "canonical_index": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-001",
+      "family": "sales_prediction",
+      "canonical_index": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-002",
+      "family": "sales_prediction",
+      "canonical_index": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-003",
+      "family": "sales_prediction",
+      "canonical_index": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-004",
+      "family": "sales_prediction",
+      "canonical_index": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-005",
+      "family": "sales_prediction",
+      "canonical_index": 5,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-006",
+      "family": "sales_prediction",
+      "canonical_index": 6,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-007",
+      "family": "sales_prediction",
+      "canonical_index": 7,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-008",
+      "family": "sales_prediction",
+      "canonical_index": 8,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-009",
+      "family": "sales_prediction",
+      "canonical_index": 9,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-010",
+      "family": "sales_prediction",
+      "canonical_index": 10,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-011",
+      "family": "sales_prediction",
+      "canonical_index": 11,
+      "schedule": "default"
+    }
+  ],
+  "skills": [],
+  "curation": false,
+  "session_policy": "new native session and HOME per task"
+}

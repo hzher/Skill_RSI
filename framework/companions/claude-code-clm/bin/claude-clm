@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+if [[ "${1:-}" == --help || "${1:-}" == -h || "${1:-}" == --probe ]]; then
+    cd -- "$root"
+    exec python3 -m clm.run "$@"
+fi
+if [[ -z "${ANTHROPIC_API_KEY:-}" || -z "${ANTHROPIC_BASE_URL:-}" ]]; then
+    set -a
+    source /mount-data/.skill-rsi-api/api.env
+    set +a
+fi
+# Keep the team env file's other credentials out of the launcher as well.
+unset OPENAI_API_KEY OPENAI_BASE_URL DEEPSEEK_API_KEY DEEPSEEK_BASE_URL
+cd -- "$root"
+exec python3 -m clm.run "$@"

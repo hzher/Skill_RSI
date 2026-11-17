@@ -1,5 +1,11 @@
 # Skill_RSI
 
+## yangyang分支框架入口
+
+[framework](framework/README.md)提供Claude Code rollout采集、轨迹经验、技能管理及独立评审。新增[三模式采集](framework/docs/ROLLOUT_COLLECTION.md)保留分类100题长会话、同100题乱序长会话及300题逐题独立session，并附官方301题全量题单。[双CLI框架](framework/companions/README.md)包含Claude Code CLM和Codex CLM独立源码与测试。
+
+各模式的运行条件、历史实测和本轮CPU验证分开说明，源码来源与文件校验位于`framework/UPSTREAM_SNAPSHOTS.json`和`framework/DELIVERY_PINS.json`。
+
 面向 **Claude Code、Codex、DSH**，持续产生有效、可复用的 trajectory，并根据轨迹不断迭代有利于 **context/memory 管理的 skills**。
 
 ## 项目目标
@@ -25,12 +31,12 @@ flowchart LR
 | 项目                         | 当前状态                                                                               |
 | ---------------------------- | -------------------------------------------------------------------------------------- |
 | 项目说明与协作文件           | 以推送到 GitHub 的版本为团队依据                                                       |
-| 实现代码、训练脚本与实验数据 | 尚未导入                                                                               |
-| 主分支                       | 约定使用 `master`；初始化检查时远端仍为 `main`，由维护者完成切换                   |
-| 成员分支                     | 暂不建立，由成员在主分支就绪后自行创建                                                 |
+| 实现代码与输入配置           | `yangyang`提供[采集与技能框架](framework/README.md)、三模式题单和双CLI源码；验证与数据索引在对应文档 |
+| 主分支                       | `master`为共同基线和远端默认分支，本次框架交付位于`yangyang` |
+| 成员分支                     | 各成员按约定在自己的长期分支工作，本次发布到`yangyang` |
 | 访问与保护规则               | 见[仓库设置与状态](docs/REPOSITORY_SETTINGS.md)，不能把本文约定当成已生效的 GitHub 权限 |
 
-杨洋：上传初版主代码、将远端默认分支设为 `master`，并通知团队。下面的命令在该前提完成后使用。
+本次`yangyang`已merge当前`master`并导入框架。团队可在`yangyang/framework`阅读和使用，公共主线的集成沿用下述PR流程。
 
 ## 分支约定
 

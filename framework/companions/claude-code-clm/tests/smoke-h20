@@ -1,0 +1,78 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
+install -d -m 700 workspaces evidence
+workspace=$(mktemp -d "$PWD/workspaces/smoke.XXXXXXXX")
+receipt=$(mktemp -d "$PWD/evidence/smoke.XXXXXXXX")
+chown 1005:1005 "$workspace"
+echo "Evidence: $receipt"
+python3 - "$workspace" "$receipt" <<'PY'
+import os
+import secrets
+import sys
+from pathlib import Path
+
+workspace, receipt = map(Path, sys.argv[1:])
+marker = "CLM-SMOKE-" + secrets.token_hex(8)
+(receipt / "expected.txt").write_text(marker + "\n")
+source = workspace / "input.txt"
+source.write_text(marker + "\n" + "\n".join(
+    f"filler row {index:03d} blue orange station volume" for index in range(80)
+) + "\n")
+os.chown(source, 1005, 1005)
+PY
+cat > "$receipt/prompt.txt" <<'PROMPT'
+Perform this CLM test using native tools. Use a separate tool call for each numbered step.
+1. Use Read on /workspace/input.txt.
+2. Use Bash to run exactly: head -n 1 /workspace/input.txt > /workspace/archive.txt && rm /workspace/input.txt
+3. Use Bash to run clm-context status. Find the historical Read exchange in the list.
+4. Use Bash to run clm-context edit --drop ID --note 'Exact marker was offloaded to /workspace/archive.txt.' Use the ID of the original Read exchange. Do not include the actual marker in the note.
+5. Run clm-context status again to verify last_edit is accepted. If rejected, diagnose once.
+6. After acceptance, use native Read on /workspace/archive.txt.
+Your final answer must be the exact recovered marker as bare text, with no backticks, quotes, Markdown or explanation.
+PROMPT
+exit_code=0
+timeout 240 bin/claude-clm --workspace "$workspace" -- -p --allowedTools Bash,Read,Write \
+    --max-turns 12 --max-budget-usd 1 --output-format stream-json --verbose \
+    "$(cat "$receipt/prompt.txt")" >"$receipt/stdout.jsonl" 2>"$receipt/stderr.log" || exit_code=$?
+printf '%s\n' "$exit_code" > "$receipt/exit_code.txt"
+cat "$receipt/stderr.log"
+if (( exit_code != 0 )); then
+    exit "$exit_code"
+fi
+python3 - "$workspace" "$receipt" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+workspace, receipt = map(Path, sys.argv[1:])
+run = Path((receipt / "stderr.log").read_text().split("CLM run: ", 1)[1].splitlines()[0])
+events = [json.loads(line) for line in (run / "messages.jsonl").read_text().splitlines()]
+responses = [event for event in events if event["route"] == "/v1/messages"]
+trace = [json.loads(line) for line in (receipt / "stdout.jsonl").read_text().splitlines()]
+result, = (entry for entry in trace if entry["type"] == "result")
+accepted, = (event for event in responses if event["edit"] == "accepted")
+expected = (receipt / "expected.txt").read_text().strip()
+assert not result["is_error"] and result["result"] == expected, "final text did not exactly match marker"
+assert (workspace / "archive.txt").read_text().strip() == expected
+assert not (workspace / "input.txt").exists()
+assert all(event["http_status"] == 200 and event["transport"] == "eof" for event in responses)
+assert accepted["removed_this_request"] >= 2
+assert accepted["after_message_bytes"] < accepted["before_message_bytes"]
+calls = [
+    block for entry in trace if entry["type"] == "assistant"
+    for block in entry["message"]["content"] if block["type"] == "tool_use"
+]
+paths = [block["input"]["file_path"] for block in calls if block["name"] == "Read"]
+assert paths == ["/workspace/input.txt", "/workspace/archive.txt"]
+summary = {
+    "run": str(run), "http_200_messages": len(responses), "edit_revision": accepted["revision"],
+    "native_tool_calls": len(calls), "exact_marker_match": True,
+    "before_message_bytes": accepted["before_message_bytes"],
+    "after_message_bytes": accepted["after_message_bytes"],
+    "reported_model_cost_usd": result.get("total_cost_usd"),
+}
+(receipt / "verified.json").write_text(json.dumps(summary, indent=2) + "\n")
+print(json.dumps(summary, indent=2))
+PY

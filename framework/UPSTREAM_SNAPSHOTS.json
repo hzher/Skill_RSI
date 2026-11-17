@@ -1,0 +1,50 @@
+{
+  "core_repository": "https://github.com/sheepyedu/Skill-Curator-Inquiry",
+  "core_commit": "e8e567ce0bce350ba0e94425ba5e42b15fd91fd6",
+  "continual_implementation_commit": "2f02798",
+  "previous_yangyang_commit": "b55df81",
+  "companions": [
+    {
+      "path": "companions/claude-code-clm",
+      "repository": "https://github.com/sheepyedu/Claude-code-CLM",
+      "commit": "96e6cde7b53dc36a93c58a9ca6c88765e77c531e",
+      "files_sha256": {
+        ".gitignore": "34a88910e21adda2a6ca424392f5455391461e7e7fd507067a2209f0b484e350",
+        "README.md": "a13ea002c68520470ebdb647fc513743dbf32b1fb1c23b0eb77537c1f067d610",
+        "bin/claude-clm": "fbe9dca949041f98e31263097dafa7c992a71c90828b0342de4211ecbce3c6a5",
+        "bin/clm-context": "075673e8ab94fb7f6dc52f494e643e63695b89b8ef9bcbc7d05fd4a1349f8969",
+        "clm/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "clm/container_entry.py": "c7f51329dcdab47467e5120d22c25c2151526a9b39d63524d443f7dd68459a55",
+        "clm/context.py": "bf3afe341bf56ce0ed8748a55d8b20ff4f7bf9452df14df0a6873cdc30950964",
+        "clm/edit.py": "a51a72be9f72781c0d287c916c6a6bb937489b49566eae2ec291ca7cb249d46d",
+        "clm/gateway.py": "0191ad8fa2f275342b32a6d96955ca657955eab46a6f2c3b6f5c309c950a62e8",
+        "clm/probe.py": "70c6249dd58c46eba8969265072de1b654eeba066c10691844a545415b9eb891",
+        "clm/run.py": "e0878e921d714392150866e380d0dbdca506de699f056b61a2cf46c1cca21a01",
+        "tests/smoke-h20": "08c2caad3308d0f73b3ec9320b3ed5653307319e61b9aa15264fde8e097770a1",
+        "tests/test_context.py": "97316d09110b3f977187c41e899d62b75340f2ba417c8a39ac60b564741bf1b9"
+      },
+      "change": "byte-identical git archive, executable modes preserved"
+    },
+    {
+      "path": "companions/codex-clm",
+      "repository": "https://github.com/sheepyedu/Codex-CLM",
+      "commit": "806b573880f0d352460ddfca6ac60b09795465e2",
+      "files_sha256": {
+        ".gitignore": "3517637d82c218c813c6019868b9ebebe85544cb95d27391a727a9acf4698d7a",
+        "README.md": "21f74ed966eca9253015869960e5320448c78e16f7e15bb8c569b54d497f4826",
+        "bin/clm-context": "075673e8ab94fb7f6dc52f494e643e63695b89b8ef9bcbc7d05fd4a1349f8969",
+        "bin/codex-clm": "f239583048e1ee8459d2d7ee2247ea528133e94e40ef64601993fed0f29b3113",
+        "clm/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "clm/container_entry.py": "cbddbc9ea7ea30a62ff0c7ab9c7358d324e6992111c4ae19fa6567ef7d8ad5dd",
+        "clm/context.py": "1ce1762f6feac46d76c25aa505ca4ace392b63a42452e5e69e8bfe95af2a4d24",
+        "clm/edit.py": "3d7c3fd6d1441a1aca168fd0228b5e48e3c78c9c6f2c4d8b4d269a02e74ea3c0",
+        "clm/gateway.py": "270942998674f84abf1cbb9105d3d45916c1ed728dcfc303361ba30aee9fd29e",
+        "clm/probe.py": "78fffa90a44361909074362bc412b6118291d842bd44b58528ba0c28d041b2a1",
+        "clm/run.py": "b5db883333aa37e018049fe9a4faabe0b7fa5de66d49d8fe63ed7b75df9cae2e",
+        "tests/smoke-h20": "e157c586908c023f82744bd90a8e68613420dd202b779a488b94645bd7bbab70",
+        "tests/test_context.py": "d3a99ce992ba6f342538491f059838c4fe24f0593ca6b3cf20c13fac0dd3ba35"
+      },
+      "change": "byte-identical git archive, executable modes preserved"
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "time": 1794911754.6378,
+  "real_provider_calls": 0,
+  "companion_tests": {
+    "claude-code-clm": {
+      "rounds": [
+        {
+          "round": 1,
+          "exit_code": 0,
+          "log": "test_cache_marker_does_not_change_editable_id (test_context.ContextTests.test_cache_marker_does_not_change_editable_id) ... ok\ntest_edit_applies_to_next_and_later_requests (test_context.ContextTests.test_edit_applies_to_next_and_later_requests) ... ok\ntest_growth_rejected_and_count_tokens_does_not_consume_edit (test_context.ContextTests.test_growth_rejected_and_count_tokens_does_not_consume_edit) ... ok\ntest_multi_tool_mismatch_and_user_text_protected (test_context.ContextTests.test_multi_tool_mismatch_and_user_text_protected) ... ok\ntest_new_anchor_discards_previous_overlay (test_context.ContextTests.test_new_anchor_discards_previous_overlay) ... ok\ntest_unknown_and_stale_edits_preserve_history (test_context.ContextTests.test_unknown_and_stale_edits_preserve_history) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 2,
+          "exit_code": 0,
+          "log": "test_cache_marker_does_not_change_editable_id (test_context.ContextTests.test_cache_marker_does_not_change_editable_id) ... ok\ntest_edit_applies_to_next_and_later_requests (test_context.ContextTests.test_edit_applies_to_next_and_later_requests) ... ok\ntest_growth_rejected_and_count_tokens_does_not_consume_edit (test_context.ContextTests.test_growth_rejected_and_count_tokens_does_not_consume_edit) ... ok\ntest_multi_tool_mismatch_and_user_text_protected (test_context.ContextTests.test_multi_tool_mismatch_and_user_text_protected) ... ok\ntest_new_anchor_discards_previous_overlay (test_context.ContextTests.test_new_anchor_discards_previous_overlay) ... ok\ntest_unknown_and_stale_edits_preserve_history (test_context.ContextTests.test_unknown_and_stale_edits_preserve_history) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.008s\n\nOK\n"
+        },
+        {
+          "round": 3,
+          "exit_code": 0,
+          "log": "test_cache_marker_does_not_change_editable_id (test_context.ContextTests.test_cache_marker_does_not_change_editable_id) ... ok\ntest_edit_applies_to_next_and_later_requests (test_context.ContextTests.test_edit_applies_to_next_and_later_requests) ... ok\ntest_growth_rejected_and_count_tokens_does_not_consume_edit (test_context.ContextTests.test_growth_rejected_and_count_tokens_does_not_consume_edit) ... ok\ntest_multi_tool_mismatch_and_user_text_protected (test_context.ContextTests.test_multi_tool_mismatch_and_user_text_protected) ... ok\ntest_new_anchor_discards_previous_overlay (test_context.ContextTests.test_new_anchor_discards_previous_overlay) ... ok\ntest_unknown_and_stale_edits_preserve_history (test_context.ContextTests.test_unknown_and_stale_edits_preserve_history) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 4,
+          "exit_code": 0,
+          "log": "test_cache_marker_does_not_change_editable_id (test_context.ContextTests.test_cache_marker_does_not_change_editable_id) ... ok\ntest_edit_applies_to_next_and_later_requests (test_context.ContextTests.test_edit_applies_to_next_and_later_requests) ... ok\ntest_growth_rejected_and_count_tokens_does_not_consume_edit (test_context.ContextTests.test_growth_rejected_and_count_tokens_does_not_consume_edit) ... ok\ntest_multi_tool_mismatch_and_user_text_protected (test_context.ContextTests.test_multi_tool_mismatch_and_user_text_protected) ... ok\ntest_new_anchor_discards_previous_overlay (test_context.ContextTests.test_new_anchor_discards_previous_overlay) ... ok\ntest_unknown_and_stale_edits_preserve_history (test_context.ContextTests.test_unknown_and_stale_edits_preserve_history) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 5,
+          "exit_code": 0,
+          "log": "test_cache_marker_does_not_change_editable_id (test_context.ContextTests.test_cache_marker_does_not_change_editable_id) ... ok\ntest_edit_applies_to_next_and_later_requests (test_context.ContextTests.test_edit_applies_to_next_and_later_requests) ... ok\ntest_growth_rejected_and_count_tokens_does_not_consume_edit (test_context.ContextTests.test_growth_rejected_and_count_tokens_does_not_consume_edit) ... ok\ntest_multi_tool_mismatch_and_user_text_protected (test_context.ContextTests.test_multi_tool_mismatch_and_user_text_protected) ... ok\ntest_new_anchor_discards_previous_overlay (test_context.ContextTests.test_new_anchor_discards_previous_overlay) ... ok\ntest_unknown_and_stale_edits_preserve_history (test_context.ContextTests.test_unknown_and_stale_edits_preserve_history) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 6,
+          "exit_code": 0,
+          "log": "test_cache_marker_does_not_change_editable_id (test_context.ContextTests.test_cache_marker_does_not_change_editable_id) ... ok\ntest_edit_applies_to_next_and_later_requests (test_context.ContextTests.test_edit_applies_to_next_and_later_requests) ... ok\ntest_growth_rejected_and_count_tokens_does_not_consume_edit (test_context.ContextTests.test_growth_rejected_and_count_tokens_does_not_consume_edit) ... ok\ntest_multi_tool_mismatch_and_user_text_protected (test_context.ContextTests.test_multi_tool_mismatch_and_user_text_protected) ... ok\ntest_new_anchor_discards_previous_overlay (test_context.ContextTests.test_new_anchor_discards_previous_overlay) ... ok\ntest_unknown_and_stale_edits_preserve_history (test_context.ContextTests.test_unknown_and_stale_edits_preserve_history) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 7,
+          "exit_code": 0,
+          "log": "test_cache_marker_does_not_change_editable_id (test_context.ContextTests.test_cache_marker_does_not_change_editable_id) ... ok\ntest_edit_applies_to_next_and_later_requests (test_context.ContextTests.test_edit_applies_to_next_and_later_requests) ... ok\ntest_growth_rejected_and_count_tokens_does_not_consume_edit (test_context.ContextTests.test_growth_rejected_and_count_tokens_does_not_consume_edit) ... ok\ntest_multi_tool_mismatch_and_user_text_protected (test_context.ContextTests.test_multi_tool_mismatch_and_user_text_protected) ... ok\ntest_new_anchor_discards_previous_overlay (test_context.ContextTests.test_new_anchor_discards_previous_overlay) ... ok\ntest_unknown_and_stale_edits_preserve_history (test_context.ContextTests.test_unknown_and_stale_edits_preserve_history) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 8,
+          "exit_code": 0,
+          "log": "test_cache_marker_does_not_change_editable_id (test_context.ContextTests.test_cache_marker_does_not_change_editable_id) ... ok\ntest_edit_applies_to_next_and_later_requests (test_context.ContextTests.test_edit_applies_to_next_and_later_requests) ... ok\ntest_growth_rejected_and_count_tokens_does_not_consume_edit (test_context.ContextTests.test_growth_rejected_and_count_tokens_does_not_consume_edit) ... ok\ntest_multi_tool_mismatch_and_user_text_protected (test_context.ContextTests.test_multi_tool_mismatch_and_user_text_protected) ... ok\ntest_new_anchor_discards_previous_overlay (test_context.ContextTests.test_new_anchor_discards_previous_overlay) ... ok\ntest_unknown_and_stale_edits_preserve_history (test_context.ContextTests.test_unknown_and_stale_edits_preserve_history) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 9,
+          "exit_code": 0,
+          "log": "test_cache_marker_does_not_change_editable_id (test_context.ContextTests.test_cache_marker_does_not_change_editable_id) ... ok\ntest_edit_applies_to_next_and_later_requests (test_context.ContextTests.test_edit_applies_to_next_and_later_requests) ... ok\ntest_growth_rejected_and_count_tokens_does_not_consume_edit (test_context.ContextTests.test_growth_rejected_and_count_tokens_does_not_consume_edit) ... ok\ntest_multi_tool_mismatch_and_user_text_protected (test_context.ContextTests.test_multi_tool_mismatch_and_user_text_protected) ... ok\ntest_new_anchor_discards_previous_overlay (test_context.ContextTests.test_new_anchor_discards_previous_overlay) ... ok\ntest_unknown_and_stale_edits_preserve_history (test_context.ContextTests.test_unknown_and_stale_edits_preserve_history) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 10,
+          "exit_code": 0,
+          "log": "test_cache_marker_does_not_change_editable_id (test_context.ContextTests.test_cache_marker_does_not_change_editable_id) ... ok\ntest_edit_applies_to_next_and_later_requests (test_context.ContextTests.test_edit_applies_to_next_and_later_requests) ... ok\ntest_growth_rejected_and_count_tokens_does_not_consume_edit (test_context.ContextTests.test_growth_rejected_and_count_tokens_does_not_consume_edit) ... ok\ntest_multi_tool_mismatch_and_user_text_protected (test_context.ContextTests.test_multi_tool_mismatch_and_user_text_protected) ... ok\ntest_new_anchor_discards_previous_overlay (test_context.ContextTests.test_new_anchor_discards_previous_overlay) ... ok\ntest_unknown_and_stale_edits_preserve_history (test_context.ContextTests.test_unknown_and_stale_edits_preserve_history) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        }
+      ],
+      "tests_per_round": 6,
+      "passed": true
+    },
+    "codex-clm": {
+      "rounds": [
+        {
+          "round": 1,
+          "exit_code": 0,
+          "log": "test_complete_group_removed_and_reasoning_preserved_for_retained_group (test_context.ContextTests.test_complete_group_removed_and_reasoning_preserved_for_retained_group) ... ok\ntest_new_anchor_discards_previous_overlay_and_protects_user (test_context.ContextTests.test_new_anchor_discards_previous_overlay_and_protects_user) ... ok\ntest_parallel_calls_remove_only_complete_batch (test_context.ContextTests.test_parallel_calls_remove_only_complete_batch) ... ok\ntest_reject_growth_and_hide_opaque_reasoning_from_snapshot (test_context.ContextTests.test_reject_growth_and_hide_opaque_reasoning_from_snapshot) ... ok\ntest_unknown_or_stale_edit_keeps_old_view (test_context.ContextTests.test_unknown_or_stale_edit_keeps_old_view) ... ok\ntest_unmatched_duplicate_and_unknown_boundary_protect_tool_batch (test_context.ContextTests.test_unmatched_duplicate_and_unknown_boundary_protect_tool_batch) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.007s\n\nOK\n"
+        },
+        {
+          "round": 2,
+          "exit_code": 0,
+          "log": "test_complete_group_removed_and_reasoning_preserved_for_retained_group (test_context.ContextTests.test_complete_group_removed_and_reasoning_preserved_for_retained_group) ... ok\ntest_new_anchor_discards_previous_overlay_and_protects_user (test_context.ContextTests.test_new_anchor_discards_previous_overlay_and_protects_user) ... ok\ntest_parallel_calls_remove_only_complete_batch (test_context.ContextTests.test_parallel_calls_remove_only_complete_batch) ... ok\ntest_reject_growth_and_hide_opaque_reasoning_from_snapshot (test_context.ContextTests.test_reject_growth_and_hide_opaque_reasoning_from_snapshot) ... ok\ntest_unknown_or_stale_edit_keeps_old_view (test_context.ContextTests.test_unknown_or_stale_edit_keeps_old_view) ... ok\ntest_unmatched_duplicate_and_unknown_boundary_protect_tool_batch (test_context.ContextTests.test_unmatched_duplicate_and_unknown_boundary_protect_tool_batch) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.007s\n\nOK\n"
+        },
+        {
+          "round": 3,
+          "exit_code": 0,
+          "log": "test_complete_group_removed_and_reasoning_preserved_for_retained_group (test_context.ContextTests.test_complete_group_removed_and_reasoning_preserved_for_retained_group) ... ok\ntest_new_anchor_discards_previous_overlay_and_protects_user (test_context.ContextTests.test_new_anchor_discards_previous_overlay_and_protects_user) ... ok\ntest_parallel_calls_remove_only_complete_batch (test_context.ContextTests.test_parallel_calls_remove_only_complete_batch) ... ok\ntest_reject_growth_and_hide_opaque_reasoning_from_snapshot (test_context.ContextTests.test_reject_growth_and_hide_opaque_reasoning_from_snapshot) ... ok\ntest_unknown_or_stale_edit_keeps_old_view (test_context.ContextTests.test_unknown_or_stale_edit_keeps_old_view) ... ok\ntest_unmatched_duplicate_and_unknown_boundary_protect_tool_batch (test_context.ContextTests.test_unmatched_duplicate_and_unknown_boundary_protect_tool_batch) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.007s\n\nOK\n"
+        },
+        {
+          "round": 4,
+          "exit_code": 0,
+          "log": "test_complete_group_removed_and_reasoning_preserved_for_retained_group (test_context.ContextTests.test_complete_group_removed_and_reasoning_preserved_for_retained_group) ... ok\ntest_new_anchor_discards_previous_overlay_and_protects_user (test_context.ContextTests.test_new_anchor_discards_previous_overlay_and_protects_user) ... ok\ntest_parallel_calls_remove_only_complete_batch (test_context.ContextTests.test_parallel_calls_remove_only_complete_batch) ... ok\ntest_reject_growth_and_hide_opaque_reasoning_from_snapshot (test_context.ContextTests.test_reject_growth_and_hide_opaque_reasoning_from_snapshot) ... ok\ntest_unknown_or_stale_edit_keeps_old_view (test_context.ContextTests.test_unknown_or_stale_edit_keeps_old_view) ... ok\ntest_unmatched_duplicate_and_unknown_boundary_protect_tool_batch (test_context.ContextTests.test_unmatched_duplicate_and_unknown_boundary_protect_tool_batch) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 5,
+          "exit_code": 0,
+          "log": "test_complete_group_removed_and_reasoning_preserved_for_retained_group (test_context.ContextTests.test_complete_group_removed_and_reasoning_preserved_for_retained_group) ... ok\ntest_new_anchor_discards_previous_overlay_and_protects_user (test_context.ContextTests.test_new_anchor_discards_previous_overlay_and_protects_user) ... ok\ntest_parallel_calls_remove_only_complete_batch (test_context.ContextTests.test_parallel_calls_remove_only_complete_batch) ... ok\ntest_reject_growth_and_hide_opaque_reasoning_from_snapshot (test_context.ContextTests.test_reject_growth_and_hide_opaque_reasoning_from_snapshot) ... ok\ntest_unknown_or_stale_edit_keeps_old_view (test_context.ContextTests.test_unknown_or_stale_edit_keeps_old_view) ... ok\ntest_unmatched_duplicate_and_unknown_boundary_protect_tool_batch (test_context.ContextTests.test_unmatched_duplicate_and_unknown_boundary_protect_tool_batch) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.007s\n\nOK\n"
+        },
+        {
+          "round": 6,
+          "exit_code": 0,
+          "log": "test_complete_group_removed_and_reasoning_preserved_for_retained_group (test_context.ContextTests.test_complete_group_removed_and_reasoning_preserved_for_retained_group) ... ok\ntest_new_anchor_discards_previous_overlay_and_protects_user (test_context.ContextTests.test_new_anchor_discards_previous_overlay_and_protects_user) ... ok\ntest_parallel_calls_remove_only_complete_batch (test_context.ContextTests.test_parallel_calls_remove_only_complete_batch) ... ok\ntest_reject_growth_and_hide_opaque_reasoning_from_snapshot (test_context.ContextTests.test_reject_growth_and_hide_opaque_reasoning_from_snapshot) ... ok\ntest_unknown_or_stale_edit_keeps_old_view (test_context.ContextTests.test_unknown_or_stale_edit_keeps_old_view) ... ok\ntest_unmatched_duplicate_and_unknown_boundary_protect_tool_batch (test_context.ContextTests.test_unmatched_duplicate_and_unknown_boundary_protect_tool_batch) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 7,
+          "exit_code": 0,
+          "log": "test_complete_group_removed_and_reasoning_preserved_for_retained_group (test_context.ContextTests.test_complete_group_removed_and_reasoning_preserved_for_retained_group) ... ok\ntest_new_anchor_discards_previous_overlay_and_protects_user (test_context.ContextTests.test_new_anchor_discards_previous_overlay_and_protects_user) ... ok\ntest_parallel_calls_remove_only_complete_batch (test_context.ContextTests.test_parallel_calls_remove_only_complete_batch) ... ok\ntest_reject_growth_and_hide_opaque_reasoning_from_snapshot (test_context.ContextTests.test_reject_growth_and_hide_opaque_reasoning_from_snapshot) ... ok\ntest_unknown_or_stale_edit_keeps_old_view (test_context.ContextTests.test_unknown_or_stale_edit_keeps_old_view) ... ok\ntest_unmatched_duplicate_and_unknown_boundary_protect_tool_batch (test_context.ContextTests.test_unmatched_duplicate_and_unknown_boundary_protect_tool_batch) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 8,
+          "exit_code": 0,
+          "log": "test_complete_group_removed_and_reasoning_preserved_for_retained_group (test_context.ContextTests.test_complete_group_removed_and_reasoning_preserved_for_retained_group) ... ok\ntest_new_anchor_discards_previous_overlay_and_protects_user (test_context.ContextTests.test_new_anchor_discards_previous_overlay_and_protects_user) ... ok\ntest_parallel_calls_remove_only_complete_batch (test_context.ContextTests.test_parallel_calls_remove_only_complete_batch) ... ok\ntest_reject_growth_and_hide_opaque_reasoning_from_snapshot (test_context.ContextTests.test_reject_growth_and_hide_opaque_reasoning_from_snapshot) ... ok\ntest_unknown_or_stale_edit_keeps_old_view (test_context.ContextTests.test_unknown_or_stale_edit_keeps_old_view) ... ok\ntest_unmatched_duplicate_and_unknown_boundary_protect_tool_batch (test_context.ContextTests.test_unmatched_duplicate_and_unknown_boundary_protect_tool_batch) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 9,
+          "exit_code": 0,
+          "log": "test_complete_group_removed_and_reasoning_preserved_for_retained_group (test_context.ContextTests.test_complete_group_removed_and_reasoning_preserved_for_retained_group) ... ok\ntest_new_anchor_discards_previous_overlay_and_protects_user (test_context.ContextTests.test_new_anchor_discards_previous_overlay_and_protects_user) ... ok\ntest_parallel_calls_remove_only_complete_batch (test_context.ContextTests.test_parallel_calls_remove_only_complete_batch) ... ok\ntest_reject_growth_and_hide_opaque_reasoning_from_snapshot (test_context.ContextTests.test_reject_growth_and_hide_opaque_reasoning_from_snapshot) ... ok\ntest_unknown_or_stale_edit_keeps_old_view (test_context.ContextTests.test_unknown_or_stale_edit_keeps_old_view) ... ok\ntest_unmatched_duplicate_and_unknown_boundary_protect_tool_batch (test_context.ContextTests.test_unmatched_duplicate_and_unknown_boundary_protect_tool_batch) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.006s\n\nOK\n"
+        },
+        {
+          "round": 10,
+          "exit_code": 0,
+          "log": "test_complete_group_removed_and_reasoning_preserved_for_retained_group (test_context.ContextTests.test_complete_group_removed_and_reasoning_preserved_for_retained_group) ... ok\ntest_new_anchor_discards_previous_overlay_and_protects_user (test_context.ContextTests.test_new_anchor_discards_previous_overlay_and_protects_user) ... ok\ntest_parallel_calls_remove_only_complete_batch (test_context.ContextTests.test_parallel_calls_remove_only_complete_batch) ... ok\ntest_reject_growth_and_hide_opaque_reasoning_from_snapshot (test_context.ContextTests.test_reject_growth_and_hide_opaque_reasoning_from_snapshot) ... ok\ntest_unknown_or_stale_edit_keeps_old_view (test_context.ContextTests.test_unknown_or_stale_edit_keeps_old_view) ... ok\ntest_unmatched_duplicate_and_unknown_boundary_protect_tool_batch (test_context.ContextTests.test_unmatched_duplicate_and_unknown_boundary_protect_tool_batch) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.007s\n\nOK\n"
+        }
+      ],
+      "tests_per_round": 6,
+      "passed": true
+    }
+  },
+  "input_checks": [
+    {
+      "mode": "grouped",
+      "tasks": 100,
+      "families": {
+        "blind_spectrum_monitoring": 30,
+        "codebase_adaptation": 7,
+        "cohort_studies": 6,
+        "database_exploration": 13,
+        "exploitable_poker": 40,
+        "sales_prediction": 4
+      },
+      "planned_task_sessions": 1,
+      "model_calls": 0,
+      "check_scope": "input manifest only"
+    },
+    {
+      "mode": "shuffled",
+      "tasks": 100,
+      "families": {
+        "sales_prediction": 4,
+        "blind_spectrum_monitoring": 30,
+        "exploitable_poker": 40,
+        "codebase_adaptation": 7,
+        "database_exploration": 13,
+        "cohort_studies": 6
+      },
+      "planned_task_sessions": 1,
+      "model_calls": 0,
+      "check_scope": "input manifest only"
+    },
+    {
+      "mode": "independent",
+      "tasks": 300,
+      "families": {
+        "blind_spectrum_monitoring": 90,
+        "codebase_adaptation": 19,
+        "cohort_studies": 20,
+        "database_exploration": 39,
+        "exploitable_poker": 120,
+        "sales_prediction": 12
+      },
+      "planned_task_sessions": 300,
+      "model_calls": 0,
+      "check_scope": "input manifest only"
+    },
+    {
+      "mode": "independent",
+      "tasks": 301,
+      "families": {
+        "blind_spectrum_monitoring": 90,
+        "codebase_adaptation": 19,
+        "cohort_studies": 20,
+        "database_exploration": 40,
+        "exploitable_poker": 120,
+        "sales_prediction": 12
+      },
+      "planned_task_sessions": 301,
+      "model_calls": 0,
+      "check_scope": "input manifest only"
+    }
+  ],
+  "upstream_files_byte_identical": true,
+  "all_three_entrypoint_help_exit0": true,
+  "native_binary_and_docker_calls": 0
+}

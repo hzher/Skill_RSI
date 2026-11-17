@@ -1,0 +1,83 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
+install -d -m 700 workspaces evidence
+workspace=$(mktemp -d "$PWD/workspaces/smoke.XXXXXXXX")
+evidence=$(mktemp -d "$PWD/evidence/smoke.XXXXXXXX")
+chown 1005:1005 "$workspace"
+echo "Evidence: $evidence"
+python3 - "$workspace" "$evidence" <<'PY'
+import os
+import secrets
+import sys
+from pathlib import Path
+
+workspace, evidence = map(Path, sys.argv[1:])
+marker = "CODEX-CLM-" + secrets.token_hex(12)
+(evidence / "expected.txt").write_text(marker + "\n")
+source = workspace / "input.txt"
+source.write_text(marker + "\n" + "\n".join(
+    f"synthetic row {index:03d} blue orange station volume" for index in range(100)
+) + "\n")
+os.chown(source, 1005, 1005)
+PY
+cat > "$evidence/prompt.txt" <<'PROMPT'
+Execute this synthetic CLM exercise. Use the native shell tool exactly once per step, in six separate model/tool rounds.
+1. Run exactly: cat /workspace/input.txt
+2. Run exactly: head -n 1 /workspace/input.txt > /workspace/archive.txt && rm /workspace/input.txt
+3. Run exactly: clm-context status
+4. Identify the editable exchange with the original long cat output (largest bytes). Run clm-context edit --drop ID --note 'Exact marker is in /workspace/archive.txt.' Substitute the actual ID. Do not include the marker in the note.
+5. Run exactly: clm-context status
+6. If last_edit is accepted, run exactly: cat /workspace/archive.txt
+Final answer: exactly the recovered marker as bare plain text. No Markdown, no quotes, no commentary.
+PROMPT
+exit_code=0
+timeout 250 bin/codex-clm --max-requests 12 --workspace "$workspace" -- exec --skip-git-repo-check \
+    --json "$(cat "$evidence/prompt.txt")" </dev/null >"$evidence/stdout.jsonl" 2>"$evidence/stderr.log" || exit_code=$?
+printf '%s\n' "$exit_code" > "$evidence/exit_code.txt"
+cat "$evidence/stderr.log"
+if (( exit_code != 0 )); then
+    exit "$exit_code"
+fi
+python3 - "$workspace" "$evidence" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+workspace, evidence = map(Path, sys.argv[1:])
+run = Path((evidence / "stderr.log").read_text().split("CLM run: ", 1)[1].splitlines()[0])
+expected = (evidence / "expected.txt").read_text().strip()
+trace = [json.loads(line) for line in (evidence / "stdout.jsonl").read_text().splitlines()]
+api = [json.loads(line) for line in (run / "responses.jsonl").read_text().splitlines()]
+edits = [event for event in api if event.get("edit") == "accepted"]
+assert len(edits) == 1, "expected exactly one accepted CLM edit"
+accepted = edits[0]
+assert all(event.get("http_status") == 200 and event["transport"] == "eof" for event in api)
+assert all(event["model"] == "gpt-6.1-sol" and event["stream"] for event in api)
+assert accepted["removed_items"] >= 2
+assert accepted["before_input_bytes"] > accepted["after_input_bytes"]
+assert accepted["raw_input_sha256"] != accepted["upstream_input_sha256"]
+assert accepted["before_input_bytes"] - accepted["after_input_bytes"] > 4000
+assert (workspace / "archive.txt").read_text().strip() == expected
+assert not (workspace / "input.txt").exists()
+items = [row["item"] for row in trace if row["type"] == "item.completed"]
+assert [item["text"] for item in items if item["type"] == "agent_message"][-1] == expected
+commands = [item for item in items if item["type"] == "command_execution"]
+assert len(commands) == 6 and all(item["exit_code"] == 0 for item in commands)
+assert "clm-context edit --drop " in commands[3]["command"]
+assert '"last_edit": "accepted"' in commands[4]["aggregated_output"]
+assert expected in commands[5]["aggregated_output"]
+turn, = (row for row in trace if row["type"] == "turn.completed")
+summary = {
+    "model": "gpt-6.1-sol", "run": str(run),
+    "http_200_responses": len(api), "edit_revision": accepted["revision"],
+    "native_shell_calls": len(commands), "exact_marker_match": True,
+    "removed_input_items": accepted["removed_items"],
+    "before_input_bytes": accepted["before_input_bytes"],
+    "after_input_bytes": accepted["after_input_bytes"],
+    "native_turn_usage": turn["usage"],
+}
+(evidence / "verified.json").write_text(json.dumps(summary, indent=2) + "\n")
+print(json.dumps(summary, indent=2))
+PY

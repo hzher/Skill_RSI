@@ -2,7 +2,7 @@
 
 本仓库面向 Claude Code、Codex、DSH 持续采集有效、可复用的 trajectory，并利用执行反馈迭代 context/memory 管理 skills。模型参数训练并行推进。
 
-当前阶段只整理 README、说明文档和 GitHub 协作配置；实现代码由维护者后续统一整理上传。分支创建步骤见 [README](README.md)，成员及权限说明见[项目治理](docs/GOVERNANCE.md)。
+`yangyang`分支已整理原生采集框架、输入配置及双CLI源码，入口见[framework](framework/README.md)。分支创建步骤见 [README](README.md)，成员及权限说明见[项目治理](docs/GOVERNANCE.md)。
 
 ## 1. 先建 Issue，再开始任务
 

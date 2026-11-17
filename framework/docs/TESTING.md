@@ -65,3 +65,7 @@ python3 tests/native_docker_rounds.py \
 ## CL-Bench原生接线回归
 
 2026-11-13最终40场景完整运行10轮，共400项通过，H20同套40项通过。新增用例与真实任务边界见[CL-Bench接线](CLBENCH_NATIVE.md)，机读结果见`reports/clbench-native-fix-20261113.json`。代码与数据库真实接线分别原生成功，工程失败轨迹和成本单列。
+
+## 2026-11-17三模式与双CLI发布
+
+新增test_collect.py覆盖分类/乱序同集合、独立逐题分派、失败隔离、输入不可变与100/300/301题覆盖。核心54项十轮540检查通过，两套CLI各6项十轮共120检查通过。具体机器回执与范围见[发布验证](../reports/ROLLOUT_RELEASE_20261117.md)。原科学模型调用、Docker部署与新任务执行计数为0。

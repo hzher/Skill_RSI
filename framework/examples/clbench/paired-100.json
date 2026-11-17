@@ -1,0 +1,916 @@
+{
+  "phase": "approved_engineering",
+  "official_commit": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+  "source_total": 301,
+  "selection_seed": 20261116,
+  "shuffle_seed": 20261117,
+  "selection_rule": "uniform fixed-seed within six family quotas, excluding initialization-terminal cases, without selecting by success or reward",
+  "quotas": {
+    "blind_spectrum_monitoring": 30,
+    "codebase_adaptation": 7,
+    "cohort_studies": 6,
+    "database_exploration": 13,
+    "exploitable_poker": 40,
+    "sales_prediction": 4
+  },
+  "selected_tasks": [
+    {
+      "id": "blind_spectrum_monitoring-000",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 0,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-001",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 1,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-004",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 4,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-007",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 7,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-024",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 24,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-026",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 26,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-027",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 27,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-028",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 28,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-029",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 29,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-031",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 31,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-032",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 32,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-041",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 41,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-043",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 43,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-045",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 45,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-046",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 46,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-051",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 51,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-055",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 55,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-064",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 64,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-066",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 66,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-069",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 69,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-073",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 73,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-075",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 75,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-076",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 76,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-079",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 79,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-081",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 81,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-082",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 82,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-083",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 83,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-084",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 84,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-086",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 86,
+      "schedule": "default"
+    },
+    {
+      "id": "blind_spectrum_monitoring-087",
+      "family": "blind_spectrum_monitoring",
+      "canonical_index": 87,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-000",
+      "family": "codebase_adaptation",
+      "canonical_index": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-005",
+      "family": "codebase_adaptation",
+      "canonical_index": 5,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-006",
+      "family": "codebase_adaptation",
+      "canonical_index": 6,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-007",
+      "family": "codebase_adaptation",
+      "canonical_index": 7,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-009",
+      "family": "codebase_adaptation",
+      "canonical_index": 9,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-013",
+      "family": "codebase_adaptation",
+      "canonical_index": 13,
+      "schedule": "default"
+    },
+    {
+      "id": "codebase_adaptation-014",
+      "family": "codebase_adaptation",
+      "canonical_index": 14,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-000",
+      "family": "cohort_studies",
+      "canonical_index": 0,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-003",
+      "family": "cohort_studies",
+      "canonical_index": 3,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-005",
+      "family": "cohort_studies",
+      "canonical_index": 5,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-006",
+      "family": "cohort_studies",
+      "canonical_index": 6,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-012",
+      "family": "cohort_studies",
+      "canonical_index": 12,
+      "stage": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "cohort_studies-015",
+      "family": "cohort_studies",
+      "canonical_index": 15,
+      "stage": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-005",
+      "family": "database_exploration",
+      "canonical_index": 5,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-006",
+      "family": "database_exploration",
+      "canonical_index": 6,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-007",
+      "family": "database_exploration",
+      "canonical_index": 7,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-008",
+      "family": "database_exploration",
+      "canonical_index": 8,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-010",
+      "family": "database_exploration",
+      "canonical_index": 10,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-014",
+      "family": "database_exploration",
+      "canonical_index": 14,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-015",
+      "family": "database_exploration",
+      "canonical_index": 15,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-025",
+      "family": "database_exploration",
+      "canonical_index": 25,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-030",
+      "family": "database_exploration",
+      "canonical_index": 30,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-034",
+      "family": "database_exploration",
+      "canonical_index": 34,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-035",
+      "family": "database_exploration",
+      "canonical_index": 35,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-036",
+      "family": "database_exploration",
+      "canonical_index": 36,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "database_exploration-038",
+      "family": "database_exploration",
+      "canonical_index": 38,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-000",
+      "family": "exploitable_poker",
+      "canonical_index": 0,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-001",
+      "family": "exploitable_poker",
+      "canonical_index": 1,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-003",
+      "family": "exploitable_poker",
+      "canonical_index": 3,
+      "stage": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-007",
+      "family": "exploitable_poker",
+      "canonical_index": 7,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-008",
+      "family": "exploitable_poker",
+      "canonical_index": 8,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-014",
+      "family": "exploitable_poker",
+      "canonical_index": 14,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-015",
+      "family": "exploitable_poker",
+      "canonical_index": 15,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-023",
+      "family": "exploitable_poker",
+      "canonical_index": 23,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-027",
+      "family": "exploitable_poker",
+      "canonical_index": 27,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-032",
+      "family": "exploitable_poker",
+      "canonical_index": 32,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-033",
+      "family": "exploitable_poker",
+      "canonical_index": 33,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-036",
+      "family": "exploitable_poker",
+      "canonical_index": 36,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-042",
+      "family": "exploitable_poker",
+      "canonical_index": 42,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-043",
+      "family": "exploitable_poker",
+      "canonical_index": 43,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-045",
+      "family": "exploitable_poker",
+      "canonical_index": 45,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-046",
+      "family": "exploitable_poker",
+      "canonical_index": 46,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-051",
+      "family": "exploitable_poker",
+      "canonical_index": 51,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-054",
+      "family": "exploitable_poker",
+      "canonical_index": 54,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-056",
+      "family": "exploitable_poker",
+      "canonical_index": 56,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-058",
+      "family": "exploitable_poker",
+      "canonical_index": 58,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-059",
+      "family": "exploitable_poker",
+      "canonical_index": 59,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-066",
+      "family": "exploitable_poker",
+      "canonical_index": 66,
+      "stage": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-069",
+      "family": "exploitable_poker",
+      "canonical_index": 69,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-075",
+      "family": "exploitable_poker",
+      "canonical_index": 75,
+      "stage": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-079",
+      "family": "exploitable_poker",
+      "canonical_index": 79,
+      "stage": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-080",
+      "family": "exploitable_poker",
+      "canonical_index": 80,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-087",
+      "family": "exploitable_poker",
+      "canonical_index": 87,
+      "stage": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-089",
+      "family": "exploitable_poker",
+      "canonical_index": 89,
+      "stage": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-091",
+      "family": "exploitable_poker",
+      "canonical_index": 91,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-092",
+      "family": "exploitable_poker",
+      "canonical_index": 92,
+      "stage": 3,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-093",
+      "family": "exploitable_poker",
+      "canonical_index": 93,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-099",
+      "family": "exploitable_poker",
+      "canonical_index": 99,
+      "stage": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-104",
+      "family": "exploitable_poker",
+      "canonical_index": 104,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-105",
+      "family": "exploitable_poker",
+      "canonical_index": 105,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-111",
+      "family": "exploitable_poker",
+      "canonical_index": 111,
+      "stage": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-112",
+      "family": "exploitable_poker",
+      "canonical_index": 112,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-113",
+      "family": "exploitable_poker",
+      "canonical_index": 113,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-114",
+      "family": "exploitable_poker",
+      "canonical_index": 114,
+      "stage": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-115",
+      "family": "exploitable_poker",
+      "canonical_index": 115,
+      "stage": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "exploitable_poker-119",
+      "family": "exploitable_poker",
+      "canonical_index": 119,
+      "stage": 4,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-000",
+      "family": "sales_prediction",
+      "canonical_index": 0,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-006",
+      "family": "sales_prediction",
+      "canonical_index": 6,
+      "stage": 1,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-009",
+      "family": "sales_prediction",
+      "canonical_index": 9,
+      "stage": 2,
+      "schedule": "default"
+    },
+    {
+      "id": "sales_prediction-010",
+      "family": "sales_prediction",
+      "canonical_index": 10,
+      "stage": 2,
+      "schedule": "default"
+    }
+  ],
+  "grouped_order": [
+    "blind_spectrum_monitoring-000",
+    "blind_spectrum_monitoring-001",
+    "blind_spectrum_monitoring-004",
+    "blind_spectrum_monitoring-007",
+    "blind_spectrum_monitoring-024",
+    "blind_spectrum_monitoring-026",
+    "blind_spectrum_monitoring-027",
+    "blind_spectrum_monitoring-028",
+    "blind_spectrum_monitoring-029",
+    "blind_spectrum_monitoring-031",
+    "blind_spectrum_monitoring-032",
+    "blind_spectrum_monitoring-041",
+    "blind_spectrum_monitoring-043",
+    "blind_spectrum_monitoring-045",
+    "blind_spectrum_monitoring-046",
+    "blind_spectrum_monitoring-051",
+    "blind_spectrum_monitoring-055",
+    "blind_spectrum_monitoring-064",
+    "blind_spectrum_monitoring-066",
+    "blind_spectrum_monitoring-069",
+    "blind_spectrum_monitoring-073",
+    "blind_spectrum_monitoring-075",
+    "blind_spectrum_monitoring-076",
+    "blind_spectrum_monitoring-079",
+    "blind_spectrum_monitoring-081",
+    "blind_spectrum_monitoring-082",
+    "blind_spectrum_monitoring-083",
+    "blind_spectrum_monitoring-084",
+    "blind_spectrum_monitoring-086",
+    "blind_spectrum_monitoring-087",
+    "codebase_adaptation-000",
+    "codebase_adaptation-005",
+    "codebase_adaptation-006",
+    "codebase_adaptation-007",
+    "codebase_adaptation-009",
+    "codebase_adaptation-013",
+    "codebase_adaptation-014",
+    "cohort_studies-000",
+    "cohort_studies-003",
+    "cohort_studies-005",
+    "cohort_studies-006",
+    "cohort_studies-012",
+    "cohort_studies-015",
+    "database_exploration-005",
+    "database_exploration-006",
+    "database_exploration-007",
+    "database_exploration-008",
+    "database_exploration-010",
+    "database_exploration-014",
+    "database_exploration-015",
+    "database_exploration-025",
+    "database_exploration-030",
+    "database_exploration-034",
+    "database_exploration-035",
+    "database_exploration-036",
+    "database_exploration-038",
+    "exploitable_poker-000",
+    "exploitable_poker-001",
+    "exploitable_poker-003",
+    "exploitable_poker-007",
+    "exploitable_poker-008",
+    "exploitable_poker-014",
+    "exploitable_poker-015",
+    "exploitable_poker-023",
+    "exploitable_poker-027",
+    "exploitable_poker-032",
+    "exploitable_poker-033",
+    "exploitable_poker-036",
+    "exploitable_poker-042",
+    "exploitable_poker-043",
+    "exploitable_poker-045",
+    "exploitable_poker-046",
+    "exploitable_poker-051",
+    "exploitable_poker-054",
+    "exploitable_poker-056",
+    "exploitable_poker-058",
+    "exploitable_poker-059",
+    "exploitable_poker-066",
+    "exploitable_poker-069",
+    "exploitable_poker-075",
+    "exploitable_poker-079",
+    "exploitable_poker-080",
+    "exploitable_poker-087",
+    "exploitable_poker-089",
+    "exploitable_poker-091",
+    "exploitable_poker-092",
+    "exploitable_poker-093",
+    "exploitable_poker-099",
+    "exploitable_poker-104",
+    "exploitable_poker-105",
+    "exploitable_poker-111",
+    "exploitable_poker-112",
+    "exploitable_poker-113",
+    "exploitable_poker-114",
+    "exploitable_poker-115",
+    "exploitable_poker-119",
+    "sales_prediction-000",
+    "sales_prediction-006",
+    "sales_prediction-009",
+    "sales_prediction-010"
+  ],
+  "shuffled_order": [
+    "sales_prediction-006",
+    "sales_prediction-009",
+    "blind_spectrum_monitoring-026",
+    "exploitable_poker-113",
+    "codebase_adaptation-007",
+    "exploitable_poker-051",
+    "blind_spectrum_monitoring-079",
+    "database_exploration-010",
+    "exploitable_poker-104",
+    "blind_spectrum_monitoring-073",
+    "exploitable_poker-089",
+    "exploitable_poker-115",
+    "blind_spectrum_monitoring-004",
+    "database_exploration-035",
+    "database_exploration-015",
+    "exploitable_poker-091",
+    "cohort_studies-012",
+    "exploitable_poker-093",
+    "blind_spectrum_monitoring-083",
+    "blind_spectrum_monitoring-046",
+    "cohort_studies-015",
+    "exploitable_poker-066",
+    "codebase_adaptation-009",
+    "blind_spectrum_monitoring-027",
+    "exploitable_poker-111",
+    "exploitable_poker-036",
+    "blind_spectrum_monitoring-000",
+    "exploitable_poker-000",
+    "exploitable_poker-054",
+    "blind_spectrum_monitoring-086",
+    "database_exploration-008",
+    "blind_spectrum_monitoring-045",
+    "cohort_studies-005",
+    "database_exploration-025",
+    "exploitable_poker-079",
+    "sales_prediction-000",
+    "database_exploration-038",
+    "exploitable_poker-003",
+    "exploitable_poker-058",
+    "codebase_adaptation-005",
+    "exploitable_poker-033",
+    "exploitable_poker-027",
+    "database_exploration-034",
+    "cohort_studies-006",
+    "exploitable_poker-075",
+    "exploitable_poker-080",
+    "exploitable_poker-001",
+    "database_exploration-036",
+    "blind_spectrum_monitoring-024",
+    "exploitable_poker-045",
+    "blind_spectrum_monitoring-069",
+    "blind_spectrum_monitoring-032",
+    "exploitable_poker-112",
+    "codebase_adaptation-013",
+    "database_exploration-014",
+    "exploitable_poker-099",
+    "sales_prediction-010",
+    "exploitable_poker-092",
+    "exploitable_poker-015",
+    "exploitable_poker-023",
+    "codebase_adaptation-006",
+    "blind_spectrum_monitoring-029",
+    "exploitable_poker-105",
+    "blind_spectrum_monitoring-041",
+    "exploitable_poker-087",
+    "blind_spectrum_monitoring-031",
+    "exploitable_poker-069",
+    "blind_spectrum_monitoring-043",
+    "exploitable_poker-059",
+    "blind_spectrum_monitoring-081",
+    "blind_spectrum_monitoring-075",
+    "exploitable_poker-046",
+    "codebase_adaptation-000",
+    "blind_spectrum_monitoring-064",
+    "exploitable_poker-043",
+    "exploitable_poker-056",
+    "exploitable_poker-042",
+    "exploitable_poker-114",
+    "blind_spectrum_monitoring-055",
+    "blind_spectrum_monitoring-076",
+    "exploitable_poker-008",
+    "database_exploration-030",
+    "exploitable_poker-032",
+    "blind_spectrum_monitoring-051",
+    "exploitable_poker-014",
+    "codebase_adaptation-014",
+    "cohort_studies-000",
+    "database_exploration-007",
+    "blind_spectrum_monitoring-001",
+    "blind_spectrum_monitoring-028",
+    "exploitable_poker-007",
+    "database_exploration-006",
+    "exploitable_poker-119",
+    "cohort_studies-003",
+    "database_exploration-005",
+    "blind_spectrum_monitoring-084",
+    "blind_spectrum_monitoring-082",
+    "blind_spectrum_monitoring-087",
+    "blind_spectrum_monitoring-007",
+    "blind_spectrum_monitoring-066"
+  ],
+  "suggested_chains": 2,
+  "suggested_executions": 200,
+  "approved_chain_count": 2,
+  "new_model_calls": 0,
+  "research_target": "observe genuine context management including compaction and compare order effects; 0 context operations does not fulfill this target",
+  "agent_state": "persistent context/session and working memory per chain, isolated across chains",
+  "benchmark_state": "preserve official per-task reset/data correctness while routing actions from a persistent agent; cross-family physical sandbox details must be disclosed",
+  "activation_policy": "no forced skill loading or manual compaction to manufacture success",
+  "recording": [
+    "all raw native and Chat requests/responses",
+    "thinking",
+    "MCP call and return",
+    "compaction trigger and summary request and response",
+    "before/after context and retained/lost evidence",
+    "session and persistent memory file versions",
+    "objective outcomes isolated from memory editing",
+    "usage and token/s"
+  ],
+  "approved_executions": 200,
+  "context_window": 200000,
+  "max_turns_per_task": 64,
+  "task_timeout": 28800,
+  "request_timeout": 14400,
+  "initial_skills": [],
+  "curation": false,
+  "local_note_tools": [
+    "Read",
+    "Write",
+    "Edit",
+    "Glob",
+    "Grep"
+  ],
+  "session_mode": "native --session-id then --resume in same persistent HOME/container",
+  "first_gate_tasks_per_chain": 2
+}

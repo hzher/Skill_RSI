@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euo pipefail
+root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+if [[ "${1:-}" != --help && "${1:-}" != -h && "${1:-}" != --probe ]]; then
+    if [[ -z "${OPENAI_API_KEY:-}" || -z "${OPENAI_BASE_URL:-}" ]]; then
+        source /mount-data/.skill-rsi-api/api.env
+        export OPENAI_API_KEY OPENAI_BASE_URL
+    fi
+fi
+cd -- "$root"
+exec python3 -m clm.run "$@"

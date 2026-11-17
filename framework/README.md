@@ -1,5 +1,11 @@
 # Skill RL 可复用框架
 
+## Rollout采集与CLI框架入口
+
+当前采集入口为`python3 -m skillrl.collect`，支持分类100题长会话、同100题乱序长会话，以及300题逐题独立session。完整配置、冻结输入、官方301题全量选项及启动命令见[三模式采集说明](docs/ROLLOUT_COLLECTION.md)。两个长会话合计200题次，初始空技能且关闭精炼。
+
+[Claude Code CLM](companions/claude-code-clm/README.md)和[Codex CLM](companions/codex-clm/README.md)的独立源码、启动器与测试位于`companions/`，来源与验证边界见[双CLI说明](companions/README.md)。
+
 从公开任务执行、可观测轨迹、版本化技能管理，到独立客观评分和逐版本LLM评审的完整实现。整个 `framework/` 可以复制到另一个仓库或服务器运行，运行时只依赖Python标准库。模型、镜像、题库和原生评分器由使用者配置。
 
 执行器先用题首快照做题，管理器从实际过程整理下一版手册。客观评分走独立分支，管理器只看真实部署中可以获得的信息。新版本的价值需要关联后续消费者。本实现迭代技能文本，模型权重保持固定；梯度RL优化器可消费导出的奖励和轨迹，优化器本身由训练系统接入。
