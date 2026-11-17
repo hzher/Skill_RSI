@@ -1,0 +1,2 @@
+-e ../continual-learning-bench[poker]
+PyYAML>=6.0

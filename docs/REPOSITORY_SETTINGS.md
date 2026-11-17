@@ -38,7 +38,7 @@ GitHub 插件已安装并用于本次发布；插件认证与本机 Git 命令�
 
 ## 设置清单与权限边界
 
-[repository-settings.json](../.github/repository-settings.json) 记录后续团队就绪时的目标设置，不是自动执行文件；其中私有可见性和一位审核者要求尚未应用。GitHub 不会自动读取并执行它。
+主分支的配置清单记录后续团队就绪时的目标设置。其中私有可见性和一位审核者要求尚未应用，GitHub 不会自动读取并执行它。[repository-settings.json](https://github.com/hzher/Skill_RSI/blob/master/.github/repository-settings.json)
 
 `CODEOWNERS` 只定义审核归属，不授予访问权限；个人分支名也不隔离成员间的写权限。参考 [个人仓库权限说明](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/permission-levels-for-a-personal-account-repository)及[分支保护说明](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)。
 

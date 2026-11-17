@@ -42,7 +42,7 @@
 - 不自动删除长期个人分支，不强推或删除共同基线。
 - 当前阶段不配置不存在的 CI 为必需检查，也不启用唯一 CODEOWNER 的强制审核。
 
-完整流程见 [CONTRIBUTING](../CONTRIBUTING.md)。
+完整流程见主分支的贡献规范。[CONTRIBUTING](https://github.com/hzher/Skill_RSI/blob/master/CONTRIBUTING.md)
 
 ## 初始化状态与待落实事项
 
@@ -63,4 +63,4 @@
 
 GPU、API、运行机器和任务环境统一登记使用人、用途、预算、使用时段及结果位置。每两天简短对齐交付和阻塞，汇报基于运行证据与实际认领；不在仓库中提交内部人员评价或未经授权的会议材料。
 
-已有 [MIT License](../LICENSE) 保持不变。本次协作初始化不修改授权文本。
+项目授权采用 MIT License，授权文本见主分支。[MIT License](https://github.com/hzher/Skill_RSI/blob/master/LICENSE)

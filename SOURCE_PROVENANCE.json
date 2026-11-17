@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "source_root": "../deepseek_cl_bench",
+  "reference_audit": "../Skill_RSI_plan/重构计划_2026-11-11/validation/reference_validation.json",
+  "source_scope": "Current local source files used as the implementation baseline",
+  "source_sha256": {
+    ".env.example": "80a21605015d4669af3afa9ced637b203557ca8e9e677eea33e378aeb58baa53",
+    "configs/leaderboard_reference.json": "8878560df186e835700b58c3a397007e925995182ec76b541dfcd42c88618963",
+    "configs/local-router.json": "e377a5469c87a0aa7e0c058289b2763a9f5af4aea84706bb8cde6a995c0b0c64",
+    "configs/official.json": "a8eb36f58ee0884cf064924fd758d48031df4d24b47fafb8851f8bd6d6e2926e",
+    "configs/reference_baselines.json": "f3b8c069c669795fdfe13aec534663f018385451bdc8743d081a27cb0bbd0ab8",
+    "configs/router-pricing.json": "fbc4298d52b5dd9fd11846e9360aedd45fdeb2e16d54ede4c0125e1d597deda8",
+    "dsh_system.py": "427c8116c281c1910fe661e547a3b903d0b473cf4a826d220333aa532c13436d",
+    "environment.yml": "36b3e85e6526d228cc87c24f2ba82f04ccdf28919e12badaed6d7fc6da49946d",
+    "export_results.py": "1ab8968937d19f304a16664bd1ae566d5ca96275de0a464737a2366369071f3e",
+    "plugins/clbench-submit/index.mjs": "e058a001f57af25bf4fdf1f602f4233fddad8ee8d9669886617ba8216a7f08e3",
+    "requirements.txt": "048e34156af153b8922c7e9b1a82297d4501688862fccead3151379b561921d8",
+    "run.py": "a4743f75251d1397654b1073e9e7495ae2e279a5da362d0773b78ffd08b748fc"
+  },
+  "modified_after_copy": ["dsh_system.py", "plugins/clbench-submit/index.mjs", "run.py"],
+  "benchmark": {
+    "source_root": "../continual-learning-bench",
+    "commit": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+    "dirty_at_inspection": false,
+    "license": "Apache-2.0",
+    "training_permission": "evaluation_only"
+  },
+  "historical_evidence": [
+    {
+      "path": "../deepseek_cl_bench/results/poker-manual-01",
+      "task": "exploitable_poker",
+      "schedule": "quick_test",
+      "dsh_version": "0.2.2-rc.2",
+      "evidence_inventory_sha256": "f2a65da5c7f99b98ac0da43225e6642f6ae35930bc4ffda1413c08a4df75849f"
+    },
+    {
+      "path": "../deepseek_cl_bench/results/dsh-v41-manual-full",
+      "task": "blind_spectrum_monitoring",
+      "schedule": "default",
+      "dsh_version": "0.2.2-rc.2",
+      "evidence_inventory_sha256": "cba89d96b5fa7f583fe1caf7e9c8ba485bfa56e61f19461dd03884f87acb6289"
+    }
+  ]
+}
