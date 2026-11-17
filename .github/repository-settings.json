@@ -1,0 +1,46 @@
+{
+  "format_version": 1,
+  "repository": "hzher/Skill_RSI",
+  "purpose": "Desired configuration only. GitHub does not apply this file automatically.",
+  "apply_after": [
+    "Repository administrator authentication is available",
+    "The maintainer has published the initial master branch",
+    "Before enforcing required reviews, at least one other reviewer has accepted collaborator access"
+  ],
+  "settings": {
+    "description": "面向 Claude Code / Codex / DSH 的持续轨迹采集与 context/memory skills 迭代。",
+    "visibility": "private",
+    "default_branch": "master",
+    "has_issues": true,
+    "has_projects": true,
+    "has_wiki": false,
+    "allow_squash_merge": true,
+    "allow_merge_commit": false,
+    "allow_rebase_merge": false,
+    "allow_auto_merge": false,
+    "delete_branch_on_merge": false,
+    "allow_update_branch": true,
+    "squash_merge_commit_title": "PR_TITLE",
+    "squash_merge_commit_message": "PR_BODY"
+  },
+  "branch_protection": {
+    "branch": "master",
+    "required_status_checks": null,
+    "enforce_admins": true,
+    "required_pull_request_reviews": {
+      "dismiss_stale_reviews": true,
+      "require_code_owner_reviews": false,
+      "required_approving_review_count": 1
+    },
+    "restrictions": null,
+    "required_linear_history": true,
+    "required_conversation_resolution": true,
+    "allow_force_pushes": false,
+    "allow_deletions": false
+  },
+  "member_branches": {
+    "creation": "Members create their own branch after master is ready; do not pre-create branches or send invitations during initialization.",
+    "names": ["yangyang", "huangzhenghao", "zhaozilin", "xuyifan"],
+    "github_account_mapping": "Not confirmed; branch names must not be used as account identities."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "run_dir": "../runs/example",
+  "sequence": "example",
+  "benchmark": {
+    "kind": "manifest",
+    "manifest": "tasks.json",
+    "evaluator": {"kind": "json_exact", "expected_dir": "evaluator-data"}
+  },
+  "models": {
+    "executor": {"base_url": "https://your-gateway.example/v1", "model": "your-executor-model", "api_key_env": "EXECUTOR_API_KEY"},
+    "curator": {"base_url": "http://127.0.0.1:8000/v1", "model": "your-skill-manager", "api_key_env": "CURATOR_API_KEY"},
+    "judge": {"base_url": "https://your-gateway.example/v1", "model": "your-judge-model", "api_key_env": "JUDGE_API_KEY"}
+  },
+  "executor": {"backend": "openai-tools", "max_turns": 64, "wall_seconds": 900},
+  "curator": {"max_turns": 16, "wall_seconds": 900},
+  "seed_skills": ["seed-skills/aggregate-check.md"]
+}

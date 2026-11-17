@@ -1,0 +1,42 @@
+[
+  {
+    "source": "task2/common.py",
+    "source_commit": "20a469bcabf6c05a3fd96c541f25a51c6b7bf743",
+    "source_sha256": "75f08a0859cf6fb020f131c5815c020c9167227722fd105fd6f7cc96528e12dd",
+    "extracted_file": "skillrl/vendor/common.py",
+    "extracted_sha256": "75f08a0859cf6fb020f131c5815c020c9167227722fd105fd6f7cc96528e12dd",
+    "change": "byte identical"
+  },
+  {
+    "source": "task2/library.py",
+    "source_commit": "20a469bcabf6c05a3fd96c541f25a51c6b7bf743",
+    "source_sha256": "fb46e6389f59a9667a5e39dda0add1d749a791df984de0481dfa85e970b01f12",
+    "extracted_file": "skillrl/vendor/library_base.py",
+    "extracted_sha256": "a5aff4ea2d856dfc913c6e0dcc17d7f4ba95f1ffd7a8c97b89b2cd3fb97fe254",
+    "change": "package relative imports only"
+  },
+  {
+    "source": "skill_composition/library.py",
+    "source_commit": "20a469bcabf6c05a3fd96c541f25a51c6b7bf743",
+    "source_sha256": "9721d4375d40a8eb332394c8ec0140937bd2477687ed366c2f8797847b441e2a",
+    "extracted_file": "skillrl/vendor/library.py",
+    "extracted_sha256": "3e91331c572c15592059af2ad096c97f5bf25cf5eaecb598c4051ec7a335386a",
+    "change": "package relative imports only"
+  },
+  {
+    "source": "skill_composition/submit.py",
+    "source_commit": "20a469bcabf6c05a3fd96c541f25a51c6b7bf743",
+    "source_sha256": "5de328030114515b00da6456e85ce447b28c44ee7aa4e562adb0a3acc1ee7e39",
+    "extracted_file": "skillrl/vendor/submit.py",
+    "extracted_sha256": "5de328030114515b00da6456e85ce447b28c44ee7aa4e562adb0a3acc1ee7e39",
+    "change": "byte identical"
+  },
+  {
+    "source": "task2/a2o.py",
+    "source_commit": "20a469bcabf6c05a3fd96c541f25a51c6b7bf743",
+    "source_sha256": "5f40081d4a6b6087af77697e8534067a1f31afbfb30ca32572740f99382e1fd6",
+    "extracted_file": "skillrl/vendor/a2o.py",
+    "extracted_sha256": "5f40081d4a6b6087af77697e8534067a1f31afbfb30ca32572740f99382e1fd6",
+    "change": "byte identical"
+  }
+]

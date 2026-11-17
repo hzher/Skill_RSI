@@ -30,6 +30,8 @@ flowchart LR
 | 版本控制范围 | 代码、配置示例、环境声明、来源索引与 `docs/` 文档，`doc/`、数据和实验结果留在本地 |
 | 访问与保护规则 | 以 GitHub 实际设置为准，历史核对记录见 [仓库设置与状态](docs/REPOSITORY_SETTINGS.md) |
 
+`framework/` 提供可独立安装运行的 Skill RL 框架，包含源码、测试、接入配置、合成演示样例与技术文档。安装和使用方法见该目录的说明。[Skill RL 框架](framework/README.md)
+
 ## 使用流程
 
 ### 1. 冻结并导入 DSH 历史实验
@@ -103,7 +105,7 @@ python -m skill_discovery evaluate-validation --extraction <extraction-dir> \
 
 `protocol.json` 中的 `pairs` 指定各 `pair_id` 和 `task_name`，`targets` 逐任务冻结 `metric_name`、`direction`、`minimum_pairs` 和 `minimum_mean_delta`，并指定 `skill_id`、`version`、`scope` 和 `group_id`。结果 JSON 用同一个 `pair_id` 指定 `without`、`with` 两组各自的 `archive` 和 `run_id`。默认要求可查证的 Skill 采用证据。方案设置 `adoption_required: false` 时，结果评估提供该 Skill 后的效果，采用状态保持未知。
 
-CL-Bench 产物用于评测与研究分析，训练资格记为 `not_qualified`。2026-11-17 上传前已通过 Python 与插件语法检查、JSON 配置解析、CLI 帮助和环境预检。DSH、Claude Code、Codex 三类合成轨迹的 sealed/unsealed 构建、校验及重复构建共 6 组离线检查通过。真实模型 rollouts 和 teacher 提炼尚未在本次验收中运行。
+CL-Bench 产物用于评测与研究分析，训练资格记为 `not_qualified`。2026-11-17 上传前已通过 Python 与插件语法检查、JSON 配置解析、CLI 帮助和环境预检。DSH、Claude Code、Codex 三类合成轨迹的 sealed/unsealed 构建、校验及重复构建共 6 组离线检查通过。`framework/` 的 23 项回归测试和示例配置预检通过。真实模型 rollouts 和 teacher 提炼尚未在本次验收中运行。
 
 ## 分支约定
 
