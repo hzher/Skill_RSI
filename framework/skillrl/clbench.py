@@ -7,8 +7,10 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
+import tempfile
 from unittest.mock import patch
 
 from .environments import DockerEnvironment
@@ -17,12 +19,31 @@ from .messages import RecordingBridge
 from .storage import atomic, begin, seal
 
 
+class ResourceCleanupError(RuntimeError):
+    """An initialization failure left official task cleanup unconfirmed."""
+
+
 class CLBenchTask:
     def __init__(self, repository, family, index, network):
         sys.path.insert(0, str(Path(repository).resolve()))
         from src.registry import get_task_class
         self.task = get_task_class(family)(schedule="default")
         self.container_adaptations = []
+        try:
+            self._reset(family, index, network)
+        except Exception:
+            container = getattr(getattr(self.task, "_env", None), "container_id", None)
+            try:
+                try:
+                    self.close()
+                finally:
+                    if container:
+                        remove_owned_container(container)
+            except Exception as error:
+                raise ResourceCleanupError("Failed to close a partially initialized CL-Bench task") from error
+            raise
+
+    def _reset(self, family, index, network):
         if family in ("codebase_adaptation", "sales_prediction"):
             from minisweagent.environments.docker import DockerEnvironment as OfficialDockerEnvironment
 
@@ -75,6 +96,14 @@ class CLBenchTask:
         if connection:
             connection.close()
             self.task._conn = None
+        temporary = getattr(self.task, "_temp_db_path", None)
+        if temporary:
+            database = Path(temporary)
+            if (database.is_symlink() or database.parent.resolve() != Path(tempfile.gettempdir()).resolve()
+                    or database.suffix != ".db"):
+                raise ValueError("Unexpected native temporary database path")
+            database.unlink(missing_ok=True)
+            self.task._temp_db_path = None
         cleanup = getattr(self.task, "_cleanup_container", None)
         if cleanup:
             cleanup()
@@ -90,6 +119,22 @@ def docker(args, *, timeout=120, check=True):
     return result
 
 
+def remove_owned_container(container):
+    if not isinstance(container, str) or not re.fullmatch(r"[0-9a-f]{12,64}", container):
+        raise ValueError("Expected an official Docker container ID")
+    listing = ["ps", "-aq", "--no-trunc", "--filter", "id=" + container]
+    found = docker(listing).stdout.decode().split()
+    if not found:
+        return
+    if len(found) != 1 or not re.fullmatch(r"[0-9a-f]{64}", found[0]) or not found[0].startswith(container):
+        raise RuntimeError("Ambiguous owned Docker container ID")
+    # Native cleanup can finish asynchronously. Verify the final state even if
+    # it removed the same container between the listing and this command.
+    docker(["rm", "-f", found[0]], check=False)
+    if docker(listing).stdout.strip():
+        raise RuntimeError("Official task container removal was not confirmed")
+
+
 def capture_workspace(container, cwd, path):
     """Archive the official working directory before benchmark cleanup removes it."""
     destination = path / "workspace-final"
@@ -101,7 +146,13 @@ def capture_workspace(container, cwd, path):
     return result.returncode == 0
 
 
-def execute(config, family, index, output):
+def execute(config, family, index, output, *, task_id=None):
+    backend = config.get("backend", "claude")
+    if backend == "codex":
+        from .codex_chatgpt import execute as execute_codex
+        return execute_codex(config, family, index, output, task_id=task_id)
+    if backend != "claude":
+        raise ValueError("Unknown native backend")
     path = Path(output).resolve()
     intent = {"family": family, "index": index, "model": config["model"], "protocol": "native-mcp-v1", "configuration": config}
     cached = begin(path, intent)
@@ -216,6 +267,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     config = json.loads(args.config.read_text())
+    config["repository"] = str(Path(config["repository"]).resolve())
     output = args.output.resolve()
     with chdir(config["repository"]):
         result = execute(config, args.family, args.index, output)
