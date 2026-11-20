@@ -1,0 +1,13 @@
+{
+  "backend": "codex",
+  "auth_mode": "chatgpt",
+  "execution_mode": "stateful",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "max",
+  "benchmark_commit": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+  "protocol_commit": "abbf143a7ab75f01596eb5e0e638330889b6a77c",
+  "timeout": 900,
+  "min_free_bytes": 4294967296,
+  "repository": "/absolute/path/to/continual-learning-bench",
+  "cli": "codex"
+}

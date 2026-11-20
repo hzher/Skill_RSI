@@ -2,6 +2,8 @@
 
 面向 **Claude Code、Codex、DSH**，持续产生有效、可复用的 trajectory，并根据轨迹不断迭代有利于 **context/memory 管理的 skills**。
 
+**CL-Bench · Sol MAX Stateful** 在 301 题上取得 254 个原生成功（84.39%）。[查看三段历史运行源码、当前框架入口及同题 Fresh 对照](CLbench-Codex/6.1Sol-MAX-stateful/README.md)。
+
 ## 项目目标
 
 ```mermaid
@@ -31,7 +33,7 @@ flowchart LR
 | 项目说明与协作文件           | 以推送到 GitHub 的版本为团队依据                                                       |
 | 实现代码、训练脚本与实验数据 | 共享实现见 framework/；本个人分支另附旧基建交接，私有实验数据未导入                                                                               |
 | 主分支                       | 当前共同基线为 `master`，个人分支在其基础上工作                   |
-| 成员分支                     | 成员通过个人分支协作；本分支为 `sunchengze`                                                 |
+| 成员分支                     | 此交付分支为 `sunchengze-clbench-codex`，基于个人分支 `sunchengze` |
 | 访问与保护规则               | 见[仓库设置与状态](docs/REPOSITORY_SETTINGS.md)，不能把本文约定当成已生效的 GitHub 权限 |
 
 初版主代码已进入共享 `master` 基线。下面的命令以该分支为协作基础。
