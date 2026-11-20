@@ -1,6 +1,5 @@
 import json
 import os
-import shutil
 from pathlib import Path
 import tempfile
 from types import SimpleNamespace
@@ -46,7 +45,7 @@ class CodexTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             cli = root / "codex"
-            shutil.copyfile(SCRIPTED_CLI, cli)
+            cli.write_text(SCRIPTED_CLI.read_text(encoding="utf-8"), encoding="utf-8", newline="\n")
             cli.chmod(0o755)
             config = {"cli": str(cli), "model": "fixture", "repository": str(root), "network": "unused"}
             path = root / "run"
