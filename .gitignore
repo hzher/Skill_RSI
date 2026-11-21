@@ -49,3 +49,11 @@ __pycache__/
 
 # Node dependencies, for future development
 node_modules/
+
+# Keep local documentation, traces, skills, examples and tests out of uploads
+/docs/
+/trace/
+/skills/
+/framework/docs/
+/framework/examples/
+/framework/tests/
