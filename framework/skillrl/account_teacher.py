@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import subprocess
 import tempfile
+import time
 
 from .storage import atomic, load
 
@@ -97,7 +98,7 @@ class AccountTeacher:
                         'model_providers.openai_account_https={name="OpenAI account HTTPS",'
                         'base_url="https://chatgpt.com/backend-api/codex",requires_openai_auth=true,'
                         'supports_websockets=false,wire_api="responses",request_max_retries=2,'
-                        'stream_max_retries=2,stream_idle_timeout_ms=180000}']
+                        'stream_max_retries=2,stream_idle_timeout_ms=600000}']
                 atomic(stage / 'request.json', {'argv': command,
                     'messages': messages,
                     'prompt_sha256': hashlib.sha256(text.encode()).hexdigest(),
@@ -112,6 +113,22 @@ class AccountTeacher:
                         code = 124
                 atomic(stage / 'exit.json', {'exit_code': code})
             if code:
+                diagnostics = ((stage / 'native.jsonl').read_text(errors='replace') + '\n' +
+                               (stage / 'stderr.txt').read_text(errors='replace')).lower()
+                terminal = any(marker in diagnostics for marker in (
+                    'usage limit', 'usage_limit', 'quota', 'unauthorized', 'invalid_token',
+                    'authentication failed', 'rate_limit', 'rate limit'))
+                network = code == 124 or any(marker in diagnostics for marker in (
+                    'request timed out', 'connection failed', 'connection reset',
+                    'stream disconnected', 'network error', 'idle timeout'))
+                if network and not terminal and ordinal < first + 2:
+                    atomic(stage / 'retry-reason.json', {'kind': 'native_account_transport',
+                        'exit_code': code, 'next_ordinal': ordinal + 1, 'api_fallback_allowed': False})
+                    print(json.dumps({'event': 'teacher_transport_retry', 'batch': name,
+                                      'failed_ordinal': ordinal}), flush=True)
+                    resumed_text = text
+                    time.sleep(10)
+                    continue
                 raise RuntimeError(f'Native account teacher failed ({code}); retained at {stage}; no API fallback')
             events = [json.loads(line) for line in (stage / 'native.jsonl').read_text().splitlines() if line.startswith('{')]
             if any(e.get('type') == 'item.completed' and e.get('item', {}).get('type') not in ('agent_message', 'reasoning', 'error') for e in events):
