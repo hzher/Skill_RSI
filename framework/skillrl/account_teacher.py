@@ -60,10 +60,24 @@ class AccountTeacher:
         attempts = self.root / 'native-account' / name
         attempts.mkdir(parents=True, exist_ok=True)
         first = max([int(p.name) + 1 for p in attempts.iterdir() if p.is_dir() and p.name.isdigit()] + [0])
+        resumed_text = None
+        if first:
+            prior = attempts / f'{first - 1:03d}'
+            if (prior / 'exit.json').exists() and load(prior / 'exit.json')['exit_code'] != 0:
+                request = load(prior / 'request.json')
+                if 'messages' in request:
+                    messages = request['messages']
+                else:
+                    # Preserve the exact unfinished public request on resume,
+                    # including earlier readback already supplied to the CLI.
+                    resumed_text = (prior / 'prompt.txt').read_text()
+                    messages = [{'role': 'user', 'content': resumed_text}]
         for ordinal in range(first, first + 3):
             stage = attempts / f'{ordinal:03d}'
             stage.mkdir()
-            text = '\n\n'.join(m['role'].upper() + ':\n' + m['content'] for m in messages)
+            text = resumed_text if resumed_text is not None else '\n\n'.join(
+                m['role'].upper() + ':\n' + m['content'] for m in messages)
+            resumed_text = None
             (stage / 'prompt.txt').write_text(text)
             with tempfile.TemporaryDirectory(prefix='astra-skill-teacher-') as cwd:
                 command = ['codex', 'exec', '--ignore-user-config', '--ignore-rules',
@@ -74,6 +88,7 @@ class AccountTeacher:
                     '-c', 'web_search="disabled"',
                     '-o', str(stage / 'final.txt'), '-']
                 atomic(stage / 'request.json', {'argv': command,
+                    'messages': messages,
                     'prompt_sha256': hashlib.sha256(text.encode()).hexdigest(),
                     'allowed_source_ids': sorted(allowed), 'provider': 'openai',
                     'requested_model': 'gpt-6-astra', 'api_fallback_allowed': False})
@@ -88,7 +103,7 @@ class AccountTeacher:
             if code:
                 raise RuntimeError(f'Native account teacher failed ({code}); retained at {stage}; no API fallback')
             events = [json.loads(line) for line in (stage / 'native.jsonl').read_text().splitlines() if line.startswith('{')]
-            if any(e.get('type') == 'item.completed' and e.get('item', {}).get('type') not in ('agent_message', 'reasoning') for e in events):
+            if any(e.get('type') == 'item.completed' and e.get('item', {}).get('type') not in ('agent_message', 'reasoning', 'error') for e in events):
                 raise RuntimeError('Text-only teacher unexpectedly used tools; inspect ' + str(stage))
             usage = next((e['usage'] for e in reversed(events) if e.get('type') == 'turn.completed'), None)
             content = (stage / 'final.txt').read_text().strip()
