@@ -27,9 +27,11 @@ def account_environment():
 
 
 class AccountTeacher:
-    def __init__(self, root, prompt, plan, timeout, validate):
+    def __init__(self, root, prompt, plan, timeout, validate, https_only=False):
         self.root, self.prompt, self.plan = root, prompt, plan
         self.timeout, self.validate = timeout, validate
+        self.https_only = https_only
+        self.provider = 'openai_account_https' if https_only else 'openai'
         self.env, self.removed = account_environment()
         status = subprocess.run(['codex', 'login', 'status'], env=self.env,
                                 capture_output=True, text=True, timeout=30)
@@ -38,7 +40,8 @@ class AccountTeacher:
         atomic(root / 'account-auth-receipt.json', {
             'login_status': (status.stdout + status.stderr).strip(),
             'cli_version': subprocess.check_output(['codex', '--version'], text=True).strip(),
-            'provider': 'openai', 'requested_model': 'gpt-6-astra',
+            'provider': self.provider, 'requested_model': 'gpt-6-astra',
+            'transport': 'https-sse' if https_only else 'native-default',
             'api_fallback_allowed': False, 'credentials_read_or_copied': False,
             'removed_environment_variable_names': self.removed,
             'model_identity_evidence': 'exact CLI model selection; CLI JSON does not report response model'})
@@ -87,10 +90,18 @@ class AccountTeacher:
                     '-c', 'features.shell_tool=false', '-c', 'features.multi_agent=false',
                     '-c', 'web_search="disabled"',
                     '-o', str(stage / 'final.txt'), '-']
+                provider = getattr(self, 'provider', 'openai')
+                if getattr(self, 'https_only', False):
+                    command[command.index('model_provider="openai"')] = 'model_provider="openai_account_https"'
+                    command[-1:-1] = ['-c',
+                        'model_providers.openai_account_https={name="OpenAI account HTTPS",'
+                        'base_url="https://chatgpt.com/backend-api/codex",requires_openai_auth=true,'
+                        'supports_websockets=false,wire_api="responses",request_max_retries=2,'
+                        'stream_max_retries=2,stream_idle_timeout_ms=180000}']
                 atomic(stage / 'request.json', {'argv': command,
                     'messages': messages,
                     'prompt_sha256': hashlib.sha256(text.encode()).hexdigest(),
-                    'allowed_source_ids': sorted(allowed), 'provider': 'openai',
+                    'allowed_source_ids': sorted(allowed), 'provider': provider,
                     'requested_model': 'gpt-6-astra', 'api_fallback_allowed': False})
                 with (stage / 'native.jsonl').open('w') as out, (stage / 'stderr.txt').open('w') as err:
                     try:
@@ -127,7 +138,7 @@ class AccountTeacher:
             atomic(self.root / 'coverage' / (name + '.json'), {
                 'response_complete': True, 'source_ids': sorted(allowed), 'usage': usage,
                 'requested_model': 'gpt-6-astra', 'reported_model': None,
-                'provider': 'openai', 'auth': 'existing ChatGPT account',
+                'provider': provider, 'auth': 'existing ChatGPT account',
                 'prompt_sha256': hashlib.sha256(text.encode()).hexdigest(), 'native_attempt': str(stage)})
             print(json.dumps({'event': 'teacher_completed', 'batch': name, 'skills': len(value['skills'])}), flush=True)
             return value

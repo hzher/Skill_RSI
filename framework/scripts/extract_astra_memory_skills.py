@@ -270,6 +270,8 @@ def main():
     parser.add_argument('--workers', type=int, default=4)
     parser.add_argument('--timeout', type=int, default=1200)
     parser.add_argument('--teacher-backend', choices=('api', 'codex-account'), default='codex-account')
+    parser.add_argument('--account-https-only', action='store_true',
+                        help='Use native account auth over HTTPS to the official Codex endpoint')
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     prompt = args.prompt.read_text()
@@ -286,7 +288,8 @@ def main():
         from skillrl.account_teacher import AccountTeacher
         class NativeExtractor(AccountTeacher, Extractor):
             pass
-        NativeExtractor(args.output.resolve(), prompt, plan, args.timeout, validate).run(args.workers)
+        NativeExtractor(args.output.resolve(), prompt, plan, args.timeout, validate,
+                        https_only=args.account_https_only).run(args.workers)
     else:
         Extractor(args.output.resolve(), prompt, plan, args.timeout).run(args.workers)
 
