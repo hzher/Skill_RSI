@@ -2,6 +2,7 @@
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import json
+import hashlib
 import os
 import signal
 import subprocess
@@ -108,7 +109,7 @@ class ResponsesRecorder:
 
 
 class CodexExecutor:
-    def __init__(self, model, *, cli='codex', timeout=600, reasoning_effort='medium', execution_policy='legacy', mcp_module='skillrl.codex_mcp'):
+    def __init__(self, model, *, cli='codex', timeout=600, reasoning_effort='medium', execution_policy='legacy', mcp_module='skillrl.codex_mcp', static_context_skills=None):
         if mcp_module not in ('skillrl.codex_mcp', 'skillrl.bounded_mcp'):
             raise ValueError('Unknown benchmark MCP transport module')
         self.mcp_module = mcp_module
@@ -116,11 +117,30 @@ class CodexExecutor:
         self.execution_guidance = reliability_guidance(execution_policy)
         self.execution_policy = execution_policy
         self.model, self.cli, self.timeout, self.reasoning_effort = model, cli, timeout, reasoning_effort
+        self.static_context_skills = json.loads(json.dumps(static_context_skills or []))
+        seen = set()
+        for skill in self.static_context_skills:
+            if set(skill) != {'id', 'name', 'content', 'sha256'} or skill['id'] in seen:
+                raise ValueError('Invalid or duplicate static context skill')
+            if not all(isinstance(v, str) and v for v in skill.values()):
+                raise ValueError('Static context skill fields must be nonempty text')
+            if hashlib.sha256(skill['content'].encode()).hexdigest() != skill['sha256']:
+                raise ValueError('Static context skill hash mismatch')
+            seen.add(skill['id'])
+
+    def static_context(self):
+        if not self.static_context_skills:
+            return ''
+        return ('\n\nOptional general context/memory procedures (static reference only; '
+                'current task instructions and tool permissions take precedence; '
+                'this text is not a Skill tool read or historical authorization):\n' +
+                '\n\n'.join(s['content'] for s in self.static_context_skills))
 
     def settings(self):
         return {'backend': 'codex', 'model': self.model.settings(), 'cli': self.cli,
                 'timeout': self.timeout, 'reasoning_effort': self.reasoning_effort,
-                'execution_policy': self.execution_policy, 'mcp_module': self.mcp_module}
+                'execution_policy': self.execution_policy, 'mcp_module': self.mcp_module,
+                **({'static_context_skills': self.static_context_skills} if self.static_context_skills else {})}
 
     def execute(self, task, environment, snapshot, path):
         path = Path(path).resolve()
@@ -155,7 +175,7 @@ class CodexExecutor:
                   'Do not persist one-off task content as a global rule. '
                   'Report only actions actually performed.\n' + self.execution_guidance + '\n' + task.instruction +
                   '\n\nDurable memory available to this session:\n' + json.dumps(injected_memory, ensure_ascii=False) +
-                  '\n\nOptional skill catalog:\n' + json.dumps(catalog, ensure_ascii=False))
+                  '\n\nOptional skill catalog:\n' + json.dumps(catalog, ensure_ascii=False) + self.static_context())
         atomic(path / 'prompt.json', {'prompt': prompt})
         home = path / 'codex-home'
         home.mkdir(mode=0o700)
@@ -215,6 +235,8 @@ class CodexExecutor:
                   'persistence_flags': flags, 'memory_injected': injected_memory, 'memory_before': memory_before,
                   'memory_after': load(environment.memory_path) if environment.memory_path.exists() else [],
                   'wall_seconds': time.monotonic() - started}
+        if self.static_context_skills:
+            record['static_context_skills'] = self.static_context_skills
         if capability:
             record['skill_write_capability'] = capability
         atomic(path / 'events.json', events)

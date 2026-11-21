@@ -1,2 +1,0 @@
-family,category,attempted,execution_complete,pipeline_complete,passed,failed,unknown,skill_reads,memory_writes,session_searches,mean_task_score
-proactive_information_gathering/PG01_release_decision_followup,proactive_information_gathering,8,8,8,8,0,0,4,0,26,1.0

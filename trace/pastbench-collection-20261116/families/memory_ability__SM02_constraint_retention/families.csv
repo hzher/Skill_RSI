@@ -1,2 +1,0 @@
-family,category,attempted,execution_complete,pipeline_complete,passed,failed,unknown,skill_reads,memory_writes,session_searches,mean_task_score
-memory_ability/SM02_constraint_retention,memory_ability,8,8,8,4,4,0,0,1,0,0.9016624999999999

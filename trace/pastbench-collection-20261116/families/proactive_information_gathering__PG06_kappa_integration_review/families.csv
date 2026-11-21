@@ -1,2 +1,0 @@
-family,category,attempted,execution_complete,pipeline_complete,passed,failed,unknown,skill_reads,memory_writes,session_searches,mean_task_score
-proactive_information_gathering/PG06_kappa_integration_review,proactive_information_gathering,8,8,7,8,0,0,8,1,36,1.0

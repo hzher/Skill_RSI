@@ -1,2 +1,0 @@
-family,category,attempted,execution_complete,pipeline_complete,passed,failed,unknown,skill_reads,memory_writes,session_searches,mean_task_score
-memory_ability/EP01_prior_case_recall,memory_ability,8,8,8,6,2,0,0,0,10,0.914275

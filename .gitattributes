@@ -3,6 +3,3 @@
 *.json text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
-
-# Published evidence must retain exact bytes for its SHA256 manifest.
-trace/** -text
