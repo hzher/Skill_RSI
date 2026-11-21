@@ -54,7 +54,10 @@ def validate(value, allowed):
 
 
 def markdown(skill):
-    lines = ['# ' + skill['name'], '', skill['mechanism']]
+    description = skill['name'] + '；' + '；'.join(skill['triggers_and_preconditions'])
+    lines = ['---', 'name: ' + skill['id'],
+             'description: ' + json.dumps(description, ensure_ascii=False), '---', '',
+             '# ' + skill['name'], '', skill['mechanism']]
     for field, title in [('triggers_and_preconditions', '触发与前提'), ('procedure', '操作步骤'),
                          ('verification', '核验'), ('failure_recovery', '失败恢复'),
                          ('do_not_use_when', '不适用情形')]:
@@ -102,6 +105,7 @@ def prepare(source, root, prompt_file, chunk_chars):
                 sources[sid] = {'family': family, 'task_id': task, 'trace': index['trace'],
                     'trace_sha256': file_sha(trace), 'archive': str(archive.relative_to(source)),
                     'passed_label': 'passed' if index['score'] == 1 else 'failed' if index['score'] == 0 else 'unscored',
+                    'continuous_reward': index.get('reward'),
                     'events': len(execution['events']), 'units': []}
                 sources[sid]['actual_initial_prompt_available'] = prompt is not None
                 for label, body in parts:
@@ -265,6 +269,7 @@ def main():
     parser.add_argument('--prompt', type=Path, required=True)
     parser.add_argument('--workers', type=int, default=4)
     parser.add_argument('--timeout', type=int, default=1200)
+    parser.add_argument('--teacher-backend', choices=('api', 'codex-account'), default='codex-account')
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     prompt = args.prompt.read_text()
@@ -277,7 +282,13 @@ def main():
                 raise ValueError('Source changed')
     else:
         plan = prepare(args.source.resolve(), args.output.resolve(), args.prompt, 40000)
-    Extractor(args.output.resolve(), prompt, plan, args.timeout).run(args.workers)
+    if args.teacher_backend == 'codex-account':
+        from skillrl.account_teacher import AccountTeacher
+        class NativeExtractor(AccountTeacher, Extractor):
+            pass
+        NativeExtractor(args.output.resolve(), prompt, plan, args.timeout, validate).run(args.workers)
+    else:
+        Extractor(args.output.resolve(), prompt, plan, args.timeout).run(args.workers)
 
 
 if __name__ == '__main__':
