@@ -11,7 +11,7 @@ class ModelError(RuntimeError):
     pass
 
 class HTTPModel:
-    def __init__(self, base_url, model, api_key_env, *, timeout=120, max_tokens=8192):
+    def __init__(self, base_url, model, api_key_env, *, timeout=120, max_tokens=8192, transport=None):
         parsed = urlsplit(base_url)
         if parsed.scheme not in ('http', 'https') or not parsed.hostname or parsed.username or parsed.password or parsed.query:
             raise ValueError('Use an HTTP base URL without embedded credentials or query')
@@ -20,6 +20,7 @@ class HTTPModel:
         self.api_key_env = api_key_env
         self.timeout = timeout
         self.max_tokens = max_tokens
+        self.transport = transport
 
     def call(self, messages, tools, path, *, token_limit=None, timeout_limit=None):
         payload = {'model': self.model, 'messages': messages, 'temperature': 0,
@@ -38,12 +39,17 @@ class HTTPModel:
         request = urllib.request.Request(url, json.dumps(payload).encode(), headers={
             'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json'})
         try:
-            with urllib.request.urlopen(request, timeout=min(self.timeout, timeout_limit) if timeout_limit is not None else self.timeout) as response:
-                raw = response.read(16 * 1024 * 1024 + 1)
-                if len(raw) > 16 * 1024 * 1024:
-                    raise ModelError('Response exceeds declared byte budget')
-                (path / 'response.raw').write_bytes(raw)
-                body = json.loads(raw)
+            limit = min(self.timeout, timeout_limit) if timeout_limit is not None else self.timeout
+            if self.transport:
+                from .transport import buffered_request
+                raw, _ = buffered_request(request, path, timeout=limit, options=self.transport, secret=key)
+            else:
+                with urllib.request.urlopen(request, timeout=limit) as response:
+                    raw = response.read(16 * 1024 * 1024 + 1)
+            if len(raw) > 16 * 1024 * 1024:
+                raise ModelError('Response exceeds declared byte budget')
+            (path / 'response.raw').write_bytes(raw)
+            body = json.loads(raw)
             choice = body['choices'][0]
             if choice.get('finish_reason') not in ('stop', 'tool_calls'):
                 raise ModelError('Complete response has unsupported finish reason ' + str(choice.get('finish_reason')))
@@ -76,7 +82,8 @@ class HTTPModel:
 
     def settings(self):
         return {'base_url': self.base_url, 'model': self.model, 'api_key_env': self.api_key_env,
-                'timeout': self.timeout, 'max_tokens': self.max_tokens}
+                'timeout': self.timeout, 'max_tokens': self.max_tokens,
+                **({'transport': self.transport} if self.transport else {})}
 
 def tool(name, description, properties, required):
     return {'type': 'function', 'function': {'name': name, 'description': description,
