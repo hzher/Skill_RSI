@@ -1,0 +1,19 @@
+{
+  "version": "1",
+  "fields": {
+    "project_id": "project",
+    "native_session_id": "session",
+    "run_id": "run",
+    "lineage_id": "lineage",
+    "task_name": "task",
+    "seq": "seq",
+    "type": "kind",
+    "timestamp": "when"
+  },
+  "types": {
+    "resume": "session_resume",
+    "check": "constraint_use",
+    "completed": "run_finished"
+  },
+  "sequence_is_identity": true
+}
