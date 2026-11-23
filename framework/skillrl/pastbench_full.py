@@ -410,6 +410,8 @@ def inherit(parent, root):
 
 
 def run_full_family(source, family, config, output, *, continue_on_error=True):
+    from .plugins import executor_options
+    codex_options = executor_options(config)
     import yaml
     from .pipeline import Pipeline
     from .codex import CodexExecutor
@@ -464,7 +466,7 @@ def run_full_family(source, family, config, output, *, continue_on_error=True):
                                        context_limit=config['reviewer_context_limit'])
         else:
             reviewer = Reviewer(models['judge'], action_tools=action_tools)
-        pipeline = Pipeline(root, benchmark, CodexExecutor(models['executor'], **config.get('codex', {})),
+        pipeline = Pipeline(root, benchmark, CodexExecutor(models['executor'], **codex_options),
             Curator(models['curator'], **config.get('curator', {})),
             reviewer, sequence=family_doc['family_id'])
         try:

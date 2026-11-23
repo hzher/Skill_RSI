@@ -17,6 +17,8 @@ Thumbs.db
 secrets/
 .local/
 .runtime/
+upstream/
+framework/runs/
 
 # Raw data, experiment outputs and model artifacts
 data/raw/
@@ -50,10 +52,22 @@ __pycache__/
 # Node dependencies, for future development
 node_modules/
 
-# Keep local documentation, traces, skills, examples and tests out of uploads
+# Local documentation, experiments and verification stay outside code releases
+/codex/
 /docs/
 /trace/
+/traces/
 /skills/
+/reports/
+/results/
+/evidence/
 /framework/docs/
 /framework/examples/
 /framework/tests/
+/framework/reports/
+/framework/runs/
+/framework/results/
+/framework/evidence/
+*.log
+.coverage
+htmlcov/

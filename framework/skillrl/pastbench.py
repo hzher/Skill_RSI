@@ -190,6 +190,8 @@ class PastBenchmark:
 
 
 def run_family(source, family, config, output):
+    from .plugins import executor_options
+    codex_options = executor_options(config)
     import yaml
     from .pipeline import Pipeline
     from .codex import CodexExecutor
@@ -228,7 +230,7 @@ def run_family(source, family, config, output):
                     if parent_memory.exists():
                         shutil.copyfile(parent_memory, root / 'memory.json')
             bench = PastBenchmark(source, family_path / name, public)
-            pipeline = Pipeline(root, bench, CodexExecutor(models['executor'], **config.get('codex', {})),
+            pipeline = Pipeline(root, bench, CodexExecutor(models['executor'], **codex_options),
                 Curator(models['curator'], **config.get('curator', {})),
                 Reviewer(models['judge'], action_tools=[t.name for t in bench.definition.tools if
                     any(x in t.name for x in ('share', 'update', 'create', 'send'))]), sequence=sequence)

@@ -10,6 +10,29 @@ from pathlib import Path
 import subprocess
 import tempfile
 import time
+from contextlib import contextmanager
+
+
+@contextmanager
+def isolated_account_home(env, enabled=True):
+    """Reuse native auth without importing personal skills/config into experiments."""
+    if not enabled:
+        yield
+        return
+    auth = Path(os.environ.get('CODEX_HOME', str(Path.home() / '.codex'))) / 'auth.json'
+    if not auth.is_file():
+        raise RuntimeError('Native account auth.json unavailable; no API fallback')
+    with tempfile.TemporaryDirectory(prefix='skillrl-account-home-') as directory:
+        (Path(directory) / 'auth.json').symlink_to(auth.resolve())
+        old = env.get('CODEX_HOME')
+        env['CODEX_HOME'] = directory
+        try:
+            yield
+        finally:
+            if old is None:
+                env.pop('CODEX_HOME', None)
+            else:
+                env['CODEX_HOME'] = old
 
 from .storage import atomic, load
 

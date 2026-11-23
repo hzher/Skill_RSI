@@ -49,11 +49,17 @@ def build(config, base):
             options['images'] = bench.get('images')
         benchmark = cls(location(bench['manifest']), **options)
     models = {role: HTTPModel(**options) for role, options in config['models'].items()}
-    execution = config.get('executor', {})
+    from .plugins import executor_options
+    execution = executor_options(config, 'executor')
     backend = execution.get('backend', 'openai-tools')
     options = {key: value for key, value in execution.items() if key != 'backend'}
     if backend not in ('claude-code', 'openai-tools', 'codex'):
         raise ValueError('Unknown executor backend')
+    if backend != 'codex':
+        if options.get('runtime_plugins') and options.get('plugin_harness_enabled',True):
+            raise ValueError('Runtime plugin harness requires the codex backend; disable it explicitly for other backends')
+        options.pop('runtime_plugins',None)
+        options.pop('plugin_harness_enabled',None)
     executor_class = {'claude-code': ClaudeCodeExecutor, 'openai-tools': ToolExecutor, 'codex': CodexExecutor}[backend]
     executor = executor_class(models['executor'], **options)
     return Pipeline(root, benchmark, executor, Curator(models['curator'], **config.get('curator', {})),

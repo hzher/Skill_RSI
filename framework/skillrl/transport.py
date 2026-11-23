@@ -14,7 +14,9 @@ class IncompleteStream(ConnectionError):
 
 
 class TemporaryProviderError(ConnectionError):
-    pass
+    def __init__(self, message, retry_after=None):
+        super().__init__(message)
+        self.retry_after = retry_after
 
 
 def buffered_request(request, path, *, timeout, options, secret='', responses=False):
@@ -24,14 +26,18 @@ def buffered_request(request, path, *, timeout, options, secret='', responses=Fa
     if not 1 <= attempts <= 30:
         raise ValueError('Transport max_attempts outside 1..30')
     deadline = time.monotonic() + min(float(options.get('max_elapsed', 480)), timeout)
-    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    use_proxy = options.get('use_environment_proxy', False)
+    if not isinstance(use_proxy, bool):
+        raise ValueError('use_environment_proxy must be boolean')
+    route = 'environment_proxy' if use_proxy else 'direct'
+    opener = urllib.request.build_opener() if use_proxy else urllib.request.build_opener(urllib.request.ProxyHandler({}))
     started = time.monotonic()
     for index in range(attempts):
         target = root / f'{index:04d}'
         target.mkdir(parents=True, exist_ok=False)
         atomic(target / 'request.json', {'url': request.full_url, 'method': request.get_method(),
             'body_sha256': hashlib.sha256(request.data or b'').hexdigest(),
-            'route': 'direct; environment proxies disabled', 'ordinal': index})
+            'route': route, 'ordinal': index})
         try:
             remaining = deadline - time.monotonic()
             if remaining <= 0:
@@ -61,16 +67,23 @@ def buffered_request(request, path, *, timeout, options, secret='', responses=Fa
                     for event in events:
                         if event.get('type') not in ('response.failed', 'response.incomplete'):
                             continue
-                        code = (event.get('response', {}).get('error') or {}).get('code')
-                        if code in ('upstream_error', 'upstream_stream_break', 'server_error', 'rate_limit_exceeded', 'temporarily_unavailable'):
-                            raise TemporaryProviderError('Provider temporary SSE error: ' + code)
+                        error_info = event.get('response', {}).get('error') or {}
+                        code = error_info.get('code')
+                        if code in ('upstream_error', 'upstream_stream_break', 'server_error', 'rate_limit_exceeded', 'temporarily_unavailable', 'server_is_overloaded', 'service_unavailable'):
+                            headers = error_info.get('headers') or {}
+                            retry_after = None
+                            try:
+                                retry_after = max(0, float(headers['retry-after'])) if 'retry-after' in headers else max(0, float(headers['retry-after-ms']) / 1000) if 'retry-after-ms' in headers else None
+                            except (ValueError, TypeError):
+                                pass
+                            raise TemporaryProviderError('Provider temporary SSE error: ' + code, retry_after)
                         raise ValueError('Provider returned a terminal unsuccessful response')
                     if not any(e.get('type') == 'response.completed' for e in events):
                         raise IncompleteStream('SSE ended without response.completed')
                 atomic(target / 'result.json', {'status': response.status, 'bytes': len(raw),
                     'response_sha256': hashlib.sha256(raw).hexdigest(), 'elapsed': time.monotonic() - started})
                 atomic(Path(path) / 'transport-summary.json', {'physical_attempts': index + 1,
-                    'recovered_errors': index, 'selected_attempt': index, 'route': 'direct',
+                    'recovered_errors': index, 'selected_attempt': index, 'route': route,
                     'prior_attempt_costs_unknown': bool(index), 'buffered_before_delivery': True})
                 return raw, content_type
         except Exception as error:
@@ -82,11 +95,20 @@ def buffered_request(request, path, *, timeout, options, secret='', responses=Fa
                 message = message.replace(secret, '[REDACTED]')
             receipt = {'kind': type(error).__name__, 'message': message[:1200],
                        'status': status, 'transient': transient, 'attempt': index}
+            if isinstance(error, TemporaryProviderError) and error.retry_after is not None:
+                receipt['retry_after_seconds'] = error.retry_after
             atomic(target / 'failure.json', receipt)
             delay = min(float(options.get('initial_delay', 2)) * 2 ** index, 30)
+            if isinstance(error, TemporaryProviderError) and error.retry_after is not None:
+                delay = max(delay, error.retry_after)
             if not transient or index + 1 >= attempts or time.monotonic() + delay >= deadline:
                 atomic(Path(path) / 'transport-exhausted.json', receipt)
                 raise
             if isinstance(error, urllib.error.HTTPError):
                 error.close()
-            time.sleep(delay)
+            # Keep each wait interruptible and bounded; never retry before the
+            # provider's requested recovery time or beyond the original budget.
+            while delay > 0:
+                chunk = min(30, delay)
+                time.sleep(chunk)
+                delay -= chunk

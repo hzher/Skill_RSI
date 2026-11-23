@@ -11,7 +11,12 @@ class ModelError(RuntimeError):
     pass
 
 class HTTPModel:
-    def __init__(self, base_url, model, api_key_env, *, timeout=120, max_tokens=8192, transport=None):
+    def __init__(self, base_url, model, api_key_env, *, timeout=120, max_tokens=8192, transport=None, auth_mode='api_key'):
+        if auth_mode not in ('api_key', 'chatgpt_account'):
+            raise ValueError('Unknown authentication mode')
+        if auth_mode == 'chatgpt_account' and base_url != 'https://chatgpt.com/backend-api/codex':
+            raise ValueError('Account authentication requires the account endpoint')
+        self.auth_mode = auth_mode
         parsed = urlsplit(base_url)
         if parsed.scheme not in ('http', 'https') or not parsed.hostname or parsed.username or parsed.password or parsed.query:
             raise ValueError('Use an HTTP base URL without embedded credentials or query')
@@ -23,6 +28,9 @@ class HTTPModel:
         self.transport = transport
 
     def call(self, messages, tools, path, *, token_limit=None, timeout_limit=None):
+        if self.auth_mode == 'chatgpt_account':
+            from .account_model import account_call
+            return account_call(self, messages, tools, path, timeout_limit=timeout_limit)
         payload = {'model': self.model, 'messages': messages, 'temperature': 0,
                    'max_tokens': min(self.max_tokens, token_limit) if token_limit is not None else self.max_tokens, 'stream': False}
         if tools:
@@ -82,6 +90,7 @@ class HTTPModel:
 
     def settings(self):
         return {'base_url': self.base_url, 'model': self.model, 'api_key_env': self.api_key_env,
+                **({'auth_mode': self.auth_mode} if self.auth_mode != 'api_key' else {}),
                 'timeout': self.timeout, 'max_tokens': self.max_tokens,
                 **({'transport': self.transport} if self.transport else {})}
 
