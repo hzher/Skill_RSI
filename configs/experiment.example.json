@@ -1,0 +1,85 @@
+{
+  "protocol_id": "heldout-sum",
+  "conditions": {
+    "native": {
+      "baseline": "native"
+    },
+    "adapter_only": {},
+    "fixed_mask": {
+      "components": [
+        {
+          "component_id": "tool-result-view",
+          "version": "1.0.0",
+          "options": {
+            "projection": "fixed"
+          }
+        }
+      ]
+    },
+    "model_tools": {
+      "baseline": "model_tools"
+    },
+    "automatic_view": {
+      "components": [
+        {
+          "component_id": "tool-result-view",
+          "version": "1.0.0"
+        }
+      ]
+    }
+  },
+  "pairs": [
+    {
+      "pair_id": "sum-seed-42",
+      "task_id": "sum-1",
+      "lineage_id": "sum-held-out",
+      "host": "dsh",
+      "host_version": "replace with the version returned by doctor",
+      "model": "replace with the native host model",
+      "scorer_version": "workspace@replace-with-benchmark-fingerprint",
+      "seed": 42
+    }
+  ],
+  "budget": {
+    "max_steps": 16,
+    "wall_seconds": 300
+  },
+  "comparisons": [
+    {
+      "control": "adapter_only",
+      "treatment": "automatic_view",
+      "primary": "reward",
+      "minimum_pairs": 1,
+      "metrics": {
+        "reward": {
+          "direction": "higher",
+          "minimum_mean_delta": 0.05
+        }
+      }
+    },
+    {
+      "control": "fixed_mask",
+      "treatment": "automatic_view",
+      "primary": "reward",
+      "minimum_pairs": 1,
+      "metrics": {
+        "reward": {
+          "direction": "higher",
+          "minimum_mean_delta": 0.05
+        }
+      }
+    },
+    {
+      "control": "model_tools",
+      "treatment": "automatic_view",
+      "primary": "reward",
+      "minimum_pairs": 1,
+      "metrics": {
+        "reward": {
+          "direction": "higher",
+          "minimum_mean_delta": 0.05
+        }
+      }
+    }
+  ]
+}

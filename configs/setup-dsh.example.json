@@ -1,0 +1,8 @@
+{
+  "host": "dsh",
+  "profile": "sdk",
+  "constraints": [
+    {"source_path": "schema.json", "object_id": "latency", "field": "unit", "pointer": "/latency/unit"}
+  ],
+  "mcp_paths": ["schema.json"]
+}

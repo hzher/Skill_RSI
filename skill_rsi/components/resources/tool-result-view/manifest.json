@@ -1,0 +1,25 @@
+{
+  "schema": "skill-rsi.component.v1",
+  "component_id": "tool-result-view",
+  "version": "1.0.0",
+  "form": "plugin",
+  "engine": "python",
+  "entrypoint": "payload/policy.py",
+  "required_capabilities": {
+    "apply": ["replace_tool_result", "retrieve_original"],
+    "suggest": ["suggest"],
+    "shadow": []
+  },
+  "scope": {
+    "hosts": ["dsh", "claude_code", "codex"],
+    "modes": ["shadow", "suggest", "apply"]
+  },
+  "trigger": {"boundaries": ["tool_result", "mcp_tool_result"]},
+  "action": {"kind": "replace_tool_result", "writes": ["tool_result.content"]},
+  "budget": {
+    "max_input_bytes": 4194304,
+    "max_original_bytes": 4194304,
+    "max_action_bytes": 16384
+  },
+  "fallback": "native"
+}

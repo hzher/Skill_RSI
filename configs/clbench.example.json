@@ -1,0 +1,13 @@
+{
+  "kind": "clbench",
+  "repository": "../../continual-learning-bench",
+  "revision": "5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26",
+  "python": "python3",
+  "tasks": [
+    {
+      "id": "spectrum-default",
+      "family": "blind_spectrum_monitoring",
+      "parameters": {"schedule": "default", "num_instances": 3}
+    }
+  ]
+}

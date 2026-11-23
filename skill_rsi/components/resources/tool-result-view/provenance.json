@@ -1,0 +1,10 @@
+{
+  "source": "Skill_RSI_hzh/plugins/clbench-submit/context-view.mjs",
+  "reused": [
+    "focusSource"
+  ],
+  "license": "MIT",
+  "notice_file": "LICENSE.dsh",
+  "adaptation": "Python port; projection selection and immutable original handling are framework-specific.",
+  "source_sha256": "bee312429dc6cda3e92b996f0857250abc10f2468682e7d6d97801bff8bc98f3"
+}

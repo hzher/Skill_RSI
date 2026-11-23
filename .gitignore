@@ -57,3 +57,10 @@ node_modules/
 /framework/docs/
 /framework/examples/
 /framework/tests/
+
+# Skill RSI package and local runs
+*.egg-info/
+.skill-rsi/
+build/
+dist/
+runs/
