@@ -1,0 +1,151 @@
+{
+  "packages": {
+    "reuse-observed-schema": {
+      "round": "database-r02-reuse-observed-schema",
+      "evidence_scope": "exploratory_subgroup",
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "max",
+      "protocol_sha256": "991affc63e56cd1928a3c41ec6f8bb2965e5ce71fe3a2981e227bc62b0b5673b",
+      "package_sha256": "e3dfb290f3f141c859c0eb51bf77a0bf7648a3a9da19c06330a0e0cb39516fc5",
+      "files": {
+        "SKILL.md": "24c550ef738d1c81a2e4cbe4d9d67bb3855a0e21312f8109cfefbb204f289cc2"
+      },
+      "source_receipts_sha256": {
+        "paired_summary": "2e800be5b67aa3aa4904e4e613ca55ddcacaf540747c9d66b1b90e0e3f1b283f",
+        "catalog_decision": "aee671da7d95b6e4f1727f0309f12a826c882fc7036347fd820cce81dc05412a"
+      },
+      "aggregate": {
+        "pairs": 72,
+        "control_success": 49,
+        "skill_success": 48,
+        "control_queries": 165,
+        "skill_queries": 141,
+        "mean_reward_difference": 0.007403
+      },
+      "selected_subgroups": {
+        "Q13": {
+          "pairs": 12,
+          "control_success": 10,
+          "skill_success": 12,
+          "control_queries": 29,
+          "skill_queries": 25,
+          "mean_reward_difference": 0.172217
+        },
+        "Q104": {
+          "pairs": 12,
+          "control_success": 10,
+          "skill_success": 7,
+          "control_queries": 32,
+          "skill_queries": 27,
+          "mean_reward_difference": -0.166667
+        }
+      }
+    },
+    "recall-observed-data-map": {
+      "round": "database-r03-recall-observed-data-map",
+      "evidence_scope": "exploratory_subgroup",
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "max",
+      "protocol_sha256": "830fdb2721ab83568a1f4c1b8c21641d6dc7114e247592c8f46e6b897fda2b19",
+      "package_sha256": "c2ffb0a85e516154c9ad619bcb1e4d871248c5e568f33ef14d353d78132e0e5f",
+      "files": {
+        "references/integration.md": "bd821c6a40a670be475de079cec4e52c046533335570df29eeb2c2fa82f12086",
+        "scripts/gateway.py": "50b8085dd264f2402b72a9905340b18804d14d4d110ee11b00bbdcc4cf69fcd8",
+        "scripts/host.py": "90cdcbba22f5be3f8e049b5bdfcd3ec69b13005a7a1a1f8de8e8cf06f2834912",
+        "scripts/routes.py": "19c0b5349f1e756e833c70d2662ff5a393ba3e2e67d6d1a49ec167b44c002b3b",
+        "SKILL.md": "ba2be6c02085cc89857a860d9aa54c8510d2d0daca228197e3fa33f6bf7366fe"
+      },
+      "source_receipts_sha256": {
+        "closed_prefix_attribution": "1dd96454bddf5060ff497b51f762cc5134decb0bb326889ded8036d2c0c17a3d",
+        "replay": "ed53bc6300c372449955e40d6b86da63f810c64edb1a27204f37375c5f3846b2"
+      },
+      "complete_world_pairs": 8,
+      "planned_world_pairs": 64,
+      "aggregate": {
+        "pairs": 48,
+        "control_success": 35,
+        "skill_success": 34,
+        "control_queries": 135,
+        "skill_queries": 102,
+        "mean_reward_difference": 0.022202
+      },
+      "selected_subgroups": {
+        "Q2": {
+          "pairs": 8,
+          "control_success": 8,
+          "skill_success": 8,
+          "control_queries": 19,
+          "skill_queries": 10,
+          "mean_reward_difference": 0.074975
+        },
+        "Q104": {
+          "pairs": 8,
+          "control_success": 8,
+          "skill_success": 8,
+          "control_queries": 18,
+          "skill_queries": 13,
+          "mean_reward_difference": 0.041625
+        }
+      }
+    },
+    "read-source-in-context": {
+      "round": "code-r03-read-source-in-context",
+      "evidence_scope": "exploratory_subgroup",
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "max",
+      "protocol_sha256": "35596760f12129fadc67b5761904a3ea7d76693274e8b6461e74668c239c6ddd",
+      "package_sha256": "5c266bf51b674204f973f53128549da4de97367c06943d905e8719d4ffd83f60",
+      "files": {
+        "SKILL.md": "6846143e24849ac82c27db079201aa0305d5bf483f2f5a71e9cd71effde6e60d"
+      },
+      "source_receipts_sha256": {
+        "paired_results_archive": "4d8542dbf5ce4b4a3cc4dcb10d9f6f087d6200b63b362ae32ab5728730a9ffe8"
+      },
+      "planned_pairs": 84,
+      "distinct_issues": 7,
+      "aggregate": {
+        "pairs": 37,
+        "control_success": 23,
+        "skill_success": 25,
+        "mean_reward_difference": 0.045946
+      },
+      "selected_subgroups": {
+        "integer_row_position": {
+          "pairs": 5,
+          "control_success": 1,
+          "skill_success": 3,
+          "mean_reward_difference": 0.34
+        },
+        "other_issues": {
+          "pairs": 32,
+          "control_success": 22,
+          "skill_success": 22,
+          "mean_reward_difference": 0.0
+        }
+      }
+    },
+    "audit-structured-decision-logs": {
+      "round": "audit-cost-confirm-r01",
+      "evidence_scope": "normalized_log_audit_cost",
+      "source_scope": "Structured post-run audit, research distribution only",
+      "files": {
+        "SKILL.md": "7c4674aacf3b0725a4a33d18dca02413f66763609043bb1736cd9d182159d002",
+        "scripts/audit.py": "9be044403d79159c7b79f1177a3ff48aab961dcc4701a1af9df93cdd80941171",
+        "scripts/public_cli.py": "1ffa5b10036d78700463b5135c5fbd0fd18e57ee55c9da5856d5b56e3dd576d0"
+      },
+      "package_sha256": "a8eb143a7f8a0ce1d75a71db88091199a56500095aa1a4851996235a6254df55",
+      "protocol_sha256": "d217f06989ed6198ccd48793f52b895759980e1a8fc8c9a5afe75a13a89805c0",
+      "aggregate": {
+        "cases": 108,
+        "batches": 12,
+        "control_correct": 108,
+        "plugin_correct": 108,
+        "control_model_calls": 12,
+        "plugin_model_calls": 0
+      },
+      "source_receipts_sha256": {
+        "cost_verified_receipt": "2688952d941ff9508330dbf59d5579ad7731ed7533cc9b5176156d03549830b1"
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 面向 **Claude Code、Codex、DSH**，持续产生有效、可复用的 trajectory，并根据轨迹不断迭代有利于 **context/memory 管理的 skills**。
 
-**CL-Bench · Sol MAX Stateful** 在 301 题上取得 254 个原生成功（84.39%）。[查看三段历史运行源码、当前框架入口及同题 Fresh 对照](CLbench-Codex/6.1Sol-MAX-stateful/README.md)。
+**CL-Bench · Sol MAX Stateful** 在 301 题上取得 254 个原生成功（84.39%）。[查看三段历史运行源码、当前框架入口及同题 Fresh 对照](CLbench-Codex/6.1Sol-MAX-stateful/README.md)。 [三项局部收益 Skill 与轨迹审计插件](CLbench-Codex/skills/README.md)。
 
 ## 项目目标
 
