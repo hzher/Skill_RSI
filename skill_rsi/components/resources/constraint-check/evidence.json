@@ -1,0 +1,6 @@
+{
+  "origin": "github_Skill_plan/03_Skill提炼与对照实验.md",
+  "algorithm": "Check the explicitly used object and field against the current source revision.",
+  "counterexamples": ["already visible at the current revision", "unrelated change", "source revision unknown"],
+  "validation_status": "unverified"
+}

@@ -1,6 +1,14 @@
-# Skill_RSI
+# Skill_RSI · AI 助手的主动式记忆管理框架
 
-面向 **DSH、Claude Code 和 Codex**，持续采集有效、可复用的 trajectory，并根据轨迹迭代有利于 **context/memory 管理的 skills**。Part 1 生成可追溯的会话、调用、环境反馈、原生评分、记忆版本和上下文标签。Part 2 读取经批准的轨迹证据，提炼 context/memory 技巧和 SOP，并用独立有/无 Skill 实验比较效果。
+Skill_RSI 面向需要跨多轮、跨天完成的任务。它的目标是从助手做过的任务里找出有用的记忆策略，把经过验证的做法打成扩展包，让下一个项目也能用。产物可以是一份教助手做事的 Skill，也可以是一个直接参与宿主（harness）运行的包，决定下一步该给模型看哪些资料。
+
+比如，旧接口用 `30000` 毫秒表示半分钟，新接口用 `30` 秒。助手隔天接着改代码，照抄昨天的 `30000`，超时就变成了 **8 小时 20 分钟**。这时，只需在**填写参数前核对接口版本**，就能发现旧笔记里的单位已经过期。知道什么时候该查、查哪一条、什么时候可以跳过，就是这里说的“主动式记忆”。
+
+![昨天的 API v1 笔记写着 30000 ms。今天填写参数前查阅 v2 的单位，换算后填入 30 s。](doc/images/timeout-units.jpg)
+
+[快速开始](#快速开始) · [典型试用场景](#典型试用场景) · [代码上下文整理包](#可能涌现的代码上下文整理包) · [三种宿主](#三种宿主) · [开发与贡献](#开发与贡献)
+
+主仓提供统一的 `skill-rsi` CLI、三种宿主适配器、轨迹归档、策略包运行时和对照实验入口。真实生效范围由当前 CLI 版本及宿主回执决定。
 
 ## 项目目标
 
@@ -18,160 +26,105 @@ flowchart LR
 - 围绕信息保留、上下文压缩、记忆读写与检索、冲突及过期记忆处理，持续生成、使用、反馈和修订 Skills。
 - 三个 harness 分别记录实际加载、任务质量、管理表现和成本，跨框架复用另做验证。小模型训练与上述工作并行。
 
-## 仓库与当前状态
+## 快速开始
 
-项目代码与协作说明发布在 [hzher/Skill_RSI](https://github.com/hzher/Skill_RSI)。
-
-| 项目 | 当前状态 |
-| --- | --- |
-| 实现代码 | 包含 DSH 运行入口、轨迹证据导入与校验、Skill 提炼和独立验证模块 |
-| 主分支 | `master`，用于团队集成 |
-| 当前工作分支 | `huangzhenghao`，用于本分支的代码与文档更新 |
-| 版本控制范围 | 代码、配置示例、环境声明、来源索引与 `docs/` 文档，`doc/`、数据和实验结果留在本地 |
-| 访问与保护规则 | 以 GitHub 实际设置为准，历史核对记录见 [仓库设置与状态](docs/REPOSITORY_SETTINGS.md) |
-
-`framework/` 提供可独立安装运行的 Skill RL 框架，包含源码、测试、接入配置、合成演示样例与技术文档。安装和使用方法见该目录的说明。[Skill RL 框架](framework/README.md)
-
-## 使用流程
-
-### 1. 冻结并导入 DSH 历史实验
-
-DSH 运行链复用已跑通的 DeepSeek Harness SDK、`clbench_submit` 和官方 CL-Bench runner/scorer。来源文件、上游提交和历史核验记录见 [SOURCE_PROVENANCE.json](SOURCE_PROVENANCE.json)。
-
-在本项目根目录用 Python 3.11+ 执行离线导入。下列命令把派生产物写到本项目，历史实验目录保持只读。加 `--seal` 会将引用的原文复制到协议 run 内并校验哈希，使用合适的私有存储位置。
+**安装一次框架，然后在自己的项目里选扩展。** 向开发者取得 wheel，在 Python 3.11+ 的虚拟环境中安装。下面用 0.2.0 举例，安装命令中的路径换成你收到的文件路径。本机接入宿主使用 macOS 或 Linux，以及已配置好的 DSH、Claude Code 或 Codex CLI。
 
 ```sh
-python -m evidence build ../deepseek_cl_bench/results/poker-manual-01 \
-  --output results/archive/poker/derived/skill-rsi-v1 --seal
-python -m evidence build ../deepseek_cl_bench/results/dsh-v41-manual-full \
-  --output results/archive/spectrum/derived/skill-rsi-v1 --seal
-python -m evidence verify results/archive/poker/derived/skill-rsi-v1
+python -m pip install --upgrade /path/to/skill_rsi-0.2.0-py3-none-any.whl
+skill-rsi --version
+skill-rsi artifact catalog
 ```
 
-每个 rollout 或逐实例 baseline attempt 单独保存。失败、部分响应和低分按可得原文归档。出包入口为 `batch_index.json`，各 run 包括 `events.jsonl`、`requests/index.jsonl`、`trajectory.ctx.json`、`context_episodes.jsonl`、`scores.jsonl`、`artifacts.json` 和 `quality.json`。无 `--seal` 时，包内引用要求批次原文仍在原位置且哈希一致。将派生目录放在其他位置时，校验命令可以用 `--batch-dir` 指定源批次。
-
-### 2. 采集新的 DSH 批次
-
-使用 `environment.yml` 所列环境、本机 DSH 及固定提交的官方 CL-Bench checkout。默认查找相邻的 `continual-learning-bench`，也可设置 `CLBENCH_ROOT`。按 `.env.example` 配置凭据引用和 `DSH_BIN`，需要中转时选用相应的配置文件。
+例如，想看日志策略会怎样处理长输出，在**要使用策略的项目根目录**运行以下两条命令。第一条生成可编辑的配置，第二条登记 Codex 适配器并应用配置。
 
 ```sh
-python run.py doctor --config configs/local-router.json
-python -u run.py quick --config configs/local-router.json --name dsh-poker-q1 --workers 2
-python -m evidence build results/dsh-poker-q1 --seal
-python -m evidence verify results/dsh-poker-q1/derived/skill-rsi-v1
+skill-rsi init --host codex --extension builtin:tool-result-view
+skill-rsi setup
 ```
 
-`quick` 使用官方 Poker `quick_test`。可以用 `full --tasks blind_spectrum_monitoring` 逐任务推进官方 default 序列。同名批次在指纹匹配时复用完整 checkpoint。未完成的 job 保留旧 attempt，并创建新 attempt。Poker rollout 可校验并重放已接受的交互前缀、恢复对应原生 DSH 会话后继续。
+生成的 `skill-rsi.json` 只有两项。
 
-新增原生旁路记录 Query、反馈、状态边界、已关联的模型调用、响应块和限定 memory 工具的前后像。DSH `request-*.json` 的层级是 `native_options`。最终 provider 请求的投影、压缩生效与所有物理重试仍需要实测证据。原生 memory 末态仅代表末态。
+```json
+{
+  "host": "codex",
+  "extensions": ["builtin:tool-result-view"]
+}
+```
 
-### 3. 导入 Claude Code 和 Codex
-
-使用官方 CL-Bench 的 `claude` 或 `codex` runner，保留生成的 traces 与相邻 artifacts。下面以 Claude Code 的官方 Poker quick 为例。Codex 批次使用独立 `--run-group-id`，执行侧使用 `--system codex`，导入侧使用 `--harness codex`。
+执行 `skill-rsi setup` 应用文件。收到团队分享的 ZIP，或用 `materialize` 生成了新包，把它放在项目中，将相对路径（例如 `./extensions/resume-check.zip`）加入数组，再执行同一条命令。也可以填含有 `manifest.json` 的扩展目录。每次配置都会锁定实际安装的版本与摘要。
 
 ```sh
-# 在官方 CL-Bench 根目录执行
-clbench run exploitable_poker --system claude --schedule quick_test \
-  --run-group-id claude-q1 --max-workers 1 --no-live-dashboard
-
-# 在 Skill_RSI_hzh 根目录执行
-python -m evidence build ../continual-learning-bench/results --harness claude_code \
-  --source exploitable_poker/traces/claude-q1/run_0000.json \
-  --source exploitable_poker/traces/claude-q1/baseline.json \
-  --output results/archive/claude-q1/derived/skill-rsi-v1 --seal
+skill-rsi setup
+skill-rsi project list --host codex
 ```
 
-导入器消费原生工具、会话事件及评分。CLI turn 可能覆盖多个模型调用，因此单次模型输入、物理重试和工具级 memory 前后像保持未知。
+首次看到 `pending` 表示配置已保存。开启新的 Codex CLI 会话，按宿主提示信任该项目及其 hook/MCP。到达扩展所需的原生事件后，`skill-rsi doctor --host codex` 会显示加载情况和生效修订。默认的 `shadow` 只记录策略本来会做什么，结果可用 `skill-rsi project receipts --host codex` 查看。[Codex 安装与试用](doc/user/02_Codex使用指南.md)
 
-### 4. 提炼和独立验证 Skill
+## 典型试用场景
 
-在输入 JSON 的 `development_groups` 中列出可阅读的协议 run ID，在 `holdout_groups` 中列出保留组名称。默认发送结构化轨迹元数据。逐条批准的显示内容可以通过 `payload_allowlist` 提供，每项包含 `run_id`、`event_id`、引用字段 `field` 和文件 `sha256`。可在允许用途内启用 `allow_offline_scores`。
+| 你遇到的情况                                                    | 可以怎样试                                                                                               | 看什么结果                                                                                                                    |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **构建日志太长，助手总从头读。** 真正的报错藏在最后几行。 | 在 DSH 项目里启用内置的 `tool-result-view`，先试跑，再查看聚焦的错误行和原文引用。 | 最后一行的错误能否找回，展开后是否与原文一致。 |
+| **项目跨天，昨天的配置今天失效。** 超时单位从毫秒改成秒。 | 为 `constraint-check` 配置允许核对的接口定义，再分别试一次单位已变和单位未变的任务。 | 该换算时能否写出正确的值，单位未变时能否省下一次查证。 |
+| **对话压缩后，助手又问了一遍已经确认的事。**              | 用 Claude Code 参考原型比较压缩前后的笔记，再从已配置的网关查下一次请求。                                | 能否定位到笔记何时变化、哪版内容进入了那次请求。只有笔记快照时，后者记为未知。                                                |
+| **工具明明查到了，助手还是答错。**                        | 运行 Codex 离线样例，沿同一次工具调用追踪 `unit=ms`，打开第二次逻辑请求的输入项。                      | 能否分清“工具返回了这条事实”和“这条事实出现在下一次逻辑请求里”。                                                          |
+| **团队留有多次返工的旧会话，想找共同原因。**              | 选一段返工记录，再选一段相似但一次成功的记录。按策略提炼方案比较第一次出现差异的步骤，提出可复用的做法。 | 候选策略能否指出依据、解释何时应跳过，并在另一项任务上减少错误或重复读取。[历史数据接入](doc/contributor/06_数据与宿主接入.md) |
 
-Teacher 配置包含完整 HTTPS Chat Completions `endpoint`、`provider`、`model`、`credential_env`，以及可选的 `revision`、`strength_basis` 和调用、输入、输出预算。执行 `extract` 会调用已配置的模型。
+## 从任务记录到扩展包
 
-```sh
-python -m skill_discovery extract --archive results/dsh-poker-q1/derived/skill-rsi-v1 \
-  --id memory-v1 --input reviewed-input.json --teacher teacher.json
+```mermaid
+flowchart LR
+    A["历史会话或正在运行的任务"] --> B["Part 1 · 记录动作和来源"]
+    B --> C["Part 2 · 从成败差异中提出策略"]
+    C --> D["在独立任务上验证"]
+    D --> E["打成扩展包，按项目启用"]
 ```
 
-产物在 `<archive>/part2/<extraction_id>/`，包含实际 teacher 输入输出、调用证据、候选与版本化 `SKILL.md`。先用 `freeze-validation` 冻结验证方案，再用两个新批次执行同配置的无 Skill 和有 Skill arm。处理组用 `run.py --skill <SKILL.md> --skill-sha256 <hash> --name <batch>` 加载冻结版本。为两组生成证据后，用 `evaluate-validation` 引用实际 run 并比较评分。
+**Part 1 留下能回查的轨迹。** 一条轨迹把用户更正、工具读到的版本、下一步动作和任务结果串起来。拿不到的环节标为未知，之后还能沿着记录查回原件。可以从用户选择的本地历史或运行中的宿主采集，也可以另接评测题集（benchmark）和评分器。[轨迹文件树与兼容格式](doc/contributor/02_轨迹数据契约.md)
 
-```sh
-python -m skill_discovery freeze-validation --extraction <extraction-dir> \
-  --id matched-v1 --protocol protocol.json
-python -m skill_discovery evaluate-validation --extraction <extraction-dir> \
-  --id matched-v1 --results arm-runs.json
-```
+**Part 2 从轨迹里找做法。** 发现阶段可以调用大模型，比较哪些任务出错、哪些成功、哪些没有介入也顺利完成。候选策略要在未参与发现的任务上再试，既看正确率和返工，也算额外读取和模型调用的成本。[策略提炼与验证](doc/contributor/03_Skill提炼与对照实验.md)
 
-`protocol.json` 中的 `pairs` 指定各 `pair_id` 和 `task_name`，`targets` 逐任务冻结 `metric_name`、`direction`、`minimum_pairs` 和 `minimum_mean_delta`，并指定 `skill_id`、`version`、`scope` 和 `group_id`。结果 JSON 用同一个 `pair_id` 指定 `without`、`with` 两组各自的 `archive` 和 `run_id`。默认要求可查证的 Skill 采用证据。方案设置 `adoption_required: false` 时，结果评估提供该 Skill 后的效果，采用状态保持未知。
+**扩展包给助手增加一项可选动作。** 根据动作发生的位置，包可以提供宿主插件、MCP 工具、hook（事件回调）、网关改造或 Skill。两个内置策略包可分别试跑、启停。`tool-result-view` 让长日志按需展开，`constraint-check` 在使用旧结论前核对版本。例如，排障时可以只关掉日志包，以便看到完整输出，同时保留版本核验。只想记录任务时，单独开启采集即可。[选择宿主并查看使用指南](#三种宿主)
 
-CL-Bench 产物用于评测与研究分析，训练资格记为 `not_qualified`。2026-11-17 上传前已通过 Python 与插件语法检查、JSON 配置解析、CLI 帮助和环境预检。DSH、Claude Code、Codex 三类合成轨迹的 sealed/unsealed 构建、校验及重复构建共 6 组离线检查通过。`framework/` 的 23 项回归测试和示例配置预检通过。真实模型 rollouts 和 teacher 提炼尚未在本次验收中运行。
+## 可能涌现的代码上下文整理包
 
-## 分支约定
+首版的两个包是起点。假设 Part 2 对比多次代码重构，发现助手经常在改完文件后继续照着旧源码写，或者反复分析已经修好的报错。由此可以提出一个新包，**在准备下一轮请求时，按代码和测试的最新状态整理上下文**。这里的“上下文”就是本轮模型能读到的材料。
 
-| 分支 | 用途 |
-| --- | --- |
-| `master` | 团队共同主线，由维护者集成经过审核的变更 |
-| `yangyang` | 对应成员的工作分支 |
-| `huangzhenghao` | 对应成员的工作分支 |
-| `zhaozilin` | 对应成员按需要创建的工作分支 |
-| `xuyifan` | 对应成员的工作分支 |
+例如，同一文件读了三次，修改后的测试仍有一项失败。这个候选包可以按下面的方式工作。
 
-分支名属于协作约定，不自动限制协作者写入权限。成员在自己的分支工作，通过 PR 合入 `master`，避免覆盖其他成员的工作。
+![候选策略示意：原始轨迹保留 v1、v2、v3 三次读取。下一轮输入选用 v3，并带上用户的兼容要求和仍未通过的断言。](doc/images/context-edit.jpg)
 
-### 1. 拉取主代码，创建自己的分支
+| 动作                   | 下一轮请求里实际怎么变                                                                                                                         |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **保留**         | 留下用户要求兼容的旧接口、当前改动和仍未通过的测试断言，方便助手继续定位问题。                                                                 |
+| **整理**         | 已完成的排查各留一条结论，附上文件版本和原始工具结果的引用。需要复查时可按引用展开。                                                           |
+| **删除过时片段** | 确认前两次读到的是已被替代的文件版本后，从下一轮模型输入里移除这两组旧读取，工具调用与返回成组处理。原始轨迹仍可回查，工作区里的源码照常保留。 |
 
-以下以 `huangzhenghao` 为例，其他成员替换为自己的约定分支名。
+这个包需要宿主允许在发送前编辑本轮输入。现有 Codex 参考网关演示了其中的移除操作。在每次请求都带齐输入的无状态 Responses 模式下，它能成组移除指定的旧调用。调用与返回配不齐，或编辑基于旧版本时，就保留原输入。[原型测试与断言](../Skill_RSI_yangyang/framework/companions/codex-clm/tests/test_context.py)
 
-```bash
-git clone https://github.com/hzher/Skill_RSI.git
-cd Skill_RSI
-git fetch origin
-git switch --track origin/huangzhenghao
-```
+**自动决定删什么仍是待验证的候选策略。** 发布前，用同一批未参与发现的代码任务分别开启和关闭候选包，比较最终补丁能否通过测试、遗漏了多少用户约束、输入缩短了多少，以及助手为找回资料又做了几次读取。
 
-本地已存在该分支时用 `git switch huangzhenghao`。如果成员分支尚未建立，在拉取仓库并执行 `git fetch origin` 后创建并推送。
+## 三种宿主
 
-```bash
-git switch --no-track -c your-branch origin/master
-git push -u origin your-branch
-```
+宿主（harness）是负责调用模型、执行工具和维持会话的程序。按你使用的 CLI 选择安装指南。[DSH 使用指南](doc/user/01_DSH使用指南.md) · [Codex 使用指南](doc/user/02_Codex使用指南.md) · [Claude Code 使用指南](doc/user/03_ClaudeCode使用指南.md)
 
-访问私有仓库前需获得协作权限，并使用自己的 GitHub 认证。
+| 宿主                              | 观测范围                                                                 | 当前接入位置                                                                                                                             |
+| --------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **DSH（DeepSeek Harness）** | 从一次查询追到工具返回和 SDK 请求参数，按行聚焦并恢复工具输出。                    | 在发送查询前核对约束，通过插件调整该次主调用看到的工具视图。[DSH 适配方案](doc/contributor/adapters_doc/dsh/README.md)                          |
+| **Claude Code**             | 在压缩前后保存会话快照，配置网关时核对请求及转发回执。 | 使用项目 hook 和 MCP。工具执行前后可用的动作依赖具体事件与回调内容。[Claude Code 适配方案](doc/contributor/adapters_doc/claude_code/README.md) |
+| **Codex**                   | 在支持原生 trace 的版本上还原指定线程的逻辑请求，并记录自有 MCP 的读写回执。 | 使用项目 hook 和 MCP。对自有 MCP 工具配置 `mcp_paths` 后，可按需读取项目文件、返回短视图并展开原文。[Codex 适配方案](doc/contributor/adapters_doc/codex/README.md) |
 
-### 2. 开始修改前，同步主分支
+## 开发与贡献
 
-```bash
-git fetch origin
-git switch huangzhenghao
-git merge origin/master
-git push origin huangzhenghao
-```
+开发者可以在独立的 Conda 环境中构建 wheel，再安装同一份文件试用或交给用户。新增的宿主适配器和内置策略随 wheel 交付，独立生成的策略 ZIP 可以单独发布。框架升级后，在目标项目重复执行 `skill-rsi setup` 即可刷新配置。[开发与打包教程](doc/contributor/07_开发与打包教程.md)
 
-遇到冲突先解决并确认结果，再提交和推送。长期成员分支通过 merge 同步，避免 rebase 后强推改写已共享的历史。
+使用大模型改代码前，每位开发者都必须让模型读取并遵守根目录的 [AGENTS.md](AGENTS.md)。
 
-### 3. 提交修改，发起 PR
+例如，给 Claude Code 记录“工具结果已截断”时，若已有字段能表达，就在宿主 PR 中完成映射。若需新增公共字段，由 hzh 协调共享 PR，宿主 PR 再引用它。
 
-只暂存本次需要提交的文件。下面以修改 README 为例。
+![Claude Code 贡献分流：复用已有字段走宿主 PR，新增公共字段另开共享 PR，由 hzh 协调。](doc/images/pr-boundaries.jpg)
 
-```bash
-git add README.md
-git commit -m "docs: clarify trajectory reuse criteria"
-git push origin huangzhenghao
-```
-
-在 GitHub 发起 Pull Request 时，**base 选择 `master`，compare 选择自己的分支**。填写目标、变更、验证和证据，关联对应 Issue。草稿阶段使用 Draft PR。
-
-至少一位他人审核并解决讨论后，由维护者执行 **Squash and merge**。合并后保留个人分支，按上面的同步步骤继续工作。详细流程见主分支的 [贡献规范](https://github.com/hzher/Skill_RSI/blob/master/CONTRIBUTING.md)。
-
-## 协作方式
-
-- 每项任务先建 Issue，写清目标、负责人、验收标准和依赖，每个 Issue 聚焦一个可交付结果。
-- 每个 PR 聚焦一个问题。实验结论提供配置、版本、运行 ID 与结果位置，分别记录运行成功和效果验证。
-- 阻塞及时更新到 Issue，重要接口与路线调整先形成提案，再按结论修改。
-- 原始轨迹、录音、模型权重、私有凭证和大体量实验产物放在适当的受控存储，仓库保留经过检查的说明、小样例及索引。
-- CI 状态检查按实际运行能力配置，提交时记录执行过的检查及结果。
-
-## License
-
-许可证信息见主分支的 [MIT License](https://github.com/hzher/Skill_RSI/blob/master/LICENSE)。
+- **了解项目和路线图。** 从一次跨天的接口迁移看首版要解决的问题，再看各模块怎样交换数据。[项目背景与目标](doc/contributor/00_项目背景与目标.md) · [总体方案与架构](doc/contributor/01_总体方案与架构.md)
+- **接入自己的数据、宿主或评测。** 可以只贡献一个文件读取器、一种宿主回调或一个评分器。带上一份合成输入、预期结果和复验命令即可开始。[数据与宿主接入](doc/contributor/06_数据与宿主接入.md) · [维护分工与 PR 规范](doc/contributor/05_开发分工与PR规范.md)
+- **尝试小模型训练。** 若要用轨迹训练“何时写入、取回或跳过”，获准的数据可交给独立的 `skill_rl_train/` 项目。只使用策略包的项目可以直接走扩展包路线。[可选训练交接](doc/contributor/04_离线训练交接.md)

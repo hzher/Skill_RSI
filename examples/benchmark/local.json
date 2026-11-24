@@ -1,0 +1,9 @@
+{
+  "kind": "manifest",
+  "manifest": "tasks.json",
+  "evaluator": {
+    "kind": "json_exact",
+    "expected_dir": "evaluator-data",
+    "output": "output/result.json"
+  }
+}
