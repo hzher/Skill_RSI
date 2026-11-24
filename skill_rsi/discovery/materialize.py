@@ -48,7 +48,7 @@ def materialize(extraction: Path, skill_id: str, version: str, review: dict, out
         if approved_config != candidate.get("configuration_sha256") or approved_config != digest(encode(implementation)):
             raise ValueError("provide the approved declarative implementation digest")
         strategy = implementation["strategy"]
-        template = files("skill_rsi.components").joinpath("resources", strategy, "manifest.json")
+        template = files("skill_rsi.components.resources").joinpath(strategy, "manifest.json")
         manifest = json.loads(template.read_text(encoding="utf-8"))
         manifest.update(component_id=skill_id, version=version, builtin_policy=strategy,
                         defaults=implementation["defaults"])

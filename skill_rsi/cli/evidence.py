@@ -81,10 +81,12 @@ def _audit(args):
 
 
 def register(routes):
+    from ..adapters.registry import available
+
     parser = command(routes, "import", "Import selected standard or native historical data", _ingest, aliases=("build",))
     parser.add_argument("path", nargs="?", type=Path)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--host", choices=("dsh", "claude_code", "codex"))
+    parser.add_argument("--host", choices=available())
     parser.add_argument("--format")
     parser.add_argument("--reader", help="name of an installed skill_rsi.sources data source")
     parser.add_argument("--mapping", type=Path)

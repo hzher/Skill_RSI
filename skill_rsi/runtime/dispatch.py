@@ -9,7 +9,7 @@ from typing import Any, Mapping
 import json
 
 from ..components.manifest import canonical, required_capabilities, sha256
-from .bindings import ProjectBindings, capabilities_of, supports_action
+from .bindings import ProjectBindings, capabilities_of, check_scope, supports_action
 from .model import Binding, Decision, Host, RuntimeEvent
 from .policy import DEFAULT_BUDGET, Original, PolicyContext, action_capability, normalized_action, propose, state_update
 from .store import decision_from, forget_reference, identity, json_text, reference, save_decision
@@ -137,6 +137,10 @@ class Runtime(ProjectBindings):
             release = self.registry._resolve(connection, binding.component_id, binding.version, binding.form, verify=False)
             if release.digest != binding.artifact_digest:
                 return skipped("binding_digest_mismatch")
+            try:
+                check_scope(release, event.host, binding.mode, description)
+            except ValueError as error:
+                return skipped(f"component_scope_changed: {error}")
             manifest = release.manifest
             trigger = manifest["trigger"]
             if event.boundary not in trigger["boundaries"] and "*" not in trigger["boundaries"]:

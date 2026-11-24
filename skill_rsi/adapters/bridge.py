@@ -195,7 +195,7 @@ def _handshake(host, registration, event, raw):
             nodes[boundary] = ["read_origin", "replace_tool_result", "retrieve_original", "suggest"]
     elif host.name == "codex" and boundary == "before_action":
         nodes[boundary] = ["read_origin", "append_context", "suggest"]
-    return {"registration_id": registration["registration_id"],
+    return {"registration_id": registration["registration_id"], "adapter_version": host.version,
             "host_version": registration.get("native_host_version"), "nodes": nodes}
 
 
@@ -221,7 +221,7 @@ def _mark_loaded(directory, handshake, boundary_ref):
     # Keep independent node observations. Concurrent hooks publish one file per node,
     # so a session-start callback cannot erase a previously exercised tool boundary.
     for name, capabilities in handshake["nodes"].items():
-        write(directory / "nodes" / (identifier(name) + ".json"), {
+        write(directory / "nodes" / (identifier(handshake["registration_id"], name) + ".json"), {
             **handshake, "nodes": {name: capabilities}, "last_event": boundary_ref
         })
 
@@ -326,6 +326,8 @@ def _confirmed(runtime, directory, payload):
 
 
 def run_hook(host, project, state_dir, registration, directory, raw):
+    if registration.get("adapter_version") != host.version or registration.get("bridge_python", sys.executable) != sys.executable:
+        return {}
     cwd = raw.get("cwd")
     if not isinstance(cwd, str) or not Path(cwd).resolve().is_relative_to(project):
         return {}
@@ -365,7 +367,7 @@ def run_mcp(host, project, state_dir, registration, directory):
     if registration.get("mcp_paths"):
         supported.update(mcp_tool_result=["read_origin", "replace_tool_result", "retrieve_original"],
                          mcp_before_action=["read_origin", "append_context"])
-    handshake = {"registration_id": registration["registration_id"],
+    handshake = {"registration_id": registration["registration_id"], "adapter_version": host.version,
                  "host_version": registration.get("native_host_version"), "nodes": supported}
     runtime = Runtime(project, state_dir=state_dir)
 
@@ -413,6 +415,8 @@ def run_mcp(host, project, state_dir, registration, directory):
         return "\n\n".join(filter(None, [note.get("text"), output.get("text", text)])), edits
 
     for line in sys.stdin.buffer:
+        if read_optional(directory / "registration.json") != registration:
+            return
         request_id = None
         operations = []
         try:
@@ -467,7 +471,9 @@ def main(argv=None):
     host = get_adapter(args.host)
     record = host_record(project, state_dir, host.name)
     registration = read_optional(record)
-    if not registration or registration["registration_id"] != args.owner:
+    if (not registration or registration["registration_id"] != args.owner
+            or registration.get("adapter_version") != host.version
+            or registration.get("bridge_python", sys.executable) != sys.executable):
         if args.mode == "hook":
             print("{}")
         return

@@ -8,12 +8,12 @@ import shlex
 import sys
 import tomllib
 from contextlib import contextmanager
+from dataclasses import dataclass, replace
 from importlib.resources import files
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 from uuid import uuid4
 
-from ..evidence.archive import write
 from ..evidence.io import inside
 from ..runtime import project_identity
 from .base import host_record, read_optional
@@ -53,82 +53,122 @@ def _write_text(path, contents):
             Path(temporary.name).unlink(missing_ok=True)
 
 
-def _command(host, project, state_dir, mode):
-    return [sys.executable, "-m", "skill_rsi.adapters.bridge", mode, "--host", host,
-            "--project", str(project), "--state-dir", str(state_dir)]
+@dataclass(frozen=True)
+class _Bridge:
+    host: str
+    project: Path
+    state_dir: Path
+    owner: str
+    python: str
+
+    def argv(self, mode):
+        return [self.python, "-m", "skill_rsi.adapters.bridge", mode, "--host", self.host,
+                "--project", str(self.project), "--state-dir", str(self.state_dir), "--owner", self.owner]
+
+    def hook(self):
+        return {"hooks": [{"type": "command", "command": shlex.join(self.argv("hook")), "timeout": 15}]}
+
+    def server(self):
+        command, *args = self.argv("mcp")
+        return {"command": command, "args": args}
+
+    def toml(self):
+        server = self.server()
+        return (f"\n# Skill RSI {self.owner} begin\n[mcp_servers.skill-rsi]\n"
+                f"command = {json.dumps(self.python, ensure_ascii=False)}\n"
+                f"args = {json.dumps(server['args'], ensure_ascii=False)}\n# Skill RSI {self.owner} end\n")
 
 
-def _hooks(project, state_dir, host, owner, *, remove=False):
-    config = (".claude/settings.local.json" if host == "claude_code" else ".codex/hooks.json")
-    path = _settings_path(project, config)
-    if remove and not path.exists():
+def _hooks(bridge, prior, *, remove, corroborate):
+    config = ".claude/settings.local.json" if bridge.host == "claude_code" else ".codex/hooks.json"
+    path = _settings_path(bridge.project, config)
+    data = read_optional(path)
+    if data is None and remove and not corroborate:
         return path, None
-    data = read_optional(path) or {}
+    data = data or {}
     hooks = data.setdefault("hooks", {})
     if not isinstance(hooks, dict):
         raise ValueError(f"Expected a hooks mapping in {path}")
-    for boundary in _HOOKS[host]:
-        command = shlex.join(_command(host, project, state_dir, "hook") + ["--owner", owner])
-        registration = {"hooks": [{"type": "command", "command": command, "timeout": 15}]}
+    old, new = prior.hook(), bridge.hook()
+    matched = False
+    for boundary in _HOOKS[bridge.host]:
         values = hooks.get(boundary, [])
         if not isinstance(values, list):
             raise ValueError(f"Expected a hook list in {path}: {boundary}")
-        if remove:
-            if any(value != registration and owner in json.dumps(value) for value in values):
-                raise ValueError(f"Managed {boundary} hook was edited: {path}")
-            kept = [value for value in values if value != registration]
-            if kept:
-                hooks[boundary] = kept
-            else:
-                hooks.pop(boundary, None)
-        elif registration not in values:
-            amended = [value for value in values if owner in json.dumps(value)]
-            if amended:
-                raise ValueError(f"Managed {boundary} hook was edited: {path}")
-            hooks[boundary] = [*values, registration]
+        updated = []
+        for value in values:
+            if value == old:
+                matched = True
+            elif value != new:
+                raw = json.dumps(value)
+                if prior.owner in raw or bridge.owner in raw:
+                    raise ValueError(f"Managed {boundary} hook was edited: {path}")
+                updated.append(value)
+                continue
+            if not remove and new not in updated:
+                updated.append(new)
+        if not remove and new not in updated:
+            updated.append(new)
+        if updated:
+            hooks[boundary] = updated
+        else:
+            hooks.pop(boundary, None)
+    if corroborate and not matched:
+        raise ValueError(f"Cannot verify the previous MCP interpreter against a managed hook in {path}")
     if not hooks:
         data.pop("hooks")
     return path, (json.dumps(data, ensure_ascii=False, indent=2) + "\n").encode()
 
 
-def _mcp(project, state_dir, host, owner, *, remove=False):
-    args = _command(host, project, state_dir, "mcp") + ["--owner", owner]
-    command = {"command": args[0], "args": args[1:]}
+def _settings(bridge, receipt, *, remove=False):
+    claude = bridge.host == "claude_code"
+    path = _settings_path(bridge.project, ".mcp.json" if claude else ".codex/config.toml")
+    before = path.read_text(encoding="utf-8") if path.exists() else ""
+    data = (json.loads(before) if claude else tomllib.loads(before)) if before else {}
+    if not isinstance(data, dict):
+        raise ValueError(f"Expected a configuration object in {path}")
+    table = "mcpServers" if claude else "mcp_servers"
+    servers = data.get(table, {})
+    if not isinstance(servers, dict):
+        raise ValueError(f"Expected an MCP server mapping in {path}")
     key = "skill-rsi"
-    if host == "claude_code":
-        path = _settings_path(project, ".mcp.json")
-        if remove and not path.exists():
-            return path, None
-        data = read_optional(path) or {}
-        servers = data.setdefault("mcpServers", {})
-        if not isinstance(servers, dict):
-            raise ValueError(f"Expected an MCP server mapping in {path}")
-        previous = servers.get(key)
-        if previous is not None and previous != command:
-            raise ValueError(f"MCP entry belongs to another configuration: {path}")
+    server = servers.get(key)
+    python = receipt.get("bridge_python")
+    # Older receipts did not record an interpreter. Cross-check the canonical MCP
+    # argv against an independently stored hook before migrating an unknown path.
+    if receipt and python is None and isinstance(server, dict):
+        python = server.get("command")
+    if python is not None and (not isinstance(python, str) or not os.path.isabs(python)):
+        raise ValueError(f"Invalid managed MCP interpreter in {path}")
+    prior = replace(bridge, owner=receipt.get("registration_id", bridge.owner), python=python or bridge.python)
+    if key in servers and server != prior.server():
+        raise ValueError(f"MCP entry belongs to another configuration: {path}")
+    if claude:
         if remove:
             servers.pop(key, None)
         else:
-            servers[key] = command
-        return path, (json.dumps(data, ensure_ascii=False, indent=2) + "\n").encode()
-    path = _settings_path(project, ".codex/config.toml")
-    if remove and not path.is_file():
-        return path, None
-    before = path.read_text(encoding="utf-8") if path.is_file() else ""
-    config = tomllib.loads(before)
-    servers = config.get("mcp_servers", {})
-    if not isinstance(servers, dict):
-        raise ValueError(f"Expected an MCP server table in {path}")
-    block = (f"\n# Skill RSI {owner} begin\n[mcp_servers.{key}]\n"
-             f"command = {json.dumps(args[0], ensure_ascii=False)}\n"
-             f"args = {json.dumps(args[1:], ensure_ascii=False)}\n# Skill RSI {owner} end\n")
-    if key in servers and block not in before:
-        raise ValueError(f"MCP entry belongs to another configuration: {path}")
-    final = before.replace(block, "", 1) if remove else before if block in before else before + ("\n" if before and not before.endswith("\n") else "") + block
-    return path, final.encode()
+            servers[key] = bridge.server()
+        if servers:
+            data[table] = servers
+        else:
+            data.pop(table, None)
+        content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    elif key in servers:
+        block = prior.toml()
+        if before.count(block) != 1:
+            raise ValueError(f"Managed MCP block was edited: {path}")
+        content = before.replace(block, "" if remove else bridge.toml(), 1)
+    else:
+        if f"# Skill RSI {prior.owner} " in before:
+            raise ValueError(f"Managed MCP block was edited: {path}")
+        content = before if remove else before + bridge.toml()
+    hook = _hooks(bridge, prior, remove=remove, corroborate=(
+        bool(receipt) and "bridge_python" not in receipt and prior.python != bridge.python
+    ))
+    return [hook, (path, None if remove and not path.exists() else content.encode())]
 
 
-def _dsh_patch(project, state_dir, owner, runtime, profile):
+def _dsh_patch(bridge, runtime, profile, command):
     directory = runtime.parent
     modules = ("plugin.mjs", "baseline.mjs")
     resources = files("skill_rsi.adapters.dsh")
@@ -138,13 +178,21 @@ def _dsh_patch(project, state_dir, owner, runtime, profile):
     for module, contents in zip(modules, payload, strict=True):
         _write_text(plugin_dir / module, contents)
     resource = plugin_dir / "plugin.mjs"
-    config = {"argv": _command("dsh", project, state_dir, "hook") + ["--owner", owner],
-              "project": str(project), "registrationId": owner}
+    config = {"argv": bridge.argv("hook"), "project": str(bridge.project), "registrationId": bridge.owner}
     patch = directory / "cordis.patch.json"
-    write(patch, [{"insert": [{"id": "skill-rsi", "name": resource.as_uri(), "config": config}]}])
-    return {"patch": str(patch), "patch_sha256": hashlib.sha256(patch.read_bytes()).hexdigest(),
+    content = json.dumps([{"insert": [{"id": "skill-rsi", "name": resource.as_uri(), "config": config}]}],
+                         ensure_ascii=False, indent=2).encode()
+    return {"patch": str(patch), "patch_sha256": hashlib.sha256(content).hexdigest(),
             "profile": profile, "resource_path": str(plugin_dir), "resource_digest": digest,
-            "command_prefix": ["dsh", "--profile", profile, "--patch", str(patch)]}
+            "command_prefix": [command, "--profile", profile, "--patch", str(patch)]}, (patch, content)
+
+
+def _check_patch(record, receipt):
+    patch = record.parent / "cordis.patch.json"
+    if patch.is_symlink() or (patch.exists() and (receipt.get("patch") != str(patch) or
+            hashlib.sha256(patch.read_bytes()).hexdigest() != receipt.get("patch_sha256"))):
+        raise ValueError(f"Managed DSH patch was edited: {patch}")
+    return patch
 
 
 def _apply(updates):
@@ -204,19 +252,33 @@ def install(adapter, project, state_dir, *, observe=None, profile=None, command=
     lock = _settings_path(project, ".skill-rsi-install.lock")
     with _lock(lock):
         existing = read_optional(target) or {}
-        owner = existing.get("registration_id") or uuid4().hex
+        if command is None:
+            command = existing.get("command", adapter.command)
+        if not isinstance(command, str) or not command.strip() or "\x00" in command:
+            raise ValueError("command must be a native CLI executable name or path")
+        if os.sep in command:
+            command = os.path.abspath(project / Path(command).expanduser())
         profile = profile or existing.get("profile") or ("sdk" if adapter.name == "dsh" else None)
-        entry = {"registration_id": owner, "project": str(project), "project_id": project_identity(project),
+        identity = {"adapter_version": adapter.version, "bridge_python": sys.executable, "command": command,
+                    "native_host_version": adapter.probe(project, command=command).get("host_version"),
+                    "profile": profile}
+        owner = existing.get("registration_id")
+        if not owner or any(existing.get(key) != value for key, value in identity.items()):
+            owner = uuid4().hex
+        bridge = _Bridge(adapter.name, project, state_dir, owner, sys.executable)
+        entry = {**identity, "registration_id": owner, "project": str(project), "project_id": project_identity(project),
                  "observe": bool(existing.get("observe")) if observe is None else bool(observe),
-                 "adapter_version": adapter.version, "host": adapter.name, "profile": profile, "phase": "registered",
-                 "native_host_version": adapter.probe(project, command=command).get("host_version"),
+                 "host": adapter.name, "phase": "registered",
                  "journal": str(target.parent / "journal"),
                  **_scope_options(project, existing, options)}
         updates = []
         if adapter.name == "dsh":
-            entry.update(_dsh_patch(project, state_dir, owner, target, profile))
+            _check_patch(target, existing)
+            details, patch = _dsh_patch(bridge, target, profile, command)
+            entry.update(details)
+            updates.append(patch)
         else:
-            updates = [_hooks(project, state_dir, adapter.name, owner), _mcp(project, state_dir, adapter.name, owner)]
+            updates = _settings(bridge, existing)
             entry["managed_settings"] = [str(path) for path, _ in updates]
         updates.append((target, (json.dumps(entry, ensure_ascii=False, indent=2) + "\n").encode()))
         _apply(updates)
@@ -232,10 +294,9 @@ def uninstall(adapter, project, state_dir, **options):
             return {"host": adapter.name, "phase": "absent"}
         owner = entry["registration_id"]
         if adapter.name == "dsh":
-            if entry.get("patch"):
-                Path(entry["patch"]).unlink(missing_ok=True)
+            _check_patch(target, entry).unlink(missing_ok=True)
         else:
-            _apply([_hooks(project, state_dir, adapter.name, owner, remove=True),
-                    _mcp(project, state_dir, adapter.name, owner, remove=True)])
+            bridge = _Bridge(adapter.name, project, state_dir, owner, sys.executable)
+            _apply(_settings(bridge, entry, remove=True))
         target.unlink()
         return {"host": adapter.name, "phase": "unregistered", "registration_id": owner}

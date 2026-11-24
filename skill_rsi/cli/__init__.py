@@ -19,7 +19,8 @@ def command(routes, name, description, handler=None, *, aliases=()):
 
 
 def common_host(parser, *, required=True):
-    parser.add_argument("--host", choices=("dsh", "claude_code", "codex"), required=required)
+    from ..adapters.registry import available
+    parser.add_argument("--host", choices=available(), required=required)
     parser.add_argument("--project", type=Path, default=Path("."))
     parser.add_argument("--command", help="native CLI executable")
 
@@ -37,7 +38,7 @@ def _version():
     try:
         return version("skill-rsi")
     except PackageNotFoundError:
-        return "0.1.0"
+        return "source"
 
 
 def _serial(value):

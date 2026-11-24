@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skill-rsi"
-version = "0.1.0"
+version = "0.2.0"
 description = "CLI for evidence-based memory strategies and harness extensions"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -19,14 +19,8 @@ yaml = ["PyYAML>=6"]
 skill-rsi = "skill_rsi.cli:main"
 
 [tool.setuptools]
-include-package-data = false
+include-package-data = true
 
 [tool.setuptools.packages.find]
 include = ["skill_rsi*"]
 namespaces = false
-
-[tool.setuptools.package-data]
-"*" = ["*.json", "*.mjs", "*.toml", "*.sh", "*.md", "resources/**/*", "resources/**/.*/*", "LICENSE*"]
-"skill_rsi.components" = ["resources/**/*"]
-"skill_rsi.adapters" = ["LICENSE*", "SOURCE_PROVENANCE.json"]
-"skill_rsi.adapters.dsh" = ["*.mjs"]

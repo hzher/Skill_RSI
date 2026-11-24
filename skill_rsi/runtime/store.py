@@ -19,6 +19,10 @@ CREATE TABLE IF NOT EXISTS binding_heads (
     desired INTEGER NOT NULL, effective INTEGER,
     PRIMARY KEY (project, host, component)
 );
+CREATE TABLE IF NOT EXISTS configured_extensions (
+    project TEXT NOT NULL, host TEXT NOT NULL, component TEXT NOT NULL,
+    PRIMARY KEY (project, host, component)
+);
 CREATE TABLE IF NOT EXISTS runtime_sessions (
     project TEXT NOT NULL, host TEXT NOT NULL, session TEXT NOT NULL,
     bindings TEXT NOT NULL, PRIMARY KEY (project, host, session)

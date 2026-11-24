@@ -1,5 +1,6 @@
 """Host lifecycle and independent project bindings."""
 from argparse import REMAINDER
+import json
 from pathlib import Path
 
 from . import command, common_host, config_arg
@@ -28,22 +29,42 @@ def _doctor(args):
     ]}
 
 
+def _init(args):
+    from ..evidence.io import write_bytes
+
+    project = args.project.expanduser().resolve(strict=True)
+    if not project.is_dir():
+        raise ValueError(f"Expected a project directory: {project}")
+    path = project / "skill-rsi.json"
+    config = {"host": args.host, "extensions": args.extension or []}
+    try:
+        write_bytes(path, (json.dumps(config, ensure_ascii=False, indent=2) + "\n").encode(), replace=False)
+    except FileExistsError as exc:
+        raise ValueError(f"{path} already exists. Edit it and run skill-rsi setup.") from exc
+    return {"config": path, "host": args.host, "extensions": config["extensions"]}
+
+
 def _setup_options(args, *, attach=False):
     from ..arguments.config import load_config
 
     config = load_config(args.config) if args.config else {}
     if "source" in config:
-        config.setdefault("host", config.pop("source").get("host"))
-    args.host = args.host or config.pop("host", None)
-    config.pop("host", None)
+        source = config.pop("source")
+        if not isinstance(source, dict):
+            raise ValueError("source must be an object")
+        config.setdefault("host", source.get("host"))
+    configured_host = config.pop("host", None)
+    args.host = args.host or configured_host
     project = config.pop("project", None)
-    if project:
+    if project and args.project is None:
         args.project = (args.config.resolve().parent / project).resolve()
-    if not args.host:
-        raise ValueError("a host is required")
+    args.project = args.project or Path(".")
+    if not isinstance(args.host, str) or not args.host:
+        raise ValueError("set host in skill-rsi.json or pass --host (see skill-rsi setup --help)")
     if config.pop("mode", "observe") != "observe":
-        raise ValueError("use project enable to select a component mode")
+        raise ValueError("set an extension's mode in extensions or use project enable")
     if attach:
+        config.pop("extensions", None)
         config["observe"] = not args.stop
     if args.command:
         config["command"] = args.command
@@ -53,18 +74,29 @@ def _setup_options(args, *, attach=False):
 
 
 def _setup(args):
+    from ..pipelines.setup import setup
+
+    if args.config is None and not args.host and not args.extension:
+        default = (args.project or Path(".")) / "skill-rsi.json"
+        if default.is_file():
+            args.config = default
+            # The default file configures the explicitly selected project.
+            args.project = default.parent
     options = _setup_options(args)
-    result = _adapter(args.host).attach(args.project, args.state_dir, **options)
-    if "observe" in options:
-        _runtime(args).set_observe(args.host, options["observe"])
-    return result
+    reconcile = "extensions" in options
+    if reconcile and (args.extension or not isinstance(options["extensions"], list)):
+        raise ValueError("set extensions as a list in the config, or use --extension separately")
+    entries = options.pop("extensions", args.extension)
+    base = args.config.resolve().parent if reconcile else Path.cwd()
+    return setup(_adapter(args.host), args.project, args.state_dir, options=options,
+                 extensions=entries, base=base, reconcile=reconcile)
 
 
 def _attach(args):
+    from ..pipelines.setup import setup
+
     options = _setup_options(args, attach=True)
-    result = _adapter(args.host).attach(args.project, args.state_dir, **options)
-    _runtime(args).set_observe(args.host, options["observe"])
-    return result
+    return setup(_adapter(args.host), args.project, args.state_dir, options=options, base=Path.cwd())
 
 
 def _uninstall(args):
@@ -118,8 +150,10 @@ def _reference(value):
 
 
 def _artifacts(args):
-    from ..components import ComponentRegistry, pack, pack_builtin
+    from ..components import ComponentRegistry, builtin_catalog, pack, pack_builtin
 
+    if args.action == "catalog":
+        return builtin_catalog()
     registry = ComponentRegistry(args.state_dir)
     match args.action:
         case "pack":
@@ -170,13 +204,26 @@ def _projects(args):
 
 
 def register(routes):
+    from ..adapters.registry import available
+
     common_host(command(routes, "doctor", "Report actual host and project capability evidence", _doctor), required=False)
-    parser = command(routes, "setup", "Register a CLI adapter for a project", _setup)
+    parser = command(routes, "init", "Create skill-rsi.json in an existing project", _init)
+    parser.add_argument("--host", choices=available(), required=True)
+    parser.add_argument("--project", type=Path, default=Path("."))
+    parser.add_argument("--extension", action="append", metavar="SOURCE",
+                        help="builtin:ID or a path relative to the project; repeatable")
+    parser = command(routes, "setup", "Configure the project host and its extensions", _setup)
+    parser.epilog = ("Run without arguments to apply skill-rsi.json in the project. "
+                     "For a one-off setup: skill-rsi setup --host codex --extension builtin:tool-result-view")
     common_host(parser, required=False)
+    parser.set_defaults(project=None)
     config_arg(parser)
     parser.add_argument("--profile")
+    parser.add_argument("--extension", action="append", metavar="SOURCE",
+                        help="enable a built-in (builtin:ID), local ZIP or directory in shadow mode; repeatable")
     parser = command(routes, "attach", "Enable or stop independent observation", _attach)
     common_host(parser, required=False)
+    parser.set_defaults(project=None)
     config_arg(parser)
     parser.add_argument("--profile")
     parser.add_argument("--mode", choices=["observe"], default="observe")
@@ -202,17 +249,21 @@ def register(routes):
     parser.add_argument("--credential-env")
     parser.add_argument("--port", type=int, default=0)
 
-    group = command(routes, "artifact", "Package and manage independently versioned strategy artifacts")
+    group = command(routes, "artifact", "Discover, install and package harness extensions")
     sub = group.add_subparsers(dest="action", required=True)
-    for action in ("pack", "builtin", "install", "upgrade", "uninstall", "list", "report"):
-        parser = command(sub, action, f"{action.capitalize()} strategy artifacts", _artifacts)
+    descriptions = {"catalog": "List the extensions bundled in this wheel",
+                    "list": "List locally installed releases and their project bindings"}
+    for action in ("catalog", "pack", "builtin", "install", "upgrade", "uninstall", "list", "report"):
+        parser = command(sub, action, descriptions.get(action, f"{action.capitalize()} strategy artifacts"), _artifacts)
         if action == "pack":
             parser.add_argument("source", type=Path)
         if action == "builtin":
-            parser.add_argument("component", choices=("tool-result-view", "constraint-check"))
+            parser.add_argument("component", help="built-in ID from artifact catalog")
         if action in {"pack", "builtin"}:
             parser.add_argument("--output", required=True, type=Path)
-        if action in {"install", "upgrade", "report"}:
+        if action in {"install", "upgrade"}:
+            parser.add_argument("file", metavar="SOURCE", help="builtin:ID, a local ZIP or a directory")
+        if action == "report":
             parser.add_argument("file", type=Path)
         if action in {"uninstall", "report"}:
             parser.add_argument("release")

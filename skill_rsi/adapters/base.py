@@ -8,6 +8,7 @@ import platform
 import shutil
 import signal
 import subprocess
+import sys
 from collections.abc import Mapping
 from pathlib import Path
 from tempfile import mkdtemp
@@ -75,19 +76,20 @@ class HostAdapter:
 
     def probe(self, project=None, state_dir=None, *, command=None):
         project = Path(project or ".").resolve()
-        command = command or self.command
+        entry = host_record(project, state_dir, self.name) if state_dir is not None else None
+        config = read_optional(entry) if entry else None
+        command = command or (config or {}).get("command") or self.command
         host_version = probe_command(command, "--version")
-        config = None
         report = None
-        if state_dir is not None:
-            entry = host_record(project, state_dir, self.name)
-            config = read_optional(entry)
+        current = config and config.get("adapter_version") == self.version and config.get("bridge_python") == sys.executable
+        if current:
             reports = [row for path in sorted((entry.parent / "nodes").glob("*.json"))
-                       if (row := read_optional(path)) and config
+                       if (row := read_optional(path)) and row.get("adapter_version") == self.version
                        and row.get("registration_id") == config.get("registration_id")
                        and (host_version is None or row.get("host_version") == host_version)]
             if reports:
-                report = {"registration_id": config["registration_id"], "host_version": reports[0].get("host_version"),
+                report = {"registration_id": config["registration_id"], "adapter_version": self.version,
+                          "host_version": reports[0].get("host_version"),
                           "nodes": {node: caps for row in reports for node, caps in row.get("nodes", {}).items()},
                           "boundaries": [row.get("last_event") for row in reports]}
         executable = shutil.which(command)
@@ -96,7 +98,9 @@ class HostAdapter:
             gaps.append("native_cli_unavailable")
         elif host_version is None:
             gaps.append("native_cli_version_unavailable")
-        if config and not report:
+        if config and not current:
+            gaps.append("registration_update_required")
+        elif config and not report:
             gaps.append("awaiting_native_callback")
         if os.name != "posix":
             gaps.append("native_registration_platform_unverified")
@@ -116,6 +120,9 @@ class HostAdapter:
         project = Path(project).resolve(strict=True)
         if not project.is_dir():
             raise ValueError(f"Expected a project directory: {project}")
+        if command is None and not options.get("command"):
+            registration = read_optional(host_record(project, state_dir, self.name)) or {}
+            options["command"] = registration.get("command", self.command)
         output = options.get("output")
         if output is None:
             runs = Path(state_dir).resolve() / "captures" / self.name

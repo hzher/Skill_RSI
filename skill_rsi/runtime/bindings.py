@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 from dataclasses import replace
 from fnmatch import fnmatchcase
 from pathlib import Path
@@ -33,31 +34,32 @@ def supports_action(description: Mapping, boundary: str, kind: str) -> bool:
     return capability in node or kind in node
 
 
-def _scope_mismatch(release: Release, host: str, mode: str, description: Mapping) -> str | None:
-    scope = release.manifest["scope"]
-    if host not in scope["hosts"] and "*" not in scope["hosts"]:
-        return f"component does not support host {host}"
-    if mode not in scope["modes"]:
-        return f"component does not support mode {mode}"
-    host_versions = scope.get("host_versions", {}).get(host)
-    for label, patterns in (("host_version", host_versions), ("adapter_version", scope.get("adapter_versions"))):
-        if patterns:
-            version = description.get(label)
-            if not isinstance(version, str) or not any(fnmatchcase(version, item) for item in patterns):
-                return f"{label} {version!r} is outside {patterns}"
-    return None
-
-
 class CapabilityGap(ValueError):
     """The reported host nodes do not yet cover the requested binding."""
 
 
-def negotiate(release: Release, host: str, mode: str, description: Mapping) -> None:
+def check_scope(release: Release, host: str, mode: str, description: Mapping, *, planning: bool = False) -> None:
+    scope = release.manifest["scope"]
+    if host not in scope["hosts"] and "*" not in scope["hosts"]:
+        raise ValueError(f"component does not support host {host}")
+    if mode not in scope["modes"]:
+        raise ValueError(f"component does not support mode {mode}")
+    host_versions = scope.get("host_versions", {}).get(host)
+    for label, patterns in (("host_version", host_versions), ("adapter_version", scope.get("adapter_versions"))):
+        if patterns:
+            version = description.get(label)
+            if label == "host_version" and version is None:
+                if planning:
+                    continue
+                raise CapabilityGap(f"{host} has not reported its version")
+            if not isinstance(version, str) or not any(fnmatchcase(version, item) for item in patterns):
+                raise ValueError(f"{label} {version!r} is outside {patterns}")
+
+
+def negotiate(release: Release, host: str, mode: str, description: Mapping, *, planning: bool = False) -> None:
     if description.get("host", host) != host:
         raise ValueError("Capability receipt belongs to a different host")
-    mismatch = _scope_mismatch(release, host, mode, description)
-    if mismatch:
-        raise ValueError(mismatch)
+    check_scope(release, host, mode, description, planning=planning)
     manifest = release.manifest
     capabilities = capabilities_of(description)
     required = required_capabilities(manifest, mode)
@@ -129,7 +131,7 @@ class ProjectBindings:
 
     def _change(self, connection, release: Release | None, host: str, component: str, *,
                 enabled: bool, mode: str, capabilities: Mapping, expected_revision: int | None,
-                options: dict | None) -> Binding:
+                options: dict | None, planning: bool = False) -> Binding:
         head = self.store.head(connection, host, component)
         revision = head["desired"] if head is not None else 0
         if expected_revision is not None and expected_revision != revision:
@@ -147,7 +149,7 @@ class ProjectBindings:
             retention = validate_options.get("original_retention_seconds")
             if retention is not None and (type(retention) is not int or not 1 <= retention <= 2**53):
                 raise ValueError("original_retention_seconds must be a positive represented integer")
-            negotiate(release, host, mode, capabilities)
+            negotiate(release, host, mode, capabilities, planning=planning)
             self._check_conflicts(connection, release, host, mode)
             self._check_state(connection, host, release, active or desired)
             version, form, digest = release.version, release.form, release.digest
@@ -170,6 +172,36 @@ class ProjectBindings:
             self.store.set_head(connection, binding, desired=binding.binding_revision, effective=effective_revision)
             return binding
         return desired
+
+    @contextmanager
+    def configure(self, host: str, extensions: Mapping[str, tuple[Release, str, dict]], *,
+                  capabilities: Mapping, reconcile: bool, observe: bool | None = None):
+        """Commit all desired bindings together after the caller registers the host."""
+        stable_id(host, "host")
+        scope = (self.project_id, host)
+        with self.store.db.transaction(write=True) as connection:
+            bindings = []
+            if reconcile:
+                managed = connection.execute(
+                    "SELECT component FROM configured_extensions WHERE project = ? AND host = ?", scope,
+                )
+                for component in sorted({row[0] for row in managed} - extensions.keys()):
+                    bindings.append(self._change(connection, None, host, component, enabled=False,
+                                                 mode="shadow", capabilities=capabilities,
+                                                 expected_revision=None, options=None))
+                connection.execute("DELETE FROM configured_extensions WHERE project = ? AND host = ?", scope)
+            for component, (installed, mode, options) in extensions.items():
+                release = self.registry._resolve(connection, component, installed.version, installed.form)
+                if release.digest != installed.digest:
+                    raise ValueError(f"Installed extension changed while configuring {component}")
+                bindings.append(self._change(connection, release, host, component, enabled=True, mode=mode,
+                                             capabilities=capabilities, expected_revision=None,
+                                             options=options, planning=True))
+                if reconcile:
+                    connection.execute("INSERT INTO configured_extensions VALUES (?, ?, ?)", (*scope, component))
+            if observe is not None:
+                connection.execute("INSERT OR REPLACE INTO observe_settings VALUES (?, ?, ?)", (*scope, bool(observe)))
+            yield bindings
 
     def enable(self, host: str, component_id: str, version: str, *, form: str | None = None,
                mode: str = "shadow", capabilities: Mapping, expected_revision: int | None = None,

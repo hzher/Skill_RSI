@@ -21,7 +21,8 @@ class Adapter(HostAdapter):
 
     def probe(self, project=None, state_dir=None, *, command=None):
         report = super().probe(project, state_dir, command=command)
-        available = bool(probe_command(command or self.command, "debug", "trace-reduce", "--help"))
+        executable = report["command"]
+        available = bool(executable and probe_command(executable, "debug", "trace-reduce", "--help"))
         return {**report, "native_trace_reducer": available}
 
     def command_line(self, prompt, resume, options):

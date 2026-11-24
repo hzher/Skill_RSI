@@ -8,6 +8,7 @@ from typing import Any, Mapping
 import hashlib
 import json
 import re
+import unicodedata
 
 SCHEMA = "skill-rsi.component.v1"
 FORMS = frozenset({"plugin", "mcp", "hook", "gateway", "skill", "middleware"})
@@ -74,6 +75,18 @@ def artifact_digest(manifest: Mapping) -> str:
     return sha256(canonical({key: value for key, value in manifest.items() if key != "artifact_digest"}))
 
 
+def _validate_file_layout(files: Mapping) -> None:
+    nodes = {}
+    for name in (*files, "manifest.json"):
+        parts = name.split("/")
+        for depth in range(1, len(parts) + 1):
+            path = "/".join(parts[:depth])
+            key = unicodedata.normalize("NFC", path).casefold()
+            node = path, depth == len(parts)
+            if nodes.setdefault(key, node) != node:
+                raise ValueError(f"File or directory collision in component: {path!r}")
+
+
 def validate_manifest(value: Any) -> dict:
     manifest = _object(value, "manifest")
     if manifest.get("schema") != SCHEMA:
@@ -101,8 +114,7 @@ def validate_manifest(value: Any) -> dict:
         relative_file(path)
         if not isinstance(digest, str) or not _SHA256.fullmatch(digest):
             raise ValueError(f"Invalid SHA-256 for {path}")
-    if len(files) != len({path.casefold() for path in files}):
-        raise ValueError("Component paths collide on a case-insensitive file system")
+    _validate_file_layout(files)
 
     requirements = manifest.get("required_capabilities")
     if isinstance(requirements, list):
