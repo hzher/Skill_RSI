@@ -28,7 +28,7 @@ def _install_extensions(registry, entries, base):
     return selected
 
 
-def setup(adapter, project, state_dir, *, options, extensions=None, base, reconcile=False):
+def setup(adapter, project, state_dir, *, options, extensions=None, base, reconcile=False, manage_all=False):
     runtime = Runtime(project, state_dir=state_dir)
     observe = options.get("observe")
     if observe is not None and type(observe) is not bool:
@@ -38,7 +38,7 @@ def setup(adapter, project, state_dir, *, options, extensions=None, base, reconc
     # against the nodes the host actually provided before activating a binding.
     capabilities = adapter.capabilities({"nodes": adapter.nodes}) if selected or reconcile else {}
     with runtime.configure(adapter.name, selected, capabilities=capabilities,
-                           reconcile=reconcile, observe=observe) as bindings:
+                           reconcile=reconcile, observe=observe, manage_all=manage_all) as bindings:
         registration = adapter.attach(project, state_dir, **options)
     if extensions is None:
         return registration

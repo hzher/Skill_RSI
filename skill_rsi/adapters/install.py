@@ -294,6 +294,9 @@ def uninstall(adapter, project, state_dir, **options):
             return {"host": adapter.name, "phase": "absent"}
         owner = entry["registration_id"]
         if adapter.name == "dsh":
+            from .dsh.desktop import uninstall_desktop
+
+            uninstall_desktop(project, state_dir)
             _check_patch(target, entry).unlink(missing_ok=True)
         else:
             bridge = _Bridge(adapter.name, project, state_dir, owner, sys.executable)

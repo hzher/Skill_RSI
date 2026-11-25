@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skill-rsi"
-version = "0.2.0"
+version = "0.5.1"
 description = "CLI for evidence-based memory strategies and harness extensions"
 readme = "README.md"
 requires-python = ">=3.11"

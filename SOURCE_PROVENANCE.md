@@ -8,3 +8,4 @@
 | LlamaFactory | `8ebba0d07dd14fdb1d429c497f018c7dae2e44b7` | Separation of CLI entry, dispatch, and declarative dataset configuration. |
 | Continual Learning Bench | `5f8c50eb1e84b2eda2ef4faff757dfc812a0ea26` | Optional external task lifecycle and official scorer. The user points the adapter at a pinned checkout. |
 | skill_rl_train | Local workspace | File handoff fields align with the training-side source and scoring model. Training consumers retain their own candidate construction, scoring, and replay logic. |
+| [CC Switch](https://github.com/farion1231/cc-switch) | `e6fd4accd257406bf9141baa402caaa78f975ba1` | Studied per-host navigation, shared extension storage with independent activation, and local executable discovery. The Python manager and browser interface are original implementations. |

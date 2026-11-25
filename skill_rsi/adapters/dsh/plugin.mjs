@@ -1,7 +1,7 @@
 // Cordis request-local decoration adapted from Skill_RSI_hzh/plugins/clbench-submit/index.mjs (MIT).
 import { spawnSync } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
-import { appendFileSync, mkdirSync, realpathSync, writeFileSync } from 'node:fs';
+import { appendFileSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
 import { baselineState, registerBaseline, seeToolResult } from './baseline.mjs';
@@ -14,12 +14,18 @@ const sha = text => createHash('sha256').update(text).digest('hex');
 
 function invoke(config, input, mode = 'hook') {
   try {
-    const [python, ...args] = config.argv;
+    let [python, ...args] = config.argv;
+    if (config.registrationPath) {
+      const registration = JSON.parse(readFileSync(config.registrationPath, 'utf8'));
+      python = registration.bridge_python;
+      args[args.indexOf('--owner') + 1] = registration.registration_id;
+    }
     if (mode !== 'hook') args[2] = mode;
     const bytes = JSON.stringify(input);
     if (Buffer.byteLength(bytes) > MAX_BRIDGE_BYTES) return {};
     const reply = spawnSync(python, args, {
       cwd: config.project, input: bytes, encoding: 'utf8', timeout: 3500, maxBuffer: MAX_BRIDGE_BYTES,
+      env: { ...process.env, ...(config.node && { PATH: dirname(config.node) + ':' + (process.env.PATH ?? '') }) },
     });
     return reply.status === 0 ? JSON.parse(reply.stdout) : {};
   } catch {
@@ -27,12 +33,18 @@ function invoke(config, input, mode = 'hook') {
   }
 }
 
+function observing(config) {
+  if (!config.registrationPath) return config.observe === true;
+  try { return JSON.parse(readFileSync(config.registrationPath, 'utf8')).observe === true; }
+  catch { return false; }
+}
+
 function makeRecorder(config) {
-  const directory = config.observe ? config.captureDirectory : null;
+  const directory = config.captureDirectory;
   let seq = 0;
   let dropped = 0;
   const writes = (path, bytes, append = false) => {
-    if (!directory) return;
+    if (!directory || !observing(config)) return;
     try {
       mkdirSync(dirname(path), { recursive: true, mode: 0o700 });
       if (append) appendFileSync(path, bytes, { mode: 0o600 });
@@ -44,13 +56,15 @@ function makeRecorder(config) {
   return {
     enabled: !!directory,
     event(stream, kind, session_id, fields = {}) {
-      if (!directory) return;
-      writes(join(directory, stream + '.jsonl'), JSON.stringify({
-        schema_version: 1, source_seq: ++seq, timestamp: Date.now(), kind, session_id, ...fields,
-      }) + '\n', true);
+      if (!directory || !observing(config)) return;
+      try {
+        writes(join(directory, stream + '.jsonl'), JSON.stringify({
+          schema_version: 1, source_seq: ++seq, timestamp: Date.now(), kind, session_id, ...fields,
+        }) + '\n', true);
+      } catch { dropped++; }
     },
     request(id, options) {
-      if (!directory) return null;
+      if (!directory || !observing(config)) return null;
       const path = `request-${id}.json`;
       const publicFields = ['provider', 'model', 'system', 'systemPrompt', 'messages', 'tools', 'toolHistory',
         'temperature', 'maxTokens', 'reasoningEffort', 'stop', 'purpose', 'sessionId'];
@@ -100,7 +114,14 @@ function appendContext(messages, texts) {
 }
 
 export function apply(ctx, config) {
-  const recorder = makeRecorder(config);
+  const recorders = new Map();
+  function recorderFor(session) {
+    if (recorders.has(session)) return recorders.get(session);
+    const allocated = config.desktop && observing(config) ? invoke(config, { session_id: session }, 'capture') : {};
+    const recorder = makeRecorder({ ...config, captureDirectory: allocated.capture_directory ?? config.captureDirectory });
+    if (recorder.enabled) recorders.set(session, recorder);
+    return recorder;
+  }
   const sessions = new Map();
   const pending = new Map();
   const toolInputs = new Map();
@@ -108,7 +129,7 @@ export function apply(ctx, config) {
   const effects = new WeakMap();
   let marks;
   try {
-    marks = createRequire(realpathSync(process.argv[1]))('@deepseek-ai/dsh-llm');
+    marks = createRequire(config.brandingAnchor ?? realpathSync(process.argv[1]))('@deepseek-ai/dsh-llm');
   } catch {
     // The installed DSH runtime must supply request branding before replacement is enabled.
   }
@@ -120,11 +141,17 @@ export function apply(ctx, config) {
       before_action: ['read_origin', 'append_context'],
     }),
   };
+  if (config.desktop) invoke(config, {
+    asset_digest: config.desktopDigest,
+    runtime: { node: process.versions.node, electron: process.versions.electron ?? null,
+      branding_anchor: config.brandingAnchor, request_branding: writable }, supported_nodes: supported,
+  }, 'desktop');
   function dispatch(session, boundary, values = {}) {
     return invoke(config, { cwd: config.project, session_id: session, boundary, supported_nodes: supported, ...values });
   }
-  function matches(agent) {
-    const cwd = agent.session.header?.cwd ?? agent.session.cwd ?? process.cwd();
+  function matches(session) {
+    const cwd = session?.header?.cwd ?? session?.cwd;
+    if (typeof cwd !== 'string' || typeof session?.id !== 'string') return false;
     try {
       const normalized = realpathSync(resolve(cwd));
       const project = realpathSync(config.project);
@@ -133,9 +160,18 @@ export function apply(ctx, config) {
       return false;
     }
   }
-  ctx.on('agent/created', ({ agent }) => {
-    if (!matches(agent)) return;
+  function ensureSession(session) {
+    if (!matches(session)) return false;
+    if (!sessions.has(session.id)) {
+      sessions.set(session.id, null);
+      recorderFor(session.id).event('session-events', 'session_attached', session.id, { cwd: config.project });
+    }
+    return true;
+  }
+  function ensureAgent(agent, source) {
+    if (!ensureSession(agent?.session)) return false;
     const id = agent.session.id;
+    if (sessions.get(id)) return true;
     const disposeExpand = agent.ctx.tools.register({
       name: 'skill_rsi_expand',
       description: 'Read the unmodified text behind a Skill RSI view handle, optionally by inclusive line range.',
@@ -156,10 +192,20 @@ export function apply(ctx, config) {
       disposeExpand();
       disposeBaseline?.();
     });
-    dispatch(id, 'session_start', { event_id: randomUUID() });
+    recorderFor(id).event('session-events', 'agent_attached', id, { cwd: config.project, source });
+    return true;
+  }
+  ctx.on('agent/created', ({ agent }) => {
+    const initialized = !!sessions.get(agent?.session?.id);
+    if (ensureAgent(agent, 'agent/created') && !initialized) {
+      dispatch(agent.session.id, 'session_start', { event_id: randomUUID() });
+    }
   });
   ctx.on('agent/disposed', ({ agent }) => {
     const id = agent.session.id;
+    recorders.get(id)?.event('session-events', 'agent_disposed', id);
+    recorders.get(id)?.finish();
+    recorders.delete(id);
     sessions.get(id)?.();
     sessions.delete(id);
     baselines.delete(id);
@@ -167,7 +213,8 @@ export function apply(ctx, config) {
     toolInputs.delete(id);
   });
   ctx.on('session/event', (session, event) => {
-    if (!sessions.has(session.id)) return;
+    if (!ensureSession(session)) return;
+    recorderFor(session.id).event('session-events', 'session_event', session.id, { event });
     if (event.type === 'turn/end') {
       dispatch(session.id, 'turn_end', { event_id: String(event.seq ?? randomUUID()), turn_id: event.data?.turn });
       pending.delete(session.id);
@@ -175,17 +222,31 @@ export function apply(ctx, config) {
     }
   });
   ctx.on('tools/execute', async (exec, next) => {
-    const id = exec.agent?.session.id;
-    if (!sessions.has(id) || !exec.callId || exec.name?.startsWith('skill_rsi_')) return next();
+    const id = exec.agent?.session?.id;
+    if (!ensureAgent(exec.agent, 'tools/execute') || !exec.callId || exec.name?.startsWith('skill_rsi_')) return next();
     const byCall = toolInputs.get(id) ?? new Map();
     toolInputs.set(id, byCall);
     byCall.set(exec.callId, { name: exec.name, args: exec.arguments });
+    recorderFor(id).event('tools', 'tool_start', id, {
+      tool_call_id: exec.callId, tool: exec.name, tool_args: exec.arguments,
+    });
     const reply = dispatch(id, 'before_action', {
       event_id: exec.callId, call_id: exec.callId, tool_name: exec.name, tool_input: exec.arguments,
     });
     const notes = (reply.actions ?? []).filter(row => row.kind === 'append_context' && typeof row.text === 'string');
     if (notes.length) pending.set(id, [...(pending.get(id) ?? []), ...notes].slice(-20));
-    return next();
+    try {
+      const result = await next();
+      recorderFor(id).event('tools', 'tool_end', id, {
+        tool_call_id: exec.callId, tool: exec.name, tool_args: exec.arguments, result,
+      });
+      return result;
+    } catch (error) {
+      recorderFor(id).event('tools', 'tool_error', id, {
+        tool_call_id: exec.callId, tool: exec.name, error: String(error),
+      });
+      throw error;
+    }
   });
   if (writable) {
     const llm = ctx.llm;
@@ -261,6 +322,7 @@ export function apply(ctx, config) {
       return;
     }
     const id = randomUUID();
+    const recorder = recorderFor(sessionId);
     const request_path = recorder.request(id, options);
     const delivered = effects.get(options) ?? [];
     recorder.event('calls', 'model_start', sessionId, { llm_call_id: id, status: 'started', request_path,
@@ -273,6 +335,7 @@ export function apply(ctx, config) {
     let failed = false;
     try {
       for await (const chunk of next()) {
+        recorder.event('calls', 'model_chunk', sessionId, { llm_call_id: id, chunk });
         if (chunk.type === 'usage') usage = chunk.usage;
         if (chunk.type === 'finish') finish = chunk.reason;
         yield chunk;
@@ -286,5 +349,5 @@ export function apply(ctx, config) {
         request_path, finish, usage });
     }
   });
-  ctx.effect(() => () => recorder.finish(), 'skill-rsi:capture');
+  ctx.effect(() => () => { for (const recorder of recorders.values()) recorder.finish(); }, 'skill-rsi:capture');
 }

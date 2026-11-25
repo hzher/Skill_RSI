@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 import selectors
+import shutil
 import subprocess
 import time
 from pathlib import Path
@@ -148,7 +149,19 @@ def run(output, project, prompt, resume, options):
     command = options.get("command") or "dsh"
     state = host_record(project, options["state_dir"], "dsh")
     registration = read_optional(state) or {}
-    sessions = Path(options.get("session_root") or state.parent / "sessions")
+    sessions = Path(options.get("session_root") or (output / "sessions" if options.get("task_dir") else state.parent / "sessions"))
+    if resume and options.get("task_dir") and not options.get("session_root"):
+        from ...tasks import TaskStore
+        previous = next((item for item in TaskStore(state_dir=options["state_dir"]).list()
+                         if item["host"] == "dsh" and item["project"] == str(project)
+                         and item.get("session_id") == resume), None)
+        origin = Path(previous["capture_path"]) / "sessions" if previous else None
+        if origin is not None and origin.is_dir():
+            if any(path.is_symlink() for path in (origin, *origin.rglob("*"))):
+                raise ValueError("Cannot resume a symlinked DSH session")
+            shutil.copytree(origin, sessions)
+        elif (state.parent / "sessions").is_dir():
+            sessions = state.parent / "sessions"
     sessions.mkdir(parents=True, mode=0o700, exist_ok=True)
     session_id = resume or "skill-rsi-" + uuid4().hex
     argv = [command, "--profile", options.get("profile") or registration.get("profile") or "sdk"]
@@ -179,7 +192,8 @@ def run(output, project, prompt, resume, options):
     capture_patch = output / "bridge.patch.json"
     write(capture_patch, patches)
     argv.extend([*options.get("args", ()), "--patch", str(capture_patch)])
-    env = os.environ.copy()
+    from . import Adapter
+    env = Adapter().environment(output, options)
     if options.get("dsh_home"):
         env["DSH_HOME"] = str(options["dsh_home"])
     initialize = {"cwd": str(project)}
@@ -206,6 +220,8 @@ def run(output, project, prompt, resume, options):
             selector.register(process.stdout, selectors.EVENT_READ)
             sdk = SDK(process, selector, stdout, session_id)
             try:
+                from ...tasks import track_child
+                track_child(options, process.pid)
                 sdk.request("initialize", initialize, min(time.monotonic() + 60, deadline))
                 chosen, operations = _query_policy(project, state, registration, options, session_id, prompt)
                 sdk.request("session/prompt", {"sessionId": session_id, "contentBlocks": [{"type": "text", "text": chosen}]}, deadline)

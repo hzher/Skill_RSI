@@ -56,7 +56,7 @@ def main(argv=None):
     parser.add_argument("--version", action="version", version=f"%(prog)s {_version()}")
     parser.add_argument("--state-dir", type=Path, help="local state root (default: SKILL_RSI_HOME or user state directory)")
     routes = parser.add_subparsers(dest="command", required=True)
-    for module in ("hosts", "evidence", "laboratory"):
+    for module in ("hosts", "evidence", "laboratory", "interface", "recording", "emergence"):
         import_module(f"{__name__}.{module}").register(routes)
     args = parser.parse_args(argv)
     args.state_dir = state_root(args.state_dir)

@@ -3,7 +3,10 @@ __pycache__/
 *.egg-info/
 .venv/
 .env
+.codex/config.toml
+.codex/hooks.json
 .skill-rsi/
+.skill-rsi-install.lock
 build/
 dist/
 runs/

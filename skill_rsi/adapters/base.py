@@ -11,7 +11,6 @@ import subprocess
 import sys
 from collections.abc import Mapping
 from pathlib import Path
-from tempfile import mkdtemp
 from uuid import uuid4
 
 from ..evidence.archive import Archive, write
@@ -32,10 +31,12 @@ def probe_command(command, *args):
     executable = shutil.which(os.fspath(command))
     if executable is None:
         return None
+    env = os.environ.copy()
+    env["PATH"] = str(Path(executable).parent) + os.pathsep + env.get("PATH", "")
     try:
         outcome = subprocess.run(
             [executable, *args], capture_output=True, text=True, timeout=8, check=False,
-            stdin=subprocess.DEVNULL,
+            stdin=subprocess.DEVNULL, env=env,
         )
     except (OSError, subprocess.TimeoutExpired):
         return None
@@ -125,9 +126,9 @@ class HostAdapter:
             options["command"] = registration.get("command", self.command)
         output = options.get("output")
         if output is None:
-            runs = Path(state_dir).resolve() / "captures" / self.name
-            runs.mkdir(parents=True, exist_ok=True, mode=0o700)
-            output = Path(mkdtemp(prefix="run-", dir=runs))
+            from ..tasks import run_task
+            return run_task(self.name, project, state_dir, prompt=prompt, resume=resume,
+                            options=options, command=command)
         else:
             output = Path(output).resolve()
             output.mkdir(parents=True, mode=0o700, exist_ok=False)
@@ -139,7 +140,18 @@ class HostAdapter:
             raise
 
     def environment(self, output, options):
-        return os.environ.copy()
+        env = os.environ.copy()
+        command = options.get("command")
+        if command and os.path.isabs(command):
+            env["PATH"] = str(Path(command).parent) + os.pathsep + env.get("PATH", "")
+        if self.name == "codex" and options.get("python_executable"):
+            python = Path(options["python_executable"])
+            if not python.is_absolute():
+                raise ValueError("Codex Python executable must be an absolute path")
+            env["PATH"] = str(python.parent) + os.pathsep + env.get("PATH", "")
+        if options.get("task_dir"):
+            env["SKILL_RSI_TASK_DIR"] = str(options["task_dir"])
+        return env
 
     def run(self, output, command, project, prompt, resume, options):
         argv = self.command_line(prompt, resume, options) if command is None else command
@@ -162,6 +174,8 @@ class HostAdapter:
                 with subprocess.Popen(argv, cwd=project, env=env, stdin=subprocess.DEVNULL,
                                       stdout=out, stderr=err, start_new_session=True) as process:
                     try:
+                        from ..tasks import track_child
+                        track_child(options, process.pid)
                         returncode = process.wait(timeout=timeout)
                     except (subprocess.TimeoutExpired, KeyboardInterrupt) as error:
                         stop_process_group(process)

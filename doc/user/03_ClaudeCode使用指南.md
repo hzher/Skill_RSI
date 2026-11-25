@@ -1,5 +1,7 @@
 # 在 Claude Code（CC）中使用 Skill RSI
 
+安装后也可运行 `skill-rsi ui`，在浏览器中点击完成接入、扩展启停与任务启动。[本机工作台教程](04_本机工作台.md)
+
 Skill RSI 可以在 Claude 调用工具后找出长日志里的错误行，也能在压缩会话时记录指定文件的版本。下面先试用日志功能。
 
 ## 安装并接入项目
@@ -7,7 +9,7 @@ Skill RSI 可以在 Claude 调用工具后找出长日志里的错误行，也�
 在 macOS 或 Linux 上，先确认本机已能正常使用 `claude`。激活 Python 3.11+ 环境，在目标项目根目录运行。下面假设收到的 wheel 放在 `~/Downloads`。
 
 ```sh
-python -m pip install --upgrade ~/Downloads/skill_rsi-0.2.0-py3-none-any.whl
+python -m pip install --upgrade ~/Downloads/skill_rsi-0.5.0-py3-none-any.whl
 skill-rsi --version
 skill-rsi init --host claude_code --extension builtin:tool-result-view
 skill-rsi setup

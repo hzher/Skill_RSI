@@ -288,8 +288,10 @@ def _dispatch(host, project, state_dir, registration, directory, raw, event, han
 def _journal(directory, record):
     try:
         from ..evidence.journal import EventJournal
+        from ..tasks import record_event
 
         EventJournal(directory / "journal").append(record)
+        record_event(directory, record)
     except Exception as error:
         try:
             write(directory / "last_capture_error.json", {"reason": type(error).__name__,
@@ -461,7 +463,7 @@ def run_mcp(host, project, state_dir, registration, directory):
 
 def main(argv=None):
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=("hook", "mcp", "expand", "receipt"))
+    parser.add_argument("mode", choices=("hook", "mcp", "expand", "receipt", "desktop", "capture"))
     parser.add_argument("--host", required=True)
     parser.add_argument("--project", required=True, type=Path)
     parser.add_argument("--state-dir", required=True, type=Path)
@@ -483,7 +485,27 @@ def main(argv=None):
     try:
         data = sys.stdin.buffer.read(_LIMIT + 1)
         row = json.loads(data) if len(data) <= _LIMIT else {}
-        if args.mode in {"expand", "receipt"}:
+        if args.mode == "desktop":
+            from datetime import datetime, timezone
+
+            installed = read_optional(record.with_name("desktop.json")) or {}
+            if host.name != "dsh" or row.get("asset_digest") != installed.get("asset_digest"):
+                raise ValueError("Desktop callback does not match the installed bundle")
+            loaded = {"registration_id": args.owner, "asset_digest": row["asset_digest"],
+                      "runtime": row.get("runtime"), "loaded_at": datetime.now(timezone.utc).isoformat()}
+            write(record.with_name("desktop-loaded.json"), loaded)
+            output = {"loaded": True}
+        elif args.mode == "capture":
+            from ..tasks.store import session_task
+
+            session = row.get("session_id")
+            if host.name != "dsh" or not registration.get("observe") or not isinstance(session, str) or not session:
+                raise ValueError("Desktop capture requires an observed DSH session")
+            task = session_task(project, host.name, session, state_dir=state_dir, live=True, source="desktop")
+            capture = Path(task["capture_path"]) / "capture"
+            capture.mkdir(parents=True, exist_ok=True, mode=0o700)
+            output = {"task_id": task["task_id"], "task_path": task["path"], "capture_directory": str(capture)}
+        elif args.mode in {"expand", "receipt"}:
             from ..runtime import Runtime
 
             runtime = Runtime(project, state_dir=state_dir)

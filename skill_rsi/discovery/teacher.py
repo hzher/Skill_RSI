@@ -164,7 +164,11 @@ class Teacher:
             choice = payload["choices"][0]
             if choice.get("finish_reason") not in (None, "stop"):
                 raise TeacherError("teacher_response_incomplete")
-            content = choice["message"]["content"].strip()
+            message = choice.get("message")
+            content = message.get("content") if isinstance(message, dict) else None
+            if not isinstance(content, str) or not content.strip():
+                raise TeacherError("teacher_final_content_missing")
+            content = content.strip()
             if content.startswith("```") and content.endswith("```"):
                 content = content.split("\n", 1)[1].rsplit("```", 1)[0]
             parsed = json.loads(content)

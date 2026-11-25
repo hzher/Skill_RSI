@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>
+      Skill RSI · 本机工作台
+    </title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/app.js" defer>
+    </script>
+  </head>
+  <body>
+    <div class="workspace">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="Skill RSI 工作台">
+          <span class="brand-mark" aria-hidden="true">
+            s.
+          </span>
+          <span>
+            Skill RSI
+            <span class="brand-sub">
+              本机工作台
+            </span>
+          </span>
+        </a>
+        <div class="sidebar-section">
+          运行框架
+        </div>
+        <nav id="hosts" aria-label="选择运行框架">
+        </nav>
+        <div class="sidebar-bottom">
+          <span class="local-dot" aria-hidden="true">
+          </span>
+          本地运行
+          <span class="sidebar-caption">
+            配置、扩展与任务轨迹
+            <br>
+            保存在这台电脑上
+          </span>
+        </div>
+      </aside>
+      <main>
+        <header class="topbar">
+          <span class="breadcrumb">
+            工作空间
+            <span>
+              /
+            </span>
+            <span id="host-crumb">
+              Codex
+            </span>
+          </span>
+          <button class="button quiet" id="refresh" type="button">
+            刷新状态
+            <span aria-hidden="true">
+              ↻
+            </span>
+          </button>
+        </header>
+        <div class="content">
+          <div id="message" class="message" role="status" aria-live="polite" hidden>
+          </div>
+          <div class="page-heading">
+            <div>
+              <h1 id="heading">
+                Codex
+              </h1>
+              <p id="host-description" class="muted">
+                连接本机 CLI，选择这个项目使用的扩展。
+              </p>
+            </div>
+            <span id="connection-badge" class="badge">
+              正在连接
+            </span>
+          </div>
+          <form id="project-form" class="project-bar">
+            <label for="project">
+              项目目录
+            </label>
+            <input id="project" name="project" type="text" list="recent-projects" placeholder="/Users/you/projects/my-project" autocomplete="off" required>
+            <datalist id="recent-projects">
+            </datalist>
+            <button class="button secondary" type="submit">
+              打开项目
+              <span aria-hidden="true">
+                ↗
+              </span>
+            </button>
+          </form>
+          <section class="card connection-card" aria-labelledby="connection-title">
+            <div class="section-heading">
+              <div>
+                <h2 id="connection-title">
+                  本机接入
+                </h2>
+                <p id="connection-note" class="muted small">
+                  读取当前框架的安装与加载状态。
+                </p>
+              </div>
+              <button type="button" id="save" class="button primary">
+                保存并接入
+                <span aria-hidden="true">
+                  ↗
+                </span>
+              </button>
+            </div>
+            <div id="connection-mode-field" class="connection-mode" hidden>
+              <label for="connection-mode">DSH 接入方式</label>
+              <select id="connection-mode">
+                <option value="cli">CLI SDK</option>
+                <option value="desktop">桌面端</option>
+              </select>
+              <p id="desktop-note" class="small muted" hidden>接入后重新打开 DSH 桌面端，在当前项目中的会话活动会自动记录。</p>
+            </div>
+            <div class="connection-fields">
+              <div class="field cli-field">
+                <label for="command">
+                  CLI 名称或路径
+                </label>
+                <input id="command" type="text" placeholder="codex" spellcheck="false" autocomplete="off">
+              </div>
+              <div class="field" id="profile-field" hidden>
+                <label for="profile">
+                  DSH Profile
+                </label>
+                <input id="profile" type="text" placeholder="sdk" spellcheck="false">
+              </div>
+              <label class="checkbox-label">
+                <input type="checkbox" id="observe">
+                <span>
+                  记录任务轨迹
+                  <span class="muted small block">
+                    原生会话按任务归档
+                  </span>
+                </span>
+              </label>
+            </div>
+            <div class="capability-line">
+              <span id="host-version" class="mono small muted">
+              </span>
+              <span id="binding-note" class="small muted">
+              </span>
+            </div>
+            <div id="host-gaps" class="host-gaps" hidden>
+            </div>
+            <section id="codex-recording" class="native-recording" aria-labelledby="codex-recording-title" hidden>
+              <div class="native-recording-heading"><h3 id="codex-recording-title">记录本机全部 Codex 主会话</h3><span id="codex-recording-status" class="small muted">未开启</span></div>
+              <p class="small muted">开启一次，从起录时刻记录本机所有项目的新数据，包括现有会话随后新增的内容。你可以继续在 Codex CLI 或桌面端中完成任务。</p>
+              <label for="codex-home" class="small muted">Codex 本机目录</label>
+              <input id="codex-home" type="text" value="~/.codex" spellcheck="false" autocomplete="off">
+              <div class="native-recording-actions"><button id="codex-record-start" class="button secondary compact" type="button">开始记录新数据</button><button id="codex-sync" class="button quiet compact" type="button" disabled>检查新数据</button><button id="codex-record-stop" class="button quiet compact" type="button" hidden>停止全部项目记录</button></div>
+              <p id="codex-recording-detail" class="small muted">起录时间 — · 最近检查 — · 已录主会话 0</p>
+              <p id="codex-recording-error" class="small analysis-error" role="status" hidden></p>
+              <p class="small muted">一条主会话一个文件夹，内部子任务并入主会话，用户单独分叉的会话独立保存。上方项目目录用于扩展配置和列表筛选。停止后重新开启，会从重新开启时刻继续记录。</p>
+            </section>
+            <details class="advanced">
+              <summary>
+                项目文件与约束
+              </summary>
+              <p class="small muted">
+                配置 MCP 可读取的文件、压缩检查点和待核验字段，路径相对于项目。
+              </p>
+              <label class="sr-only" for="advanced-config">
+                项目高级配置 JSON
+              </label>
+              <textarea id="advanced-config" class="mono" rows="6" spellcheck="false" placeholder='{"mcp_paths": [], "checkpoint_paths": [], "constraints": []}'></textarea>
+            </details>
+          </section>
+          <div class="columns">
+            <div class="column">
+              <section class="card extensions-card" aria-labelledby="extensions-title">
+                <div class="section-heading">
+                  <div>
+                    <h2 id="extensions-title">
+                      Harness 扩展
+                      <span id="extension-count" class="count">
+                        0
+                      </span>
+                    </h2>
+                    <p class="muted small">
+                      为当前项目选择要运行的策略。
+                    </p>
+                  </div>
+                  <button class="button secondary compact" id="show-import" type="button">
+                    <span aria-hidden="true">
+                      ＋
+                    </span>
+                    添加扩展
+                  </button>
+                </div>
+                <div id="extensions" class="extension-list">
+                  <div class="empty">
+                    正在读取扩展…
+                  </div>
+                </div>
+                <div id="extension-footer" class="card-footer small muted">
+                  选择模式后，点击「保存并接入」应用更改。
+                </div>
+              </section>
+              <section class="card history-card" aria-labelledby="history-title">
+                <div class="section-heading">
+                  <div class="history-title-row"><h2 id="history-title">任务记录</h2><span id="task-count" class="count">0</span></div>
+                  <label class="project-filter"><input id="current-project-only" type="checkbox">仅当前项目</label>
+                </div>
+                <div class="task-search"><label class="sr-only" for="task-search">搜索任务主题、工作目录、宿主或来源</label><input id="task-search" type="search" placeholder="搜索主题、工作目录、宿主或来源" autocomplete="off"></div>
+                <div id="tasks" class="task-list">
+                  <div class="empty">
+                    本机记录的任务会显示在这里。
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <span class="small muted">
+                    统一保存位置
+                  </span>
+                  <button id="copy-tasks-dir" type="button" class="path-button" title="复制轨迹目录">
+                    <span id="tasks-dir" class="mono small">
+                      —
+                    </span>
+                    <span aria-hidden="true">
+                      ⧉
+                    </span>
+                  </button>
+                </div>
+              </section>
+            </div>
+            <div class="column">
+              <section class="card run-card" aria-labelledby="run-title">
+                <div class="section-heading">
+                  <div>
+                    <h2 id="run-title">
+                      开始一个任务
+                    </h2>
+                    <p class="muted small">
+                      使用当前框架与已应用的扩展。
+                    </p>
+                  </div>
+                  <span class="run-icon" aria-hidden="true">
+                    ↗
+                  </span>
+                </div>
+                <div id="desktop-task-note" class="desktop-task-note" hidden>
+                  <p>在 DSH 桌面端创建或继续当前项目的任务。</p>
+                  <p class="small muted">接入后重新打开桌面端，产生的会话会出现在左侧任务记录中。选择一条记录，即可查看轨迹并分析生成候选扩展。</p>
+                </div>
+                <form id="run-form">
+                  <label class="sr-only" for="prompt">
+                    任务内容
+                  </label>
+                  <textarea id="prompt" name="prompt" rows="6" placeholder="例如，阅读项目说明，找出当前架构的入口文件。" required></textarea>
+                  <div class="run-footer">
+                    <span id="run-hint" class="small muted">
+                      执行时会调用你已配置的模型。
+                    </span>
+                    <button id="start" class="button primary" type="submit">
+                      运行任务
+                      <span aria-hidden="true">
+                        ↗
+                      </span>
+                    </button>
+                  </div>
+                </form>
+              </section>
+              <section class="card detail-card" aria-labelledby="detail-title">
+                <div class="section-heading">
+                  <h2 id="detail-title">
+                    执行详情
+                  </h2>
+                  <div class="detail-actions">
+                    <button id="emerge" class="button primary compact" type="button" disabled>一键分析生成</button>
+                    <button id="cancel" class="button danger compact" type="button" hidden>停止任务</button>
+                  </div>
+                </div>
+                <div class="emergence-controls">
+                  <h3>Codex 生成 harness 扩展</h3>
+                  <p class="small muted">让 Codex 直接读取任务轨迹文件，寻找可复用的经验。结果可能包含多个候选，也可能建议继续观察。</p>
+                  <label for="emergence-instructions">补充分析要求（可选）</label>
+                  <textarea id="emergence-instructions" rows="3" placeholder="例如，关注这次任务中反复读取或遗漏约束的原因。"></textarea>
+                  <div class="emergence-model-fields">
+                    <div class="analysis-field"><label for="emergence-model">模型</label><input id="emergence-model" type="text" value="gpt-6.1-sol" spellcheck="false"></div>
+                    <div class="analysis-field"><label for="emergence-effort">推理强度</label><select id="emergence-effort"><option value="low">low</option><option value="medium">medium</option><option value="high">high</option><option value="xhigh">xhigh</option><option value="max">max</option><option value="ultra" selected>ultra</option></select></div>
+                  </div>
+                  <details class="emergence-settings"><summary>Codex 默认设置</summary><label for="emergence-command">本机 Codex CLI</label><input id="emergence-command" type="text" placeholder="codex" spellcheck="false"><div class="llm-actions"><button id="save-emergence-settings" type="button" class="button secondary compact">保存默认设置</button></div></details>
+                  <p id="emergence-settings-status" class="small muted">使用本机 Codex 已有的账号与模型服务配置。</p>
+                </div>
+                <details id="legacy-analysis" class="legacy-analysis"><summary>高级分析入口</summary>
+                <div id="analysis-controls" class="analysis-controls">
+                  <button id="analyze" class="button secondary compact" type="button" disabled>运行高级分析</button>
+                  <div class="analysis-field"><label for="analysis-method">分析方式</label><select id="analysis-method"><option value="llm">LLM 分析</option><option value="local">本机规则</option></select></div>
+                  <div class="analysis-field" id="analysis-host-field"><label for="analysis-host">分析来源</label><select id="analysis-host"><option value="codex">Codex</option><option value="api">已配置 LLM</option><option value="dsh">DSH</option><option value="claude_code">Claude Code</option></select></div>
+                  <p id="analysis-hint" class="small muted">通过所选框架调用已配置的模型，分析任务记录并生成候选扩展。</p>
+                  <p id="llm-status" class="small muted">正在读取 LLM 配置…</p>
+                  <details id="llm-settings" class="llm-settings">
+                    <summary>LLM 配置</summary>
+                    <div class="llm-fields">
+                      <div class="llm-wide"><label for="llm-protocol">API 格式</label><select id="llm-protocol"><option value="openai">OpenAI 兼容</option><option value="anthropic">Anthropic Messages</option></select></div>
+                      <div class="llm-wide"><label for="llm-base-url">API 地址</label><input id="llm-base-url" type="text" spellcheck="false" placeholder="https://api.example.com/v1"></div>
+                      <div class="llm-wide"><label for="llm-model">模型名称</label><input id="llm-model" type="text" spellcheck="false" placeholder="模型服务提供的名称"></div>
+                      <div class="llm-wide"><label for="llm-env-file">本机凭据文件</label><input id="llm-env-file" type="text" spellcheck="false" value="/Users/user1/Desktop/memorax/Skill_RSI_hzh/.env"></div>
+                      <div class="llm-wide"><label for="llm-env-key">凭据变量名（可选）</label><input id="llm-env-key" type="text" spellcheck="false" placeholder="例如 DEEPSEEK_API_KEY"></div>
+                      <div class="llm-wide"><label for="llm-api-key">API Key</label><input id="llm-api-key" type="password" autocomplete="new-password" placeholder="留空沿用本机凭据"></div>
+                    </div>
+                    <p class="small muted">凭据只在本机使用。修改地址或 API 格式后，保存以确认对应的凭据状态。直接填写密钥时，请使用服务商提供的真实密钥。</p>
+                    <div class="llm-actions"><button id="reload-llm" class="button quiet compact" type="button">重新读取</button><button id="save-llm" class="button secondary compact" type="button">保存 LLM 配置</button></div>
+                  </details>
+                </div>
+                </details>
+                <div id="task-detail" class="detail-empty">
+                  <span class="detail-symbol" aria-hidden="true">
+                    ⌘
+                  </span>
+                  <p>
+                    从这里跟进任务
+                  </p>
+                  <span class="small muted">
+                    启动新任务，或选择一条任务记录。
+                  </span>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <dialog id="import-dialog">
+      <form id="import-form">
+        <div class="section-heading">
+          <h2>
+            添加 Harness 扩展
+          </h2>
+          <button class="icon-button" id="close-import" type="button" aria-label="关闭">
+            ×
+          </button>
+        </div>
+        <p class="muted small">
+          选择框架内置策略，或导入本机的 ZIP 与扩展目录。
+        </p>
+        <div id="catalog" class="catalog">
+        </div>
+        <label for="source">
+          扩展来源
+        </label>
+        <input id="source" type="text" placeholder="builtin:tool-result-view 或 /path/to/extension.zip" autocomplete="off" required>
+        <p class="small muted">
+          导入后可在当前框架页面选择模式和启用状态。
+        </p>
+        <div class="dialog-actions">
+          <button id="install" class="button primary" type="submit">
+            导入扩展
+          </button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

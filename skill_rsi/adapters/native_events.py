@@ -30,7 +30,7 @@ def native_session(row: dict, harness: str) -> str | None:
     elif row.get("type") == "session_meta":
         value = mapping(row.get("payload")).get("id")
     else:
-        value = row.get("thread_id")
+        value = row.get("thread_id") or mapping(row.get("payload")).get("thread_id")
     return value if isinstance(value, str) and value else None
 
 
@@ -76,10 +76,55 @@ def _claude_parts(row: dict) -> Iterable[EventPart]:
         yield "native_record", "/type" if isinstance(kind, str) else "", {"teacher_visible": False}
 
 
+def _codex_message_parts(item, pointer, role):
+    event_type = {"assistant": "model_response", "user": "user_message"}.get(role, "native_record")
+    for index, block in enumerate(records(item.get("content"))):
+        if not isinstance(block, dict):
+            continue
+        kind = block.get("type")
+        if (isinstance(kind, str) and kind.casefold() in {"text", "input_text", "output_text"}
+                and isinstance(block.get("text"), str)):
+            yield event_type, f"{pointer}/content/{index}/text", {
+                "actor_type": _ACTORS.get(role), "role": role, "teacher_visible": role in {"assistant", "user"}}
+
+
+def _desktop_parts(item) -> Iterable[EventPart]:
+    kind = item.get("type")
+    if not isinstance(kind, str):
+        kind = None
+    pointer = "/payload/item"
+    if isinstance(kind, str) and kind.casefold() in _PRIVATE_BLOCKS:
+        yield "native_private_block", pointer + "/type", {"teacher_visible": False}
+    elif kind in {"UserMessage", "AgentMessage"}:
+        yield from _codex_message_parts(item, pointer, "user" if kind == "UserMessage" else "assistant")
+    elif kind in {"CommandExecution", "FileChange", "McpToolCall", "WebSearch"}:
+        call_id = item.get("id")
+        if not isinstance(call_id, str) or not call_id:
+            call_id = None
+        fields = {"tool_call_id": call_id, "tool_name": kind,
+                  "mapping_status": "native_item_id" if call_id else "unresolved"}
+        yield "tool_call", pointer, {**fields, "actor_type": "agent"}
+        result = pointer + "/aggregated_output" if isinstance(item.get("aggregated_output"), str) else pointer
+        yield "tool_result", result, {**fields, "actor_type": "harness", "native_status": item.get("status"),
+                                      "exit_code": item.get("exit_code")}
+    elif kind == "ContextCompaction":
+        yield "context_change", pointer + "/type", {"actor_type": "harness", "change_kind": "context_compact",
+                                                   "evidence_status": "observed"}
+    else:
+        yield "native_record", pointer + "/type", {"teacher_visible": False}
+
+
 def _codex_parts(row: dict) -> Iterable[EventPart]:
     kind = row.get("type")
     item = mapping(row.get("item"))
     payload = mapping(row.get("payload"))
+    if kind == "event_msg" and payload.get("type") == "item_completed":
+        yield from _desktop_parts(mapping(payload.get("item")))
+        return
+    if kind == "token_usage_record" and isinstance(payload.get("usage"), dict):
+        yield "usage", "/payload/usage", {"actor_type": "harness", "usage_scope": "response",
+                                           "usage": payload["usage"]}
+        return
     if kind in {"thread.started", "session_meta", "turn.started", "turn.completed", "turn.failed", "error"}:
         status = {"turn.completed": "completed", "turn.failed": "failed", "error": "failed"}.get(kind)
         yield "harness_outcome" if status else "state_boundary", "/type", {"actor_type": "harness", "boundary": kind, "status": status}
@@ -107,15 +152,18 @@ def _codex_parts(row: dict) -> Iterable[EventPart]:
     elif kind == "response_item" and isinstance(payload_type, str) and payload_type in _CODEX_CALLS:
         yield "tool_call", "/payload", {"actor_type": "agent", "tool_call_id": payload.get("call_id"), "tool_name": payload.get("name", payload_type)}
     elif kind == "response_item" and payload_type in {"function_call_output", "custom_tool_call_output", "mcp_call_output"}:
-        yield "tool_result", "/payload", {"actor_type": "harness", "tool_call_id": payload.get("call_id")}
+        call_id = payload.get("call_id")
+        if not isinstance(call_id, str) or not call_id:
+            call_id = None
+        yield "tool_result", "/payload", {"actor_type": "harness", "tool_call_id": call_id,
+                                          "mapping_status": "native_call_id" if call_id else "unresolved"}
     elif kind == "response_item" and payload_type == "message":
         role = payload.get("role")
         if not isinstance(role, str):
             role = None
-        event_type = {"assistant": "model_response", "user": "user_message"}.get(role, "native_record")
-        for index, block in enumerate(records(payload.get("content"))):
-            if isinstance(block, dict) and block.get("type") in ("input_text", "output_text") and isinstance(block.get("text"), str):
-                yield event_type, f"/payload/content/{index}/text", {"actor_type": _ACTORS.get(role), "role": role, "teacher_visible": role in {"assistant", "user"}}
+        yield from _codex_message_parts(payload, "/payload", role)
+    elif kind == "response_item" and payload_type == "agent_message":
+        yield from _codex_message_parts(payload, "/payload", "assistant")
     elif kind == "event_msg" and payload_type in {"user_message", "agent_message"} and isinstance(payload.get("message"), str):
         yield "model_response" if payload_type == "agent_message" else "user_message", "/payload/message", {"actor_type": "agent" if payload_type == "agent_message" else "harness"}
     else:

@@ -175,17 +175,20 @@ class ProjectBindings:
 
     @contextmanager
     def configure(self, host: str, extensions: Mapping[str, tuple[Release, str, dict]], *,
-                  capabilities: Mapping, reconcile: bool, observe: bool | None = None):
+                  capabilities: Mapping, reconcile: bool, observe: bool | None = None,
+                  manage_all: bool = False):
         """Commit all desired bindings together after the caller registers the host."""
         stable_id(host, "host")
         scope = (self.project_id, host)
         with self.store.db.transaction(write=True) as connection:
             bindings = []
             if reconcile:
-                managed = connection.execute(
+                managed = {row[0] for row in connection.execute(
                     "SELECT component FROM configured_extensions WHERE project = ? AND host = ?", scope,
-                )
-                for component in sorted({row[0] for row in managed} - extensions.keys()):
+                )}
+                if manage_all:
+                    managed.update(binding.component_id for binding in self.store.revisions(connection, host))
+                for component in sorted(managed - extensions.keys()):
                     bindings.append(self._change(connection, None, host, component, enabled=False,
                                                  mode="shadow", capabilities=capabilities,
                                                  expected_revision=None, options=None))

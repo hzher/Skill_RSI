@@ -2,6 +2,22 @@
 
 适配器首先要回答“正确版本的事实，在出错动作之前到底到了哪一层”。支持原生深度记录的 Codex 优先用 rollout trace 采集；已有的 CLI 历史、API 网关与 MCP 日志可以补录，也能在缺少深度记录时独立使用。API 或账号描述认证方式，每次运行另外登记实际可用的观察点。[诊断场景与指标](../../../../../github_Skill_plan/07_Codex上下文与记忆诊断.md) · [Codex 原生源码、版本与命令](../../../../../github_Skill_plan/08_Codex原生源码取证.md)
 
+## 本机 CLI 与桌面端持续记录（0.4.2）
+
+`skill_rsi/adapters/codex/recording.py` 是统一入口。工作台启动后台同步线程；无界面时由 `skill-rsi record --host codex` 持续同步。默认覆盖本机全部项目，新项目无需单独登记；`--scope project --project /path/to/project` 可显式限制范围。首次启用对现有文件建立 EOF 基线，只记录此后新增的完整行，不补录历史正文。工作台重启沿用游标，明确停用后再启用则跳过停用期。记录器读取登记的 Codex home，不改宿主文件，也不依赖桌面端重新启动。
+
+需要复验某条已结束任务时，可在明确获准后使用 `--import-session THREAD_ID` 单独补录该主会话及已证实的后代。此入口不更改全局起录边界，不补录其他会话，并在元数据中保留单条补录的范围与时间。
+
+每个用户可见的主会话对应一个稳定任务，续接追加到同一目录。已证明父链的子代理和后台线程归入主会话的 `capture/threads/<thread-id>/`，各自保留原文与索引；用户独立派生的会话仍单独记录。由 Skill RSI 启动的托管任务优先按原生 thread ID 关联，避免重复建任务。原文、来源索引和按摘要保存的原件存入任务的 `capture/`，详情与分析器通过公共解析器读取。宿主 hook 的额外事件仍写入 `journal/`。
+
+新任务保存在 `~/SkillRSI/tasks/<宿主>/<来源>/<起录日期>_<主题>_<工作目录名>_<短标识>/`。稳定任务 ID 由私有索引定位，不随主题变化；目录名去除路径字符并限长。`task.json` 保留完整工作目录、原生创建时间、起录范围及来源信息，已有平铺任务可继续读取。
+
+增量游标只推进到完整 JSONL 行。起录前开始的半行整行跳过，起录后的半行等待下一轮；归档移动和文件换代保留起录边界，错误记录保留具体位置。CLI JSON items、Responses 调用及桌面 `event_msg.item_completed` 都进入公共解析器；无法证明关联的工具结果保留未知关联，不按时间猜配。桌面的 reasoning 内容不进入 LLM 提炼投影。
+
+普通 rollout 表明宿主保存过这些事件，不足以证明完整模型输入、物理请求次数或服务端最终输入；这些能力另由原生 trace 或显式网关提供。录制开关与扩展加载回执独立：暂停录制保留已有轨迹，采集成功也不等于扩展已执行。
+
+回归入口：`python -m unittest discover -s tests/adapters/codex -p 'test_*.py'`。界面与 CLI 复验使用合成会话；本机真实会话只作本地验收，不加入仓库或发行包。
+
 ## 优先接原生 trace 与 reducer
 
 1. **启动时配置。** 对用户选定的项目和诊断区间，先运行 `codex --version` 和 `codex debug trace-reduce --help`。通过启动器把 `CODEX_ROLLOUT_TRACE_ROOT` 显式传到真正承载 Codex 会话的进程，其值为单独的本地私有目录。普通 shell 中设置变量只影响随后继承它的进程。两个旧启动器均过滤 `CODEX_*` 或含 `CODEX` 的环境键，迁移时要专门传递所选目录，再用实际 bundle 验证。已有运行可以从它先前启用的观察点继续采集。[账号启动器](../../../../../Skill_RSI_chengze/framework/skillrl/codex_host_actor.py) · [API 启动器](../../../../../Skill_RSI_xuyifan/framework/skillrl/codex.py)

@@ -1,5 +1,7 @@
 # 在 DSH 中使用 Skill RSI
 
+安装后也可运行 `skill-rsi ui`，在浏览器中点击完成接入、扩展启停与任务启动。[本机工作台教程](04_本机工作台.md)
+
 排查构建失败时，DSH 可以先把错误附近的几行交给模型，需要时再展开完整日志。下面先试跑一次，看看策略会选中哪些行。
 
 ## 安装并接入项目
@@ -7,7 +9,7 @@
 在 macOS 或 Linux 上，先确认 DSH 已配好模型，能使用 `sdk` Profile。激活 Python 3.11+ 环境。以下假设收到的 wheel 放在 `~/Downloads`，也可以换成实际路径。
 
 ```sh
-python -m pip install --upgrade ~/Downloads/skill_rsi-0.2.0-py3-none-any.whl
+python -m pip install --upgrade ~/Downloads/skill_rsi-0.5.0-py3-none-any.whl
 skill-rsi --version
 dsh --version
 ```

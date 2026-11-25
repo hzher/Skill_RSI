@@ -5,4 +5,5 @@ recursive-include examples *.json *.jsonl
 recursive-include doc *.md *.jpg
 graft skill_rsi/adapters
 graft skill_rsi/components/resources
+graft skill_rsi/ui/static
 global-exclude .DS_Store *.pyc *.pyo .env .env.*

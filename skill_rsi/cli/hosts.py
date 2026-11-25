@@ -111,6 +111,7 @@ def _uninstall(args):
 
 def _collect(args):
     from ..arguments.config import load_config
+    from ..tasks import run_task
 
     options = load_config(args.config) if args.config else {}
     if args.command:
@@ -119,12 +120,12 @@ def _collect(args):
         if args.host != "codex":
             raise ValueError("native rollout trace is a Codex capture option")
         options["trace"] = True
-    for key in ("model", "timeout", "output"):
+    for key in ("model", "timeout", "output", "tasks_dir", "title"):
         if getattr(args, key) is not None:
             options[key] = getattr(args, key)
     argv = args.argv[1:] if args.argv and args.argv[0] == "--" else args.argv
-    launch = _adapter(args.host).launch(argv or None, project=args.project, state_dir=args.state_dir,
-                                        prompt=args.prompt, resume=args.resume, options=options)
+    launch = run_task(args.host, args.project, args.state_dir, command=argv or None,
+                      prompt=args.prompt, resume=args.resume, options=options)
     if args.archive and launch.get("path"):
         from ..pipelines.evidence import ingest
         launch["archive"] = ingest(Path(launch["path"]), output=args.archive, host=args.host,
@@ -237,6 +238,8 @@ def register(routes):
     parser.add_argument("--model")
     parser.add_argument("--timeout", type=float)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--tasks-dir", type=Path, help="unified task folder root (default: ~/SkillRSI/tasks)")
+    parser.add_argument("--title", help="human-readable task name")
     parser.add_argument("--archive", type=Path)
     parser.add_argument("--trace", action="store_true", help="enable native Codex rollout trace for this launch")
     parser.add_argument("--argv", nargs=REMAINDER, help="explicit native command arguments instead of the default entry point")
