@@ -1,0 +1,10 @@
+{
+  "endpoint": "https://model.example/v1/chat/completions",
+  "provider": "openai-compatible",
+  "model": "your-discovery-model",
+  "credential_env": "SKILL_RSI_TEACHER_API_KEY",
+  "max_calls": 32,
+  "max_prompt_bytes": 60000,
+  "max_output_tokens": 2048,
+  "timeout_seconds": 120
+}

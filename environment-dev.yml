@@ -1,0 +1,9 @@
+name: skill-rsi-dev
+channels:
+  - defaults
+dependencies:
+  - python=3.14
+  - pip
+  - python-build
+  - setuptools>=77
+  - wheel

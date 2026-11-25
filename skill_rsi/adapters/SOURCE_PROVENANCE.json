@@ -1,0 +1,29 @@
+{
+  "license": "MIT",
+  "license_file": "LICENSE.hzh",
+  "reference_snapshots": [
+    {
+      "repository": "Skill_RSI_hzh",
+      "checkout": "abbf143a7ab75f01596eb5e0e638330889b6a77c",
+      "source_digests_cover_local_worktree": true,
+      "files": [
+        {"source": "evidence/dsh.py", "sha256": "c9c3aa97efbea9430d30f3b3819e92e9174c263c706d814475283974cb7642dc", "destination": "dsh/reader.py"},
+        {"source": "adapters/native_events.py", "sha256": "461425ba9efd8c85a336036502fdaaa8c4a474ea1375896f9dd7576b736bd558", "destination": "native_events.py"},
+        {"source": "dsh_system.py", "sha256": "85a9258c15cd142dc046180873d72e3be11e15b8d52eda035677ed876c9e2614", "destination": "dsh/sdk.py"},
+        {"source": "plugins/clbench-submit/index.mjs", "sha256": "4a4b274e9beb8b14a1d4da6b1216a089cb1c4927d6140653c78ca8a2e67de7fa", "destination": "dsh/plugin.mjs"},
+        {"source": "plugins/clbench-submit/context-view.mjs", "sha256": "bee312429dc6cda3e92b996f0857250abc10f2468682e7d6d97801bff8bc98f3", "destination": "dsh/baseline.mjs"},
+        {"source": "plugins/clbench-submit/context-edit.mjs", "sha256": "e0f3dc425df9f606dd4dc318a566636b1e6bc9f05e7413d0999c526ea94fdd89", "destination": "dsh/baseline.mjs"}
+      ]
+    },
+    {
+      "repository": "Skill_RSI_yangyang",
+      "checkout": "138cd13d79a50202fdf400accb176eb0bb8b5d80",
+      "source_digests_cover_local_worktree": true,
+      "files": [
+        {"source": "framework/skillrl/wire.py", "sha256": "3b3ed9b0983437a557167e35bf7a169e31c574648c661ca819121929f0d0a128", "destination": "wire.py"},
+        {"source": "framework/skillrl/messages.py", "sha256": "0256a3743806d6dc306add6540d20f90df94536db1964eb68ad39e43124d9e1f", "informed": "gateway.py"},
+        {"source": "framework/skillrl/context_hook.py", "sha256": "d3c1e2c8b844bb8e5f155ce5f0a3117983ea7c7a3af3eaffd222883414dd0103", "informed": "bridge.py"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "run_groups": {
+    "development": {"development-projects": ["replace-with-development-run-id"]},
+    "holdout": {"evaluation-projects": ["replace-with-holdout-run-id"]}
+  },
+  "allowed_use": ["discovery", "evaluation"],
+  "payload_allowlist": [],
+  "window_bytes": 12000
+}

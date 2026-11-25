@@ -1,73 +1,9 @@
-# Local system and editor state
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Credentials and machine-local configuration
-.env
-.env.*
-!.env.example
-*.pem
-*.key
-*.p12
-*.pfx
-secrets/
-.local/
-.runtime/
-upstream/
-framework/runs/
-
-# Raw data, experiment outputs and model artifacts
-data/raw/
-trajectories/raw/
-artifacts/
-outputs/
-logs/
-checkpoints/
-wandb/
-mlruns/
-*.safetensors
-*.ckpt
-*.pt
-*.pth
-
-# Recordings and large media
-*.m4a
-*.wav
-*.mp3
-*.mp4
-
-# Python environments and caches, for future development
-.venv/
-venv/
 __pycache__/
 *.py[cod]
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-
-# Node dependencies, for future development
-node_modules/
-
-# Local documentation, experiments and verification stay outside code releases
-/codex/
-/docs/
-/trace/
-/traces/
-/skills/
-/reports/
-/results/
-/evidence/
-/framework/docs/
-/framework/examples/
-/framework/tests/
-/framework/reports/
-/framework/runs/
-/framework/results/
-/framework/evidence/
-*.log
-.coverage
-htmlcov/
+*.egg-info/
+.venv/
+.env
+.skill-rsi/
+build/
+dist/
+runs/
