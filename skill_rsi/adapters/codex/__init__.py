@@ -6,6 +6,7 @@ from .trace import read_bundle
 
 
 class Adapter(HostAdapter):
+    version = "2"
     name = "codex"
     command = "codex"
     offline_formats = ("trace", "rollout", "session", "cli", "responses")
@@ -16,6 +17,7 @@ class Adapter(HostAdapter):
         "mcp": ("retrieve_original",),
         "mcp_tool_result": ("read_origin", "replace_tool_result", "retrieve_original"),
         "mcp_before_action": ("read_origin", "append_context"),
+        "capture_start": ("append_context", "load_plugin", "suggest"),
     }
     hook_boundary = "any_event"
 
@@ -41,6 +43,11 @@ class Adapter(HostAdapter):
 
     def environment(self, output, options):
         env = super().environment(output, options)
+        for name, value in options.get("_capture_environment", {}).items():
+            if value is None:
+                env.pop(name, None)
+            else:
+                env[name] = value
         if options.get("trace"):
             location = output / "codex-trace"
             location.mkdir(mode=0o700)
@@ -50,7 +57,11 @@ class Adapter(HostAdapter):
     def run(self, output, command, project, prompt, resume, options):
         from ...evidence.archive import write
 
-        result = super().run(output, command, project, prompt, resume, options)
+        if options.get("api") is not None or options.get("native_mcp") or options.get("components"):
+            from .capture import run
+            result = run(self, output, command, project, prompt, resume, options)
+        else:
+            result = super().run(output, command, project, prompt, resume, options)
         if options.get("trace"):
             bundles = sorted(path.parent for path in (output / "codex-trace").rglob("trace.jsonl")
                              if (path.parent / "manifest.json").is_file())
@@ -86,7 +97,8 @@ class Adapter(HostAdapter):
             patterns = ("stdout.jsonl",) if format == "cli" else ("rollout-*.jsonl", "stdout.jsonl")
             paths = jsonl_sources(archive, source, options, patterns)
             for records in paths:
-                yield from read_session(archive, records, self.name)
+                from .evidence import enrich
+                yield from enrich(archive, records.parent, list(read_session(archive, records, self.name)))
 
     def summarize_cli(self, stdout):
         report = {}
