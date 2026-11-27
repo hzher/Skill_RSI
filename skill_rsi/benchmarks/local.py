@@ -135,6 +135,65 @@ class WorkBuddyBenchmark(ManifestBenchmark):
         copy_public(task.public_dir, workspace)
         return DockerEnvironment(workspace, self.images.get(task.id, self.image), network=self.network, user=self.user, security_profile=self.security_profile)
 
+    def run_with_host(self, pair, workspace, root, executor, budget, deadline):
+        """Keep task tools inside the original image while the host manages its model."""
+        from time import monotonic
+        from ..evidence.io import read_json, write_json, encode
+        from ..experiments.run import benchmark_fingerprint
+
+        task = self.rows[pair['task_id']]
+        environment = self.prepare(task, workspace)
+        transcript = []
+        feedback = None
+        action_path = Path(workspace) / 'benchmark-action.json'
+        try:
+            environment.start()
+            for step in range(budget['max_steps']):
+                remaining = deadline - monotonic()
+                if remaining <= 0:
+                    raise RuntimeError('WorkBuddy action budget exhausted')
+                action_path.unlink(missing_ok=True)
+                prompt = ('Complete the task in the benchmark container through JSON actions. '
+                          'Write one object to benchmark-action.json: '
+                          '{"kind":"shell","command":"..."}, '
+                          '{"kind":"read","path":"relative/file"}, '
+                          '{"kind":"write","path":"relative/file","content":"..."}, or '
+                          '{"kind":"finish"}. Shell commands execute in /workspace in the original image. '
+                          'Use these actions for all benchmark operations.\n\n' + task.instruction +
+                          '\n\nPrevious native feedback:\n' + encode(feedback).decode())
+                launch = executor(prompt, remaining)
+                if launch.get('status') != 'completed':
+                    raise RuntimeError('host did not complete the WorkBuddy step')
+                action = read_json(action_path)
+                action_path.unlink()
+                if not isinstance(action, dict):
+                    raise ValueError('WorkBuddy action must be an object')
+                kind = action.get('kind')
+                if kind == 'finish' and set(action) == {'kind'}:
+                    outcome = self.evaluate(task, workspace, {'environment': environment.metadata()})
+                    write_json(root / 'native-objective.json', outcome)
+                    return {'scorer_version': 'workspace@' + benchmark_fingerprint(self),
+                            'instance_outcomes': [{'instance_id': task.id, 'instance_index': 0,
+                                'reward': outcome['score'], 'success': None if outcome['score'] is None else bool(outcome['score'])}],
+                            'details': {'status': outcome['details'].get('status')}, 'metrics': outcome['details'].get('metrics', {})}
+                try:
+                    if kind == 'shell' and set(action) == {'kind', 'command'} and isinstance(action['command'], str):
+                        feedback = environment.bash(action['command'], timeout=min(120, max(0.1, deadline - monotonic())))
+                    elif kind == 'read' and set(action) == {'kind', 'path'}:
+                        feedback = {'text': environment.read(action['path'])}
+                    elif kind == 'write' and set(action) == {'kind', 'path', 'content'}:
+                        feedback = environment.write(action['path'], action['content'])
+                    else:
+                        raise ValueError('invalid WorkBuddy action')
+                except (OSError, ValueError, RuntimeError, subprocess.TimeoutExpired) as error:
+                    feedback = {'is_error': True, 'reason': type(error).__name__, 'message': str(error)}
+                transcript.append({'step': step, 'action': action, 'feedback': feedback,
+                                   'native_run_id': launch['run_id']})
+                write_json(root / 'benchmark-transcript.json', transcript)
+            raise RuntimeError('WorkBuddy task did not finish within the action budget')
+        finally:
+            environment.close()
+
     @classmethod
     def from_export(cls, index, **kwargs):
         return cls(index, **kwargs)

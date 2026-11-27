@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from ..components import builtin_policy_assets, pack
+from ..components import FORMS, builtin_policy_assets, pack
 from ..evidence.io import digest, encode, inside, read_json, write_json
 from ..review.projection import SECRET
 from .implementation import configuration
@@ -42,8 +42,13 @@ def materialize(extraction: Path, skill_id: str, version: str, review: dict, out
         "fallback": "native",
     }
     implementation = configuration(candidate)
+    form = review.get("form", candidate.get("form", "plugin" if implementation else "skill"))
+    if form not in FORMS:
+        raise ValueError("unknown requested component form")
+    if form != "skill" and not implementation:
+        raise ValueError("an executable form requires a reviewed declarative implementation")
     assets = {"payload/SKILL.md": skill}
-    if implementation:
+    if implementation and form != "skill":
         approved_config = review.get("approved_configuration_sha256")
         if approved_config != candidate.get("configuration_sha256") or approved_config != digest(encode(implementation)):
             raise ValueError("provide the approved declarative implementation digest")
@@ -51,7 +56,7 @@ def materialize(extraction: Path, skill_id: str, version: str, review: dict, out
         template = files("skill_rsi.components.resources").joinpath(strategy, "manifest.json")
         manifest = json.loads(template.read_text(encoding="utf-8"))
         manifest.update(component_id=skill_id, version=version, builtin_policy=strategy,
-                        defaults=implementation["defaults"])
+                        defaults=implementation["defaults"], form=form)
         if "hosts" in review:
             hosts = review["hosts"]
             if not isinstance(hosts, list) or not set(hosts) <= set(manifest["scope"]["hosts"]):
@@ -59,6 +64,8 @@ def materialize(extraction: Path, skill_id: str, version: str, review: dict, out
             manifest["scope"]["hosts"] = hosts
         assets.update(builtin_policy_assets(strategy))
         assets["implementation.json"] = encode(implementation) + b"\n"
+    if "boundaries" in review:
+        manifest["trigger"] = {**manifest["trigger"], "boundaries": review["boundaries"]}
     manifest_source = read_json(extraction / "manifest.json")
     input_bytes = (extraction / "input_index.json").read_bytes()
     inputs = json.loads(input_bytes)

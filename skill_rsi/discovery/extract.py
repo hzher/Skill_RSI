@@ -7,6 +7,7 @@ from ..review.projection import SECRET
 from ..review.snapshot import load_snapshot
 from .implementation import configuration
 from .teacher import PROMPT_VERSION, Teacher, TeacherError
+from ..components import FORMS
 
 
 SCHEMA = "skill-rsi.discovery.v1"
@@ -55,6 +56,10 @@ def _review(candidate, events, review):
         return "needs_more_evidence", "insufficient_support"
     try:
         configuration(candidate)
+        if candidate.get("form", "skill") not in FORMS:
+            raise ValueError("unknown component form")
+        if candidate.get("form", "skill") != "skill" and not configuration(candidate):
+            raise ValueError("executable forms require an implementation")
     except ValueError:
         return "rejected", "invalid_declarative_implementation"
     rendered = _render(candidate)
@@ -159,7 +164,7 @@ def extract(snapshot: Path, output: Path, extraction_id: str, teacher_config: di
                 generalization["review"] = "insufficient"
             keys_to_keep = set(SECTIONS) | {"skill_id", "version", "parent_version", "title", "objective",
                                             "evidence_origin", "expected_mechanism", "source_refs",
-                                            "counterexample_refs", "behavior_tags", "hypothesis", "implementation"}
+                                            "counterexample_refs", "behavior_tags", "hypothesis", "implementation", "form"}
             candidate = {key: value for key, value in candidate.items() if key in keys_to_keep}
             status, reason = _review(candidate, events & read_events, generalization.get("review"))
             if (candidate.get("skill_id"), candidate.get("version")) != (original.get("skill_id"), original.get("version")):

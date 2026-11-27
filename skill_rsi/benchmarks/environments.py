@@ -72,9 +72,9 @@ class DockerEnvironment(DirectoryEnvironment):
         self.command(['start', self.container])
         return self
 
-    def bash(self, command):
+    def bash(self, command, timeout=120):
         result = subprocess.run(['docker', 'exec', self.container, 'sh', '-lc', command],
-                                capture_output=True, text=True, timeout=120)
+                                capture_output=True, text=True, timeout=timeout)
         if len(result.stdout) + len(result.stderr) > 2_000_000:
             raise ValueError('Shell output byte budget exceeded')
         return {'exit_code': result.returncode, 'stdout': result.stdout, 'stderr': result.stderr}

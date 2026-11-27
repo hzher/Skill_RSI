@@ -122,6 +122,7 @@ def _experiment_arm(root, *, protocol, key, pair, condition, benchmark, state_di
     deadline = start + budget["wall_seconds"]
     session_id = None
     attached = False
+    configured = False
     capabilities = None
     releases = ()
 
@@ -142,16 +143,18 @@ def _experiment_arm(root, *, protocol, key, pair, condition, benchmark, state_di
            artifact_digests=[item["digest"] for item in condition["components"]])
 
     def execute(prompt, time_limit):
-        nonlocal session_id, attached, runtime
+        nonlocal session_id, attached, configured, runtime
         time_limit = min(time_limit, deadline - monotonic())
         if time_limit <= 0:
             raise RuntimeError("arm wall budget exhausted")
-        if not attached and condition["baseline"] != "native":
+        if not configured and condition["baseline"] != "native":
             runtime = Runtime(workspace, state_dir=arm_state)
             setup = settings.get("setup", {})
-            host.attach(workspace, arm_state, **setup, observe=True,
-                        command=settings.get("launch", {}).get("command"))
-            attached = True
+            if not (pair['host'] == 'codex' and settings.get('launch', {}).get('api')):
+                host.attach(workspace, arm_state, **setup, observe=True,
+                            command=settings.get("launch", {}).get("command"))
+                attached = True
+            configured = True
             for release, options in releases:
                 frozen = pack(release.path, root / "artifacts" / (release.digest + ".zip"))
                 if frozen.digest != release.digest:

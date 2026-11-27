@@ -10,6 +10,9 @@ def create_benchmark(config: dict, base: Path):
     if kind == "clbench":
         from .clbench import CLBench
         return CLBench(config, base)
+    if kind in {"pastbench", "past-bench"}:
+        from .pastbench import PASTBench
+        return PASTBench(config, base)
     if kind not in {"manifest", "workbuddy"}:
         entries = tuple(entry_points(group="skill_rsi.benchmarks", name=kind))
         if len(entries) != 1:
