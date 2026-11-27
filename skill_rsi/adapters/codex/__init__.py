@@ -1,6 +1,6 @@
 """Codex CLI, session and native trace adapters."""
 
-from ..base import HostAdapter, evidence_input, probe_command
+from ..base import HostAdapter, evidence_input, probe_command, host_record, read_optional
 from ..session import decode_native, jsonl_sources, read_session
 from .trace import read_bundle
 
@@ -13,7 +13,9 @@ class Adapter(HostAdapter):
     nodes = {
         "session_start": (),
         "before_action": ("read_origin", "append_context", "suggest"),
-        "tool_result": (),
+        "tool_result": ("read_origin", "replace_tool_result", "retrieve_original", "append_context"),
+        "before_request": ("append_context",),
+        "before_use": ("read_origin", "append_context"),
         "mcp": ("retrieve_original",),
         "mcp_tool_result": ("read_origin", "replace_tool_result", "retrieve_original"),
         "mcp_before_action": ("read_origin", "append_context"),
@@ -25,7 +27,41 @@ class Adapter(HostAdapter):
         report = super().probe(project, state_dir, command=command)
         executable = report["command"]
         available = bool(executable and probe_command(executable, "debug", "trace-reduce", "--help"))
-        return {**report, "native_trace_reducer": available}
+        report["native_trace_reducer"] = available
+        if state_dir is not None:
+            from pathlib import Path
+            from .gateway import RequestBoundary
+            receipt = read_optional(host_record(project or '.', state_dir, 'codex').parent / 'gateway.json')
+            if (receipt and receipt.get('adapter_version') == self.version
+                    and receipt.get('project') == str(Path(project or '.').resolve())
+                    and receipt.get('host_version') == report.get('host_version')
+                    and receipt.get('registration_id') == (report.get('registration') or {}).get('registration_id')
+                    and Path(receipt['forward_path']).is_file()):
+                report.update(RequestBoundary(self.version).capabilities(), loaded=True,
+                              gateway_receipt=receipt, capability_scope='verified_managed_gateway_launch',
+                              missing_reasons=[r for r in report['missing_reasons'] if r != 'awaiting_native_callback'])
+        return report
+
+    def attach(self, project, state_dir, **options):
+        previous = read_optional(host_record(project, state_dir, self.name)) or {}
+        if options.get('api') is not None or previous.get('transport') == 'gateway':
+            from .registration import install
+            return install(self, project, state_dir, **options)
+        return super().attach(project, state_dir, **options)
+
+    def detach(self, project, state_dir, **options):
+        previous = read_optional(host_record(project, state_dir, self.name)) or {}
+        if previous.get('transport') == 'gateway':
+            from .registration import uninstall
+            return uninstall(self, project, state_dir)
+        return super().detach(project, state_dir, **options)
+
+    def launch(self, command=None, *, project, state_dir, prompt=None, resume=None, options=None):
+        registration = read_optional(host_record(project, state_dir, self.name)) or {}
+        configured = registration.get('launch_options', {}) if registration.get('transport') == 'gateway' else {}
+        selected = {**configured, **(options or {})}
+        return super().launch(command, project=project, state_dir=state_dir, prompt=prompt,
+                              resume=resume, options=selected)
 
     def command_line(self, prompt, resume, options):
         if not isinstance(prompt, str) or not prompt.strip():
@@ -33,12 +69,27 @@ class Adapter(HostAdapter):
         command = [options.get("command") or self.command, "exec"]
         if options.get("profile"):
             command += ["--profile", options["profile"]]
+        args = list(options.get("args", ()))
         if resume:
+            # Sandbox selection belongs to exec, including on resumed turns.
+            remaining = []
+            iterator = iter(args)
+            for arg in iterator:
+                if arg in ("--sandbox", "-s"):
+                    value = next(iterator, None)
+                    if value is None:
+                        raise ValueError("sandbox option requires a mode")
+                    command.extend((arg, value))
+                elif arg.startswith("--sandbox="):
+                    command.append(arg)
+                else:
+                    remaining.append(arg)
+            args = remaining
             command.append("resume")
         command += ["--json", "--skip-git-repo-check"]
         if options.get("model"):
             command += ["--model", options["model"]]
-        command += list(options.get("args", ()))
+        command += args
         return [*command, "--", *([resume] if resume else []), prompt]
 
     def environment(self, output, options):
@@ -79,8 +130,8 @@ class Adapter(HostAdapter):
         if format not in {None, *self.offline_formats}:
             raise ValueError(f"Unsupported Codex format {format!r}")
         if format == "responses":
-            from ..gateway import read_wire
-            yield from read_wire(archive, source, "codex")
+            from .wire import read
+            yield from read(archive, source)
             return
         bundles = []
         if source.is_file() and source.name == "manifest.json":
